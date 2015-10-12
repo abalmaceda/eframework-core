@@ -1,0 +1,11 @@
+<template name="packagesGrid">
+  <div class="flex flex-xx available-pkg-grid">
+    {{#each reactionApps provides='dashboard'}}
+      {{#if pkgPermissions}}
+        <div class="flex-item">
+          {{> gridPackage}}
+        </div>
+      {{/if}}
+    {{/each}}
+  </div>
+</template>
