@@ -1,14 +1,14 @@
 /**
  * productImageGallery helpers
  */
-let Media = ReactionCore.Collections.Media;
+let Media = EFrameworkCore.Collections.Media;
 /*
  * uploadHandler method
  */
 function uploadHandler(event) {
   let productId = selectedProductId();
   let variantId = selectedVariantId();
-  let shopId = selectedProduct().shopId || ReactionCore.getShopId();
+  let shopId = selectedProduct().shopId || EFrameworkCore.getShopId();
   let userId = Meteor.userId();
   let count = Media.find({
     "metadata.variantId": variantId
@@ -69,7 +69,7 @@ Template.productImageGallery.helpers({
           "metadata.priority": 1
         }
       });
-      if (!ReactionCore.hasAdminAccess() && mediaArray.count() < 1) {
+      if (!EFrameworkCore.hasAdminAccess() && mediaArray.count() < 1) {
         mediaArray = Media.find({
           "metadata.variantId": product.variants[0]._id
         }, {
@@ -109,7 +109,7 @@ Template.productImageGallery.helpers({
 Template.productImageGallery.onRendered(function () {
   return this.autorun(function () {
     let $gallery;
-    if (ReactionCore.hasAdminAccess()) {
+    if (EFrameworkCore.hasAdminAccess()) {
       $gallery = $(".gallery");
       return $gallery.sortable({
         cursor: "move",
@@ -143,7 +143,7 @@ Template.productImageGallery.events({
   "mouseenter .gallery > li": function (event) {
     let ids = [];
     event.stopImmediatePropagation();
-    if (!ReactionCore.hasPermission("createProduct")) {
+    if (!EFrameworkCore.hasPermission("createProduct")) {
       let first = $(".gallery li:nth-child(1)");
       let target = $(event.currentTarget);
       let variant = selectedVariant();

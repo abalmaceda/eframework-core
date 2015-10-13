@@ -4,7 +4,7 @@
  * defaults are set in Shops.defaultWorkflows
  */
 
-ReactionCore.Schemas.Layout = new SimpleSchema({
+EFrameworkCore.Schemas.Layout = new SimpleSchema({
   template: {
     type: String,
     optional: true,

@@ -18,19 +18,19 @@ Meteor.methods({
   "cart/mergeCart": function (cartId) {
     check(cartId, String);
 
-    let Cart = ReactionCore.Collections.Cart; // convienance shorthand
+    let Cart = EFrameworkCore.Collections.Cart; // convienance shorthand
     let currentCart = Cart.findOne(cartId); // we don't process current cart, but merge into it.
     let userId = currentCart.userId; // just used to filter out the current cart
-    let sessionId = ReactionCore.sessionId; // persisten sessions, see: publications/sessions.js
-    let shopId = ReactionCore.getShopId();
+    let sessionId = EFrameworkCore.sessionId; // persisten sessions, see: publications/sessions.js
+    let shopId = EFrameworkCore.getShopId();
 
     // no need to merge anonymous carts
     if (Roles.userIsInRole(userId, "anonymous", shopId)) {
       return false;
     }
-    ReactionCore.Log.debug("merge cart: matching sessionId");
-    ReactionCore.Log.debug("current userId", userId);
-    ReactionCore.Log.debug("sessionId", sessionId);
+    EFrameworkCore.Log.debug("merge cart: matching sessionId");
+    EFrameworkCore.Log.debug("current userId", userId);
+    EFrameworkCore.Log.debug("sessionId", sessionId);
     // get session carts without current user cart
     let sessionCarts = Cart.find({
       $and: [{
@@ -43,13 +43,13 @@ Meteor.methods({
         }
       }]
     });
-    ReactionCore.Log.debug("sessionCarts", sessionCarts.fetch())
-    ReactionCore.Log.debug(
+    EFrameworkCore.Log.debug("sessionCarts", sessionCarts.fetch())
+    EFrameworkCore.Log.debug(
       `merge cart: begin merge processing of session ${sessionId} into: ${currentCart._id}`
     );
     // loop through session carts and merge into user cart
     sessionCarts.forEach((sessionCart) => {
-      ReactionCore.Log.debug(
+      EFrameworkCore.Log.debug(
         `merge cart: merge user userId: ${userId}, sessionCart.userId: ${sessionCart.userId}, sessionCart id: ${sessionCart._id}`
       );
       // really if we have no items, there's nothing to merge    "workflow" : {
@@ -74,15 +74,15 @@ Meteor.methods({
         // and we're also going to do some garbage Collection
         Cart.remove(sessionCart._id);
         Meteor.users.remove(sessionCart.userId);
-        ReactionCore.Collections.Accounts.remove({
+        EFrameworkCore.Collections.Accounts.remove({
           userId: sessionCart.userId
         });
-        ReactionCore.Log.debug(
+        EFrameworkCore.Log.debug(
           `merge cart: delete cart ${sessionCart._id} and user: ${sessionCart.userId}`
         );
       }
 
-      ReactionCore.Log.debug(
+      EFrameworkCore.Log.debug(
         `merge cart: processed merge for cartId ${sessionCart._id}`
       );
       return currentCart._id;
@@ -102,7 +102,7 @@ Meteor.methods({
     this.unblock();
     let sessionId;
     let userId = createForUserId || this.userId;
-    let Cart = ReactionCore.Collections.Cart;
+    let Cart = EFrameworkCore.Collections.Cart;
     let currentCartId;
 
     // find current userCart
@@ -112,12 +112,12 @@ Meteor.methods({
     });
 
     if (currentUserCart) {
-      ReactionCore.Log.debug("currentUserCart", currentUserCart.sessionId);
+      EFrameworkCore.Log.debug("currentUserCart", currentUserCart.sessionId);
       sessionId = currentUserCart.session;
     } else {
-      sessionId = ReactionCore.sessionId;
+      sessionId = EFrameworkCore.sessionId;
     }
-    ReactionCore.Log.debug("current cart serverSession", sessionId);
+    EFrameworkCore.Log.debug("current cart serverSession", sessionId);
     // while anonymous and merge into user cart
     let sessionCartCount = Cart.find({
       session: sessionId,
@@ -127,19 +127,19 @@ Meteor.methods({
     }).count();
 
     // check if user has `anonymous` role.( this is a visitor)
-    let anonymousUser = ReactionCore.hasPermission("anonymous");
+    let anonymousUser = EFrameworkCore.hasPermission("anonymous");
     // the cart is either current or new
     if (currentUserCart) {
       currentCartId = currentUserCart._id;
     }
 
-    ReactionCore.Log.debug("create cart: shopId", shopId);
-    ReactionCore.Log.debug("create cart: userId", userId);
-    ReactionCore.Log.debug("create cart: sessionId", sessionId);
-    ReactionCore.Log.debug("create cart: currentUserCart", currentCartId);
-    ReactionCore.Log.debug("create cart: sessionCarts.count",
+    EFrameworkCore.Log.debug("create cart: shopId", shopId);
+    EFrameworkCore.Log.debug("create cart: userId", userId);
+    EFrameworkCore.Log.debug("create cart: sessionId", sessionId);
+    EFrameworkCore.Log.debug("create cart: currentUserCart", currentCartId);
+    EFrameworkCore.Log.debug("create cart: sessionCarts.count",
       sessionCartCount);
-    ReactionCore.Log.debug("create cart: anonymousUser", anonymousUser);
+    EFrameworkCore.Log.debug("create cart: anonymousUser", anonymousUser);
 
     // if we have a session cart, but just create or
     // authenticated into a new user we need to create a user
@@ -149,13 +149,13 @@ Meteor.methods({
         sessionId: sessionId,
         userId: userId
       });
-      ReactionCore.Log.debug("create cart: into new user cart. created: " +
+      EFrameworkCore.Log.debug("create cart: into new user cart. created: " +
         currentCartId + " for user " + userId);
     }
 
     // merge session carts into the current cart
     if (currentCartId && sessionCartCount > 0 && anonymousUser === false) {
-      ReactionCore.Log.debug(
+      EFrameworkCore.Log.debug(
         "create cart: found existing cart. merge into " + currentCartId +
         " for user " + userId);
       Meteor.call("cart/mergeCart", currentCartId);
@@ -165,7 +165,7 @@ Meteor.methods({
         shopId: shopId,
         userId: userId
       });
-      ReactionCore.Log.debug(
+      EFrameworkCore.Log.debug(
         `create cart: no existing cart. created: ${currentCartId} currentCartId for sessionId ${sessionId} and userId ${userId}`
       );
     }
@@ -188,11 +188,11 @@ Meteor.methods({
   "cart/addToCart": function (cartId, productId, variantData, quantity) {
     check(cartId, String);
     check(productId, String);
-    check(variantData, ReactionCore.Schemas.ProductVariant);
+    check(variantData, EFrameworkCore.Schemas.ProductVariant);
     check(quantity, String);
 
-    let currentCart = ReactionCore.Collections.Cart.findOne(cartId);
-    let cartVariantExists = ReactionCore.Collections.Cart.findOne({
+    let currentCart = EFrameworkCore.Collections.Cart.findOne(cartId);
+    let cartVariantExists = EFrameworkCore.Collections.Cart.findOne({
       "_id": currentCart._id,
       "items.variants._id": variantData._id
     });
@@ -211,14 +211,14 @@ Meteor.methods({
       });
       return function (error) {
         if (error) {
-          ReactionCore.Log.warn("error adding to cart", ReactionCore.Collections
+          EFrameworkCore.Log.warn("error adding to cart", EFrameworkCore.Collections
             .Cart.simpleSchema().namedContext().invalidKeys());
           return error;
         }
       };
     }
     // cart variant doesn't exist
-    let product = ReactionCore.Collections.Products.findOne(productId);
+    let product = EFrameworkCore.Collections.Products.findOne(productId);
     return Cart.update({
       _id: currentCart._id
     }, {
@@ -233,7 +233,7 @@ Meteor.methods({
       }
     }, function (error) {
       if (error) {
-        ReactionCore.Log.warn("error adding to cart", ReactionCore.Collections
+        EFrameworkCore.Log.warn("error adding to cart", EFrameworkCore.Collections
           .Cart.simpleSchema().namedContext().invalidKeys());
         return;
       }
@@ -276,7 +276,7 @@ Meteor.methods({
    */
   "cart/copyCartToOrder": (cartId) => {
     check(cartId, String);
-    let cart = ReactionCore.Collections.Cart.findOne(cartId);
+    let cart = EFrameworkCore.Collections.Cart.findOne(cartId);
     let order = _.clone(cart);
     let user;
     let emails;
@@ -322,25 +322,25 @@ Meteor.methods({
     order.workflow.workflow = ["orderCreated"];
 
     // insert new reaction order
-    let orderId = ReactionCore.Collections.Orders.insert(order);
-    ReactionCore.Log.debug("Created orderId", orderId);
+    let orderId = EFrameworkCore.Collections.Orders.insert(order);
+    EFrameworkCore.Log.debug("Created orderId", orderId);
 
     if (orderId) {
       // TODO: check for succesful orders/inventoryAdjust
       Meteor.call("orders/inventoryAdjust", orderId);
       // trash the old cart
-      ReactionCore.Collections.Cart.remove({
+      EFrameworkCore.Collections.Cart.remove({
         _id: order.cartId
       });
       // create a new cart for the user
       // even though this should be caught by
       // subscription handler, it's not always working
-      let newCartExists = ReactionCore.Collections.Cart.find(order.userId);
+      let newCartExists = EFrameworkCore.Collections.Cart.find(order.userId);
       if (newCartExists.count() === 0) {
         Meteor.call("cart/createCart", order.userId);
       }
       // return
-      ReactionCore.Log.debug("Transitioned cart " + cartId + " to order " +
+      EFrameworkCore.Log.debug("Transitioned cart " + cartId + " to order " +
         orderId);
       return orderId;
     }
@@ -359,7 +359,7 @@ Meteor.methods({
     check(cartId, String);
     check(method, Object);
     // get current cart
-    let cart = ReactionCore.Collections.Cart.findOne({
+    let cart = EFrameworkCore.Collections.Cart.findOne({
       _id: cartId,
       userId: Meteor.userId()
     });
@@ -396,10 +396,10 @@ Meteor.methods({
       };
     }
     // update or insert method
-    ReactionCore.Collections.Cart.update(selector, update, function (
+    EFrameworkCore.Collections.Cart.update(selector, update, function (
       error) {
       if (error) {
-        ReactionCore.Log.warn(`Error adding rates to cart ${cartId}`,
+        EFrameworkCore.Log.warn(`Error adding rates to cart ${cartId}`,
           error);
         return;
       }
@@ -419,10 +419,10 @@ Meteor.methods({
    */
   "cart/setShipmentAddress": function (cartId, address) {
     check(cartId, String);
-    check(address, ReactionCore.Schemas.Address);
+    check(address, EFrameworkCore.Schemas.Address);
     this.unblock();
 
-    let cart = ReactionCore.Collections.Cart.findOne({
+    let cart = EFrameworkCore.Collections.Cart.findOne({
       _id: cartId,
       userId: Meteor.userId()
     });
@@ -456,10 +456,10 @@ Meteor.methods({
       }
 
       // add / or set the shipping address
-      ReactionCore.Collections.Cart.update(selector, update, function (
+      EFrameworkCore.Collections.Cart.update(selector, update, function (
         error) {
         if (error) {
-          ReactionCore.Log.warn(error);
+          EFrameworkCore.Log.warn(error);
           return;
         }
         // refresh shipping quotes
@@ -487,10 +487,10 @@ Meteor.methods({
    */
   "cart/setPaymentAddress": function (cartId, address) {
     check(cartId, String);
-    check(address, ReactionCore.Schemas.Address);
+    check(address, EFrameworkCore.Schemas.Address);
     this.unblock();
 
-    let cart = ReactionCore.Collections.Cart.findOne({
+    let cart = EFrameworkCore.Collections.Cart.findOne({
       _id: cartId,
       userId: Meteor.userId()
     });
@@ -523,10 +523,10 @@ Meteor.methods({
         };
       }
 
-      ReactionCore.Collections.Cart.update(selector, update,
+      EFrameworkCore.Collections.Cart.update(selector, update,
         function (error, result) {
           if (error) {
-            ReactionCore.Log.warn(error);
+            EFrameworkCore.Log.warn(error);
           } else {
             // post payment address Methods
             return result;
@@ -544,9 +544,9 @@ Meteor.methods({
    * @return {String} returns update result
    */
   "cart/submitPayment": function (paymentMethod) {
-    check(paymentMethod, ReactionCore.Schemas.PaymentMethod);
+    check(paymentMethod, EFrameworkCore.Schemas.PaymentMethod);
 
-    let checkoutCart = ReactionCore.Collections.Cart.findOne({
+    let checkoutCart = EFrameworkCore.Collections.Cart.findOne({
       userId: Meteor.userId()
     });
 
@@ -591,10 +591,10 @@ Meteor.methods({
       };
     }
 
-    return ReactionCore.Collections.Cart.update(selector, update,
+    return EFrameworkCore.Collections.Cart.update(selector, update,
       function (error) {
         if (error) {
-          ReactionCore.Log.warn(error);
+          EFrameworkCore.Log.warn(error);
           throw new Meteor.Error("An error occurred saving the order",
             error);
         }

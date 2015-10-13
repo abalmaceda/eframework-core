@@ -3,7 +3,7 @@
 // cartShippingMethods to get current shipment methods
 // until we handle multiple methods, we just use the first
 function cartShippingMethods(currentCart) {
-  let cart = currentCart || ReactionCore.Collections.Cart.findOne();
+  let cart = currentCart || EFrameworkCore.Collections.Cart.findOne();
   if (cart) {
     if (cart.shipping) {
       if (cart.shipping[0].shipmentQuotes) {
@@ -16,7 +16,7 @@ function cartShippingMethods(currentCart) {
 // getShipmentMethod to get current shipment method
 // until we handle multiple methods, we just use the first
 function getShipmentMethod(currentCart) {
-  let cart = currentCart || ReactionCore.Collections.Cart.findOne();
+  let cart = currentCart || EFrameworkCore.Collections.Cart.findOne();
   if (cart) {
     if (cart.shipping) {
       if (cart.shipping[0].shipmentMethod) {
@@ -31,13 +31,13 @@ Template.coreCheckoutShipping.helpers({
   // retrieves current rates and updates shipping rates
   // in the users cart collection (historical, and prevents repeated rate lookup)
   shipmentQuotes: function () {
-    let cart = ReactionCore.Collections.Cart.findOne();
+    let cart = EFrameworkCore.Collections.Cart.findOne();
     return cartShippingMethods(cart);
   },
 
   // helper to make sure there are some shipping providers
   shippingConfigured: function () {
-    let exists = ReactionCore.Collections.Shipping.find({
+    let exists = EFrameworkCore.Collections.Shipping.find({
       "methods.enabled": true
     }).count();
     return exists;
@@ -65,7 +65,7 @@ Template.coreCheckoutShipping.events({
     event.preventDefault();
     event.stopPropagation();
     let self = this;
-    let cart = ReactionCore.Collections.Cart.findOne();
+    let cart = EFrameworkCore.Collections.Cart.findOne();
 
     try {
       Meteor.call("cart/setShipmentMethod", cart._id, self.method);

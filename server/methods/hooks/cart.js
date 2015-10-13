@@ -1,9 +1,9 @@
 // Meteor.after to call after
-ReactionCore.MethodHooks.after("cart/submitPayment", function (options) {
+EFrameworkCore.MethodHooks.after("cart/submitPayment", function (options) {
   // if cart/submit had an error we won't copy cart to Order
   // and we'll throw an error.
   if (options.error === undefined) {
-    let cart = ReactionCore.Collections.Cart.findOne({
+    let cart = EFrameworkCore.Collections.Cart.findOne({
       userId: Meteor.userId()
     });
 

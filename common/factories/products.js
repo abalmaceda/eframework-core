@@ -3,7 +3,7 @@
  *
  */
 
-Factory.define("tag", ReactionCore.Collections.Tags, {
+Factory.define("tag", EFrameworkCore.Collections.Tags, {
   name: "Tag",
   slug: "tag",
   position: _.random(0, 100000),
@@ -18,7 +18,7 @@ Factory.define("tag", ReactionCore.Collections.Tags, {
  * product Factory
  */
 
-Factory.define("product", ReactionCore.Collections.Products, {
+Factory.define("product", EFrameworkCore.Collections.Products, {
   shopId: Factory.get("shop"),
   title: faker.commerce.productName(),
   pageTitle: faker.lorem.sentence(),

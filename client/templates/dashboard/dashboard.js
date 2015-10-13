@@ -9,12 +9,12 @@ Template.dashboard.helpers({
     return Router.current().route.getName();
   },
   displayConsoleNavBar: function() {
-    if (ReactionCore.hasPermission('console') && Session.get("displayConsoleNavBar")) {
+    if (EFrameworkCore.hasPermission('console') && Session.get("displayConsoleNavBar")) {
       return true;
     }
   },
   displayConsoleDrawer: function() {
-    if (ReactionCore.hasPermission('console') && Session.get("displayConsoleDrawer")) {
+    if (EFrameworkCore.hasPermission('console') && Session.get("displayConsoleDrawer")) {
       return true;
     }
   }
@@ -48,7 +48,7 @@ Template.dashboardHeader.helpers({
 
   "registry": function () {
     // just some handle little helpers for default package i18nKey/i18nLabel
-    var registry = ReactionCore.getRegistryForCurrentRoute("dashboard") || {};
+    var registry = EFrameworkCore.getRegistryForCurrentRoute("dashboard") || {};
     registry.nameSpace = registry.name || registry.template || "app";
     registry.i18nLabel = registry.label || registry.provides || "Settings";
     registry.i18nKey = registry.nameSpace.toCamelCase() + "." + registry.i18nLabel.toCamelCase();
@@ -57,7 +57,7 @@ Template.dashboardHeader.helpers({
 
   thisDashboard: function () {
 
-    return ReactionCore.getRegistryForCurrentRoute("dashboard");
+    return EFrameworkCore.getRegistryForCurrentRoute("dashboard");
 
   }
 
@@ -68,6 +68,6 @@ Template.dashboardHeader.helpers({
 
 Template.dashboardHeader.events({
   "click [data-event-action=showPackageSettings]": function () {
-    ReactionCore.showActionView();
+    EFrameworkCore.showActionView();
   }
 });

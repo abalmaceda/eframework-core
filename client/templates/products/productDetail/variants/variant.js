@@ -40,7 +40,7 @@ Template.variant.events({
     return toggleSession("variant-form-" + this._id);
   },
   "dblclick .variant-detail": function(event) {
-    if (ReactionCore.hasPermission('createProduct')) {
+    if (EFrameworkCore.hasPermission('createProduct')) {
       setCurrentVariant(this._id);
       return toggleSession("variant-form-" + this._id);
     }
@@ -60,7 +60,7 @@ Template.variant.events({
 Template.variant.onRendered(function() {
   return this.autorun(function() {
     var variantSort;
-    if (ReactionCore.hasPermission('createProduct')) {
+    if (EFrameworkCore.hasPermission('createProduct')) {
       variantSort = $(".variant-list");
       return variantSort.sortable({
         items: "> li.variant-list-item",

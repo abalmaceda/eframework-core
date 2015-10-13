@@ -8,33 +8,33 @@ Match.OptionalOrNull = function (pattern) {
   return Match.OneOf(void 0, null, pattern);
 };
 /*
- * extend ReactionCore and add common methods
+ * extend EFrameworkCore and add common methods
  */
-_.extend(ReactionCore, {
+_.extend(EFrameworkCore, {
   /**
-   * ReactionCore.shopIdAutoValue
+   * EFrameworkCore.shopIdAutoValue
    * @summary used for schemea injection autoValue
-   * @example autoValue: ReactionCore.shopIdAutoValue
+   * @example autoValue: EFrameworkCore.shopIdAutoValue
    * @return {String} returns current shopId
    */
   shopIdAutoValue: function () {
     // we should always have a shopId
-    if (ReactionCore.getShopId()) {
+    if (EFrameworkCore.getShopId()) {
       if (this.isSet && this.isFromTrustedCode) {
-        return ReactionCore.getShopId();
+        return EFrameworkCore.getShopId();
       }
       if (Meteor.isClient && this.isInsert) {
-        return ReactionCore.getShopId();
+        return EFrameworkCore.getShopId();
       } else if (Meteor.isServer && (this.isInsert || this.isUpsert)) {
-        return ReactionCore.getShopId();
+        return EFrameworkCore.getShopId();
       }
       return this.unset();
     }
   },
   /**
-   * ReactionCore.schemaIdAutoValue
+   * EFrameworkCore.schemaIdAutoValue
    * @summary used for schemea injection autoValue
-   * @example autoValue: ReactionCore.schemaIdAutoValue
+   * @example autoValue: EFrameworkCore.schemaIdAutoValue
    * @return {String} returns randomId
    */
   schemaIdAutoValue: function () {
@@ -49,7 +49,7 @@ _.extend(ReactionCore, {
     return this.unset();
   },
   /**
-   * ReactionCore.setProduct
+   * EFrameworkCore.setProduct
    * @summary method to set default/parameterized product variant
    * @param {String} currentProductId - set current productId
    * @param {String} currentVariantId - set current variantId
@@ -59,7 +59,7 @@ _.extend(ReactionCore, {
     let productId = currentProductId;
     let variantId = currentVariantId;
     if (!productId.match(/^[A-Za-z0-9]{17}$/)) {
-      let product = ReactionCore.Collections.Products.findOne({
+      let product = EFrameworkCore.Collections.Products.findOne({
         handle: productId.toLowerCase()
       });
       if (product) {

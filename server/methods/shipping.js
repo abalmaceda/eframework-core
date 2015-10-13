@@ -1,5 +1,5 @@
 /*
- * ReactionCore Shipping Methods
+ * EFrameworkCore Shipping Methods
  * methods typically used for checkout (shipping, taxes, etc)
  */
 Meteor.methods({
@@ -16,7 +16,7 @@ Meteor.methods({
     }
     check(cartId, String);
     this.unblock();
-    let cart = ReactionCore.Collections.Cart.findOne(cartId);
+    let cart = EFrameworkCore.Collections.Cart.findOne(cartId);
     if (cart) {
       let rates = Meteor.call("shipping/getShippingRates", cart);
       // no rates found
@@ -51,12 +51,12 @@ Meteor.methods({
       }
       // add quotes to the cart
       if (rates.length > 0) {
-        ReactionCore.Collections.Cart.update(selector, update, function (error) {
+        EFrameworkCore.Collections.Cart.update(selector, update, function (error) {
           if (error) {
-            ReactionCore.Log.warn(`Error adding rates to cart ${cartId}`, error);
+            EFrameworkCore.Log.warn(`Error adding rates to cart ${cartId}`, error);
             return;
           }
-          ReactionCore.Log.debug(`Success adding rates to cart ${cartId}`, rates);
+          EFrameworkCore.Log.debug(`Success adding rates to cart ${cartId}`, rates);
         });
       }
     }
@@ -75,7 +75,7 @@ Meteor.methods({
     let products = cart.items;
     // default selector is current shop
     let selector = {
-      shopId: ReactionCore.getShopId()
+      shopId: EFrameworkCore.getShopId()
     };
     // must have products to calculate shipping
     if (!cart.items) {
@@ -97,7 +97,7 @@ Meteor.methods({
       };
     }
 
-    let shippingMethods = ReactionCore.Collections.Shipping.find(selector);
+    let shippingMethods = EFrameworkCore.Collections.Shipping.find(selector);
 
     shippingMethods.forEach(function (shipping) {
       let _results = [];
@@ -121,8 +121,8 @@ Meteor.methods({
       }
       return _results;
     });
-    ReactionCore.Log.info("getShippingrates returning rates");
-    ReactionCore.Log.debug("rates", rates);
+    EFrameworkCore.Log.info("getShippingrates returning rates");
+    EFrameworkCore.Log.debug("rates", rates);
     return rates;
   }
 });

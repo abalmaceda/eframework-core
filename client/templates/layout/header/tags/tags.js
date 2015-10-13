@@ -30,7 +30,7 @@ $(document).mouseup(function (e) {
 
 Template.headerTags.helpers({
   tagsComponent: function () {
-    if (isEditing(currentTag()) && ReactionCore.hasOwnerAccess()) {
+    if (isEditing(currentTag()) && EFrameworkCore.hasOwnerAccess()) {
       return Template.tagInputForm;
     }
     return Template.headerLinks;

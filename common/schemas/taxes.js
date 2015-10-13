@@ -2,7 +2,7 @@
 * TaxRates Schema
 */
 
-ReactionCore.Schemas.TaxRates = new SimpleSchema({
+EFrameworkCore.Schemas.TaxRates = new SimpleSchema({
   country: {
     type: String
   },
@@ -15,10 +15,10 @@ ReactionCore.Schemas.TaxRates = new SimpleSchema({
   }
 });
 
-ReactionCore.Schemas.Taxes = new SimpleSchema({
+EFrameworkCore.Schemas.Taxes = new SimpleSchema({
   shopId: {
     type: String,
-    autoValue: ReactionCore.shopIdAutoValue,
+    autoValue: EFrameworkCore.shopIdAutoValue,
     index: 1,
     label: "Taxes shopId"
   },
@@ -49,6 +49,6 @@ ReactionCore.Schemas.Taxes = new SimpleSchema({
   },
   rates: {
     label: "Tax Rate",
-    type: [ReactionCore.Schemas.TaxRates]
+    type: [EFrameworkCore.Schemas.TaxRates]
   }
 });

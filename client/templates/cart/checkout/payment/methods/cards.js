@@ -15,7 +15,7 @@ Template.corePaymentMethods.helpers({
   appDetails: function () {
     let self = this;
     if (!(this.icon && this.label)) {
-      let app = ReactionCore.Collections.Packages.findOne(this.packageId);
+      let app = EFrameworkCore.Collections.Packages.findOne(this.packageId);
       for (let registry of app.registry) {
         if (!(registry.provides === "dashboard")) {
           continue;

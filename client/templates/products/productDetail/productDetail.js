@@ -13,7 +13,7 @@ Template.productDetail.helpers({
     }
   },
   tagsComponent: function () {
-    if (ReactionCore.hasPermission("createProduct")) {
+    if (EFrameworkCore.hasPermission("createProduct")) {
       return Template.productTagInputForm;
     }
     return Template.productDetailTags;
@@ -41,13 +41,13 @@ Template.productDetail.helpers({
     return getProductPriceRange();
   },
   fieldComponent: function () {
-    if (ReactionCore.hasPermission("createProduct")) {
+    if (EFrameworkCore.hasPermission("createProduct")) {
       return Template.productDetailEdit;
     }
     return Template.productDetailField;
   },
   metaComponent: function () {
-    if (ReactionCore.hasPermission("createProduct")) {
+    if (EFrameworkCore.hasPermission("createProduct")) {
       return Template.productMetaFieldForm;
     }
     return Template.productMetaField;
@@ -61,7 +61,7 @@ Template.productDetail.helpers({
 Template.productDetail.events({
   "click #price": function () {
     let formName;
-    if (ReactionCore.hasPermission("createProduct")) {
+    if (EFrameworkCore.hasPermission("createProduct")) {
       let variant = selectedVariant();
       if (!variant) {
         return;
@@ -155,11 +155,11 @@ Template.productDetail.events({
           autoHide: 10000
         });
       } else {
-        cartId = ReactionCore.Collections.Cart.findOne()._id;
+        cartId = EFrameworkCore.Collections.Cart.findOne()._id;
         productId = currentProduct._id;
 
         if (cartId && productId) {
-          count = ReactionCore.Collections.Cart.findOne(cartId).cartCount() || 0;
+          count = EFrameworkCore.Collections.Cart.findOne(cartId).cartCount() || 0;
 
           Meteor.call("cart/addToCart", cartId, productId, currentVariant, quantity, function (error) {
             let address;
@@ -169,7 +169,7 @@ Template.productDetail.events({
                 return locateUser();
               }
             } else if (error) {
-              ReactionCore.Log.error("Failed to add to cart.", error);
+              EFrameworkCore.Log.error("Failed to add to cart.", error);
               return error;
             }
           });
@@ -230,25 +230,25 @@ Template.productDetail.events({
     maybeDeleteProduct(this);
   },
   "click .fa-facebook": function () {
-    if (ReactionCore.hasPermission("createProduct")) {
+    if (EFrameworkCore.hasPermission("createProduct")) {
       $(".facebookMsg-edit").fadeIn();
       return $(".facebookMsg-edit-input").focus();
     }
   },
   "click .fa-twitter": function () {
-    if (ReactionCore.hasPermission("createProduct")) {
+    if (EFrameworkCore.hasPermission("createProduct")) {
       $(".twitterMsg-edit").fadeIn();
       return $(".twitterMsg-edit-input").focus();
     }
   },
   "click .fa-pinterest": function () {
-    if (ReactionCore.hasPermission("createProduct")) {
+    if (EFrameworkCore.hasPermission("createProduct")) {
       $(".pinterestMsg-edit").fadeIn();
       return $(".pinterestMsg-edit-input").focus();
     }
   },
   "click .fa-google-plus": function () {
-    if (ReactionCore.hasPermission("createProduct")) {
+    if (EFrameworkCore.hasPermission("createProduct")) {
       $(".googleplusMsg-edit").fadeIn();
       return $(".googleplusMsg-edit-input").focus();
     }

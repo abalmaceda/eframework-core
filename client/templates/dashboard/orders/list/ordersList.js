@@ -7,7 +7,7 @@ Template.dashboardOrdersList.helpers({
     if (data.hash.data) {
       return data.hash.data;
     }
-    return ReactionCore.Collections.Orders.find({}, {
+    return EFrameworkCore.Collections.Orders.find({}, {
       sort: {
         createdAt: -1
       },

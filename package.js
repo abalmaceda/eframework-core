@@ -485,11 +485,11 @@ api.addFiles("client/templates/layout/layout.js", "client");
   // api.addFiles("client/templates/products/productSettings/productSettings.js", "client");
 
   // // Exports
-  api.export("ReactionCore");
+  api.export("EFrameworkCore");
   api.export("ReactionRegistry", "server");
   api.export("faker", ["server"]); // for testing only?
 
-  // legacy Exports (TODO: move to ReactionCore)
+  // legacy Exports (TODO: move to EFrameworkCore)
   api.export("Alerts", ["client"]);
   api.export("currentProduct", ["client", "server"]);
 });

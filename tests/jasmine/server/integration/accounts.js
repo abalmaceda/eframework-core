@@ -7,19 +7,19 @@ describe("Account Meteor method ", function() {
   describe('addressBookAdd', function() {
 
     beforeEach(function() {
-      return ReactionCore.Collections.Accounts.remove({});
+      return EFrameworkCore.Collections.Accounts.remove({});
     });
 
     it('should throw 400 Match Failed error if the doc doesn\'t match the Address Schema', function(done) {
       var account;
       account = Factory.create('account');
-      spyOn(ReactionCore.Collections.Accounts, 'update');
+      spyOn(EFrameworkCore.Collections.Accounts, 'update');
 
       expect(function() {
         return Meteor.call('addressBookAdd', {}, account._id);
       }).toThrow();
 
-      expect(ReactionCore.Collections.Accounts.update).not.toHaveBeenCalled();
+      expect(EFrameworkCore.Collections.Accounts.update).not.toHaveBeenCalled();
       return done();
     });
 
@@ -28,13 +28,13 @@ describe("Account Meteor method ", function() {
       account1 = Factory.create('account');
       account2 = Factory.create('account');
       spyOn(Meteor, 'userId').and.returnValue(account1._id);
-      spyOn(ReactionCore.Collections.Accounts, 'update');
+      spyOn(EFrameworkCore.Collections.Accounts, 'update');
 
       expect(function() {
         return Meteor.call('addressBookAdd', faker.reaction.address(), account2._id);
       }).not.toThrow();
 
-      expect(ReactionCore.Collections.Accounts.update).toHaveBeenCalled();
+      expect(EFrameworkCore.Collections.Accounts.update).toHaveBeenCalled();
       return done();
     });
 
@@ -43,7 +43,7 @@ describe("Account Meteor method ", function() {
   describe('accounts/inviteShopMember', function() {
 
     it('should not let non-Owners invite a user to the shop', function(done) {
-      spyOn(ReactionCore, 'hasOwnerAccess').and.returnValue(false);
+      spyOn(EFrameworkCore, 'hasOwnerAccess').and.returnValue(false);
       spyOn(Accounts, 'createUser');
       shopId = Factory.create('shop')._id;
 
@@ -58,7 +58,7 @@ describe("Account Meteor method ", function() {
     });
 
     /*it('should let a Owner invite a user to the shop', function(done) {
-      spyOn(ReactionCore, 'hasOwnerAccess').and.returnValue(true);
+      spyOn(EFrameworkCore, 'hasOwnerAccess').and.returnValue(true);
       spyOn(Accounts, 'createUser');
       shopId = Factory.create('shop')._id;
 

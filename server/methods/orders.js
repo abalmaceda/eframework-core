@@ -113,7 +113,7 @@ Meteor.methods({
   "orders/addTracking": function (orderId, tracking) {
     check(orderId, String);
     check(tracking, String);
-    return ReactionCore.Collections.Orders.update(orderId, {
+    return EFrameworkCore.Collections.Orders.update(orderId, {
       $addToSet: {
         "shipping.shipmentMethod.tracking": tracking
       }
@@ -133,13 +133,13 @@ Meteor.methods({
     check(data, Object);
 
     // temp hack until we build out multiple payment handlers
-    let cart = ReactionCore.Collections.Cart.findOne(cartId);
+    let cart = EFrameworkCore.Collections.Cart.findOne(cartId);
     let shippingId = "";
     if (cart.shipping) {
       shippingId = cart.shipping[0]._id;
     }
 
-    return ReactionCore.Collections.Orders.update({
+    return EFrameworkCore.Collections.Orders.update({
       "_id": orderId,
       "shipping._id": shippingId
     }, {
@@ -163,7 +163,7 @@ Meteor.methods({
     check(shipmentId, String);
     check(tracking, String);
 
-    return ReactionCore.Collections.Orders.update({
+    return EFrameworkCore.Collections.Orders.update({
       "_id": orderId,
       "shipping._id": shipmentId
     }, {
@@ -187,7 +187,7 @@ Meteor.methods({
     check(shipmentId, String);
     check(item, Object);
 
-    return ReactionCore.Collections.Orders.update({
+    return EFrameworkCore.Collections.Orders.update({
       "_id": orderId,
       "shipping._id": shipmentId
     }, {
@@ -202,7 +202,7 @@ Meteor.methods({
     check(shipmentId, Number);
     check(item, Object);
 
-    return ReactionCore.Collections.Orders.update({
+    return EFrameworkCore.Collections.Orders.update({
       "_id": orderId,
       "shipments._id": shipmentId
     }, {
@@ -223,12 +223,12 @@ Meteor.methods({
   "orders/removeShipment": function (orderId, shipmentIndex) {
     check(orderId, String);
     check(shipmentIndex, Number);
-    ReactionCore.Collections.Orders.update(orderId, {
+    EFrameworkCore.Collections.Orders.update(orderId, {
       $unset: {
         [`shipments.${shipmentIndex}`]: 1
       }
     });
-    return ReactionCore.Collections.Orders.update(orderId, {
+    return EFrameworkCore.Collections.Orders.update(orderId, {
       $pull: {
         shipments: null
       }
@@ -245,7 +245,7 @@ Meteor.methods({
   "orders/addOrderEmail": function (orderId, email) {
     check(orderId, String);
     check(email, String);
-    return ReactionCore.Collections.Orders.update(orderId, {
+    return EFrameworkCore.Collections.Orders.update(orderId, {
       $set: {
         email: email
       }
@@ -263,7 +263,7 @@ Meteor.methods({
     check(orderId, String);
     check(docId, String);
     check(docType, String);
-    return ReactionCore.Collections.Orders.update(orderId, {
+    return EFrameworkCore.Collections.Orders.update(orderId, {
       $addToSet: {
         documents: {
           docId: docId,
@@ -285,7 +285,7 @@ Meteor.methods({
     check(orderId, String);
     check(event, String);
     check(value, Match.Optional(String));
-    return ReactionCore.Collections.Orders.update(orderId, {
+    return EFrameworkCore.Collections.Orders.update(orderId, {
       $addToSet: {
         history: {
           event: event,
@@ -305,10 +305,10 @@ Meteor.methods({
    */
   "orders/inventoryAdjust": function (orderId) {
     check(orderId, String);
-    let order = ReactionCore.Collections.Orders.findOne(orderId);
+    let order = EFrameworkCore.Collections.Orders.findOne(orderId);
 
     _.each(order.items, function (product) {
-      ReactionCore.Collections.Products.update({
+      EFrameworkCore.Collections.Products.update({
         "_id": product.productId,
         "variants._id": product.variants._id
       }, {
@@ -332,7 +332,7 @@ Meteor.methods({
   "orders/capturePayments": (orderId) => {
     check(orderId, String);
 
-    let order = ReactionCore.Collections.Orders.findOne(orderId);
+    let order = EFrameworkCore.Collections.Orders.findOne(orderId);
 
     // process order..payment.paymentMethod
     _.each(order.billing.paymentMethod, function (paymentMethod) {
@@ -345,7 +345,7 @@ Meteor.methods({
 
             if (result.capture) {
               transactionId = paymentMethod.transactionId;
-              ReactionCore.Collections.Orders.update({
+              EFrameworkCore.Collections.Orders.update({
                 "_id": orderId,
                 "billing.paymentMethod.transactionId": transactionId
               }, {
@@ -357,7 +357,7 @@ Meteor.methods({
                 }
               });
             } else {
-              ReactionCore.Log.warn(
+              EFrameworkCore.Log.warn(
                 "Failed to capture transaction.", order,
                 paymentMethod.transactionId);
               throw new Meteor.Error(

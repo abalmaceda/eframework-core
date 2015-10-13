@@ -6,17 +6,17 @@
 
 Template.coreHead.helpers({
   metaData: function () {
-    return ReactionCore.MetaData;
+    return EFrameworkCore.MetaData;
   }
 });
 
 Template.coreAdminLayout.helpers({
   template: function () {
-    return ReactionCore.getActionView();
+    return EFrameworkCore.getActionView();
   },
 
   adminControlsClassname: function () {
-    if (ReactionCore.isActionViewOpen()) {
+    if (EFrameworkCore.isActionViewOpen()) {
       return "show-settings";
     }
     return "";

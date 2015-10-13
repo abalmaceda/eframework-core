@@ -13,7 +13,7 @@ Template.cartCompleted.helpers({
   },
   userOrders: function () {
     if (Meteor.user()) {
-      return ReactionCore.Collections.Orders.find({
+      return EFrameworkCore.Collections.Orders.find({
         userId: Meteor.userId()
       });
     }

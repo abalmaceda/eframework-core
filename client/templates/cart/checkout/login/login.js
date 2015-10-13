@@ -7,10 +7,10 @@
 Template.checkoutLogin.helpers({
   checkoutLoginCompleted: function () {
     const self = this;
-    let guestUser = ReactionCore.hasPermission("guest", Meteor.user());
-    let currentStatus = ReactionCore.Collections.Cart.findOne().workflow.status;
+    let guestUser = EFrameworkCore.hasPermission("guest", Meteor.user());
+    let currentStatus = EFrameworkCore.Collections.Cart.findOne().workflow.status;
     let anonUser = Roles.userIsInRole("anonymous", Meteor.user(),
-      ReactionCore.getShopId());
+      EFrameworkCore.getShopId());
 
     if (currentStatus !== self.template && guestUser === true && anonUser ===
       false) {

@@ -2,7 +2,7 @@ Template.settingsHeader.helpers({
 
   "registry": function () {
     // just some handle little helpers for default package i18nKey/i18nLabel
-    var registry = ReactionCore.getActionView() || {};
+    var registry = EFrameworkCore.getActionView() || {};
     registry.nameSpace = registry.name || registry.template || "app";
     registry.i18nLabel = registry.label || registry.provides || "Settings";
     registry.i18nKey = registry.nameSpace.toCamelCase() + "." + registry.i18nLabel.toCamelCase();
@@ -17,7 +17,7 @@ Template.settingsHeader.helpers({
       'name': 1
     };
 
-    var reactionApp = ReactionCore.Collections.Packages.findOne({
+    var reactionApp = EFrameworkCore.Collections.Packages.findOne({
       "registry.provides": "settings",
       "registry.route": Router.current().route.getName()
     }, {
@@ -42,7 +42,7 @@ Template.settingsHeader.helpers({
 
 Template.settingsHeader.events({
   "click [data-event-action=closeSettings]": function () {
-    ReactionCore.hideActionView();
+    EFrameworkCore.hideActionView();
   }
 });
 
@@ -51,11 +51,11 @@ Template.settingsHeader.events({
 
 Template.settingsSidebar.helpers({
   pkgPermissions: function () {
-    if (ReactionCore.hasPermission('dashboard')) {
+    if (EFrameworkCore.hasPermission('dashboard')) {
       if (this.route) {
-        return ReactionCore.hasPermission(this.route);
+        return EFrameworkCore.hasPermission(this.route);
       } else {
-        return ReactionCore.hasPermission(this.name);
+        return EFrameworkCore.hasPermission(this.name);
       }
     } else {
       return false;

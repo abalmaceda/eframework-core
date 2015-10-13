@@ -1,8 +1,8 @@
 /**
- * ReactionCore
+ * EFrameworkCore
  * Global reaction shop permissions methods and shop initialization
  */
-_.extend(ReactionCore, {
+_.extend(EFrameworkCore, {
   shopId: null,
   init: function () {
     let self;
@@ -15,7 +15,7 @@ _.extend(ReactionCore, {
       shopHandle = Meteor.subscribe("Shops");
       if (shopHandle.ready()) {
         domain = Meteor.absoluteUrl().split("/")[2].split(":")[0];
-        shop = ReactionCore.Collections.Shops.findOne({
+        shop = EFrameworkCore.Collections.Shops.findOne({
           domains: domain
         });
         self.shopId = shop._id;
@@ -91,7 +91,7 @@ _.extend(ReactionCore, {
   },
   allowGuestCheckout: function () {
     let allowGuest = true;
-    let packageRegistry = ReactionCore.Collections.Packages.findOne({
+    let packageRegistry = EFrameworkCore.Collections.Packages.findOne({
       name: "core",
       shopId: this.shopId
     });
@@ -117,7 +117,7 @@ _.extend(ReactionCore, {
    */
   showActionView: function (viewData) {
     Session.set("admin/showActionView", true);
-    ReactionCore.setActionView(viewData);
+    EFrameworkCore.setActionView(viewData);
   },
 
   isActionViewOpen: function () {
@@ -128,13 +128,13 @@ _.extend(ReactionCore, {
     if (viewData) {
       Session.set("admin/actionView", viewData);
     } else {
-      let registryItem = ReactionCore.getRegistryForCurrentRoute(
+      let registryItem = EFrameworkCore.getRegistryForCurrentRoute(
         "settings");
 
       if (registryItem) {
-        ReactionCore.setActionView(registryItem);
+        EFrameworkCore.setActionView(registryItem);
       } else {
-        ReactionCore.setActionView({
+        EFrameworkCore.setActionView({
           template: "blankControls"
         });
       }
@@ -161,7 +161,7 @@ _.extend(ReactionCore, {
   getRegistryForCurrentRoute: function (provides) {
     let routeName = Router.current().route.getName();
     // find registry entries for routeName
-    let reactionApp = ReactionCore.Collections.Packages.findOne({
+    let reactionApp = EFrameworkCore.Collections.Packages.findOne({
       // "registry.provides": provides,
       "registry.route": routeName
     }, {
@@ -209,11 +209,11 @@ if (!_.contains(levels, isDebug)) {
   isDebug = "INFO";
 }
 
-ReactionCore.Log = bunyan.createLogger({
+EFrameworkCore.Log = bunyan.createLogger({
   name: "core-client"
 });
 
-ReactionCore.Log.level(isDebug);
+EFrameworkCore.Log.level(isDebug);
 
 /*
  * registerLoginHandler
@@ -238,13 +238,13 @@ Meteor.startup(function () {
   // warn on insecure exporting of PackageRegistry settings
   if (typeof PackageRegistry !== "undefined" && PackageRegistry !== null) {
     let msg = "PackageRegistry: Insecure export to client.";
-    ReactionCore.Log.warn(msg, PackageRegistry);
+    EFrameworkCore.Log.warn(msg, PackageRegistry);
   }
   // init the core
-  ReactionCore.init();
+  EFrameworkCore.init();
   // initialize anonymous guest users
   return Deps.autorun(function () {
-    if (ReactionCore.allowGuestCheckout() && !Meteor.userId()) {
+    if (EFrameworkCore.allowGuestCheckout() && !Meteor.userId()) {
       Accounts.loginWithAnonymous();
     }
   });

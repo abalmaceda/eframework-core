@@ -2,7 +2,7 @@
 /**
  *  currentProduct
  *  @summary Reactive current product dependency, ensuring reactive products, without session
- *  @todo rename as this can easily be confused with ReactionCore.setCurrentProduct
+ *  @todo rename as this can easily be confused with EFrameworkCore.setCurrentProduct
  *  @todo this is a messy class implementation, normalize it.
  *  @description
  *  products:
@@ -359,10 +359,10 @@ this.getProductPriceRange = function (currentProductId) {
 //  * @return {Boolean} true if authenticated user
 //  */
 // this.getGuestLoginState = function () {
-//   if (Meteor.user() && ReactionCore.getShopId() && ReactionCore.allowGuestCheckout()) {
+//   if (Meteor.user() && EFrameworkCore.getShopId() && EFrameworkCore.allowGuestCheckout()) {
 //     let isGuestFlow = Session.equals("guestCheckoutFlow", true);
-//     let isGuest = Roles.userIsInRole(Meteor.user(), "guest", ReactionCore.getShopId());
-//     let isAnonymous = Roles.userIsInRole(Meteor.user(), "anonymous", ReactionCore
+//     let isGuest = Roles.userIsInRole(Meteor.user(), "guest", EFrameworkCore.getShopId());
+//     let isAnonymous = Roles.userIsInRole(Meteor.user(), "anonymous", EFrameworkCore
 //       .getShopId());
 //     if (!isGuestFlow && !isGuest && isAnonymous) {
 //       return false;

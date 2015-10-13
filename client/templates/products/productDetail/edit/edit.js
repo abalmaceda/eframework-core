@@ -7,7 +7,7 @@ Template.productDetailEdit.helpers({
     i18nextDep.depend();
     let i18nKey = `productDetailEdit.${this.field}`;
     if (i18n.t(i18nKey) === i18nKey) {
-      ReactionCore.Log.info(`returning empty placeholder productDetailEdit: ${i18nKey} no i18n key found.`);
+      EFrameworkCore.Log.info(`returning empty placeholder productDetailEdit: ${i18nKey} no i18n key found.`);
     } else {
       return i18n.t(i18nKey);
     }
@@ -44,7 +44,7 @@ Template.productDetailEdit.events({
 
 Template.productDetailField.events({
   "click .product-detail-field": function () {
-    if (ReactionCore.hasOwnerAccess()) {
+    if (EFrameworkCore.hasOwnerAccess()) {
       let fieldClass = "editing-" + this.field;
       Session.set(fieldClass, true);
       Tracker.flush();

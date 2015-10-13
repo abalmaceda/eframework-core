@@ -2,7 +2,7 @@
  * CartItem Schema
  */
 
-ReactionCore.Schemas.CartItem = new SimpleSchema({
+EFrameworkCore.Schemas.CartItem = new SimpleSchema({
   _id: {
     type: String
   },
@@ -12,7 +12,7 @@ ReactionCore.Schemas.CartItem = new SimpleSchema({
   },
   shopId: {
     type: String,
-    autoValue: ReactionCore.shopIdAutoValue,
+    autoValue: EFrameworkCore.shopIdAutoValue,
     index: 1,
     label: "Cart Item shopId",
     optional: true
@@ -23,7 +23,7 @@ ReactionCore.Schemas.CartItem = new SimpleSchema({
     min: 0
   },
   variants: {
-    type: ReactionCore.Schemas.ProductVariant
+    type: EFrameworkCore.Schemas.ProductVariant
   }
 });
 
@@ -31,10 +31,10 @@ ReactionCore.Schemas.CartItem = new SimpleSchema({
  * Cart Schema
  */
 
-ReactionCore.Schemas.Cart = new SimpleSchema({
+EFrameworkCore.Schemas.Cart = new SimpleSchema({
   shopId: {
     type: String,
-    autoValue: ReactionCore.shopIdAutoValue,
+    autoValue: EFrameworkCore.shopIdAutoValue,
     index: 1,
     label: "Cart ShopId"
   },
@@ -54,7 +54,7 @@ ReactionCore.Schemas.Cart = new SimpleSchema({
   sessionId: {
     type: String,
     autoValue: function () {
-      return ReactionCore.sessionId;
+      return EFrameworkCore.sessionId;
     },
     index: 1
   },
@@ -65,16 +65,16 @@ ReactionCore.Schemas.Cart = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Email
   },
   items: {
-    type: [ReactionCore.Schemas.CartItem],
+    type: [EFrameworkCore.Schemas.CartItem],
     optional: true
   },
   shipping: {
-    type: [ReactionCore.Schemas.Shipment],
+    type: [EFrameworkCore.Schemas.Shipment],
     optional: true,
     blackbox: true
   },
   billing: {
-    type: [ReactionCore.Schemas.Payment],
+    type: [EFrameworkCore.Schemas.Payment],
     optional: true,
     blackbox: true
   },
@@ -86,7 +86,7 @@ ReactionCore.Schemas.Cart = new SimpleSchema({
     min: 0
   },
   workflow: {
-    type: ReactionCore.Schemas.Workflow,
+    type: EFrameworkCore.Schemas.Workflow,
     optional: true
   },
   createdAt: {

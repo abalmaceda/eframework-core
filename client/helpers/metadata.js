@@ -1,9 +1,9 @@
 /**
- * ReactionCore MetaData
+ * EFrameworkCore MetaData
  * Spiderable method to set meta tags for crawl
  * accepts current iron-router route
  */
-ReactionCore.MetaData = {
+EFrameworkCore.MetaData = {
 	settings: {
 		title: "",
 		meta: [],
@@ -21,7 +21,7 @@ ReactionCore.MetaData = {
 	  for (let meta of metaElements) {
 	    $metaTag = $(meta);
 	    let property = $metaTag.attr("name") || $metaTag.attr("property");
-	    if (property && _.indexOf(ReactionCore.MetaData.settings.ignore, property) < 0) {
+	    if (property && _.indexOf(EFrameworkCore.MetaData.settings.ignore, property) < 0) {
 	      _results.push($metaTag.remove());
 	    } else {
 	      _results.push(void 0);
@@ -34,13 +34,13 @@ ReactionCore.MetaData = {
 	    return false;
 	  }
 	  let product = selectedProduct();
-	  let shop = ReactionCore.Collections.Shops.findOne(ReactionCore.getShopId());
+	  let shop = EFrameworkCore.Collections.Shops.findOne(EFrameworkCore.getShopId());
 	  let meta = updateMeta || [];
 	  let title = "";
 	  let keywords = [];
 
 	  if (shop) {
-	    ReactionCore.MetaData.name = shop.name;
+	    EFrameworkCore.MetaData.name = shop.name;
 	    if (params._id) {
 	      title = params._id.charAt(0).toUpperCase() + params._id.substring(1);
 	    } else {
@@ -83,14 +83,14 @@ ReactionCore.MetaData = {
 	      }
 	    }
 	    // set site defaults
-	    ReactionCore.MetaData.title = title;
-	    ReactionCore.MetaData.meta = meta;
+	    EFrameworkCore.MetaData.title = title;
+	    EFrameworkCore.MetaData.meta = meta;
 	    return meta;
 	  }
 	},
 	refresh: function (route, params, meta) {
-		ReactionCore.MetaData.clear(route);
-		ReactionCore.MetaData.update(route, params, meta);
-		return ReactionCore.MetaData.render(route);
+		EFrameworkCore.MetaData.clear(route);
+		EFrameworkCore.MetaData.update(route, params, meta);
+		return EFrameworkCore.MetaData.render(route);
 	}
 };

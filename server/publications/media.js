@@ -4,9 +4,9 @@
  */
 Meteor.publish("Media", function (shops) {
   check(shops, Match.Optional(Array));
-  let Media = ReactionCore.Collections.Media;
+  let Media = EFrameworkCore.Collections.Media;
   let selector;
-  let shopId = ReactionCore.getShopId(this);
+  let shopId = EFrameworkCore.getShopId(this);
 
   if (shopId) {
     selector = {

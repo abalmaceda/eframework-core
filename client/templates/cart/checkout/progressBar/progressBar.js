@@ -5,7 +5,7 @@
 
 Template.checkoutProgressBar.helpers({
   progressbarStatusClass: function () {
-    var cartWorkflow = ReactionCore.Collections.Cart.findOne().workflow;
+    var cartWorkflow = EFrameworkCore.Collections.Cart.findOne().workflow;
     var thisStep = (cartWorkflow.status === this.template); // active
     var previouslyVisited = _.contains(cartWorkflow.workflow, this.template);
 

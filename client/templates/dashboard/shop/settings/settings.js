@@ -5,11 +5,11 @@
 Template.shopSettings.helpers({
 
   shop: function () {
-    return ReactionCore.Collections.Shops.findOne();
+    return EFrameworkCore.Collections.Shops.findOne();
   },
 
   packageData: function() {
-    return ReactionCore.Collections.Packages.findOne({
+    return EFrameworkCore.Collections.Packages.findOne({
       name: "core"
     });
   },
@@ -20,7 +20,7 @@ Template.shopSettings.helpers({
   },
   countryOptions: function() {
     var countries, country, countryOptions, locale;
-    countries = ReactionCore.Collections.Shops.findOne().locales.countries;
+    countries = EFrameworkCore.Collections.Shops.findOne().locales.countries;
     countryOptions = [];
     for (locale in countries) {
       country = countries[locale];
@@ -42,7 +42,7 @@ Template.shopSettings.helpers({
   },
   currencyOptions: function() {
     var currencies, currency, currencyOptions, structure;
-    currencies = ReactionCore.Collections.Shops.findOne().currencies;
+    currencies = EFrameworkCore.Collections.Shops.findOne().currencies;
     currencyOptions = [];
     for (currency in currencies) {
       structure = currencies[currency];
@@ -55,7 +55,7 @@ Template.shopSettings.helpers({
   },
   uomOptions: function() {
     var measure, unitsOfMeasure, uom, uomOptions;
-    unitsOfMeasure = ReactionCore.Collections.Shops.findOne().unitsOfMeasure;
+    unitsOfMeasure = EFrameworkCore.Collections.Shops.findOne().unitsOfMeasure;
     uomOptions = [];
     for (measure in unitsOfMeasure) {
       uom = unitsOfMeasure[measure];

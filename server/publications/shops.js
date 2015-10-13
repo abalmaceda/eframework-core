@@ -4,5 +4,5 @@
  */
 
 Meteor.publish("Shops", function () {
-  return ReactionCore.getCurrentShopCursor(this);
+  return EFrameworkCore.getCurrentShopCursor(this);
 });

@@ -3,21 +3,21 @@ describe("core methods", function () {
   describe("flushTranslations", function () {
     it("should throw 403 error by non admin", function (done) {
       spyOn(Roles, "userIsInRole").and.returnValue(false);
-      spyOn(ReactionCore.Collections.Translations, "remove");
+      spyOn(EFrameworkCore.Collections.Translations, "remove");
       spyOn(Fixtures, "loadI18n");
       expect(function () {
         return Meteor.call("flushTranslations");
       }).toThrow(new Meteor.Error(403, "Access Denied"));
-      expect(ReactionCore.Collections.Translations.remove).not.toHaveBeenCalled();
+      expect(EFrameworkCore.Collections.Translations.remove).not.toHaveBeenCalled();
       expect(Fixtures.loadI18n).not.toHaveBeenCalled();
       return done();
     });
     return it("should remove and load translations back by admin", function (done) {
       spyOn(Roles, "userIsInRole").and.returnValue(true);
-      spyOn(ReactionCore.Collections.Translations, "remove");
+      spyOn(EFrameworkCore.Collections.Translations, "remove");
       spyOn(Fixtures, "loadI18n");
       Meteor.call("flushTranslations");
-      expect(ReactionCore.Collections.Translations.remove).toHaveBeenCalled();
+      expect(EFrameworkCore.Collections.Translations.remove).toHaveBeenCalled();
       expect(Fixtures.loadI18n).toHaveBeenCalled();
       return done();
     });

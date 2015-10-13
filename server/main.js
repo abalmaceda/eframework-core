@@ -1,6 +1,6 @@
 /**
  * Application Startup
- * ReactionCore Server Configuration
+ * EFrameworkCore Server Configuration
  */
 
 /**
@@ -30,38 +30,38 @@ if (process.env.VELOCITY_CI === "1") {
   });
 }
 
-ReactionCore.Log = logger.bunyan.createLogger({
+EFrameworkCore.Log = logger.bunyan.createLogger({
   name: "core",
   stream: isDebug !== "DEBUG" ? formatOut : process.stdout,
   level: "debug"
 });
 
 // set logging level
-ReactionCore.Log.level(isDebug);
+EFrameworkCore.Log.level(isDebug);
 
 /**
- * ReactionCore methods (server)
+ * EFrameworkCore methods (server)
  */
 
-_.extend(ReactionCore, {
+_.extend(EFrameworkCore, {
   init: function () {
     try {
       ReactionRegistry.loadFixtures();
     } catch (error) {
-      ReactionCore.Log.error("loadFixtures: ", error.message);
+      EFrameworkCore.Log.error("loadFixtures: ", error.message);
     }
     return true;
   },
 
   getCurrentShopCursor: function (client) {
     let domain = this.getDomain(client);
-    let cursor = ReactionCore.Collections.Shops.find({
+    let cursor = EFrameworkCore.Collections.Shops.find({
       domains: domain
     }, {
       limit: 1
     });
     if (!cursor.count()) {
-      ReactionCore.Log.debug("Add a domain entry to shops for ",
+      EFrameworkCore.Log.debug("Add a domain entry to shops for ",
         domain);
     }
     return cursor;
@@ -147,7 +147,7 @@ _.extend(ReactionCore, {
     return Roles.getGroupsForUser(this.userId, "admin");
   },
   configureMailUrl: function (user, password, host, port) {
-    let shopMail = ReactionCore.Collections.Packages.findOne({
+    let shopMail = EFrameworkCore.Collections.Packages.findOne({
       shopId: this.getShopId(),
       name: "core"
     }).settings.mail;
@@ -159,7 +159,7 @@ _.extend(ReactionCore, {
       return mailString;
     } else if (shopMail.user && shopMail.password && shopMail.host &&
       shopMail.port) {
-      ReactionCore.Log.info("setting default mail url to: " + shopMail
+      EFrameworkCore.Log.info("setting default mail url to: " + shopMail
         .host);
       let mailString =
         `smtp://${shopMail.user}:${shopMail.password}@${shopMail.host}:${shopMail.port}/`;
@@ -170,7 +170,7 @@ _.extend(ReactionCore, {
       return mailUrl;
     }
     if (!process.env.MAIL_URL) {
-      ReactionCore.Log.warn(
+      EFrameworkCore.Log.warn(
         "Mail server not configured. Unable to send email.");
       return false;
     }
@@ -187,6 +187,6 @@ Match.OptionalOrNull = function (pattern) {
  */
 
 Meteor.startup(function () {
-  ReactionCore.init();
-  return ReactionCore.Log.info("Reaction Core initialization finished. ");
+  EFrameworkCore.init();
+  return EFrameworkCore.Log.info("Reaction Core initialization finished. ");
 });

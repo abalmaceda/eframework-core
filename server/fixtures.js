@@ -28,7 +28,7 @@ PackageFixture = class PackageFixture {
     let json = null;
     let result = null;
 
-    ReactionCore.Log.debug(
+    EFrameworkCore.Log.debug(
       `Loading fixture data for ${collection._name}`);
     // if jsonFile was path wasn't provided
     // we'll assume we're loading collection data
@@ -45,11 +45,11 @@ PackageFixture = class PackageFixture {
     }
 
     if (result) {
-      ReactionCore.Log.info(
+      EFrameworkCore.Log.info(
         `Success importing fixture data to ${collection._name}`
       );
     } else {
-      ReactionCore.Log.error("Error adding fixture data to " +
+      EFrameworkCore.Log.error("Error adding fixture data to " +
         collection._name, error.message);
     }
   }
@@ -79,19 +79,19 @@ PackageFixture = class PackageFixture {
     let validatedJson = EJSON.parse(json);
     // validate json and error out if not an array
     if (!_.isArray(validatedJson[0])) {
-      ReactionCore.Log.warn(
+      EFrameworkCore.Log.warn(
         "Load Settings is not an array. Failed to load settings.");
       return;
     }
     // loop settings and upsert packages.
     for (let pkg of validatedJson) {
       for (let item of pkg) {
-        exists = ReactionCore.Collections.Packages.findOne({
+        exists = EFrameworkCore.Collections.Packages.findOne({
           name: item.name
         });
         // insert into the Packages collection
         if (exists) {
-          result = ReactionCore.Collections.Packages.upsert({
+          result = EFrameworkCore.Collections.Packages.upsert({
             name: item.name
           }, {
             $set: {
@@ -118,13 +118,13 @@ PackageFixture = class PackageFixture {
                 }, {
                   $set: settings
                 });
-                ReactionCore.Log.info("service configuration loaded: " +
+                EFrameworkCore.Log.info("service configuration loaded: " +
                   item.name + " | " + service);
               }
             }
           }
         }
-        ReactionCore.Log.info(`loaded local package data: ${item.name}`);
+        EFrameworkCore.Log.info(`loaded local package data: ${item.name}`);
       }
     }
   }
@@ -136,7 +136,7 @@ PackageFixture = class PackageFixture {
    * @returns {null} inserts collection
    */
   loadI18n(translationCollection) {
-    let collection = translationCollection || ReactionCore.Collections.Translations;
+    let collection = translationCollection || EFrameworkCore.Collections.Translations;
     let json;
     let shop;
 
@@ -144,9 +144,9 @@ PackageFixture = class PackageFixture {
       return;
     }
 
-    shop = ReactionCore.Collections.Shops.findOne();
+    shop = EFrameworkCore.Collections.Shops.findOne();
     if (shop) {
-      ReactionCore.Log.info(
+      EFrameworkCore.Log.info(
         `Loading fixture data for ${collection._name}`);
       if (!(shop !== null ? shop.languages : void 0)) {
         shop.languages = [{
@@ -160,17 +160,17 @@ PackageFixture = class PackageFixture {
         for (let item of json) {
           collection.insert(item, function (error) {
             if (error) {
-              ReactionCore.Log.warn("Error adding " + language.i18n +
+              EFrameworkCore.Log.warn("Error adding " + language.i18n +
                 " to " + collection._name, item, error);
             }
           });
-          ReactionCore.Log.info("Success adding " + language.i18n +
+          EFrameworkCore.Log.info("Success adding " + language.i18n +
             " to " +
             collection._name);
         }
       }
     } else {
-      ReactionCore.Log.error("No shop found. Failed to load languages.");
+      EFrameworkCore.Log.error("No shop found. Failed to load languages.");
       return;
     }
   }
@@ -211,7 +211,7 @@ ReactionRegistry.createDefaultAdminUser = function () {
   options.password = process.env.REACTION_AUTH;
 
   defaultAdminRoles = ["owner", "admin"];
-  shopId = ReactionCore.getShopId();
+  shopId = EFrameworkCore.getShopId();
   if (Roles.getUsersInRole(defaultAdminRoles, shopId).count() !== 0) {
     return;
   }
@@ -222,7 +222,7 @@ ReactionRegistry.createDefaultAdminUser = function () {
       options.password = url.substring(url.indexOf("/") + 2, url.indexOf("@"))
         .split(":")[1];
     }
-    ReactionCore.Log.warn(
+    EFrameworkCore.Log.warn(
       "\nIMPORTANT! DEFAULT USER INFO (ENV)\n  EMAIL/LOGIN: " + options.email +
       "\n  PASSWORD: " + options.password + "\n");
   } else {
@@ -230,7 +230,7 @@ ReactionRegistry.createDefaultAdminUser = function () {
     options.password = Meteor.settings.REACTION_AUTH || Random.secret(8);
     options.email = Meteor.settings.REACTION_EMAIL || Random.id(8).toLowerCase() +
       "@" + domain;
-    ReactionCore.Log.warn(
+    EFrameworkCore.Log.warn(
       "\nIMPORTANT! DEFAULT USER INFO (RANDOM)\n  EMAIL/LOGIN: " + options.email +
       "\n  PASSWORD: " + options.password + "\n");
   }
@@ -243,7 +243,7 @@ ReactionRegistry.createDefaultAdminUser = function () {
   try {
     Accounts.sendVerificationEmail(accountId);
   } catch (_error) {
-    ReactionCore.Log.warn(
+    EFrameworkCore.Log.warn(
       "Unable to send admin account verification email.", error);
   }
 
@@ -261,9 +261,9 @@ ReactionRegistry.createDefaultAdminUser = function () {
     });
   }
 
-  packages = ReactionCore.Collections.Packages.find().fetch();
+  packages = EFrameworkCore.Collections.Packages.find().fetch();
 
-  ReactionCore.Collections.Shops.update(shopId, {
+  EFrameworkCore.Collections.Shops.update(shopId, {
     $addToSet: {
       emails: {
         address: options.email,
@@ -298,20 +298,20 @@ ReactionRegistry.createDefaultAdminUser = function () {
 ReactionRegistry.loadFixtures = function () {
   let currentDomain;
 
-  Fixtures.loadData(ReactionCore.Collections.Shops);
-  Fixtures.loadData(ReactionCore.Collections.Products);
-  Fixtures.loadData(ReactionCore.Collections.Tags);
-  Fixtures.loadI18n(ReactionCore.Collections.Translations);
+  Fixtures.loadData(EFrameworkCore.Collections.Shops);
+  Fixtures.loadData(EFrameworkCore.Collections.Products);
+  Fixtures.loadData(EFrameworkCore.Collections.Tags);
+  Fixtures.loadI18n(EFrameworkCore.Collections.Translations);
 
   try {
-    currentDomain = ReactionCore.Collections.Shops.findOne().domains[0];
+    currentDomain = EFrameworkCore.Collections.Shops.findOne().domains[0];
   } catch (_error) {
-    ReactionCore.Log.error("Failed to determine default shop.", _error);
+    EFrameworkCore.Log.error("Failed to determine default shop.", _error);
   }
 
   // if the server domain changes, update shop
   if (currentDomain && currentDomain !== getDomain()) {
-    ReactionCore.Log.info("Updating domain to " + getDomain());
+    EFrameworkCore.Log.info("Updating domain to " + getDomain());
     Shops.update({
       domains: currentDomain
     }, {
@@ -324,18 +324,18 @@ ReactionRegistry.loadFixtures = function () {
   //  we check to see if the number of packages have changed against current data
   //  if there is a change, we'll either insert or upsert package registry
   //  into the Packages collection
-  if (ReactionCore.Collections.Packages.find().count() !== ReactionCore.Collections
+  if (EFrameworkCore.Collections.Packages.find().count() !== EFrameworkCore.Collections
     .Shops.find().count() * Object.keys(ReactionRegistry.Packages).length) {
     // for each shop, we're loading packages registry
     _.each(ReactionRegistry.Packages, function (config, pkgName) {
-      return ReactionCore.Collections.Shops.find().forEach(function (
+      return EFrameworkCore.Collections.Shops.find().forEach(function (
         shop) {
         let shopId = shop._id;
-        ReactionCore.Log.info("Initializing " + shop.name + " " +
+        EFrameworkCore.Log.info("Initializing " + shop.name + " " +
           pkgName);
         // existing registry will be upserted with changes
         if (!shopId) return [];
-        let result = ReactionCore.Collections.Packages.upsert({
+        let result = EFrameworkCore.Collections.Packages.upsert({
           shopId: shopId,
           name: pkgName
         }, {
@@ -353,11 +353,11 @@ ReactionRegistry.loadFixtures = function () {
     });
   }
   // remove registry entries for packages that have been removed
-  ReactionCore.Collections.Shops.find().forEach(function (shop) {
-    return ReactionCore.Collections.Packages.find().forEach(function (pkg) {
+  EFrameworkCore.Collections.Shops.find().forEach(function (shop) {
+    return EFrameworkCore.Collections.Packages.find().forEach(function (pkg) {
       if (!_.has(ReactionRegistry.Packages, pkg.name)) {
-        ReactionCore.Log.info(`Removing ${pkg.name}`, pkg);
-        return ReactionCore.Collections.Packages.remove({
+        EFrameworkCore.Log.info(`Removing ${pkg.name}`, pkg);
+        return EFrameworkCore.Collections.Packages.remove({
           shopId: shop._id,
           name: pkg.name
         });

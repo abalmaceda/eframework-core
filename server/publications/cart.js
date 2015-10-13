@@ -14,11 +14,11 @@ Meteor.publish("Cart", function (sessionId, userId) {
     this.ready();
   }
   // shopId is also required.
-  if (!ReactionCore.getShopId()) {
+  if (!EFrameworkCore.getShopId()) {
     this.ready();
   }
   // select user cart
-  cart = ReactionCore.Collections.Cart.findOne({
+  cart = EFrameworkCore.Collections.Cart.findOne({
     userId: this.userId
   });
 
@@ -31,7 +31,7 @@ Meteor.publish("Cart", function (sessionId, userId) {
     this.ready();
   }
   // return cart cursor
-  return ReactionCore.Collections.Cart.find(cartId);
+  return EFrameworkCore.Collections.Cart.find(cartId);
 });
 
 /**
@@ -39,8 +39,8 @@ Meteor.publish("Cart", function (sessionId, userId) {
  */
 
 Meteor.publish("Shipping", function () {
-  return ReactionCore.Collections.Shipping.find({
-    shopId: ReactionCore.getShopId()
+  return EFrameworkCore.Collections.Shipping.find({
+    shopId: EFrameworkCore.getShopId()
   });
 });
 
@@ -49,8 +49,8 @@ Meteor.publish("Shipping", function () {
  */
 
 Meteor.publish("Taxes", function () {
-  return ReactionCore.Collections.Taxes.find({
-    shopId: ReactionCore.getShopId()
+  return EFrameworkCore.Collections.Taxes.find({
+    shopId: EFrameworkCore.getShopId()
   });
 });
 
@@ -59,7 +59,7 @@ Meteor.publish("Taxes", function () {
  */
 
 Meteor.publish("Discounts", function () {
-  return ReactionCore.Collections.Discounts.find({
-    shopId: ReactionCore.getShopId()
+  return EFrameworkCore.Collections.Discounts.find({
+    shopId: EFrameworkCore.getShopId()
   });
 });

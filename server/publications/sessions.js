@@ -32,7 +32,7 @@ Meteor.publish("Sessions", function (sessionId) {
   }
 
   // set global sessionId
-  ReactionCore.sessionId = newSessionId;
+  EFrameworkCore.sessionId = newSessionId;
 
   // return cursor
   return ServerSessions.find(newSessionId);

@@ -10,11 +10,11 @@ Template.consoleNavBar.helpers({
     }
   },
   pkgPermissions: function() {
-    if (ReactionCore.hasPermission('console')) {
+    if (EFrameworkCore.hasPermission('console')) {
       if (this.route) {
-        return ReactionCore.hasPermission(this.route);
+        return EFrameworkCore.hasPermission(this.route);
       } else {
-        return ReactionCore.hasPermission(this.name);
+        return EFrameworkCore.hasPermission(this.name);
       }
     } else {
       return false;

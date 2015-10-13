@@ -3,7 +3,7 @@
  */
 
 let Media;
-Media = ReactionCore.Collections.Media;
+Media = EFrameworkCore.Collections.Media;
 Template.productList.helpers({
   products: function () {
     return getProductsByTag(this.tag);

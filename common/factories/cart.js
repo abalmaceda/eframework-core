@@ -3,7 +3,7 @@
 * @summary define cart Factory
 */
 
-Factory.define("cart", ReactionCore.Collections.Cart, {
+Factory.define("cart", EFrameworkCore.Collections.Cart, {
   shopId: Factory.get("shop"),
   userId: Factory.get("user"),
   sessionId: Random.id(),

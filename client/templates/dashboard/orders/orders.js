@@ -6,15 +6,15 @@
 Template.orders.helpers({
 
   orders() {
-    return ReactionCore.Collections.Orders.find({});
+    return EFrameworkCore.Collections.Orders.find({});
   },
 
   settings: function () {
     // ensure sub is up to date
-    ReactionCore.Subscriptions.Orders = Meteor.subscribe("Orders");
+    EFrameworkCore.Subscriptions.Orders = Meteor.subscribe("Orders");
     // return reactive-table setup
     return {
-      collection: ReactionCore.Collections.Orders,
+      collection: EFrameworkCore.Collections.Orders,
       rowsPerPage: 10,
       showFilter: false,
       showNavigation: true,
@@ -43,7 +43,7 @@ Template.orders.events({
       Meteor.call("workflow/pushOrderWorkflow", "coreOrderWorkflow", "coreOrderCreated", this._id);
     }
 
-    ReactionCore.showActionView({
+    EFrameworkCore.showActionView({
       label: "Order Details",
       data: this,
       template: "coreOrderWorkflow"
@@ -59,7 +59,7 @@ Template.orderViewButton.events({
       Meteor.call("workflow/pushOrderWorkflow", "coreOrderWorkflow", "coreOrderCreated", this._id);
     }
 
-    ReactionCore.showActionView({
+    EFrameworkCore.showActionView({
       label: "Order Details",
       data: this,
       template: "coreOrderWorkflow"

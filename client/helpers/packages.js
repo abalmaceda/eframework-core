@@ -63,7 +63,7 @@ Template.registerHelper("reactionApps", function (optionHash) {
   // you could provide a shopId in optionHash
   if (packageSubscription.ready()) {
     if (!options.shopId) {
-      options.shopId = ReactionCore.getShopId();
+      options.shopId = EFrameworkCore.getShopId();
     }
 
     reactionApps = [];
@@ -88,7 +88,7 @@ Template.registerHelper("reactionApps", function (optionHash) {
       name: 1
     };
 
-    reactionPackages = ReactionCore.Collections.Packages.find(filter,
+    reactionPackages = EFrameworkCore.Collections.Packages.find(filter,
       fields).fetch();
 
     if (!reactionPackages) {

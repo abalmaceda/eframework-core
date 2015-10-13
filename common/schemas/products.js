@@ -1,7 +1,7 @@
 /**
  * VariantMedia Schema
  */
-ReactionCore.Schemas.VariantMedia = new SimpleSchema({
+EFrameworkCore.Schemas.VariantMedia = new SimpleSchema({
   mediaId: {
     type: String,
     optional: true
@@ -11,7 +11,7 @@ ReactionCore.Schemas.VariantMedia = new SimpleSchema({
     optional: true
   },
   metafields: {
-    type: [ReactionCore.Schemas.Metafield],
+    type: [EFrameworkCore.Schemas.Metafield],
     optional: true
   },
   updatedAt: {
@@ -36,7 +36,7 @@ ReactionCore.Schemas.VariantMedia = new SimpleSchema({
 /**
  * ProductPosition Schema
  */
-ReactionCore.Schemas.ProductPosition = new SimpleSchema({
+EFrameworkCore.Schemas.ProductPosition = new SimpleSchema({
   tag: {
     type: String,
     optional: true
@@ -65,7 +65,7 @@ ReactionCore.Schemas.ProductPosition = new SimpleSchema({
  * ProductVariant Schema
  */
 
-ReactionCore.Schemas.ProductVariant = new SimpleSchema({
+EFrameworkCore.Schemas.ProductVariant = new SimpleSchema({
   _id: {
     type: String
   },
@@ -214,7 +214,7 @@ ReactionCore.Schemas.ProductVariant = new SimpleSchema({
     optional: true
   },
   metafields: {
-    type: [ReactionCore.Schemas.Metafield],
+    type: [EFrameworkCore.Schemas.Metafield],
     optional: true
   },
   createdAt: {
@@ -233,7 +233,7 @@ ReactionCore.Schemas.ProductVariant = new SimpleSchema({
  * Product Schema
  */
 
-ReactionCore.Schemas.Product = new SimpleSchema({
+EFrameworkCore.Schemas.Product = new SimpleSchema({
   _id: {
     type: String,
     optional: true
@@ -244,7 +244,7 @@ ReactionCore.Schemas.Product = new SimpleSchema({
   },
   shopId: {
     type: String,
-    autoValue: ReactionCore.shopIdAutoValue,
+    autoValue: EFrameworkCore.shopIdAutoValue,
     index: 1,
     label: "Product ShopId"
   },
@@ -269,15 +269,15 @@ ReactionCore.Schemas.Product = new SimpleSchema({
     optional: true
   },
   metafields: {
-    type: [ReactionCore.Schemas.Metafield],
+    type: [EFrameworkCore.Schemas.Metafield],
     optional: true
   },
   positions: {
-    type: [ReactionCore.Schemas.ProductPosition],
+    type: [EFrameworkCore.Schemas.ProductPosition],
     optional: true
   },
   variants: {
-    type: [ReactionCore.Schemas.ProductVariant]
+    type: [EFrameworkCore.Schemas.ProductVariant]
   },
   requiresShipping: {
     label: "Require a shipping address",
@@ -286,7 +286,7 @@ ReactionCore.Schemas.Product = new SimpleSchema({
     optional: true
   },
   parcel: {
-    type: ReactionCore.Schemas.ShippingParcel,
+    type: EFrameworkCore.Schemas.ShippingParcel,
     optional: true
   },
   hashtags: {

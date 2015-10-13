@@ -2,13 +2,13 @@
  * register reaction core components as reaction packages
  */
 
-ReactionCore.registerPackage = function (packageInfo) {
+EFrameworkCore.registerPackage = function (packageInfo) {
   let registeredPackage = ReactionRegistry.Packages[packageInfo.name] =
     packageInfo;
   return registeredPackage;
 };
 
-ReactionCore.registerPackage({
+EFrameworkCore.registerPackage({
   label: "Core",
   name: "core",
   icon: "fa fa-th",

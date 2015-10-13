@@ -1,4 +1,4 @@
-Factory.define("shop", ReactionCore.Collections.Shops, {
+Factory.define("shop", EFrameworkCore.Collections.Shops, {
   name: faker.company.companyName(),
   description: faker.company.catchPhrase(),
   keywords: faker.company.bsAdjective(),

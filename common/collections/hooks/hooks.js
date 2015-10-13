@@ -1,5 +1,5 @@
 /**
- * ReactionCore Collection Hooks
+ * EFrameworkCore Collection Hooks
  * transform collections based on events
  *
  * See: https://github.com/matb33/meteor-collection-hooks
@@ -77,7 +77,7 @@ organizedChildVariants = function (product) {
 /*
  * refresh mail configuration on package change
  */
-ReactionCore.Collections.Packages.after.update(function (userId, doc,
+EFrameworkCore.Collections.Packages.after.update(function (userId, doc,
   fieldNames, modifier) {
   let _ref;
   let _ref1;
@@ -86,7 +86,7 @@ ReactionCore.Collections.Packages.after.update(function (userId, doc,
       _ref1.mail : void 0 : void 0) || ((_ref2 = modifier.$set) != null ?
       _ref2["settings.mail.user"] : void 0)) {
     if (Meteor.isServer) {
-      return ReactionCore.configureMailUrl();
+      return EFrameworkCore.configureMailUrl();
     }
   }
 });
@@ -94,9 +94,9 @@ ReactionCore.Collections.Packages.after.update(function (userId, doc,
 /**
  * create unpublished product
  */
-ReactionCore.Collections.Products.before.insert(function (userId, product) {
+EFrameworkCore.Collections.Products.before.insert(function (userId, product) {
   let variant, _i, _len, _ref, _results;
-  product.shopId = product.shopId || ReactionCore.getShopId();
+  product.shopId = product.shopId || EFrameworkCore.getShopId();
   _.defaults(product, {
     type: "simple",
     handle: getSlug(product.title),
@@ -116,7 +116,7 @@ ReactionCore.Collections.Products.before.insert(function (userId, product) {
 /**
  * On product update
  */
-ReactionCore.Collections.Products.before.update(function (userId, product,
+EFrameworkCore.Collections.Products.before.update(function (userId, product,
   fieldNames, modifier, options) {
   let addToSet, createdAt, differenceInQty, firstInventoryVariant,
     organizedChildren, originalInventoryQuantity, position, removedVariant,

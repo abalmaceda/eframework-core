@@ -2,7 +2,7 @@
 * Permissions Schema
 */
 
-ReactionCore.Schemas.Permissions = new SimpleSchema({
+EFrameworkCore.Schemas.Permissions = new SimpleSchema({
   permission: {
     type: String
   },
@@ -17,7 +17,7 @@ ReactionCore.Schemas.Permissions = new SimpleSchema({
  * Shop defaultWorkflow is defined in Shop
  */
 
-ReactionCore.Schemas.Workflow = new SimpleSchema({
+EFrameworkCore.Schemas.Workflow = new SimpleSchema({
   status: {
     type: String,
     defaultValue: "new"
@@ -32,11 +32,11 @@ ReactionCore.Schemas.Workflow = new SimpleSchema({
 * PackageConfig Schema
 */
 
-ReactionCore.Schemas.PackageConfig = new SimpleSchema({
+EFrameworkCore.Schemas.PackageConfig = new SimpleSchema({
   "shopId": {
     type: String,
     index: 1,
-    autoValue: ReactionCore.shopIdAutoValue,
+    autoValue: EFrameworkCore.shopIdAutoValue,
     label: "PackageConfig ShopId",
     optional: true
   },
@@ -58,7 +58,7 @@ ReactionCore.Schemas.PackageConfig = new SimpleSchema({
     blackbox: true
   },
   "layout": {
-    type: [ReactionCore.Schemas.Layout],
+    type: [EFrameworkCore.Schemas.Layout],
     optional: true
   },
   "registry": {
@@ -101,7 +101,7 @@ ReactionCore.Schemas.PackageConfig = new SimpleSchema({
     optional: true
   },
   "registry.$.permissions": {
-    type: [ReactionCore.Schemas.Permissions],
+    type: [EFrameworkCore.Schemas.Permissions],
     optional: true
   }
 });
@@ -112,8 +112,8 @@ ReactionCore.Schemas.PackageConfig = new SimpleSchema({
 * Core Reaction Settings
 */
 
-ReactionCore.Schemas.CorePackageConfig = new SimpleSchema([
-  ReactionCore.Schemas.PackageConfig, {
+EFrameworkCore.Schemas.CorePackageConfig = new SimpleSchema([
+  EFrameworkCore.Schemas.PackageConfig, {
     "settings.mail": {
       type: Object,
       optional: true,

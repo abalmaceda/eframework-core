@@ -12,13 +12,13 @@
  */
 if (Package.blaze) {
   Package.blaze.Blaze.Template.registerHelper("currentUser", function () {
-    if (ReactionCore !== undefined) {
+    if (EFrameworkCore !== undefined) {
       // shoppers should always be guests
-      let isGuest = Roles.userIsInRole(Meteor.user(), "guest", ReactionCore
+      let isGuest = Roles.userIsInRole(Meteor.user(), "guest", EFrameworkCore
         .getShopId());
       // but if a user has never logged in then they are anonymous
       let isAnonymous = Roles.userIsInRole(Meteor.user(), "anonymous",
-        ReactionCore.getShopId());
+        EFrameworkCore.getShopId());
 
       if (!isGuest && isAnonymous) {
         return null;
@@ -184,7 +184,7 @@ Template.registerHelper("activeRouteClass", function () {
  * @return {String} returns site name
  */
 Template.registerHelper("siteName", function () {
-  let shop = ReactionCore.Collections.Shops.findOne();
+  let shop = EFrameworkCore.Collections.Shops.findOne();
   if (shop) {
     if (shop.name) {
       return shop.name;

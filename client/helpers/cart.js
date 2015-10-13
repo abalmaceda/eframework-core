@@ -11,7 +11,7 @@
  * are calculated by a transformation on the collection
  * and are available to use in template as cart.xxx
  * in template: {{cart.cartCount}}
- * in code: ReactionCore.Collections.Cart.findOne().cartTotal()
+ * in code: EFrameworkCore.Collections.Cart.findOne().cartTotal()
  * @return {Object} returns inventory helpers
  */
 Template.registerHelper("cart", function () {
@@ -32,7 +32,7 @@ Template.registerHelper("cart", function () {
      */
     showLowInventoryWarning() {
       let item;
-      let storedCart = ReactionCore.Collections.Cart.findOne();
+      let storedCart = EFrameworkCore.Collections.Cart.findOne();
       // we're not being picky here - first thing in cart
       // that is low will trigger a inventory warning
       if (storedCart !== null ? storedCart.items : void 0) {
@@ -74,7 +74,7 @@ Template.registerHelper("cart", function () {
  */
 
 Template.registerHelper("cartPayerName", function () {
-  let cart = ReactionCore.Collections.Cart.findOne();
+  let cart = EFrameworkCore.Collections.Cart.findOne();
   if (cart) {
     if (cart.billing) {
       if (cart.billing[0].address) {

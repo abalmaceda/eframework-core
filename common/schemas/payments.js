@@ -2,7 +2,7 @@
  * PaymentMethod Schema
  */
 
-ReactionCore.Schemas.PaymentMethod = new SimpleSchema({
+EFrameworkCore.Schemas.PaymentMethod = new SimpleSchema({
   processor: {
     type: String
   },
@@ -18,7 +18,7 @@ ReactionCore.Schemas.PaymentMethod = new SimpleSchema({
     type: String
   },
   workflow: {
-    type: ReactionCore.Schemas.Workflow,
+    type: EFrameworkCore.Schemas.Workflow,
     optional: true
   },
   status: {
@@ -61,7 +61,7 @@ ReactionCore.Schemas.PaymentMethod = new SimpleSchema({
  * Invoice Schema
  */
 
-ReactionCore.Schemas.Invoice = new SimpleSchema({
+EFrameworkCore.Schemas.Invoice = new SimpleSchema({
   transaction: {
     type: String,
     optional: true
@@ -95,7 +95,7 @@ ReactionCore.Schemas.Invoice = new SimpleSchema({
  * Payment Schema
  */
 
-ReactionCore.Schemas.Payment = new SimpleSchema({
+EFrameworkCore.Schemas.Payment = new SimpleSchema({
   _id: {
     type: String,
     label: "Payment Id",
@@ -107,15 +107,15 @@ ReactionCore.Schemas.Payment = new SimpleSchema({
     }
   },
   address: {
-    type: ReactionCore.Schemas.Address,
+    type: EFrameworkCore.Schemas.Address,
     optional: true
   },
   paymentMethod: {
-    type: ReactionCore.Schemas.PaymentMethod,
+    type: EFrameworkCore.Schemas.PaymentMethod,
     optional: true
   },
   invoice: {
-    type: ReactionCore.Schemas.Invoice,
+    type: EFrameworkCore.Schemas.Invoice,
     optional: true
   }
 });

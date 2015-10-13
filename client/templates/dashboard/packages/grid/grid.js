@@ -4,11 +4,11 @@
 */
 Template.packagesGrid.helpers({
   pkgPermissions: function() {
-    if (ReactionCore.hasPermission('dashboard')) {
+    if (EFrameworkCore.hasPermission('dashboard')) {
       if (this.route) {
-        return ReactionCore.hasPermission(this.route);
+        return EFrameworkCore.hasPermission(this.route);
       } else {
-        return ReactionCore.hasPermission(this.name);
+        return EFrameworkCore.hasPermission(this.name);
       }
     } else {
       return false;

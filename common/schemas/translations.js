@@ -6,7 +6,7 @@
 * since ui editing for these values are likely
 */
 
-ReactionCore.Schemas.Translation = new SimpleSchema({
+EFrameworkCore.Schemas.Translation = new SimpleSchema({
   language: {
     type: String
   },

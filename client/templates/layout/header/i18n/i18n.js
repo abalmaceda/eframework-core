@@ -5,7 +5,7 @@
 Template.i18nChooser.helpers({
   languages: function () {
     let languages = [];
-    let shop = ReactionCore.Collections.Shops.findOne();
+    let shop = EFrameworkCore.Collections.Shops.findOne();
     if (shop !== null ? shop.languages : void 0) {
       for (let language of shop.languages) {
         if (language.enabled === true) {

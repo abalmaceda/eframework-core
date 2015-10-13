@@ -4,9 +4,9 @@
 
 Meteor.methods({
   "cart/submitPayment": function (paymentMethod) {
-    check(paymentMethod, ReactionCore.Schemas.PaymentMethod);
+    check(paymentMethod, EFrameworkCore.Schemas.PaymentMethod);
 
-    let checkoutCart = ReactionCore.Collections.Cart.findOne({
+    let checkoutCart = EFrameworkCore.Collections.Cart.findOne({
       userId: Meteor.userId()
     });
 
@@ -50,9 +50,9 @@ Meteor.methods({
       };
     }
 
-    ReactionCore.Collections.Cart.update(selector, update, function (error, result) {
+    EFrameworkCore.Collections.Cart.update(selector, update, function (error, result) {
       if (error) {
-        ReactionCore.Log.warn(error);
+        EFrameworkCore.Log.warn(error);
         throw new Meteor.Error("An error occurred saving the order", error);
       } else {
         // it's ok for this to be called multiple times

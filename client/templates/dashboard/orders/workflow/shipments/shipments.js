@@ -7,7 +7,7 @@ Template.coreOrderShipments.onCreated(() => {
 
   function getOrder(orderId) {
     template.orderDep.depend();
-    return ReactionCore.Collections.Orders.findOne(orderId);
+    return EFrameworkCore.Collections.Orders.findOne(orderId);
   }
 
   Tracker.autorun(() => {
@@ -156,7 +156,7 @@ Template.coreOrderShipments.helpers({
       variantId = variantObjectOrId._id;
     }
 
-    let defaultImage = ReactionCore.Collections.Media.findOne({
+    let defaultImage = EFrameworkCore.Collections.Media.findOne({
       "metadata.variantId": variantId,
       "metadata.priority": 0
     });

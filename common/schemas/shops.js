@@ -2,7 +2,7 @@
  * CustomEmailSettings Schema
  */
 
-ReactionCore.Schemas.CustomEmailSettings = new SimpleSchema({
+EFrameworkCore.Schemas.CustomEmailSettings = new SimpleSchema({
   username: {
     type: String,
     optional: true
@@ -26,7 +26,7 @@ ReactionCore.Schemas.CustomEmailSettings = new SimpleSchema({
  * Metafield Schema
  */
 
-ReactionCore.Schemas.Metafield = new SimpleSchema({
+EFrameworkCore.Schemas.Metafield = new SimpleSchema({
   key: {
     type: String,
     max: 30,
@@ -59,7 +59,7 @@ ReactionCore.Schemas.Metafield = new SimpleSchema({
  * Currency Schema
  */
 
-ReactionCore.Schemas.Currency = new SimpleSchema({
+EFrameworkCore.Schemas.Currency = new SimpleSchema({
   symbol: {
     type: String,
     defaultValue: "$"
@@ -93,7 +93,7 @@ ReactionCore.Schemas.Currency = new SimpleSchema({
  * Locale Schema
  */
 
-ReactionCore.Schemas.Locale = new SimpleSchema({
+EFrameworkCore.Schemas.Locale = new SimpleSchema({
   continents: {
     type: Object,
     blackbox: true
@@ -108,7 +108,7 @@ ReactionCore.Schemas.Locale = new SimpleSchema({
  * Shop Schema
  */
 
-ReactionCore.Schemas.Shop = new SimpleSchema({
+EFrameworkCore.Schemas.Shop = new SimpleSchema({
   "_id": {
     type: String,
     optional: true
@@ -130,7 +130,7 @@ ReactionCore.Schemas.Shop = new SimpleSchema({
     optional: true
   },
   "addressBook": {
-    type: [ReactionCore.Schemas.Address],
+    type: [EFrameworkCore.Schemas.Address],
     optional: true
   },
   "domains": {
@@ -139,7 +139,7 @@ ReactionCore.Schemas.Shop = new SimpleSchema({
     index: 1
   },
   "emails": {
-    type: [ReactionCore.Schemas.Email],
+    type: [EFrameworkCore.Schemas.Email],
     optional: true
   },
   "currency": {
@@ -148,7 +148,7 @@ ReactionCore.Schemas.Shop = new SimpleSchema({
     defaultValue: "USD"
   },
   "currencies": {
-    type: Object, // ReactionCore.Schemas.Currency
+    type: Object, // EFrameworkCore.Schemas.Currency
     blackbox: true
   },
   "locale": {
@@ -156,7 +156,7 @@ ReactionCore.Schemas.Shop = new SimpleSchema({
     defaultValue: "en"
   },
   "locales": {
-    type: ReactionCore.Schemas.Locale
+    type: EFrameworkCore.Schemas.Locale
   },
   "languages": {
     type: [Object],
@@ -186,7 +186,7 @@ ReactionCore.Schemas.Shop = new SimpleSchema({
     label: "Base Unit of Measure"
   },
   "metafields": {
-    type: [ReactionCore.Schemas.Metafield],
+    type: [EFrameworkCore.Schemas.Metafield],
     optional: true
   },
   "defaultRoles": {

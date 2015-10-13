@@ -44,7 +44,7 @@ Template.gridPackage.events({
     var self;
     self = this;
     event.preventDefault();
-    return ReactionCore.Collections.Packages.update(template.data.packageId, {
+    return EFrameworkCore.Collections.Packages.update(template.data.packageId, {
       $set: {
         enabled: true
       }
@@ -73,7 +73,7 @@ Template.gridPackage.events({
     }
     if (confirm("Are you sure you want to disable " + self.label)) {
       event.preventDefault();
-      ReactionCore.Collections.Packages.update(template.data.packageId, {
+      EFrameworkCore.Collections.Packages.update(template.data.packageId, {
         $set: {
           enabled: false
         }
@@ -106,7 +106,7 @@ Template.gridPackage.events({
     event.stopPropagation();
 
     // Show the advanced settings view using this package registry entry
-    ReactionCore.showActionView(this)
+    EFrameworkCore.showActionView(this)
 
   }
 });

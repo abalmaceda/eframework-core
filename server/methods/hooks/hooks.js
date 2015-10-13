@@ -3,7 +3,7 @@
  *  @see https://github.com/hitchcott/meteor-method-hooks
  *  @see https://github.com/Workpop/meteor-method-hooks
  */
-ReactionCore.MethodHooks = {};
+EFrameworkCore.MethodHooks = {};
 
 /**
  * A hook to be run before or after a method.
@@ -26,20 +26,20 @@ ReactionCore.MethodHooks = {};
  * @type {Object.<String, [Hook]>} A mapping from method names to arrays of hooks
  * @private
  */
-ReactionCore.MethodHooks._afterHooks = {};
+EFrameworkCore.MethodHooks._afterHooks = {};
 
 /**
  * A collection of before hooks
  * @type {Object.<String, [Hook]>} A mapping from method names to arrays of hooks
  * @private
  */
-ReactionCore.MethodHooks._beforeHooks = {};
+EFrameworkCore.MethodHooks._beforeHooks = {};
 
 /**
  * handlers
  * The method handler definitions appropriate to the environment
  */
-ReactionCore.MethodHooks._handlers = Meteor.isClient ? Meteor.connection._methodHandlers :
+EFrameworkCore.MethodHooks._handlers = Meteor.isClient ? Meteor.connection._methodHandlers :
   Meteor.server.method_handlers;
 
 /**
@@ -47,14 +47,14 @@ ReactionCore.MethodHooks._handlers = Meteor.isClient ? Meteor.connection._method
  * @type {Object.<String, Function>} Method handler mapping
  * @private
  */
-ReactionCore.MethodHooks._originalMethodHandlers = {};
+EFrameworkCore.MethodHooks._originalMethodHandlers = {};
 
 /**
  * Wrappers
  * @type {Object.<String, Function>} A mapping from method names to method functions
  * @private
  */
-ReactionCore.MethodHooks._wrappers = {};
+EFrameworkCore.MethodHooks._wrappers = {};
 
 /**
  *  initializeHook
@@ -65,26 +65,26 @@ ReactionCore.MethodHooks._wrappers = {};
  * @private
  * @return {String} - returns transformed data
  */
-ReactionCore.MethodHooks._initializeHook = function (mapping, methodName,
+EFrameworkCore.MethodHooks._initializeHook = function (mapping, methodName,
   hookFunction) {
   mapping[methodName] = mapping[methodName] || [];
   mapping[methodName].push(hookFunction);
 
   // Initialize a wrapper for the given method name. Idempotent, it will not erase existing handlers.
-  let method = ReactionCore.MethodHooks._handlers[methodName];
+  let method = EFrameworkCore.MethodHooks._handlers[methodName];
   // If no method is found, or a wrapper already exists, return
-  if (!method || ReactionCore.MethodHooks._wrappers[methodName]) {
+  if (!method || EFrameworkCore.MethodHooks._wrappers[methodName]) {
     return;
   }
 
   // Get a reference to the original handler
-  ReactionCore.MethodHooks._originalMethodHandlers[methodName] = method;
+  EFrameworkCore.MethodHooks._originalMethodHandlers[methodName] = method;
 
-  ReactionCore.MethodHooks._wrappers[methodName] = function () {
+  EFrameworkCore.MethodHooks._wrappers[methodName] = function () {
     // Get arguments you can mutate
     let args = _.toArray(arguments);
     // Call the before hooks
-    let beforeHooks = ReactionCore.MethodHooks._beforeHooks[methodName];
+    let beforeHooks = EFrameworkCore.MethodHooks._beforeHooks[methodName];
     _.each(beforeHooks, function (beforeHook, hooksProcessed) {
       beforeHook.call(this, {
         result: undefined,
@@ -99,14 +99,14 @@ ReactionCore.MethodHooks._initializeHook = function (mapping, methodName,
 
     // Call the main method body
     try {
-      methodResult = ReactionCore.MethodHooks._originalMethodHandlers[
+      methodResult = EFrameworkCore.MethodHooks._originalMethodHandlers[
         methodName].apply(this, args);
     } catch (error) {
       methodError = error;
     }
 
     // Call after hooks, providing the result and the original arguments
-    let afterHooks = ReactionCore.MethodHooks._afterHooks[methodName];
+    let afterHooks = EFrameworkCore.MethodHooks._afterHooks[methodName];
     _.each(afterHooks, function (afterHook, hooksProcessed) {
       let hookResult = afterHook.call(this, {
         result: methodResult,
@@ -132,43 +132,43 @@ ReactionCore.MethodHooks._initializeHook = function (mapping, methodName,
   };
 
   // Assign to a new handler
-  ReactionCore.MethodHooks._handlers[methodName] = ReactionCore.MethodHooks._wrappers[
+  EFrameworkCore.MethodHooks._handlers[methodName] = EFrameworkCore.MethodHooks._wrappers[
     methodName];
 };
 
 /**
- * ReactionCore MethodHooks before
+ * EFrameworkCore MethodHooks before
  * @summary Add a function to call before the specified method
  * @param {String} methodName - methodName
  * @param {String} beforeFunction - beforeFunction
  * @return {String} - returns transformed data
  */
-ReactionCore.MethodHooks.before = function (methodName, beforeFunction) {
-  ReactionCore.MethodHooks._initializeHook(ReactionCore.MethodHooks._beforeHooks,
+EFrameworkCore.MethodHooks.before = function (methodName, beforeFunction) {
+  EFrameworkCore.MethodHooks._initializeHook(EFrameworkCore.MethodHooks._beforeHooks,
     methodName, beforeFunction);
 };
 
 /**
- * ReactionCore.MethodHooks.after
+ * EFrameworkCore.MethodHooks.after
  * Add a function to call after the specified method
  * @param {String} methodName - methodName
  * @param {String} afterFunction - afterFunction
  * @return {String} - returns transformed data
  */
-ReactionCore.MethodHooks.after = function (methodName, afterFunction) {
-  ReactionCore.MethodHooks._initializeHook(ReactionCore.MethodHooks._afterHooks,
+EFrameworkCore.MethodHooks.after = function (methodName, afterFunction) {
+  EFrameworkCore.MethodHooks._initializeHook(EFrameworkCore.MethodHooks._afterHooks,
     methodName, afterFunction);
 };
 
 /**
- * ReactionCore.MethodHooks.beforeMeth
+ * EFrameworkCore.MethodHooks.beforeMeth
  * Call the provided hook in values for the key'd method names
  * @param {Object.<string, Hook>} dict - dict
  * @return {String} - returns transformed data
  */
-ReactionCore.MethodHooks.beforeMethods = function (dict) {
+EFrameworkCore.MethodHooks.beforeMethods = function (dict) {
   _.each(dict, function (v, k) {
-    ReactionCore.MethodHooks.before(k, v);
+    EFrameworkCore.MethodHooks.before(k, v);
   });
 };
 
@@ -177,8 +177,8 @@ ReactionCore.MethodHooks.beforeMethods = function (dict) {
  * @param {Object.<string, Hook>} dict - dict
  * @return {String} - returns transformed data
  */
-ReactionCore.MethodHooks.afterMethods = function (dict) {
+EFrameworkCore.MethodHooks.afterMethods = function (dict) {
   _.each(dict, function (v, k) {
-    ReactionCore.MethodHooks.after(k, v);
+    EFrameworkCore.MethodHooks.after(k, v);
   });
 };

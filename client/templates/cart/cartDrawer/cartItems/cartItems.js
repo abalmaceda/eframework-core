@@ -28,7 +28,7 @@ Template.cartDrawerItems.onRendered(function () {
 Template.cartDrawerItems.helpers({
   media: function () {
     let product = Products.findOne(this.productId);
-    let defaultImage = ReactionCore.Collections.Media.findOne({
+    let defaultImage = EFrameworkCore.Collections.Media.findOne({
       "metadata.variantId": this.variants._id
     });
 
@@ -36,7 +36,7 @@ Template.cartDrawerItems.helpers({
       return defaultImage;
     } else if (product) {
       _.any(product.variants, function (variant) {
-        defaultImage = ReactionCore.Collections.Media.findOne({
+        defaultImage = EFrameworkCore.Collections.Media.findOne({
           "metadata.variantId": variant._id
         });
         return !!defaultImage;

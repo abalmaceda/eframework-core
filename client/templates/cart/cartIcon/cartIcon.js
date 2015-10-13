@@ -4,7 +4,7 @@
  */
 Template.cartIcon.helpers({
   cart: function () {
-    return ReactionCore.Collections.Cart.findOne();
+    return EFrameworkCore.Collections.Cart.findOne();
   }
 });
 

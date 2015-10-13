@@ -1,6 +1,6 @@
 
 /**
-* ReactionCore Collections
+* EFrameworkCore Collections
 *
 *
 * transform methods used to return cart calculated values
@@ -8,13 +8,13 @@
 * are calculated by a transformation on the collection
 * and are available to use in template as cart.xxx
 * in template: {{cart.cartCount}}
-* in code: ReactionCore.Collections.Cart.findOne().cartTotal()
+* in code: EFrameworkCore.Collections.Cart.findOne().cartTotal()
 */
 
 /**
-* ReactionCore transform collections
+* EFrameworkCore transform collections
 */
-ReactionCore.Helpers.cartTransform = {
+EFrameworkCore.Helpers.cartTransform = {
   cartCount: function () {
     let count = 0;
     if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
@@ -84,22 +84,22 @@ ReactionCore.Helpers.cartTransform = {
 };
 
 /**
-* ReactionCore Collections Cart
+* EFrameworkCore Collections Cart
 */
-ReactionCore.Collections.Cart = Cart = this.Cart = new Mongo.Collection("Cart", {
+EFrameworkCore.Collections.Cart = Cart = this.Cart = new Mongo.Collection("Cart", {
   transform: function (cart) {
-    let newInstance = Object.create(ReactionCore.Helpers.cartTransform);
+    let newInstance = Object.create(EFrameworkCore.Helpers.cartTransform);
     return _.extend(newInstance, cart);
   }
 });
 
-ReactionCore.Collections.Cart.attachSchema(ReactionCore.Schemas.Cart);
+EFrameworkCore.Collections.Cart.attachSchema(EFrameworkCore.Schemas.Cart);
 
 
 /**
-* ReactionCore Collections Orders
+* EFrameworkCore Collections Orders
 */
-ReactionCore.Collections.Orders = Orders = this.Orders = new Mongo.Collection("Orders", {
+EFrameworkCore.Collections.Orders = Orders = this.Orders = new Mongo.Collection("Orders", {
   transform: function (order) {
     order.itemCount = function () {
       let count = 0;
@@ -114,71 +114,71 @@ ReactionCore.Collections.Orders = Orders = this.Orders = new Mongo.Collection("O
   }
 });
 
-ReactionCore.Collections.Orders.attachSchema([
-  ReactionCore.Schemas.Cart,
-  ReactionCore.Schemas.Order,
-  ReactionCore.Schemas.OrderItem
+EFrameworkCore.Collections.Orders.attachSchema([
+  EFrameworkCore.Schemas.Cart,
+  EFrameworkCore.Schemas.Order,
+  EFrameworkCore.Schemas.OrderItem
 ]);
 
 /**
-* ReactionCore Collections Packages
+* EFrameworkCore Collections Packages
 */
-ReactionCore.Collections.Packages = new Mongo.Collection("Packages");
+EFrameworkCore.Collections.Packages = new Mongo.Collection("Packages");
 
-ReactionCore.Collections.Packages.attachSchema(ReactionCore.Schemas.PackageConfig);
+EFrameworkCore.Collections.Packages.attachSchema(EFrameworkCore.Schemas.PackageConfig);
 
 /**
-* ReactionCore Collections Products
+* EFrameworkCore Collections Products
 */
-ReactionCore.Collections.Products = Products = this.Products = new Mongo.Collection("Products");
+EFrameworkCore.Collections.Products = Products = this.Products = new Mongo.Collection("Products");
 
-ReactionCore.Collections.Products.attachSchema(ReactionCore.Schemas.Product);
+EFrameworkCore.Collections.Products.attachSchema(EFrameworkCore.Schemas.Product);
 
 /**
-* ReactionCore Collections Shipping
+* EFrameworkCore Collections Shipping
 */
-ReactionCore.Collections.Shipping = new Mongo.Collection("Shipping");
+EFrameworkCore.Collections.Shipping = new Mongo.Collection("Shipping");
 
-ReactionCore.Collections.Shipping.attachSchema(ReactionCore.Schemas.Shipping);
+EFrameworkCore.Collections.Shipping.attachSchema(EFrameworkCore.Schemas.Shipping);
 
 /**
-* ReactionCore Collections Taxes
+* EFrameworkCore Collections Taxes
 */
-ReactionCore.Collections.Taxes = new Mongo.Collection("Taxes");
+EFrameworkCore.Collections.Taxes = new Mongo.Collection("Taxes");
 
-ReactionCore.Collections.Taxes.attachSchema(ReactionCore.Schemas.Taxes);
+EFrameworkCore.Collections.Taxes.attachSchema(EFrameworkCore.Schemas.Taxes);
 
 /**
-* ReactionCore Collections Discounts
+* EFrameworkCore Collections Discounts
 */
-ReactionCore.Collections.Discounts = new Mongo.Collection("Discounts");
+EFrameworkCore.Collections.Discounts = new Mongo.Collection("Discounts");
 
-ReactionCore.Collections.Discounts.attachSchema(ReactionCore.Schemas.Discounts);
+EFrameworkCore.Collections.Discounts.attachSchema(EFrameworkCore.Schemas.Discounts);
 
 /**
-* ReactionCore Collections Shops
+* EFrameworkCore Collections Shops
 */
-ReactionCore.Collections.Shops = Shops = this.Shops = new Mongo.Collection("Shops");
+EFrameworkCore.Collections.Shops = Shops = this.Shops = new Mongo.Collection("Shops");
 
-ReactionCore.Collections.Shops.attachSchema(ReactionCore.Schemas.Shop);
+EFrameworkCore.Collections.Shops.attachSchema(EFrameworkCore.Schemas.Shop);
 
 /**
-* ReactionCore Collections Tags
+* EFrameworkCore Collections Tags
 */
-ReactionCore.Collections.Tags = Tags = this.Tags = new Mongo.Collection("Tags");
+EFrameworkCore.Collections.Tags = Tags = this.Tags = new Mongo.Collection("Tags");
 
-ReactionCore.Collections.Tags.attachSchema(ReactionCore.Schemas.Tag);
+EFrameworkCore.Collections.Tags.attachSchema(EFrameworkCore.Schemas.Tag);
 
 /**
-* ReactionCore Collections Translations
+* EFrameworkCore Collections Translations
 */
-ReactionCore.Collections.Translations = new Mongo.Collection("Translations");
+EFrameworkCore.Collections.Translations = new Mongo.Collection("Translations");
 
-ReactionCore.Collections.Translations.attachSchema(ReactionCore.Schemas.Translation);
+EFrameworkCore.Collections.Translations.attachSchema(EFrameworkCore.Schemas.Translation);
 
 /**
-* ReactionCore Collections Accounts
+* EFrameworkCore Collections Accounts
 */
-ReactionCore.Collections.Layouts = new Mongo.Collection("Layouts");
+EFrameworkCore.Collections.Layouts = new Mongo.Collection("Layouts");
 
-ReactionCore.Collections.Layouts.attachSchema(ReactionCore.Schemas.Layouts);
+EFrameworkCore.Collections.Layouts.attachSchema(EFrameworkCore.Schemas.Layouts);

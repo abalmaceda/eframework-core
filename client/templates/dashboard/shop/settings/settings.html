@@ -9,7 +9,7 @@
       </div>
       <div id="general" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="General">
         <div class="panel-body">
-          {{#autoForm collection="ReactionCore.Collections.Packages" schema="ReactionCore.Schemas.CorePackageConfig" doc=packageData id="shopEditOptionsForm" type="update" autosave=true}}
+          {{#autoForm collection="EFrameworkCore.Collections.Packages" schema="EFrameworkCore.Schemas.CorePackageConfig" doc=packageData id="shopEditOptionsForm" type="update" autosave=true}}
             {{> afFieldInput name='settings.public.allowGuestCheckout'}}
           {{/autoForm}}
         </div>
@@ -62,7 +62,7 @@
       </div>
       <div id="mail" class="panel-collapse collapse" role="tabpanel" aria-labelledby="mail">
         <div class="panel-body">
-          {{#autoForm collection="ReactionCore.Collections.Packages" schema="ReactionCore.Schemas.CorePackageConfig" doc=packageData id="shopEditEmailForm" type="update"}}
+          {{#autoForm collection="EFrameworkCore.Collections.Packages" schema="EFrameworkCore.Schemas.CorePackageConfig" doc=packageData id="shopEditEmailForm" type="update"}}
             {{> afQuickField name='settings.mail.user'}}
             {{> afQuickField name='settings.mail.password'}}
             {{> afQuickField name='settings.mail.host'}}
@@ -99,7 +99,7 @@
       </div>
       <div id="options" class="panel-collapse collapse" role="tabpanel" aria-labelledby="options">
         <div class="panel-body">
-          {{#autoForm collection="ReactionCore.Collections.Packages" schema="ReactionCore.Schemas.CorePackageConfig" doc=packageData id="shopEditOpenExchangeRatesForm" type="update"}}
+          {{#autoForm collection="EFrameworkCore.Collections.Packages" schema="EFrameworkCore.Schemas.CorePackageConfig" doc=packageData id="shopEditOpenExchangeRatesForm" type="update"}}
             {{> afQuickField name='settings.openexchangerates.appId'}}
             {{> afQuickField name='settings.google.clientId'}}
             {{> afQuickField name='settings.google.apiKey'}}

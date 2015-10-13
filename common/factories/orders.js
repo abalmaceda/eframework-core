@@ -31,7 +31,7 @@ function paymentMethod(doc) {
   };
 };
 
-Factory.define("order", ReactionCore.Collections.Orders, {
+Factory.define("order", EFrameworkCore.Collections.Orders, {
   // Schemas.OrderItems
   additionalField: faker.lorem.sentence(),
   status: faker.lorem.sentence(3),
@@ -122,7 +122,7 @@ Factory.define("order", ReactionCore.Collections.Orders, {
 });
 
 // Calls paymentMethod() factory helper
-Factory.define("authorizedApprovedPaypalOrder", ReactionCore.Collections.Orders,
+Factory.define("authorizedApprovedPaypalOrder", EFrameworkCore.Collections.Orders,
   Factory.extend("order", {
     payment: {
       paymentMethod: paymentMethod({

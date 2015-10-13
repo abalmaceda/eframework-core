@@ -2,7 +2,7 @@
 * Tag Schema
 */
 
-ReactionCore.Schemas.Tag = new SimpleSchema({
+EFrameworkCore.Schemas.Tag = new SimpleSchema({
   name: {
     type: String,
     index: 1
@@ -25,7 +25,7 @@ ReactionCore.Schemas.Tag = new SimpleSchema({
   shopId: {
     type: String,
     index: 1,
-    autoValue: ReactionCore.shopIdAutoValue,
+    autoValue: EFrameworkCore.shopIdAutoValue,
     label: "Tag shopId"
   },
   createdAt: {

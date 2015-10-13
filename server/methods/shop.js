@@ -13,7 +13,7 @@ Meteor.methods({
     check(shop, Match.Optional(Object));
 
     // must have owner access to create new shops
-    if (!ReactionCore.hasOwnerAccess()) {
+    if (!EFrameworkCore.hasOwnerAccess()) {
       throw new Meteor.Error(403, "Access Denied. Owner Access Required");
     }
 
@@ -21,15 +21,15 @@ Meteor.methods({
 
     let currentUser = Meteor.userId();
     let userId = shopAdminUserId || Meteor.userId();
-    let adminRoles = Roles.getRolesForUser(currentUser, ReactionCore.getShopId());
+    let adminRoles = Roles.getRolesForUser(currentUser, EFrameworkCore.getShopId());
 
     try {
       let shopId = Factory.create("shop")._id;
-      ReactionCore.Log.info("Created shop: ", shopId);
+      EFrameworkCore.Log.info("Created shop: ", shopId);
       Roles.addUsersToRoles([currentUser, userId], adminRoles, shopId);
       return shopId;
     } catch (error) {
-      return ReactionCore.Log.error("Failed to shop/createShop", error);
+      return EFrameworkCore.Log.error("Failed to shop/createShop", error);
     }
   },
 
@@ -55,7 +55,7 @@ Meteor.methods({
     }
 
     // get shop locale/currency related data
-    let shop = ReactionCore.Collections.Shops.findOne(ReactionCore.getShopId(), {
+    let shop = EFrameworkCore.Collections.Shops.findOne(EFrameworkCore.getShopId(), {
       fields: {
         addressBook: 1,
         locales: 1,
@@ -105,7 +105,7 @@ Meteor.methods({
             "shop/getCurrencyRates", currency);
 
           if (!exchangeRate) {
-            ReactionCore.Log.warn(
+            EFrameworkCore.Log.warn(
               "Failed to fetch rate exchange rates.");
           }
           result.currency.exchangeRate = exchangeRate.data;
@@ -127,7 +127,7 @@ Meteor.methods({
     check(currency, String);
     this.unblock();
 
-    let shop = ReactionCore.Collections.Shops.findOne(ReactionCore.getShopId(), {
+    let shop = EFrameworkCore.Collections.Shops.findOne(EFrameworkCore.getShopId(), {
       fields: {
         addressBook: 1,
         locales: 1,
@@ -138,10 +138,10 @@ Meteor.methods({
 
     let baseCurrency = shop.currency || "USD";
     let shopCurrencies = shop.currencies;
-    let shopId = ReactionCore.getShopId();
+    let shopId = EFrameworkCore.getShopId();
 
     // fetch shop settings for api auth credentials
-    let shopSettings = ReactionCore.Collections.Packages.findOne({
+    let shopSettings = EFrameworkCore.Collections.Packages.findOne({
       shopId: shopId,
       name: "core"
     }, {
@@ -157,7 +157,7 @@ Meteor.methods({
     // with current rates from Open Exchange Rates
     // warn if we don't have app_id, but default to 1
     if (!openexchangeratesAppId) {
-      ReactionCore.Log.warn(
+      EFrameworkCore.Log.warn(
         "Open Exchange Rates AppId not configured. Configure for current rates."
       );
     } else {
@@ -172,7 +172,7 @@ Meteor.methods({
           let rateUpdate = {};
           let collectionKey = `currencies.${currencyKey}.rate`;
           rateUpdate[collectionKey] = exchangeRates[currencyKey];
-          ReactionCore.Collections.Shops.update(shopId, {
+          EFrameworkCore.Collections.Shops.update(shopId, {
             $set: rateUpdate
           });
         }
@@ -229,7 +229,7 @@ Meteor.methods({
 
     let newTagId;
     // must have 'core' permissions
-    if (!ReactionCore.hasPermission("core")) {
+    if (!EFrameworkCore.hasPermission("core")) {
       throw new Meteor.Error(403, "Access Denied");
     }
     this.unblock();
@@ -247,7 +247,7 @@ Meteor.methods({
       return Tags.update(tagId, {
         $set: newTag
       }, function () {
-        ReactionCore.Log.info(
+        EFrameworkCore.Log.info(
           `Changed name of tag ${tagId} to ${tagName}`);
         return true;
       });
@@ -259,7 +259,7 @@ Meteor.methods({
             relatedTagIds: existingTag._id
           }
         }, function () {
-          ReactionCore.Log.info(
+          EFrameworkCore.Log.info(
             `Added tag ${existingTag.name} to the related tags list for tag ${currentTagId}`
           );
           return true;
@@ -271,14 +271,14 @@ Meteor.methods({
           isTopLevel: true
         }
       }, function () {
-        ReactionCore.Log.info('Marked tag "' + existingTag.name +
+        EFrameworkCore.Log.info('Marked tag "' + existingTag.name +
           '" as a top level tag');
         return true;
       });
     }
     // create newTags
     newTag.isTopLevel = !currentTagId;
-    newTag.shopId = ReactionCore.getShopId();
+    newTag.shopId = EFrameworkCore.getShopId();
     newTag.updatedAt = new Date();
     newTag.createdAt = new Date();
     newTagId = Tags.insert(newTag);
@@ -288,12 +288,12 @@ Meteor.methods({
           relatedTagIds: newTagId
         }
       }, function () {
-        ReactionCore.Log.info('Added tag "' + newTag.name +
+        EFrameworkCore.Log.info('Added tag "' + newTag.name +
           '" to the related tags list for tag ' + currentTagId);
         return true;
       });
     } else if (newTagId && !currentTagId) {
-      ReactionCore.Log.info('Created tag "' + newTag.name + '"');
+      EFrameworkCore.Log.info('Created tag "' + newTag.name + '"');
       return true;
     }
     throw new Meteor.Error(403, "Failed to update header tags.");
@@ -309,7 +309,7 @@ Meteor.methods({
     check(tagId, String);
     check(currentTagId, String);
     // must have core permissions
-    if (!ReactionCore.hasPermission("core")) {
+    if (!EFrameworkCore.hasPermission("core")) {
       throw new Meteor.Error(403, "Access Denied");
     }
     this.unblock();
@@ -345,12 +345,12 @@ Meteor.methods({
    * @return {undefined}
    */
   "flushTranslations": function () {
-    if (!ReactionCore.hasAdminAccess()) {
+    if (!EFrameworkCore.hasAdminAccess()) {
       throw new Meteor.Error(403, "Access Denied");
     }
-    ReactionCore.Collections.Translations.remove({});
+    EFrameworkCore.Collections.Translations.remove({});
     Fixtures.loadI18n();
-    ReactionCore.Log.info(Meteor.userId() + " Flushed Translations.");
+    EFrameworkCore.Log.info(Meteor.userId() + " Flushed Translations.");
     return;
   },
 
@@ -363,7 +363,7 @@ Meteor.methods({
   "shop/getWorkflow": function (name) {
     check(name, String);
 
-    shopWorkflows = ReactionCore.Collections.Shops.findOne({
+    shopWorkflows = EFrameworkCore.Collections.Shops.findOne({
       defaultWorkflows: {
         $elemMatch: {
           provides: name

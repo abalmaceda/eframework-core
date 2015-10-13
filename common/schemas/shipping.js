@@ -2,11 +2,11 @@
  * ShippingMethod Schema
  */
 
-ReactionCore.Schemas.ShippingMethod = new SimpleSchema({
+EFrameworkCore.Schemas.ShippingMethod = new SimpleSchema({
   "_id": {
     type: String,
     label: "Shipment Method Id",
-    autoValue: ReactionCore.schemaIdAutoValue
+    autoValue: EFrameworkCore.schemaIdAutoValue
   },
   "name": {
     type: String,
@@ -101,12 +101,12 @@ ReactionCore.Schemas.ShippingMethod = new SimpleSchema({
  * ShipmentQuote Schema
  */
 
-ReactionCore.Schemas.ShipmentQuote = new SimpleSchema({
+EFrameworkCore.Schemas.ShipmentQuote = new SimpleSchema({
   carrier: {
     type: String
   },
   method: {
-    type: ReactionCore.Schemas.ShippingMethod
+    type: EFrameworkCore.Schemas.ShippingMethod
   },
   rate: {
     type: Number,
@@ -116,12 +116,12 @@ ReactionCore.Schemas.ShipmentQuote = new SimpleSchema({
 });
 
 // populate with order.items that are added to a shipment
-ReactionCore.Schemas.ShipmentItem = new SimpleSchema({
+EFrameworkCore.Schemas.ShipmentItem = new SimpleSchema({
   _id: {
     type: String,
     label: "Shipment Line Item",
     optional: true,
-    autoValue: ReactionCore.schemaIdAutoValue
+    autoValue: EFrameworkCore.schemaIdAutoValue
   },
   productId: {
     type: String,
@@ -147,7 +147,7 @@ ReactionCore.Schemas.ShipmentItem = new SimpleSchema({
  * ShippingParcel Schema
  */
 
-ReactionCore.Schemas.ShippingParcel = new SimpleSchema({
+EFrameworkCore.Schemas.ShippingParcel = new SimpleSchema({
   containers: {
     type: String,
     optional: true
@@ -175,22 +175,22 @@ ReactionCore.Schemas.ShippingParcel = new SimpleSchema({
  * used for cart/order shipment tracking
  */
 
-ReactionCore.Schemas.Shipment = new SimpleSchema({
+EFrameworkCore.Schemas.Shipment = new SimpleSchema({
   _id: {
     type: String,
     label: "Shipment Id",
-    autoValue: ReactionCore.schemaIdAutoValue
+    autoValue: EFrameworkCore.schemaIdAutoValue
   },
   address: {
-    type: ReactionCore.Schemas.Address,
+    type: EFrameworkCore.Schemas.Address,
     optional: true
   },
   shipmentMethod: {
-    type: ReactionCore.Schemas.ShippingMethod,
+    type: EFrameworkCore.Schemas.ShippingMethod,
     optional: true
   },
   shipmentQuotes: {
-    type: [ReactionCore.Schemas.ShipmentQuote],
+    type: [EFrameworkCore.Schemas.ShipmentQuote],
     optional: true
   },
   tracking: {
@@ -198,19 +198,19 @@ ReactionCore.Schemas.Shipment = new SimpleSchema({
     optional: true
   },
   parcel: {
-    type: ReactionCore.Schemas.ShippingParcel,
+    type: EFrameworkCore.Schemas.ShippingParcel,
     optional: true
   },
   items: {
-    type: [ReactionCore.Schemas.ShipmentItem],
+    type: [EFrameworkCore.Schemas.ShipmentItem],
     optional: true
   },
   workflow: {
-    type: ReactionCore.Schemas.Workflow,
+    type: EFrameworkCore.Schemas.Workflow,
     optional: true
   },
   invoice: {
-    type: ReactionCore.Schemas.Invoice,
+    type: EFrameworkCore.Schemas.Invoice,
     optional: true
   },
   transactions: {
@@ -224,7 +224,7 @@ ReactionCore.Schemas.Shipment = new SimpleSchema({
  * ShippingProvider Schema
  */
 
-ReactionCore.Schemas.ShippingProvider = new SimpleSchema({
+EFrameworkCore.Schemas.ShippingProvider = new SimpleSchema({
   name: {
     type: String,
     label: "Service Code"
@@ -258,24 +258,24 @@ ReactionCore.Schemas.ShippingProvider = new SimpleSchema({
  * Shipping Schema
  */
 
-ReactionCore.Schemas.Shipping = new SimpleSchema({
+EFrameworkCore.Schemas.Shipping = new SimpleSchema({
   shopId: {
     type: String,
     index: 1,
-    autoValue: ReactionCore.shopIdAutoValue,
+    autoValue: EFrameworkCore.shopIdAutoValue,
     label: "Shipping ShopId"
   },
   provider: {
-    type: ReactionCore.Schemas.ShippingProvider,
+    type: EFrameworkCore.Schemas.ShippingProvider,
     label: "Shipping Provider"
   },
   methods: {
-    type: [ReactionCore.Schemas.ShippingMethod],
+    type: [EFrameworkCore.Schemas.ShippingMethod],
     optional: true,
     label: "Shipping Methods"
   },
   shipmentQuotes: {
-    type: [ReactionCore.Schemas.ShipmentQuote],
+    type: [EFrameworkCore.Schemas.ShipmentQuote],
     optional: true,
     label: "Quoted Methods"
   }

@@ -2,7 +2,7 @@
  * Order Document Schema
  */
 
-ReactionCore.Schemas.Document = new SimpleSchema({
+EFrameworkCore.Schemas.Document = new SimpleSchema({
   docId: {
     type: String
   },
@@ -16,7 +16,7 @@ ReactionCore.Schemas.Document = new SimpleSchema({
  * Order History Schema
  */
 
-ReactionCore.Schemas.History = new SimpleSchema({
+EFrameworkCore.Schemas.History = new SimpleSchema({
   event: {
     type: String
   },
@@ -32,7 +32,7 @@ ReactionCore.Schemas.History = new SimpleSchema({
  * Order Notes Schema
  */
 
-ReactionCore.Schemas.Notes = new SimpleSchema({
+EFrameworkCore.Schemas.Notes = new SimpleSchema({
   content: {
     type: String
   },
@@ -46,25 +46,25 @@ ReactionCore.Schemas.Notes = new SimpleSchema({
 
 /**
  * OrderItems Schema
- * merges with ReactionCore.Schemas.Cart, ReactionCore.Schemas.Order]
+ * merges with EFrameworkCore.Schemas.Cart, EFrameworkCore.Schemas.Order]
  * to create Orders collection
  * @see common/collections.collection.js
  */
-ReactionCore.Schemas.OrderItem = new SimpleSchema({
+EFrameworkCore.Schemas.OrderItem = new SimpleSchema({
   additionalField: {
     type: String,
     optional: true
   },
   workflow: {
-    type: ReactionCore.Schemas.Workflow,
+    type: EFrameworkCore.Schemas.Workflow,
     optional: true
   },
   history: {
-    type: [ReactionCore.Schemas.History],
+    type: [EFrameworkCore.Schemas.History],
     optional: true
   },
   documents: {
-    type: [ReactionCore.Schemas.Document],
+    type: [EFrameworkCore.Schemas.Document],
     optional: true
   }
 });
@@ -75,7 +75,7 @@ ReactionCore.Schemas.OrderItem = new SimpleSchema({
  * order transactions tie shipping, billing, and inventory transactions
  * @see common/collections.collection.js
  */
-ReactionCore.Schemas.OrderTransaction = new SimpleSchema({
+EFrameworkCore.Schemas.OrderTransaction = new SimpleSchema({
   itemId: {
     type: String,
     optional: true
@@ -108,7 +108,7 @@ ReactionCore.Schemas.OrderTransaction = new SimpleSchema({
  * Order Schema
  * @see common/collections.collection.js
  */
-ReactionCore.Schemas.Order = new SimpleSchema({
+EFrameworkCore.Schemas.Order = new SimpleSchema({
   userId: {
     type: String,
     unique: false
@@ -118,23 +118,23 @@ ReactionCore.Schemas.Order = new SimpleSchema({
     optional: true
   },
   history: {
-    type: [ReactionCore.Schemas.History],
+    type: [EFrameworkCore.Schemas.History],
     optional: true
   },
   documents: {
-    type: [ReactionCore.Schemas.Document],
+    type: [EFrameworkCore.Schemas.Document],
     optional: true
   },
   notes: {
-    type: [ReactionCore.Schemas.Notes],
+    type: [EFrameworkCore.Schemas.Notes],
     optional: true
   },
   items: {
-    type: [ReactionCore.Schemas.OrderItem],
+    type: [EFrameworkCore.Schemas.OrderItem],
     optional: true
   },
   transactions: {
-    type: [ReactionCore.Schemas.OrderTransaction],
+    type: [EFrameworkCore.Schemas.OrderTransaction],
     optional: true
   }
 });

@@ -18,7 +18,7 @@ Template.productSettings.helpers({
 
     if (variants.length > 0) {
       let variantId = variants[0]._id;
-      defaultImage = ReactionCore.Collections.Media.findOne({
+      defaultImage = EFrameworkCore.Collections.Media.findOne({
         "metadata.variantId": variantId,
         "metadata.priority": 0
       });
@@ -40,7 +40,7 @@ Template.productSettings.helpers({
 
     if (variants.length > 0) {
       let variantId = variants[0]._id;
-      mediaArray = ReactionCore.Collections.Media.find({
+      mediaArray = EFrameworkCore.Collections.Media.find({
         "metadata.variantId": variantId,
         "metadata.priority": {
           $gt: 0
@@ -143,7 +143,7 @@ Template.productSettings.events({
     event.preventDefault();
     let weight = $(event.currentTarget).data("event-data") || 0;
     let position = {
-      tag: ReactionCore.getCurrentTag(),
+      tag: EFrameworkCore.getCurrentTag(),
       weight: weight,
       updatedAt: new Date()
     };

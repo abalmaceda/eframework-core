@@ -35,7 +35,7 @@ $(window).scroll(loadMoreProducts());
 Template.productGrid.helpers({
   productScrollLimit: function () {
     // if count less rows than we asked for, we've got all the rows in the collection.
-    return !(ReactionCore.Collections.Products.find().count() < Session.get(
+    return !(EFrameworkCore.Collections.Products.find().count() < Session.get(
       "productScrollLimit"));
   },
   products: function () {
@@ -94,7 +94,7 @@ Template.productGrid.helpers({
         if (gridProduct.positions) {
           let _results = [];
           for (position of gridProduct.positions) {
-            if (position.tag === ReactionCore.getCurrentTag()) {
+            if (position.tag === EFrameworkCore.getCurrentTag()) {
               _results.push(position);
             }
             gridProducts[index].position = _results[0];
@@ -131,7 +131,7 @@ Template.productGridItems.helpers({
     }
     if (variants.length > 0) {
       variantId = variants[0]._id;
-      defaultImage = ReactionCore.Collections.Media.findOne({
+      defaultImage = EFrameworkCore.Collections.Media.findOne({
         "metadata.variantId": variantId,
         "metadata.priority": 0
       });
@@ -154,7 +154,7 @@ Template.productGridItems.helpers({
 
     if (variants.length > 0) {
       variantId = variants[0]._id;
-      mediaArray = ReactionCore.Collections.Media.find({
+      mediaArray = EFrameworkCore.Collections.Media.find({
         "metadata.variantId": variantId,
         "metadata.priority": {
           $gt: 0
@@ -213,7 +213,7 @@ Template.productGridItems.events({
   "click [data-event-action=showProductSettings]": function (event) {
     event.preventDefault();
 
-    ReactionCore.showActionView({
+    EFrameworkCore.showActionView({
       label: "Edit Product",
       template: "productSettings",
       type: "product",
@@ -394,7 +394,7 @@ Template.gridControls.onRendered(function () {
 });
 
 Template.productGridItems.onRendered(function () {
-  if (ReactionCore.hasPermission("createProduct")) {
+  if (EFrameworkCore.hasPermission("createProduct")) {
     let productSort = $(".product-grid-list");
     return productSort.sortable({
       items: "> li.product-grid-item",
@@ -415,7 +415,7 @@ Template.productGridItems.onRendered(function () {
           _i) {
           productId = uiPositions[index];
           position = {
-            tag: ReactionCore.getCurrentTag(),
+            tag: EFrameworkCore.getCurrentTag(),
             position: index,
             updatedAt: new Date()
           };

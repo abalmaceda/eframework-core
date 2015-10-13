@@ -8,9 +8,9 @@
  */
 
 Template.registerHelper("reactionTemplate", function (options) {
-  let shopId = options.hash.shopId || ReactionCore.getShopId();
+  let shopId = options.hash.shopId || EFrameworkCore.getShopId();
   // get shop info, defaults to current
-  let Shop = ReactionCore.Collections.Shops.findOne(shopId);
+  let Shop = EFrameworkCore.Collections.Shops.findOne(shopId);
   // let layoutConfiguration = Shop.layout;
   let reactionTemplates = [];
 
@@ -26,7 +26,7 @@ Template.registerHelper("reactionTemplate", function (options) {
   if (Template.currentData()) {
     currentId = Template.currentData()._id;
   } else {
-    let currentCart = ReactionCore.Collections.Cart.findOne({
+    let currentCart = EFrameworkCore.Collections.Cart.findOne({
       userId: Meteor.userId()
     });
     currentId = currentCart._id;
@@ -37,14 +37,14 @@ Template.registerHelper("reactionTemplate", function (options) {
 
   // The currentCollection must have workflow schema attached.
   // layoutConfigCollection is the collection defined in Shops.workflow
-  let workflowTargetCollection = ReactionCore.Collections[
+  let workflowTargetCollection = EFrameworkCore.Collections[
     layoutConfigCollection];
   let currentCollection = workflowTargetCollection.findOne(currentId);
 
   // if we be here without a workflow, we're layouteers
   // if there isn't a layout defined
   if (!currentCollection) {
-    currentCollection = ReactionCore.Collections.Layouts.findOne(
+    currentCollection = EFrameworkCore.Collections.Layouts.findOne(
       currentId);
     if (!currentCollection) {
       return [];
@@ -55,7 +55,7 @@ Template.registerHelper("reactionTemplate", function (options) {
   let currentCollectionWorkflow = currentCollection.workflow.workflow;
 
   // find the packages with these options
-  let Packages = ReactionCore.Collections.Packages.find({
+  let Packages = EFrameworkCore.Collections.Packages.find({
     layout: {
       $elemMatch: options.hash
     }
@@ -67,12 +67,12 @@ Template.registerHelper("reactionTemplate", function (options) {
     for (layout of layoutWorkflows) {
       // audience is layout permissions
       if (layout.audience === undefined) {
-        defaultRoles = ReactionCore.Collections.Shops.findOne().defaultRoles;
+        defaultRoles = EFrameworkCore.Collections.Shops.findOne().defaultRoles;
         layout.audience = defaultRoles;
       }
 
       // check permissions so you don't have to on template.
-      if (ReactionCore.hasPermission(layout.audience)) {
+      if (EFrameworkCore.hasPermission(layout.audience)) {
         // default boolean status
         layout.status = _.contains(currentCollectionWorkflow,
           layout.template);
@@ -86,6 +86,6 @@ Template.registerHelper("reactionTemplate", function (options) {
     }
   });
 
-  ReactionCore.Log.debug("reactionTemplates", reactionTemplates);
+  EFrameworkCore.Log.debug("reactionTemplates", reactionTemplates);
   return reactionTemplates;
 });

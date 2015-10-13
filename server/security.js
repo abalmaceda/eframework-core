@@ -17,27 +17,27 @@
 //  * Assign to some local letiables to keep code
 //  * short and sweet
 //  */
-// let Cart = ReactionCore.Collections.Cart;
+// let Cart = EFrameworkCore.Collections.Cart;
 
-// let Discounts = ReactionCore.Collections.Discounts;
+// let Discounts = EFrameworkCore.Collections.Discounts;
 
-// let Media = ReactionCore.Collections.Media;
+// let Media = EFrameworkCore.Collections.Media;
 
-// let Orders = ReactionCore.Collections.Orders;
+// let Orders = EFrameworkCore.Collections.Orders;
 
-// let Packages = ReactionCore.Collections.Packages;
+// let Packages = EFrameworkCore.Collections.Packages;
 
-let Products = ReactionCore.Collections.Products;
+let Products = EFrameworkCore.Collections.Products;
 
-// let Shipping = ReactionCore.Collections.Shipping;
+// let Shipping = EFrameworkCore.Collections.Shipping;
 
-// let Shops = ReactionCore.Collections.Shops;
+// let Shops = EFrameworkCore.Collections.Shops;
 
-// let Tags = ReactionCore.Collections.Tags;
+// let Tags = EFrameworkCore.Collections.Tags;
 
-// let Taxes = ReactionCore.Collections.Taxes;
+// let Taxes = EFrameworkCore.Collections.Taxes;
 
-// let Translations = ReactionCore.Collections.Translations;
+// let Translations = EFrameworkCore.Collections.Translations;
 
 // /*
 //  * Define some additional rule chain methods
@@ -46,21 +46,21 @@ let Products = ReactionCore.Collections.Products;
 // Security.defineMethod("ifShopIdMatches", {
 //   fetch: [],
 //   deny: function (type, arg, userId, doc) {
-//     return doc.shopId !== ReactionCore.getShopId();
+//     return doc.shopId !== EFrameworkCore.getShopId();
 //   }
 // });
 
 // Security.defineMethod("ifShopIdMatchesThisId", {
 //   fetch: [],
 //   deny: function (type, arg, userId, doc) {
-//     return doc._id !== ReactionCore.getShopId();
+//     return doc._id !== EFrameworkCore.getShopId();
 //   }
 // });
 
 // Security.defineMethod("ifFileBelongsToShop", {
 //   fetch: [],
 //   deny: function (type, arg, userId, doc) {
-//     return doc.metadata.shopId !== ReactionCore.getShopId();
+//     return doc.metadata.shopId !== EFrameworkCore.getShopId();
 //   }
 // });
 
@@ -81,7 +81,7 @@ let Products = ReactionCore.Collections.Products;
 // Security.defineMethod("ifSessionIdMatches", {
 //   fetch: [],
 //   deny: function (type, arg, userId, doc) {
-//     return doc.sessionId !== ReactionCore.sessionId;
+//     return doc.sessionId !== EFrameworkCore.sessionId;
 //   }
 // });
 
@@ -98,7 +98,7 @@ let Products = ReactionCore.Collections.Products;
 //   Translations, Discounts, Taxes, Shipping, Orders, Packages
 // ]).ifHasRole({
 //   role: "admin",
-//   group: ReactionCore.getShopId()
+//   group: EFrameworkCore.getShopId()
 // }).ifShopIdMatches().exceptProps(["shopId"]).apply();
 
 // /*
@@ -107,7 +107,7 @@ let Products = ReactionCore.Collections.Products;
 
 // Security.permit(["insert", "update", "remove"]).collections([Media]).ifHasRole({
 //   role: ["admin", "owner", "createProduct"],
-//   group: ReactionCore.getShopId()
+//   group: EFrameworkCore.getShopId()
 // }).ifFileBelongsToShop().apply();
 
 // /*
@@ -117,7 +117,7 @@ let Products = ReactionCore.Collections.Products;
 
 // Shops.permit(["update", "remove"]).ifHasRole({
 //   role: ["admin", "owner"],
-//   group: ReactionCore.getShopId()
+//   group: EFrameworkCore.getShopId()
 // }).ifShopIdMatchesThisId().apply();
 
 // /*
@@ -127,7 +127,7 @@ let Products = ReactionCore.Collections.Products;
 
 // Products.permit(["insert", "update", "remove"]).ifHasRole({
 //   role: ["createProduct"],
-//   group: ReactionCore.getShopId()
+//   group: EFrameworkCore.getShopId()
 // }).ifShopIdMatchesThisId().apply();
 
 // /*
@@ -136,7 +136,7 @@ let Products = ReactionCore.Collections.Products;
 
 // Orders.permit("remove").ifHasRole({
 //   role: "owner",
-//   group: ReactionCore.getShopId()
+//   group: EFrameworkCore.getShopId()
 // }).ifShopIdMatches().exceptProps(["shopId"]).apply();
 
 // /*
@@ -148,7 +148,7 @@ let Products = ReactionCore.Collections.Products;
 
 // Cart.permit(["insert", "update", "remove"]).ifHasRole({
 //   role: ["anonymous", "guest"],
-//   group: ReactionCore.getShopId()
+//   group: EFrameworkCore.getShopId()
 // }).ifShopIdMatchesThisId().ifUserIdMatches().ifSessionIdMatches().apply();
 
 // /*

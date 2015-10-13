@@ -2,7 +2,7 @@
 * DiscountType Schema
 */
 
-ReactionCore.Schemas.DiscountType = new SimpleSchema({
+EFrameworkCore.Schemas.DiscountType = new SimpleSchema({
   percentage: {
     type: Number,
     optional: true,
@@ -24,7 +24,7 @@ ReactionCore.Schemas.DiscountType = new SimpleSchema({
 * DiscountRules Schema
 */
 
-ReactionCore.Schemas.DiscountRules = new SimpleSchema({
+EFrameworkCore.Schemas.DiscountRules = new SimpleSchema({
   "validUses": {
     type: Number,
     optional: true
@@ -55,10 +55,10 @@ ReactionCore.Schemas.DiscountRules = new SimpleSchema({
 * Discounts Schema
 */
 
-ReactionCore.Schemas.Discounts = new SimpleSchema({
+EFrameworkCore.Schemas.Discounts = new SimpleSchema({
   shopId: {
     type: String,
-    autoValue: ReactionCore.shopIdAutoValue,
+    autoValue: EFrameworkCore.shopIdAutoValue,
     index: 1
   },
   beginDate: {
@@ -70,9 +70,9 @@ ReactionCore.Schemas.Discounts = new SimpleSchema({
     optional: true
   },
   discount: {
-    type: ReactionCore.Schemas.DiscountType
+    type: EFrameworkCore.Schemas.DiscountType
   },
   rules: {
-    type: ReactionCore.Schemas.DiscountRules
+    type: EFrameworkCore.Schemas.DiscountRules
   }
 });

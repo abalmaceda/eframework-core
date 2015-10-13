@@ -67,19 +67,19 @@
 //   // use i18n detected language to getLocale info
 //   Meteor.call("shop/getLocale", function (error, result) {
 //     if (result) {
-//       ReactionCore.Locale = result;
-//       ReactionCore.Locale.language = Session.get("language");
-//       moment.locale(ReactionCore.Locale.language);
+//       EFrameworkCore.Locale = result;
+//       EFrameworkCore.Locale.language = Session.get("language");
+//       moment.locale(EFrameworkCore.Locale.language);
 //       localeDep.changed();
 //     }
 //   });
 //   // use tracker autorun to detect language changes
 //   Tracker.autorun(function () {
-//     ReactionCore.Locale.language = Session.get("language");
-//     return Meteor.subscribe("Translations", ReactionCore.Locale.language,
+//     EFrameworkCore.Locale.language = Session.get("language");
+//     return Meteor.subscribe("Translations", EFrameworkCore.Locale.language,
 //       function () {
 //         // fetch reaction translations
-//         let reactionTranslations = ReactionCore.Collections.Translations
+//         let reactionTranslations = EFrameworkCore.Collections.Translations
 //           .find({}, {
 //             fields: {
 //               _id: 0
@@ -93,15 +93,15 @@
 //         }, {});
 //         // initialize i18next
 //         return $.i18n.init({
-//           lng: ReactionCore.Locale.language,
+//           lng: EFrameworkCore.Locale.language,
 //           fallbackLng: "en",
 //           ns: "core",
 //           resStore: resources
 //         }, function () {
-//           for (let schema in ReactionCore.Schemas) {
-//             if ({}.hasOwnProperty.call(ReactionCore.Schemas,
+//           for (let schema in EFrameworkCore.Schemas) {
+//             if ({}.hasOwnProperty.call(EFrameworkCore.Schemas,
 //                 schema)) {
-//               let ss = ReactionCore.Schemas[schema];
+//               let ss = EFrameworkCore.Schemas[schema];
 //               ss.labels(getLabelsFor(ss, schema));
 //               ss.messages(getMessagesFor(ss, schema));
 //             }
@@ -149,7 +149,7 @@
  */
 Template.registerHelper("i18n", function (i18nKey, i18nMessage) {
   if (!i18nKey || typeof i18nMessage !== String) {
-    ReactionCore.Log.info("i18n key string required to translate", i18nKey, i18nMessage);
+    EFrameworkCore.Log.info("i18n key string required to translate", i18nKey, i18nMessage);
     return "";
   }
   check(i18nKey, String);
@@ -160,7 +160,7 @@ Template.registerHelper("i18n", function (i18nKey, i18nMessage) {
   let message = new Handlebars.SafeString(i18nMessage);
 
   if (i18n.t(i18nKey) === i18nKey) {
-    ReactionCore.Log.debug(
+    EFrameworkCore.Log.debug(
       `i18n: no translation found. returning raw message for: ${i18nKey}`
     );
     return message.string;
@@ -174,7 +174,7 @@ Template.registerHelper("i18n", function (i18nKey, i18nMessage) {
 //  * @returns {String} return current locale currency symbol
 //  */
 // Template.registerHelper("currencySymbol", function () {
-//   return ReactionCore.Locale.currency.symbol;
+//   return EFrameworkCore.Locale.currency.symbol;
 // });
 
 /**
@@ -196,30 +196,30 @@ Template.registerHelper("formatPrice", function (currentPrice) {
 		let prices = currentPrice.split(" - ");
 		for (actualPrice of prices) {
 			let originalPrice = actualPrice;
-			if (ReactionCore.Locale) {
-				if (ReactionCore.Locale.currency) {
-					if (ReactionCore.Locale.exchangeRate) {
-						if (ReactionCore.Locale.exchangeRate.rate) {
-							actualPrice = actualPrice * ReactionCore.Locale.exchangeRate.rate;
+			if (EFrameworkCore.Locale) {
+				if (EFrameworkCore.Locale.currency) {
+					if (EFrameworkCore.Locale.exchangeRate) {
+						if (EFrameworkCore.Locale.exchangeRate.rate) {
+							actualPrice = actualPrice * EFrameworkCore.Locale.exchangeRate.rate;
 						}
 					}
 				}
-				formattedPrice = accounting.formatMoney(actualPrice, ReactionCore.Locale
+				formattedPrice = accounting.formatMoney(actualPrice, EFrameworkCore.Locale
 				.currency);
 				price = currentPrice.replace(originalPrice, formattedPrice);
 			}
 		}
 	} catch (error) {
-		ReactionCore.Log.debug("currency error, fallback to shop currency");
-		if (ReactionCore.Locale) {
-		if (ReactionCore.Locale.currency) {
-		if (ReactionCore.Locale.exchangeRate) {
-		if (ReactionCore.Locale.exchangeRate.rate) {
-		price = price * ReactionCore.Locale.exchangeRate.Rate;
-		price = accounting.formatMoney(price, ReactionCore.Locale.currency);
+		EFrameworkCore.Log.debug("currency error, fallback to shop currency");
+		if (EFrameworkCore.Locale) {
+		if (EFrameworkCore.Locale.currency) {
+		if (EFrameworkCore.Locale.exchangeRate) {
+		if (EFrameworkCore.Locale.exchangeRate.rate) {
+		price = price * EFrameworkCore.Locale.exchangeRate.Rate;
+		price = accounting.formatMoney(price, EFrameworkCore.Locale.currency);
 		}
 		} else {
-		price = accounting.formatMoney(currentPrice, ReactionCore.Locale.currency);
+		price = accounting.formatMoney(currentPrice, EFrameworkCore.Locale.currency);
 		}
 		}
 		}

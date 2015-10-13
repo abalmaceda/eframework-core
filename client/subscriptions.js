@@ -1,5 +1,5 @@
 /*
- * ReactionCore.session
+ * EFrameworkCore.session
  * Create persistent sessions for users
  * The server returns only one record, so findOne will return that record
  * Stores into client session all data contained in server session
@@ -11,24 +11,24 @@ let serverSession = Random.id();
 
 Tracker.autorun(function () {
   currentSession = Session.get("sessionId") || amplify.store(
-    "ReactionCore.session");
+    "EFrameworkCore.session");
   if (!currentSession) {
-    amplify.store("ReactionCore.session", serverSession);
+    amplify.store("EFrameworkCore.session", serverSession);
     Session.set("sessionId", serverSession);
     currentSession = serverSession;
   }
 });
 
-ReactionCore.Subscriptions.Sessions = Meteor.subscribe("Sessions",
+EFrameworkCore.Subscriptions.Sessions = Meteor.subscribe("Sessions",
   currentSession);
 // Load order is important here, sessions come before cart.
-ReactionCore.Subscriptions.Cart = Meteor.subscribe("Cart",
+EFrameworkCore.Subscriptions.Cart = Meteor.subscribe("Cart",
   Session.get("sessionId"),
   Meteor.userId()
 );
 // detect when a cart has been deleted
 // resubscribe will force cart to be rebuilt
-let cart = ReactionCore.Collections.Cart.find();
+let cart = EFrameworkCore.Collections.Cart.find();
 cart.observeChanges({
   removed: function () {
     Meteor.subscribe("Cart", Session.get("sessionId"), Meteor.userId());
@@ -38,11 +38,11 @@ cart.observeChanges({
 /**
  * General Subscriptions
  */
-ReactionCore.Subscriptions.Packages =
+EFrameworkCore.Subscriptions.Packages =
   Meteor.subscribe("Packages");
 
-ReactionCore.Subscriptions.Tags =
+EFrameworkCore.Subscriptions.Tags =
   Meteor.subscribe("Tags");
 
-ReactionCore.Subscriptions.Media =
+EFrameworkCore.Subscriptions.Media =
   Meteor.subscribe("Media");

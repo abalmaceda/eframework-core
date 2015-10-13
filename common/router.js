@@ -13,7 +13,7 @@ Router.configure({
 
 	onRun: function () {
 		$(window).scrollTop(0);
-		ReactionCore.clearActionView();
+		EFrameworkCore.clearActionView();
 		this.next();
 	},
 
@@ -25,11 +25,11 @@ Router.configure({
 		}
 
 		if (Meteor.isClient) {
-			if (ReactionCore.hasDashboardAccess()) {
+			if (EFrameworkCore.hasDashboardAccess()) {
 				this.layout("coreAdminLayout");
 				// Find a registry entry for this page that provides settings
 				// -- Settings is the default view for the "Action View"
-				ReactionCore.setActionView();
+				EFrameworkCore.setActionView();
 				// this.render("dashboardPackages")
 				$("body").addClass("admin");
 			} else {
@@ -57,7 +57,7 @@ Router.waitOn(function () {
 let ShopController = RouteController.extend({
 	
 	onAfterAction: function () {
-		return ReactionCore.MetaData.refresh(this.route, this.params);
+		return EFrameworkCore.MetaData.refresh(this.route, this.params);
 	},
 	
 	yieldTemplates: {
@@ -82,7 +82,7 @@ this.ShopController = ShopController;
 
 let ShopAccountsController = RouteController.extend({
   onBeforeAction: function () {
-    if (!ReactionCore.hasPermission(this.route.getName())) {
+    if (!EFrameworkCore.hasPermission(this.route.getName())) {
       this.render("layoutHeader", {
         to: "layoutHeader"
       });
@@ -115,7 +115,7 @@ this.ShopAccountsController = ShopAccountsController;
  */
 let ShopAdminController = this.ShopController.extend({
   onBeforeAction: function () {
-    if (!ReactionCore.hasPermission(this.route.getName())) {
+    if (!EFrameworkCore.hasPermission(this.route.getName())) {
       this.render("layoutHeader", {
         to: "layoutHeader"
       });
@@ -137,7 +137,7 @@ this.ShopAdminController = ShopAdminController;
 
 // let PrintController = RouteController.extend({
 //   onBeforeAction: function () {
-//     if (!ReactionCore.hasPermission(this.route.getName())) {
+//     if (!EFrameworkCore.hasPermission(this.route.getName())) {
 //       this.render("unauthorized");
 //     } else {
 //       this.next();
@@ -181,7 +181,7 @@ Router.map(function () {
 //     path: "/dashboard/shop",
 //     template: "shopDashboard",
 //     data: function () {
-//       return ReactionCore.Collections.Shops.findOne();
+//       return EFrameworkCore.Collections.Shops.findOne();
 //     }
 //   });
 
@@ -194,7 +194,7 @@ Router.map(function () {
 //     },
 //     data: function () {
 //       if (Orders.findOne(this.params._id)) {
-//         return ReactionCore.Collections.Orders.findOne({
+//         return EFrameworkCore.Collections.Orders.findOne({
 //           _id: this.params._id
 //         });
 //       }
@@ -234,7 +234,7 @@ this.route("product", {
 	onBeforeAction: function () {
 		let variant;
 		variant = this.params.variant || this.params.query.variant;
-		ReactionCore.setProduct(this.params._id, variant);
+		EFrameworkCore.setProduct(this.params._id, variant);
 		return this.next();
 	},
 	data: function () {
@@ -242,7 +242,7 @@ this.route("product", {
 		product = selectedProduct();
 		if (this.ready() && product) {
 			if (!product.isVisible) {
-				if (!ReactionCore.hasPermission("createProduct")) {
+				if (!EFrameworkCore.hasPermission("createProduct")) {
 					this.render("unauthorized");
 				}
 			}
@@ -282,10 +282,10 @@ this.route("product", {
 //     },
 //     data: function () {
 //       if (this.ready()) {
-//         if (ReactionCore.Collections.Orders.findOne({
+//         if (EFrameworkCore.Collections.Orders.findOne({
 //           cartId: this.params._id
 //         })) {
-//           return ReactionCore.Collections.Orders.findOne({
+//           return EFrameworkCore.Collections.Orders.findOne({
 //             cartId: this.params._id
 //           });
 //         }
@@ -308,7 +308,7 @@ this.route("product", {
 //     },
 //     data: function () {
 //       if (this.ready()) {
-//         return ReactionCore.Collections.Orders.findOne({
+//         return EFrameworkCore.Collections.Orders.findOne({
 //           _id: this.params._id
 //         });
 //       }

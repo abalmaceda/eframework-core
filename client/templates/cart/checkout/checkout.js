@@ -12,7 +12,7 @@
 
 Template.cartCheckout.helpers({
   cart: function () {
-    return ReactionCore.Collections.Cart.findOne();
+    return EFrameworkCore.Collections.Cart.findOne();
   }
 });
 
@@ -20,7 +20,7 @@ Template.cartCheckout.onRendered(function () {
   // ensure checkout drawer does not display
   Session.set("displayCartDrawer", false);
   // init cart workflow
-  if (!ReactionCore.Collections.Cart.findOne().workflow.workflow) {
+  if (!EFrameworkCore.Collections.Cart.findOne().workflow.workflow) {
     Meteor.call("workflow/pushCartWorkflow", "coreCartWorkflow",
       "checkoutLogin");
   }
@@ -56,7 +56,7 @@ Template.checkoutSteps.helpers({
 Template.checkoutStepBadge.helpers({
   checkoutStepBadgeClass: function () {
     let workflowStep = Template.instance().data;
-    // let currentStatus = ReactionCore.Collections.Cart.findOne().workflow.status;
+    // let currentStatus = EFrameworkCore.Collections.Cart.findOne().workflow.status;
     if (workflowStep.status === true || workflowStep.status === this.template) {
       return "active";
     }

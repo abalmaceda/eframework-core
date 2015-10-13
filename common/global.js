@@ -1,20 +1,20 @@
 // exported, global/window scope
-ReactionCore = {};
-ReactionCore.Schemas = {};
-ReactionCore.Collections = {};
-ReactionCore.Helpers = {};
-ReactionCore.MetaData = {};
-ReactionCore.Locale = {};
-ReactionCore.Log = {};
+EFrameworkCore = {};
+EFrameworkCore.Schemas = {};
+EFrameworkCore.Collections = {};
+EFrameworkCore.Helpers = {};
+EFrameworkCore.MetaData = {};
+EFrameworkCore.Locale = {};
+EFrameworkCore.Log = {};
 
 if (Meteor.isClient) {
-  ReactionCore.Alerts = {};
-  ReactionCore.Subscriptions = {};
+  EFrameworkCore.Alerts = {};
+  EFrameworkCore.Subscriptions = {};
 }
 
 // convenience
-Alerts = ReactionCore.Alerts;
-Schemas = ReactionCore.Schemas;
+Alerts = EFrameworkCore.Alerts;
+Schemas = EFrameworkCore.Schemas;
 
 // not exported to client (private)
 ReactionRegistry = {};
