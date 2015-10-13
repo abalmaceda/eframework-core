@@ -236,7 +236,7 @@ api.addFiles("common/common.js");
   // api.addFiles("common/collections/collectionFS.js");
 
   // // collection hooks
-api.addFiles("common/collections/hooks/hooks.js");
+//api.addFiles("common/collections/hooks/hooks.js");
 
   // // security
   api.addFiles("server/browserPolicy.js", "server");
@@ -258,7 +258,7 @@ api.addFiles("common/collections/hooks/hooks.js");
 
   // // publications
 	api.addFiles("server/publications/sessions.js", "server");
-  // api.addFiles("server/publications/shops.js", "server");
+api.addFiles("server/publications/shops.js", "server");
   // api.addFiles("server/publications/cart.js", "server");
   // api.addFiles("server/publications/media.js", "server");
   // api.addFiles("server/publications/orders.js", "server");
@@ -271,22 +271,22 @@ api.addFiles("server/publications/translations.js", "server");
   // api.addFiles("server/methods/orders.js", "server");
 api.addFiles("server/methods/products.js", "server");
   // api.addFiles("server/methods/shipping.js", "server");
-  // api.addFiles("server/methods/shop.js", "server");
+api.addFiles("server/methods/shop.js", "server");
 
   // // method hooks
-api.addFiles("server/methods/hooks/hooks.js");
+//api.addFiles("server/methods/hooks/hooks.js");
   // api.addFiles("server/methods/hooks/cart.js", "server");
 
 	// client
-api.addFiles("client/subscriptions.js", "client");
+//api.addFiles("client/subscriptions.js", "client");
 	api.addFiles("client/helpers/layout.js", "client");
-api.addFiles("client/helpers/packages.js", "client");
+//api.addFiles("client/helpers/packages.js", "client");
   // api.addFiles("client/helpers/cart.js", "client");
 api.addFiles("client/helpers/globals.js", "client");
 api.addFiles("client/helpers/products.js", "client");
 api.addFiles("client/helpers/i18n.js", "client");
 api.addFiles("client/helpers/metadata.js", "client");
-  api.addFiles("client/helpers/permissions.js", "client");
+ api.addFiles("client/helpers/permissions.js", "client");
   api.addFiles("client/helpers/utilities.js", "client");
 
 api.addFiles("client/templates/layout/layout.html", "client");
@@ -301,7 +301,7 @@ api.addFiles("client/templates/layout/layout.js", "client");
   api.addFiles("client/templates/layout/header/i18n/i18n.html", "client");
   api.addFiles("client/templates/layout/header/i18n/i18n.js", "client");
 
-  api.addFiles("client/templates/layout/header/brand/brand.html", "client");
+  //api.addFiles("client/templates/layout/header/brand/brand.html", "client");
 
 	api.addFiles("client/templates/layout/footer/footer.html", "client");
 

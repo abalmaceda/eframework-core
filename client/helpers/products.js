@@ -43,70 +43,70 @@ this.currentProduct = {
 // export currentProduct
 currentProduct = this.currentProduct;
 
-// /**
-//  * setCurrentVariant
-//  * @param {String} variantId - set current variantId
-//  * @return {undefined}
-//  */
-// this.setCurrentVariant = function (variantId) {
-//   let currentId;
-//   if (variantId === null) {
-//     currentProduct.set("variantId", null);
-//     currentProduct.set("variantId", selectedVariantId());
-//   }
-//   if (!variantId) {
-//     return;
-//   }
-//   currentId = selectedVariantId();
-//   if (currentId === variantId) {
-//     return;
-//   }
-//   currentProduct.set("variantId", variantId);
-// };
+/**
+ * setCurrentVariant
+ * @param {String} variantId - set current variantId
+ * @return {undefined}
+ */
+this.setCurrentVariant = function (variantId) {
+  let currentId;
+  if (variantId === null) {
+    currentProduct.set("variantId", null);
+    currentProduct.set("variantId", selectedVariantId());
+  }
+  if (!variantId) {
+    return;
+  }
+  currentId = selectedVariantId();
+  if (currentId === variantId) {
+    return;
+  }
+  currentProduct.set("variantId", variantId);
+};
 
-// /**
-//  * setCurrentProduct
-//  * @param {String} productId - set current productId
-//  * @return {undefined}
-//  */
-// this.setCurrentProduct = function (productId) {
-//   let currentId;
-//   if (productId === null) {
-//     currentProduct.set("productId", null);
-//   }
-//   if (!productId) {
-//     return;
-//   }
-//   currentId = selectedProductId();
-//   if (currentId === productId) {
-//     return;
-//   }
-//   currentProduct.set("productId", productId);
-//   currentProduct.set("variantId", null);
-// };
+/**
+ * setCurrentProduct
+ * @param {String} productId - set current productId
+ * @return {undefined}
+ */
+this.setCurrentProduct = function (productId) {
+  let currentId;
+  if (productId === null) {
+    currentProduct.set("productId", null);
+  }
+  if (!productId) {
+    return;
+  }
+  currentId = selectedProductId();
+  if (currentId === productId) {
+    return;
+  }
+  currentProduct.set("productId", productId);
+  currentProduct.set("variantId", null);
+};
 
-// /**
-//  * selectedVariant
-//  * @summary get the currently active/requested variant object
-//  * @return {Object} currently selected variant object
-//  */
-// this.selectedVariant = function () {
-//   let id;
-//   let product;
-//   let variant;
-//   id = selectedVariantId();
-//   if (!id) {
-//     return {};
-//   }
-//   product = selectedProduct();
-//   if (!product) {
-//     return {};
-//   }
-//   variant = _.findWhere(product.variants, {
-//     _id: id
-//   });
-//   return variant;
-// };
+/**
+ * selectedVariant
+ * @summary get the currently active/requested variant object
+ * @return {Object} currently selected variant object
+ */
+this.selectedVariant = function () {
+  let id;
+  let product;
+  let variant;
+  id = selectedVariantId();
+  if (!id) {
+    return {};
+  }
+  product = selectedProduct();
+  if (!product) {
+    return {};
+  }
+  variant = _.findWhere(product.variants, {
+    _id: id
+  });
+  return variant;
+};
 
 /**
 * selectedProduct
@@ -128,202 +128,203 @@ this.selectedProductId = function () {
 	return currentProduct.get("productId");
 };
 
-// /**
-//  * selectedVariantId
-//  * @summary get the currently active/requested variant
-//  * @return {String} currently selected variant id
-//  */
-// this.selectedVariantId = function () {
-//   let id = currentProduct.get("variantId");
-//   if (id !== null) {
-//     return id;
-//   }
+/**
+ * selectedVariantId
+ * @summary get the currently active/requested variant
+ * @return {String} currently selected variant id
+ */
+this.selectedVariantId = function () {
+  let id = currentProduct.get("variantId");
+  if (id !== null) {
+    return id;
+  }
 
-//   let product = selectedProduct();
-//   if (!product) {
-//     return [];
-//   }
+  let product = selectedProduct();
+  if (!product) {
+    return [];
+  }
 
-//   let variants = (function () {
-//     let results = [];
-//     for (let variant of product.variants) {
-//       if (!variant.parentId) {
-//         results.push(variant);
-//       }
-//     }
-//     return results;
-//   })();
+  let variants = (function () {
+    let results = [];
+    for (let variant of product.variants) {
+      if (!variant.parentId) {
+        results.push(variant);
+      }
+    }
+    return results;
+  })();
 
-//   if (!(variants.length > 0)) {
-//     return [];
-//   }
+  if (!(variants.length > 0)) {
+    return [];
+  }
 
-//   id = variants[0]._id;
-//   currentProduct.set("variantId", id);
-//   return id;
-// };
+  id = variants[0]._id;
+  currentProduct.set("variantId", id);
+  return id;
+};
 
-// /**
-//  * checkChildVariants
-//  * @summary return number of child variants for a parent
-//  * @param {String} parentVariantId - parentVariantId
-//  * @return {Number} count of childVariants for this parentVariantId
-//  */
-// this.checkChildVariants = function (parentVariantId) {
-//   let product = selectedProduct();
-//   if (!product) {
-//     return 0;
-//   }
+/**
+ * checkChildVariants
+ * @summary return number of child variants for a parent
+ * @param {String} parentVariantId - parentVariantId
+ * @return {Number} count of childVariants for this parentVariantId
+ */
+this.checkChildVariants = function (parentVariantId) {
+  let product = selectedProduct();
+  if (!product) {
+    return 0;
+  }
 
-//   let childVariants = (function () {
-//     let results = [];
-//     for (variant of product.variants) {
-//       if ((variant !== null ? variant.parentId : void 0) ===
-//         parentVariantId && (variant !== null ? variant.type : void 0) !==
-//         "inventory") {
-//         results.push(variant);
-//       }
-//     }
-//     return results;
-//   })();
-//   return childVariants.length;
-// };
+  let childVariants = (function () {
+    let results = [];
+    for (variant of product.variants) {
+      if ((variant !== null ? variant.parentId : void 0) ===
+        parentVariantId && (variant !== null ? variant.type : void 0) !==
+        "inventory") {
+        results.push(variant);
+      }
+    }
+    return results;
+  })();
+  return childVariants.length;
+};
 
-// /**
-//  * checkInventoryVariants
-//  * @summary return number of inventory variants for a parent
-//  * @param {String} parentVariantId - parentVariantId
-//  * @return {Number} count of inventory variants for this parentVariantId
-//  */
-// this.checkInventoryVariants = function (parentVariantId) {
-//   let product = selectedProduct();
-//   if (!product) {
-//     return 0;
-//   }
+/**
+ * checkInventoryVariants
+ * @summary return number of inventory variants for a parent
+ * @param {String} parentVariantId - parentVariantId
+ * @return {Number} count of inventory variants for this parentVariantId
+ */
+this.checkInventoryVariants = function (parentVariantId) {
+  let product = selectedProduct();
+  if (!product) {
+    return 0;
+  }
 
-//   let inventoryVariants = (function () {
-//     let results = [];
-//     for (variant of product.variants) {
-//       if ((variant !== null ? variant.parentId : void 0) ===
-//         parentVariantId && (variant !== null ? variant.type : void 0) ===
-//         "inventory") {
-//         results.push(variant);
-//       }
-//     }
-//     return results;
-//   })();
-//   return inventoryVariants.length;
-// };
+  let inventoryVariants = (function () {
+    let results = [];
+    for (variant of product.variants) {
+      if ((variant !== null ? variant.parentId : void 0) ===
+        parentVariantId && (variant !== null ? variant.type : void 0) ===
+        "inventory") {
+        results.push(variant);
+      }
+    }
+    return results;
+  })();
+  return inventoryVariants.length;
+};
 
-// /**
-//  * getVariantPriceRange
-//  * @summary get price range of a variant if it has child options.
-//  * if no child options, return main price value
-//  * @todo remove string return and replace with object
-//  * @param {String} currentVariantId - currentVariantId
-//  * @param {String} currentProductId - currentProductId
-//  * @return {String} formatted price or price range
-//  */
-// this.getVariantPriceRange = function (currentVariantId, currentProductId) {
-//   let productId = currentProductId || selectedProductId();
-//   let variantId = currentVariantId || selectedVariant()._id;
+/**
+ * getVariantPriceRange
+ * @summary get price range of a variant if it has child options.
+ * if no child options, return main price value
+ * @todo remove string return and replace with object
+ * @param {String} currentVariantId - currentVariantId
+ * @param {String} currentProductId - currentProductId
+ * @return {String} formatted price or price range
+ */
+this.getVariantPriceRange = function (currentVariantId, currentProductId) {
+  let productId = currentProductId || selectedProductId();
+  let variantId = currentVariantId || selectedVariant()._id;
 
-//   let product = Products.findOne(productId);
-//   if (!(variantId && productId && product)) {
-//     return undefined;
-//   }
+  let product = Products.findOne(productId);
+  if (!(variantId && productId && product)) {
+    return undefined;
+  }
 
-//   let variant = _.findWhere(product.variants, {
-//     _id: variantId
-//   });
+  let variant = _.findWhere(product.variants, {
+    _id: variantId
+  });
 
-//   let children = (function () {
-//     let results = [];
-//     for (let thisVariant of product.variants) {
-//       if (thisVariant.parentId === variantId) {
-//         results.push(thisVariant);
-//       }
-//     }
-//     return results;
-//   })();
+  let children = (function () {
+    let results = [];
+    for (let thisVariant of product.variants) {
+      if (thisVariant.parentId === variantId) {
+        results.push(thisVariant);
+      }
+    }
+    return results;
+  })();
 
-//   if (children.length === 0) {
-//     if (variant !== null ? variant.price : void 0) {
-//       return variant.price;
-//     }
-//     return undefined;
-//   }
+  if (children.length === 0) {
+    if (variant !== null ? variant.price : void 0) {
+      return variant.price;
+    }
+    return undefined;
+  }
 
-//   if (children.length === 1) {
-//     return children[0].price;
-//   }
+  if (children.length === 1) {
+    return children[0].price;
+  }
 
-//   let priceMin = Number.POSITIVE_INFINITY;
-//   let priceMax = Number.NEGATIVE_INFINITY;
+  let priceMin = Number.POSITIVE_INFINITY;
+  let priceMax = Number.NEGATIVE_INFINITY;
 
-//   for (let child of children) {
-//     if (child.price < priceMin) {
-//       priceMin = child.price;
-//     }
-//     if (child.price > priceMax) {
-//       priceMax = child.price;
-//     }
-//   }
-//   if (priceMin === priceMax) {
-//     return priceMin;
-//   }
-//   return `${priceMin} - ${priceMax}`;
-// };
+  for (let child of children) {
+    if (child.price < priceMin) {
+      priceMin = child.price;
+    }
+    if (child.price > priceMax) {
+      priceMax = child.price;
+    }
+  }
+  if (priceMin === priceMax) {
+    return priceMin;
+  }
+  return `${priceMin} - ${priceMax}`;
+};
 
-// /**
-//  * getProductPriceRange
-//  * @summary get price range of a product
-//  * if no only one price available, return it
-//  * otherwise return a string range
-//  * @todo remove string return and replace with object
-//  * @param {String} currentProductId - currentProductId
-//  * @return {String} formatted price or price range
-//  */
-// this.getProductPriceRange = function (currentProductId) {
-//   let productId = currentProductId || selectedProductId();
-//   let product = Products.findOne(productId);
+/* TODO */
+/**
+ * getProductPriceRange
+ * @summary get price range of a product
+ * if no only one price available, return it
+ * otherwise return a string range
+ * @todo remove string return and replace with object
+ * @param {String} currentProductId - currentProductId
+ * @return {String} formatted price or price range
+ */
+this.getProductPriceRange = function (currentProductId) {
+  let productId = currentProductId || selectedProductId();
+  let product = Products.findOne(productId);
 
-//   if (!product) {
-//     return undefined;
-//   } else if (!product._id) {
-//     return undefined;
-//   }
+  if (!product) {
+    return undefined;
+  } else if (!product._id) {
+    return undefined;
+  }
 
-//   let variants = (function () {
-//     let results = [];
-//     for (let variant of product.variants) {
-//       if (!variant.parentId) {
-//         results.push(variant);
-//       }
-//     }
-//     return results;
-//   })();
+  let variants = (function () {
+    let results = [];
+    for (let variant of product.variants) {
+      if (!variant.parentId) {
+        results.push(variant);
+      }
+    }
+    return results;
+  })();
 
-//   if (variants.length > 0) {
-//     let variantPrices = [];
-//     for (let variant of variants) {
-//       let range = getVariantPriceRange(variant._id, productId);
-//       if (Match.test(range, String)) {
-//         let firstPrice = parseFloat(range.substr(0, range.indexOf(" ")));
-//         let lastPrice = parseFloat(range.substr(range.lastIndexOf(" ") + 1));
-//         variantPrices.push(firstPrice, lastPrice);
-//       } else {
-//         variantPrices.push(range);
-//       }
-//     }
-//     let priceMin = _.min(variantPrices);
-//     let priceMax = _.max(variantPrices);
-//     if (priceMin === priceMax) {
-//       return priceMin;
-//     }
-//     return `${priceMin} - ${priceMax}`;
-//   }
-// };
+  if (variants.length > 0) {
+    let variantPrices = [];
+    for (let variant of variants) {
+      let range = getVariantPriceRange(variant._id, productId);
+      if (Match.test(range, String)) {
+        let firstPrice = parseFloat(range.substr(0, range.indexOf(" ")));
+        let lastPrice = parseFloat(range.substr(range.lastIndexOf(" ") + 1));
+        variantPrices.push(firstPrice, lastPrice);
+      } else {
+        variantPrices.push(range);
+      }
+    }
+    let priceMin = _.min(variantPrices);
+    let priceMax = _.max(variantPrices);
+    if (priceMin === priceMax) {
+      return priceMin;
+    }
+    return `${priceMin} - ${priceMax}`;
+  }
+};
 
 // /**
 //  * getCardTypes

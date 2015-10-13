@@ -1,3 +1,5 @@
+/* TODO todo*/
+
 /*
  * Methods for the reaction permissions
  * https://github.com/ongoworks/reaction#rolespermissions-system
@@ -11,7 +13,9 @@
  * @param  {String} checkUserId - optional Meteor.userId, default to current
  * @return {Boolean}
  */
+ /* TODO funtion */
 Template.registerHelper("hasPermission", function (permissions, options) {
+  return true;
   check(permissions, Match.OneOf(String, Array));
   check(options.hash, Match.Optional(Object));
   // default to checking this.userId
@@ -33,33 +37,33 @@ Template.registerHelper("hasPermission", function (permissions, options) {
  * @summary check if user has owner access
  * @return {Boolean} return true if owner
  */
-Template.registerHelper("hasOwnerAccess", function () {
-  return ReactionCore.hasOwnerAccess();
-});
+// Template.registerHelper("hasOwnerAccess", function () {
+//   return ReactionCore.hasOwnerAccess();
+// });
 
 /**
  * hasAdminAccess template helper
  * @summary check if user has admin access
  * @return {Boolean} return true if admin
  */
-Template.registerHelper("hasAdminAccess", function () {
-  return ReactionCore.hasAdminAccess();
-});
+// Template.registerHelper("hasAdminAccess", function () {
+//   return ReactionCore.hasAdminAccess();
+// });
 
 /**
  * hasDashboardAccess template helper
  * @summary check if user has dashboard access
  * @return {Boolean} return true if user has dashboard permission
  */
-Template.registerHelper("hasDashboardAccess", function () {
-  return ReactionCore.hasDashboardAccess();
-});
+// Template.registerHelper("hasDashboardAccess", function () {
+//   return ReactionCore.hasDashboardAccess();
+// });
 
 /**
  * allowGuestCheckout template helper
  * @summary check if guest users are allowed to checkout
  * @return {Boolean} return true if shop has guest checkout enabled
  */
-Template.registerHelper("allowGuestCheckout", function () {
-  return ReactionCore.allowGuestCheckout();
-});
+// Template.registerHelper("allowGuestCheckout", function () {
+//   return ReactionCore.allowGuestCheckout();
+// });

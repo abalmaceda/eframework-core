@@ -44,9 +44,10 @@ Router.configure({
 /*
 	Es importante siempre estar suscrito a estas publicaciones antes de acceder a una nueva UI
 */
+
 Router.waitOn(function () {
 	this.subscribe("Shops");
-	return this.subscribe("Packages");
+	//return this.subscribe("Packages");
 });
 
 /*
@@ -54,9 +55,11 @@ Router.waitOn(function () {
  * Controlador principal para shop, mayoria de las vistas excepto admin
  */
 let ShopController = RouteController.extend({
+	
 	onAfterAction: function () {
 		return ReactionCore.MetaData.refresh(this.route, this.params);
 	},
+	
 	yieldTemplates: {
 		layoutHeader: {
 			to: "layoutHeader"
@@ -128,31 +131,31 @@ let ShopAdminController = this.ShopController.extend({
 
 this.ShopAdminController = ShopAdminController;
 
-/*
- * Print Controller
- */
+// /*
+//  * Print Controller
+//  */
 
-let PrintController = RouteController.extend({
-  onBeforeAction: function () {
-    if (!ReactionCore.hasPermission(this.route.getName())) {
-      this.render("unauthorized");
-    } else {
-      this.next();
-    }
-  }
-});
+// let PrintController = RouteController.extend({
+//   onBeforeAction: function () {
+//     if (!ReactionCore.hasPermission(this.route.getName())) {
+//       this.render("unauthorized");
+//     } else {
+//       this.next();
+//     }
+//   }
+// });
 
-this.PrintController = PrintController;
+// this.PrintController = PrintController;
 
-/*
- * General Route Declarations
- */
+// /*
+//  * General Route Declarations
+//  */
 
 Router.map(function () {
 	this.route("unauthorized", {
 	template: "unauthorized",
 	name: "unauthorized"
-	});
+});
 
 	this.route("index", {
 		controller: ShopController,
@@ -164,39 +167,39 @@ Router.map(function () {
 		}
 	  });
 
-  this.route("dashboard", {
-    controller: ShopAdminController,
-    template: "dashboardPackages",
-    onBeforeAction: function () {
-      Session.set("dashboard", true);
-      return this.next();
-    }
-  });
+//   this.route("dashboard", {
+//     controller: ShopAdminController,
+//     template: "dashboardPackages",
+//     onBeforeAction: function () {
+//       Session.set("dashboard", true);
+//       return this.next();
+//     }
+//   });
 
-  this.route("dashboard/shop", {
-    controller: ShopAdminController,
-    path: "/dashboard/shop",
-    template: "shopDashboard",
-    data: function () {
-      return ReactionCore.Collections.Shops.findOne();
-    }
-  });
+//   this.route("dashboard/shop", {
+//     controller: ShopAdminController,
+//     path: "/dashboard/shop",
+//     template: "shopDashboard",
+//     data: function () {
+//       return ReactionCore.Collections.Shops.findOne();
+//     }
+//   });
 
-  this.route("dashboard/orders", {
-    controller: ShopAdminController,
-    path: "dashboard/orders/:_id?",
-    template: "orders",
-    waitOn: function () {
-      return this.subscribe("Orders");
-    },
-    data: function () {
-      if (Orders.findOne(this.params._id)) {
-        return ReactionCore.Collections.Orders.findOne({
-          _id: this.params._id
-        });
-      }
-    }
-  });
+//   this.route("dashboard/orders", {
+//     controller: ShopAdminController,
+//     path: "dashboard/orders/:_id?",
+//     template: "orders",
+//     waitOn: function () {
+//       return this.subscribe("Orders");
+//     },
+//     data: function () {
+//       if (Orders.findOne(this.params._id)) {
+//         return ReactionCore.Collections.Orders.findOne({
+//           _id: this.params._id
+//         });
+//       }
+//     }
+//   });
 
   this.route("product/tag", {
     controller: ShopController,
@@ -251,64 +254,64 @@ this.route("product", {
 	}
 });
 
-  this.route("cartCheckout", {
-    layoutTemplate: "coreLayout",
-    path: "checkout",
-    template: "cartCheckout",
-    yieldTemplates: {
-      checkoutHeader: {
-        to: "layoutHeader"
-      }
-    },
-    waitOn: function () {
-      this.subscribe("Packages");
-      this.subscribe("Products");
-      this.subscribe("Shipping");
-      return this.subscribe("AccountOrders");
-    }
-  });
+//   this.route("cartCheckout", {
+//     layoutTemplate: "coreLayout",
+//     path: "checkout",
+//     template: "cartCheckout",
+//     yieldTemplates: {
+//       checkoutHeader: {
+//         to: "layoutHeader"
+//       }
+//     },
+//     waitOn: function () {
+//       this.subscribe("Packages");
+//       this.subscribe("Products");
+//       this.subscribe("Shipping");
+//       return this.subscribe("AccountOrders");
+//     }
+//   });
 
-  this.route("cartCompleted", {
-    controller: ShopController,
-    path: "completed/:_id",
-    template: "cartCompleted",
-    subscriptions: function () {
-      this.subscribe("Orders");
-      return this.subscribe("CompletedCartOrder", Meteor.userId(),
-        this.params._id);
-    },
-    data: function () {
-      if (this.ready()) {
-        if (ReactionCore.Collections.Orders.findOne({
-          cartId: this.params._id
-        })) {
-          return ReactionCore.Collections.Orders.findOne({
-            cartId: this.params._id
-          });
-        }
-        return this.render("unauthorized");
-      }
-      return this.render("loading");
-    }
-  });
+//   this.route("cartCompleted", {
+//     controller: ShopController,
+//     path: "completed/:_id",
+//     template: "cartCompleted",
+//     subscriptions: function () {
+//       this.subscribe("Orders");
+//       return this.subscribe("CompletedCartOrder", Meteor.userId(),
+//         this.params._id);
+//     },
+//     data: function () {
+//       if (this.ready()) {
+//         if (ReactionCore.Collections.Orders.findOne({
+//           cartId: this.params._id
+//         })) {
+//           return ReactionCore.Collections.Orders.findOne({
+//             cartId: this.params._id
+//           });
+//         }
+//         return this.render("unauthorized");
+//       }
+//       return this.render("loading");
+//     }
+//   });
 
-  return this.route("dashboard/pdf/orders", {
-    controller: PrintController,
-    path: "dashboard/pdf/orders/:_id",
-    template: "completedPDFLayout",
-    onBeforeAction() {
-      this.layout("print");
-      return this.next();
-    },
-    subscriptions: function () {
-      this.subscribe("Orders");
-    },
-    data: function () {
-      if (this.ready()) {
-        return ReactionCore.Collections.Orders.findOne({
-          _id: this.params._id
-        });
-      }
-    }
-  });
+//   return this.route("dashboard/pdf/orders", {
+//     controller: PrintController,
+//     path: "dashboard/pdf/orders/:_id",
+//     template: "completedPDFLayout",
+//     onBeforeAction() {
+//       this.layout("print");
+//       return this.next();
+//     },
+//     subscriptions: function () {
+//       this.subscribe("Orders");
+//     },
+//     data: function () {
+//       if (this.ready()) {
+//         return ReactionCore.Collections.Orders.findOne({
+//           _id: this.params._id
+//         });
+//       }
+//     }
+//   });
 });

@@ -33,14 +33,15 @@
       data-event-value="{{_id}}">
 
       <div class="product-primary-images">
-        {{#with media}}
+       <!-- {{#with media}}
           <span class="product-image" style="background-image: url('{{url store='large'}}')"></span>
         {{else}}
           <span class="product-image" style="background-image: url(/resources/placeholder.gif)"></span>
         {{/with}}
+        -->
       </div>
 
-      {{#if additionalMedia}}
+<!--      {{#if additionalMedia}}
         {{#if isMediumWeight}}
           <div class="product-additional-images">
             {{#each additionalMedia}}
@@ -50,6 +51,7 @@
           </div>
         {{/if}}
       {{/if}}
+      -->
     </a>
 
     {{> gridControls}}
