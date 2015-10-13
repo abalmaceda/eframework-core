@@ -217,19 +217,19 @@ api.addFiles("common/common.js");
   api.addFiles("server/fixtures.js", "server");
 
   // schemas
-  api.addFiles("common/schemas/address.js");
-  api.addFiles("common/schemas/layouts.js");
-  api.addFiles("common/schemas/packages.js");
-  api.addFiles("common/schemas/shops.js");
-  api.addFiles("common/schemas/payments.js");
-  api.addFiles("common/schemas/shipping.js");
-  api.addFiles("common/schemas/taxes.js");
-  api.addFiles("common/schemas/discounts.js");
-  api.addFiles("common/schemas/products.js");
-  api.addFiles("common/schemas/tags.js");
-  api.addFiles("common/schemas/cart.js");
-  api.addFiles("common/schemas/orders.js");
-  api.addFiles("common/schemas/translations.js");
+  // api.addFiles("common/schemas/address.js");
+  // api.addFiles("common/schemas/layouts.js");
+  // api.addFiles("common/schemas/packages.js");
+  // api.addFiles("common/schemas/shops.js");
+  // api.addFiles("common/schemas/payments.js");
+  // api.addFiles("common/schemas/shipping.js");
+  // api.addFiles("common/schemas/taxes.js");
+  // api.addFiles("common/schemas/discounts.js");
+  // api.addFiles("common/schemas/products.js");
+  // api.addFiles("common/schemas/tags.js");
+  // api.addFiles("common/schemas/cart.js");
+  // api.addFiles("common/schemas/orders.js");
+  // api.addFiles("common/schemas/translations.js");
 
   // // collections
   api.addFiles("common/collections/collections.js");

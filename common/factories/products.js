@@ -2,17 +2,17 @@
  * tag Factory
  *
  */
-
-Factory.define("tag", EFrameworkCore.Collections.Tags, {
-  name: "Tag",
-  slug: "tag",
-  position: _.random(0, 100000),
-  //  relatedTagIds: [],
-  isTopLevel: true,
-  shopId: Factory.get("shop"),
-  createdAt: faker.date.past(),
-  updatedAt: new Date()
-});
+// TODO
+// Factory.define("tag", EFrameworkCore.Collections.Tags, {
+//   name: "Tag",
+//   slug: "tag",
+//   position: _.random(0, 100000),
+//   //  relatedTagIds: [],
+//   isTopLevel: true,
+//   shopId: Factory.get("shop"),
+//   createdAt: faker.date.past(),
+//   updatedAt: new Date()
+// });
 
 /**
  * product Factory

@@ -45,21 +45,23 @@ Router.configure({
 	Es importante siempre estar suscrito a estas publicaciones antes de acceder a una nueva UI
 */
 
+/* TODO: Agregar cuando corresponda
 Router.waitOn(function () {
 	this.subscribe("Shops");
-	//return this.subscribe("Packages");
+	return this.subscribe("Packages");
 });
-
+*/
 /*
  * ShopController Controller
  * Controlador principal para shop, mayoria de las vistas excepto admin
  */
 let ShopController = RouteController.extend({
-	
+	/*
+	*TODO : Agregar cuando corresponda
 	onAfterAction: function () {
 		return EFrameworkCore.MetaData.refresh(this.route, this.params);
 	},
-	
+	*/
 	yieldTemplates: {
 		layoutHeader: {
 			to: "layoutHeader"
@@ -80,56 +82,56 @@ this.ShopController = ShopController;
  * restricts access of accounts views
  */
 
-let ShopAccountsController = RouteController.extend({
-  onBeforeAction: function () {
-    if (!EFrameworkCore.hasPermission(this.route.getName())) {
-      this.render("layoutHeader", {
-        to: "layoutHeader"
-      });
-      this.render("layoutFooter", {
-        to: "layoutFooter"
-      });
-      this.render("unauthorized");
-    } else {
-      this.next();
-    }
-  },
-  yieldTemplates: {
-    layoutHeader: {
-      to: "layoutHeader"
-    },
-    layoutFooter: {
-      to: "layoutFooter"
-    },
-    dashboard: {
-      to: "dashboard"
-    }
-  }
-});
+// let ShopAccountsController = RouteController.extend({
+//   onBeforeAction: function () {
+//     if (!EFrameworkCore.hasPermission(this.route.getName())) {
+//       this.render("layoutHeader", {
+//         to: "layoutHeader"
+//       });
+//       this.render("layoutFooter", {
+//         to: "layoutFooter"
+//       });
+//       this.render("unauthorized");
+//     } else {
+//       this.next();
+//     }
+//   },
+//   yieldTemplates: {
+//     layoutHeader: {
+//       to: "layoutHeader"
+//     },
+//     layoutFooter: {
+//       to: "layoutFooter"
+//     },
+//     dashboard: {
+//       to: "dashboard"
+//     }
+//   }
+// });
 
-this.ShopAccountsController = ShopAccountsController;
+// this.ShopAccountsController = ShopAccountsController;
 
 /*
  * ShopAdminController Controller
  * restricts access of admin views
  */
-let ShopAdminController = this.ShopController.extend({
-  onBeforeAction: function () {
-    if (!EFrameworkCore.hasPermission(this.route.getName())) {
-      this.render("layoutHeader", {
-        to: "layoutHeader"
-      });
-      this.render("layoutFooter", {
-        to: "layoutFooter"
-      });
-      this.render("unauthorized");
-    } else {
-      this.next();
-    }
-  }
-});
+// let ShopAdminController = this.ShopController.extend({
+//   onBeforeAction: function () {
+//     if (!EFrameworkCore.hasPermission(this.route.getName())) {
+//       this.render("layoutHeader", {
+//         to: "layoutHeader"
+//       });
+//       this.render("layoutFooter", {
+//         to: "layoutFooter"
+//       });
+//       this.render("unauthorized");
+//     } else {
+//       this.next();
+//     }
+//   }
+// });
 
-this.ShopAdminController = ShopAdminController;
+// this.ShopAdminController = ShopAdminController;
 
 // /*
 //  * Print Controller
@@ -201,58 +203,58 @@ Router.map(function () {
 //     }
 //   });
 
-  this.route("product/tag", {
-    controller: ShopController,
-    path: "product/tag/:_id",
-    template: "products",
-    waitOn: function () {
-      return this.subscribe("Products", Session.get("productScrollLimit"));
-    },
-    subscriptions: function () {
-      return this.subscribe("Tags");
-    },
-    data: function () {
-      let id;
-      if (this.ready()) {
-        id = this.params._id;
-        return {
-          tag: Tags.findOne({
-            slug: id
-          }) || Tags.findOne(id)
-        };
-      }
-    }
-  });
+  // this.route("product/tag", {
+  //   controller: ShopController,
+  //   path: "product/tag/:_id",
+  //   template: "products",
+  //   waitOn: function () {
+  //     return this.subscribe("Products", Session.get("productScrollLimit"));
+  //   },
+  //   subscriptions: function () {
+  //     return this.subscribe("Tags");
+  //   },
+  //   data: function () {
+  //     let id;
+  //     if (this.ready()) {
+  //       id = this.params._id;
+  //       return {
+  //         tag: Tags.findOne({
+  //           slug: id
+  //         }) || Tags.findOne(id)
+  //       };
+  //     }
+  //   }
+  // });
 
-this.route("product", {
-	controller: ShopController,
-	path: "product/:_id/:variant?",
-	template: "productDetail",
-	subscriptions: function () {
-		return this.subscribe("Product", this.params._id);
-	},
-	onBeforeAction: function () {
-		let variant;
-		variant = this.params.variant || this.params.query.variant;
-		EFrameworkCore.setProduct(this.params._id, variant);
-		return this.next();
-	},
-	data: function () {
-		let product;
-		product = selectedProduct();
-		if (this.ready() && product) {
-			if (!product.isVisible) {
-				if (!EFrameworkCore.hasPermission("createProduct")) {
-					this.render("unauthorized");
-				}
-			}
-			return product;
-		}
-		if (this.ready() && !product) {
-			return this.render("productNotFound");
-		}
-	}
-});
+// this.route("product", {
+// 	controller: ShopController,
+// 	path: "product/:_id/:variant?",
+// 	template: "productDetail",
+// 	subscriptions: function () {
+// 		return this.subscribe("Product", this.params._id);
+// 	},
+// 	onBeforeAction: function () {
+// 		let variant;
+// 		variant = this.params.variant || this.params.query.variant;
+// 		EFrameworkCore.setProduct(this.params._id, variant);
+// 		return this.next();
+// 	},
+// 	data: function () {
+// 		let product;
+// 		product = selectedProduct();
+// 		if (this.ready() && product) {
+// 			if (!product.isVisible) {
+// 				if (!EFrameworkCore.hasPermission("createProduct")) {
+// 					this.render("unauthorized");
+// 				}
+// 			}
+// 			return product;
+// 		}
+// 		if (this.ready() && !product) {
+// 			return this.render("productNotFound");
+// 		}
+// 	}
+// });
 
 //   this.route("cartCheckout", {
 //     layoutTemplate: "coreLayout",

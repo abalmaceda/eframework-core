@@ -80,8 +80,8 @@ Meteor.publish("Product", function (productId) {
 /**
  * tags
  */
-Meteor.publish("Tags", function () {
-  return EFrameworkCore.Collections.Tags.find({
-    shopId: EFrameworkCore.getShopId()
-  });
-});
+// Meteor.publish("Tags", function () {
+//   return EFrameworkCore.Collections.Tags.find({
+//     shopId: EFrameworkCore.getShopId()
+//   });
+// });

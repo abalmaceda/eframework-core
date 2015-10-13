@@ -14,111 +14,111 @@
 /**
 * EFrameworkCore transform collections
 */
-EFrameworkCore.Helpers.cartTransform = {
-  cartCount: function () {
-    let count = 0;
-    if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
-      for (let items of this.items) {
-        count += items.quantity;
-      }
-    }
-    return count;
-  },
-  cartShipping: function () {
-    let shipping = 0;
-    if (this.shipping) {
-      if (this.shipping[0].shipmentMethod) {
-        shipping += this.shipping[0].shipmentMethod.rate;
-      }
-    }
-    return shipping;
-  },
-  cartSubTotal: function () {
-    let subtotal = 0;
-    if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
-      for (let items of this.items) {
-        subtotal += items.quantity * items.variants.price;
-      }
-    }
-    subtotal = subtotal.toFixed(2);
-    return subtotal;
-  },
-  cartTaxes: function () {
-    let subtotal = 0;
-    if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
-      for (let items of this.items) {
-        let tax = this.tax || 0;
-        subtotal += items.variants.price * tax;
-      }
-    }
-    subtotal = subtotal.toFixed(2);
-    return subtotal;
-  },
-  cartDiscounts: function () {
-    return "0.00";
-  },
-  cartTotal: function () {
-    let total;
-    let subtotal = 0;
-    if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
-      for (let items of this.items) {
-        subtotal += items.quantity * items.variants.price;
-      }
-    }
-    let shipping = 0;
-    if (this.shipping) {
-      if (this.shipping.shippingMethod) {
-        for (let shippingMethod of this.shipping.shippingMethod) {
-          shipping += shippingMethod.rate;
-        }
-      }
-    }
+// EFrameworkCore.Helpers.cartTransform = {
+//   cartCount: function () {
+//     let count = 0;
+//     if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
+//       for (let items of this.items) {
+//         count += items.quantity;
+//       }
+//     }
+//     return count;
+//   },
+//   cartShipping: function () {
+//     let shipping = 0;
+//     if (this.shipping) {
+//       if (this.shipping[0].shipmentMethod) {
+//         shipping += this.shipping[0].shipmentMethod.rate;
+//       }
+//     }
+//     return shipping;
+//   },
+//   cartSubTotal: function () {
+//     let subtotal = 0;
+//     if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
+//       for (let items of this.items) {
+//         subtotal += items.quantity * items.variants.price;
+//       }
+//     }
+//     subtotal = subtotal.toFixed(2);
+//     return subtotal;
+//   },
+//   cartTaxes: function () {
+//     let subtotal = 0;
+//     if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
+//       for (let items of this.items) {
+//         let tax = this.tax || 0;
+//         subtotal += items.variants.price * tax;
+//       }
+//     }
+//     subtotal = subtotal.toFixed(2);
+//     return subtotal;
+//   },
+//   cartDiscounts: function () {
+//     return "0.00";
+//   },
+//   cartTotal: function () {
+//     let total;
+//     let subtotal = 0;
+//     if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
+//       for (let items of this.items) {
+//         subtotal += items.quantity * items.variants.price;
+//       }
+//     }
+//     let shipping = 0;
+//     if (this.shipping) {
+//       if (this.shipping.shippingMethod) {
+//         for (let shippingMethod of this.shipping.shippingMethod) {
+//           shipping += shippingMethod.rate;
+//         }
+//       }
+//     }
 
-    shipping = parseFloat(shipping);
-    if (!isNaN(shipping)) {
-      subtotal = subtotal + shipping;
-    }
-    total = subtotal.toFixed(2);
-    return total;
-  }
-};
+//     shipping = parseFloat(shipping);
+//     if (!isNaN(shipping)) {
+//       subtotal = subtotal + shipping;
+//     }
+//     total = subtotal.toFixed(2);
+//     return total;
+//   }
+// };
 
-/**
-* EFrameworkCore Collections Cart
-*/
-EFrameworkCore.Collections.Cart = Cart = this.Cart = new Mongo.Collection("Cart", {
-  transform: function (cart) {
-    let newInstance = Object.create(EFrameworkCore.Helpers.cartTransform);
-    return _.extend(newInstance, cart);
-  }
-});
+// /**
+// * EFrameworkCore Collections Cart
+// */
+// EFrameworkCore.Collections.Cart = Cart = this.Cart = new Mongo.Collection("Cart", {
+//   transform: function (cart) {
+//     let newInstance = Object.create(EFrameworkCore.Helpers.cartTransform);
+//     return _.extend(newInstance, cart);
+//   }
+// });
 
-EFrameworkCore.Collections.Cart.attachSchema(EFrameworkCore.Schemas.Cart);
+// EFrameworkCore.Collections.Cart.attachSchema(EFrameworkCore.Schemas.Cart);
 
 
-/**
-* EFrameworkCore Collections Orders
-*/
-EFrameworkCore.Collections.Orders = Orders = this.Orders = new Mongo.Collection("Orders", {
-  transform: function (order) {
-    order.itemCount = function () {
-      let count = 0;
-      if (order !== null ? order.items : void 0) {
-        for (let items of order.items) {
-          count += items.quantity;
-        }
-      }
-      return count;
-    };
-    return order;
-  }
-});
+// /**
+// * EFrameworkCore Collections Orders
+// */
+// EFrameworkCore.Collections.Orders = Orders = this.Orders = new Mongo.Collection("Orders", {
+//   transform: function (order) {
+//     order.itemCount = function () {
+//       let count = 0;
+//       if (order !== null ? order.items : void 0) {
+//         for (let items of order.items) {
+//           count += items.quantity;
+//         }
+//       }
+//       return count;
+//     };
+//     return order;
+//   }
+// });
 
-EFrameworkCore.Collections.Orders.attachSchema([
-  EFrameworkCore.Schemas.Cart,
-  EFrameworkCore.Schemas.Order,
-  EFrameworkCore.Schemas.OrderItem
-]);
+// EFrameworkCore.Collections.Orders.attachSchema([
+//   EFrameworkCore.Schemas.Cart,
+//   EFrameworkCore.Schemas.Order,
+//   EFrameworkCore.Schemas.OrderItem
+// ]);
 
 /**
 * EFrameworkCore Collections Packages
