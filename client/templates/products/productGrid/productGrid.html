@@ -1,116 +1,145 @@
+ <!--
+ 	Muestra un conjunto de productos disponibles.
+ -->
+ <!-- TODO: More Info -->
 <template name="productGrid">
-  <div class="container-main">
-  <div class="product-grid" data-event-category="grid" data-event-action="generic-click" data-event-label="product grid click">
-    <ul class="product-grid-list list-unstyled" id="product-grid-list">
-    {{#each products}}
-      {{> productGridItems}}
-    {{/each}}
-    </ul>
-  </div>
-</div>
+	<div class="container-main">
+		<div class="product-grid" data-event-category="grid" data-event-action="generic-click" data-event-label="product grid click">
+			<ul class="product-grid-list list-unstyled" id="product-grid-list">
+				{{#each products}}
+					{{> productGridItems}}
+				{{/each}}
+			</ul>
+		</div>
+	</div>
 
-{{!-- TODO: Finish infinite paganation implementation
-{{#if productScrollLimit}}
-  <div class="row" id="productScrollLimitLoader">
-      <span class="pager" data-i18n="app.more">More</span>
-  </div>
-{{/if}}
---}}
+	{{!-- TODO: Finish infinite paganation implementation
+	{{#if productScrollLimit}}
+		<div class="row" id="productScrollLimitLoader">
+			<span class="pager" data-i18n="app.more">More</span>
+		</div>
+	{{/if}}
+	--}}
 </template>
 
+<!--
+	Muestra información simple de un producto.
+-->
+ <!-- TODO: More Info -->
 <template name="productGridItems">
-  <li class="product-grid-item {{#if position.pinned}}pinned{{/if}} {{weightClass}}" data-id="{{_id}}" id="{{_id}}">
-    {{> gridNotice}}
-    <span class="product-grid-item-alerts">
-      {{> bootstrapAlerts placement="productGridItem" id=_id}}
-    </span>
+	<li class="product-grid-item {{#if position.pinned}}pinned{{/if}} {{weightClass}}" data-id="{{_id}}" id="{{_id}}">
+	<!-- Agrega noticia relacionada al producto -->
+		{{> gridNotice}}
+		<span class="product-grid-item-alerts">
+			{{> bootstrapAlerts placement="productGridItem" id=_id}}
+		</span>
 
-    <a class="product-grid-item-images"
-      href="{{pathForSEO 'product' 'handle'}}"
-      data-event-category="grid"
-      data-event-action="product-click"
-      data-event-label="grid product click"
-      data-event-value="{{_id}}">
+		<a class="product-grid-item-images"
+		href="{{pathForSEO 'product' 'handle'}}"
+		data-event-category="grid"
+		data-event-action="product-click"
+		data-event-label="grid product click"
+		data-event-value="{{_id}}">
+			<div class="product-primary-images">
 
-      <div class="product-primary-images">
-       <!-- {{#with media}}
-          <span class="product-image" style="background-image: url('{{url store='large'}}')"></span>
-        {{else}}
-          <span class="product-image" style="background-image: url(/resources/placeholder.gif)"></span>
-        {{/with}}
-        -->
-      </div>
+				<!-- Muestra foto de produecto si tiene, en caso contrario muestrra una foto Default -->
+				{{#with media}}
+					<span class="product-image" style="background-image: url('{{url store='large'}}')"></span>
+				{{else}}
+					<span class="product-image" style="background-image: url(/resources/placeholder.gif)"></span>
+				{{/with}}
+				
+			</div>
 
-<!--      {{#if additionalMedia}}
-        {{#if isMediumWeight}}
-          <div class="product-additional-images">
-            {{#each additionalMedia}}
-                <span class="product-image" style="background-image: url('{{url store='medium'}}')"></span>
+			<!--
+			{{#if additionalMedia}}
+				{{#if isMediumWeight}}
+					<div class="product-additional-images">
+					{{#each additionalMedia}}
+						<span class="product-image" style="background-image: url('{{url store='medium'}}')"></span>
+					{{/each}}
+					</div>
+				{{/if}}
+			{{/if}}
+			-->
+		</a>
 
-            {{/each}}
-          </div>
-        {{/if}}
-      {{/if}}
-      -->
-    </a>
-
-    {{> gridControls}}
-    {{> gridContent}}
-  </li>
+		{{> gridControls}}
+		{{> gridContent}}
+	</li>
 </template>
 
 
+<!--
+	Muestra información en relacion al stock del producto.
+	Se muestra información cuando:
+	- Backorder
+	- No hay Stock
+	- Queda poco 
+-->
+ <!-- TODO: More Info Backorder -->
 <template name="gridNotice">
-  {{#if isSoldOut}}
-    {{#if isBackorder}}
-      <span class="variant-qty-sold-out badge" data-i18n="productDetail.backOrder">Backorder</span>
-    {{else}}
-      <span class="variant-qty-sold-out badge" data-i18n="productDetail.soldOut">Sold Out!</span>
-    {{/if}}
-  {{else}}
-    {{#if isLowQuantity}}
-      <div class="badge badge-low-inv-warning" title="" data-i18n="productDetail.limitedSupply">Limited Supply</div>
-    {{/if}}
-  {{/if}}
+	{{#if isSoldOut}}
+		{{#if isBackorder}}
+			<span class="variant-qty-sold-out badge" data-i18n="productDetail.backOrder">Backorder</span>
+		{{else}}
+			<span class="variant-qty-sold-out badge" data-i18n="productDetail.soldOut">Sold Out!</span>
+		{{/if}}
+	{{else}}
+		{{#if isLowQuantity}}
+			<div class="badge badge-low-inv-warning" title="" data-i18n="productDetail.limitedSupply">Limited Supply</div>
+		{{/if}}
+	{{/if}}
 </template>
 
-
+<!-- 
+	Muestra información extra del producto
+	TITULO y PRECIO
+-->
 <template name="gridContent">
-  <div class="grid-content">
-    <a href="{{pathForSEO 'product' 'handle'}}" data-event-category="grid" data-event-action="product-click" data-event-label="grid product click" data-event-value="{{_id}}">
-      <div class="overlay">
-        <div class="overlay-title">{{title}}</div>
-        <div class="currency-symbol">{{formatPrice displayPrice}}</div>
-      </div>
-    </a>
-  </div>
+	<div class="grid-content">
+		<a href="{{pathForSEO 'product' 'handle'}}" data-event-category="grid" data-event-action="product-click" data-event-label="grid product click" data-event-value="{{_id}}">
+			<div class="overlay">
+				<div class="overlay-title">{{title}}</div>
+				<div class="currency-symbol">{{formatPrice displayPrice}}</div>
+			</div>
+		</a>
+	</div>
 </template>
 
-
+<!--
+	Agrega opciones si el usuario es administrador
+	Estas opciones corresponden a:
+	- Clonar producto
+	- Eliminar producto
+	- Publicar producto
+	- 
+-->
+ <!-- TODO : agregar opcion faltante de admin-->
 <template name="gridControls">
-  {{#if hasPermission "createProduct"}}
-    <div class="product-grid-controls">
-      <button
-        class="publish-product"
-        data-toggle="tooltip"
-        title="{{i18n 'productDetailEdit.publish' 'Publish'}}"
-        data-original-title="{{i18n 'productDetailEdit.publish' 'Publish'}}"
-        >
-        {{#if isVisible}}
-          <i class="fa fa-eye"></i>
-        {{else}}
-          <i class="fa fa-eye-slash"></i>
-        {{/if}}
-      </button>
+	{{#if hasPermission "createProduct"}}
+		<div class="product-grid-controls">
+			<button
+			class="publish-product"
+			data-toggle="tooltip"
+			title="{{i18n 'productDetailEdit.publish' 'Publish'}}"
+			data-original-title="{{i18n 'productDetailEdit.publish' 'Publish'}}"
+			>
+				{{#if isVisible}}
+					<i class="fa fa-eye"></i>
+				{{else}}
+					<i class="fa fa-eye-slash"></i>
+				{{/if}}
+			</button>
 
-      <button
-        class="admin-controls-open"
-        data-toggle="dropdown"
-        title="{{i18n 'productDetailEdit.moreOptions' 'More Options'}}"
-        data-original-title="{{i18n 'productDetailEdit.moreOptions' 'More Options'}}"
-        data-event-action="showProductSettings">
-        <i class="fa fa-gear"></i>
-      </button>
-    </div>
-  {{/if}}
+			<button
+			class="admin-controls-open"
+			data-toggle="dropdown"
+			title="{{i18n 'productDetailEdit.moreOptions' 'More Options'}}"
+			data-original-title="{{i18n 'productDetailEdit.moreOptions' 'More Options'}}"
+			data-event-action="showProductSettings">
+				<i class="fa fa-gear"></i>
+			</button>
+		</div>
+	{{/if}}
 </template>

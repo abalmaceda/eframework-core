@@ -117,32 +117,39 @@ Template.productGrid.helpers({
 	}
 });
 
-// /**
-//  * productGridItems helpers
-//  */
+/**
+ * productGridItems helpers
+ */
 
-// Template.productGridItems.helpers({
-//   media: function () {
-//     let defaultImage;
-//     let variantId;
-//     let variants = [];
-//     for (let variant of this.variants) {
-//       if (!variant.parentId) {
-//         variants.push(variant);
-//       }
-//     }
-//     if (variants.length > 0) {
-//       variantId = variants[0]._id;
-//       defaultImage = EFrameworkCore.Collections.Media.findOne({
-//         "metadata.variantId": variantId,
-//         "metadata.priority": 0
-//       });
-//     }
-//     if (defaultImage) {
-//       return defaultImage;
-//     }
-//     return false;
-//   },
+Template.productGridItems.helpers({
+	/* TODO: ARREGLAR FUNCION Y DEFINICION ( no se bien que retorna) */
+
+	/*
+	* Template.productGridItems.media
+	* @summary Verifica si existe una imagen default para mostrar en el producto
+	* @return {Media} returns un puntero a un "Objeto Media" / false
+ 	*/
+ 	media: function () {
+    // let defaultImage;
+    // let variantId;
+    // let variants = [];
+    // for (let variant of this.variants) {
+    //   if (!variant.parentId) {
+    //     variants.push(variant);
+    //   }
+    // }
+    // if (variants.length > 0) {
+    //   variantId = variants[0]._id;
+    //   defaultImage = EFrameworkCore.Collections.Media.findOne({
+    //     "metadata.variantId": variantId,
+    //     "metadata.priority": 0
+    //   });
+    // }
+    // if (defaultImage) {
+    //   return defaultImage;
+    // }
+    	return false;
+	},
 //   additionalMedia: function () {
 //     let mediaArray;
 //     let variantId;
@@ -205,7 +212,7 @@ Template.productGrid.helpers({
 //     }
 //     return false;
 //   }
-// });
+});
 
 // /**
 //  * productGridItems events

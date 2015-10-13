@@ -1,13 +1,18 @@
+<!-- 
+	TODO
+	Muestra los productos disponibles
+-->
 <template name="products">
-  {{>productGrid}}
+	{{>productGrid}}
 </template>
 
+<!-- TODO -->
 <template name="productListGrid">
-  <div class="row">
-    {{>productGrid}}
-    {{#if hasPermission "createProduct"}}
-      {{>productList}}
-    {{/if}}
-  </div>
+	<div class="row">
+		{{>productGrid}}
+		{{#if hasPermission "createProduct"}}
+			{{>productList}}
+		{{/if}}
+	</div>
 </template>
 
