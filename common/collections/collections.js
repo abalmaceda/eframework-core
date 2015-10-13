@@ -1,3 +1,4 @@
+/* TODO */
 
 /**
 * EFrameworkCore Collections
@@ -137,23 +138,23 @@ EFrameworkCore.Collections.Products.attachSchema(EFrameworkCore.Schemas.Product)
 /**
 * EFrameworkCore Collections Shipping
 */
-EFrameworkCore.Collections.Shipping = new Mongo.Collection("Shipping");
+// EFrameworkCore.Collections.Shipping = new Mongo.Collection("Shipping");
 
-EFrameworkCore.Collections.Shipping.attachSchema(EFrameworkCore.Schemas.Shipping);
+// EFrameworkCore.Collections.Shipping.attachSchema(EFrameworkCore.Schemas.Shipping);
 
 /**
 * EFrameworkCore Collections Taxes
 */
-EFrameworkCore.Collections.Taxes = new Mongo.Collection("Taxes");
+// EFrameworkCore.Collections.Taxes = new Mongo.Collection("Taxes");
 
-EFrameworkCore.Collections.Taxes.attachSchema(EFrameworkCore.Schemas.Taxes);
+// EFrameworkCore.Collections.Taxes.attachSchema(EFrameworkCore.Schemas.Taxes);
 
 /**
 * EFrameworkCore Collections Discounts
 */
-EFrameworkCore.Collections.Discounts = new Mongo.Collection("Discounts");
+// EFrameworkCore.Collections.Discounts = new Mongo.Collection("Discounts");
 
-EFrameworkCore.Collections.Discounts.attachSchema(EFrameworkCore.Schemas.Discounts);
+// EFrameworkCore.Collections.Discounts.attachSchema(EFrameworkCore.Schemas.Discounts);
 
 /**
 * EFrameworkCore Collections Shops
@@ -179,6 +180,6 @@ EFrameworkCore.Collections.Translations.attachSchema(EFrameworkCore.Schemas.Tran
 /**
 * EFrameworkCore Collections Accounts
 */
-EFrameworkCore.Collections.Layouts = new Mongo.Collection("Layouts");
+// EFrameworkCore.Collections.Layouts = new Mongo.Collection("Layouts");
 
-EFrameworkCore.Collections.Layouts.attachSchema(EFrameworkCore.Schemas.Layouts);
+// EFrameworkCore.Collections.Layouts.attachSchema(EFrameworkCore.Schemas.Layouts);

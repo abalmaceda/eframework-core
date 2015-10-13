@@ -239,8 +239,8 @@ api.addFiles("common/common.js");
 //api.addFiles("common/collections/hooks/hooks.js");
 
   // // security
-  api.addFiles("server/browserPolicy.js", "server");
-  api.addFiles("server/security.js", "server");
+  // api.addFiles("server/browserPolicy.js", "server");
+  // api.addFiles("server/security.js", "server");
 
   // common
   api.addFiles("common/router.js");
@@ -257,7 +257,7 @@ api.addFiles("common/common.js");
   api.addFiles("common/factories/orders.js");
 
   // // publications
-	api.addFiles("server/publications/sessions.js", "server");
+	// api.addFiles("server/publications/sessions.js", "server");
 api.addFiles("server/publications/shops.js", "server");
   // api.addFiles("server/publications/cart.js", "server");
   // api.addFiles("server/publications/media.js", "server");
