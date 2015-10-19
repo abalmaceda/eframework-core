@@ -42,7 +42,6 @@ EFrameworkCore.Log.level(isDebug);
 /**
  * EFrameworkCore methods (server)
  */
-
 _.extend(EFrameworkCore, {
   init: function () {
     try {
@@ -78,12 +77,14 @@ _.extend(EFrameworkCore, {
   getDomain: function () {
     return Meteor.absoluteUrl().split("/")[2].split(":")[0];
   },
+
+  /* TODO: verificar bien esta funcion */
   /**
-   * hasPermission - server permissions checks
+   * hasPermission - Revision de permisos en el servidor
    * @param {String | Array} checkPermissions -String or Array of permissions if empty, defaults to "admin, owner"
    * @param {String} checkUserId - userId, defaults to Meteor.userId()
    * @param {String} group - default to shopId
-   * @return {Boolean} Boolean - true if has permission
+   * @return {Boolean} Boolean - true si tiene permisos
    */
   hasPermission: function (checkPermissions, checkUserId, group) {
     check(checkPermissions, Match.OneOf(String, Array));
@@ -102,7 +103,8 @@ _.extend(EFrameworkCore, {
     } else {
       permissions = checkPermissions;
     }
-    // if the user has admin, owner permissions we'll always check if those roles are enough
+   
+    /* Aunque se tenga permisos "admin" , "owner" se verifica siempre si estos roles son suficientes */
     permissions.push("admin", "owner");
     // check if userIs the Roles
     if (Roles.userIsInRole(userId, permissions, shopId)) {
@@ -177,16 +179,17 @@ _.extend(EFrameworkCore, {
   }
 });
 
+
 // Method Check Helper
 Match.OptionalOrNull = function (pattern) {
-  return Match.OneOf(void 0, null, pattern);
+return Match.OneOf(void 0, null, pattern);
 };
 
-/*
- * Execute start up fixtures
- */
 
+/*
+ * Ejecuta start up fixtures
+ */
 Meteor.startup(function () {
-  EFrameworkCore.init();
-  return EFrameworkCore.Log.info("Reaction Core initialization finished. ");
+	EFrameworkCore.init();
+	return EFrameworkCore.Log.info("E-Framework Core initialization finished. ");
 });

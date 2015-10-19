@@ -1,12 +1,15 @@
 /* TODO: verificar toda la clase */
 
 /*
- * Reaction Core Routing
- * reaction routing and security configuration
- * uses iron:router package.
- * Extend/override in reaction/client/routing.coffee
- */
+* E-Framework Core Routing
+* reaction routing and security configuration
+* utiliza iron:router package.
+* Extend/override en eframework/client/routing.js
+*/
 
+/*
+*	Configuración global de Router
+*/
 Router.configure({
 	notFoundTemplate: "notFound",
 	loadingTemplate: "loading",
@@ -154,17 +157,27 @@ this.ShopController = ShopController;
 //  */
 
 Router.map(function () {
+	/*
+	Si no se tiene permisos para ingresar a la ruta, se reenvia a este Template
+	*/
 	this.route("unauthorized", {
-	template: "unauthorized",
-	name: "unauthorized"
-});
-
+		template: "unauthorized",
+		name: "unauthorized"
+	});
+	/*
+		Ruta inicial de la aplicación. Envia al Template Products
+	*/
 	this.route("index", {
 		controller: ShopController,
 		path: "/",
 		name: "index",
 		template: "products",
-		waitOn: function () {
+		//waitOn: function () {
+		subscriptions: function(){
+			/*
+				Hay que estar suscrito a Proucts, antes de ir al Template.
+				Asi puedo utlizar la información para llenar la UI
+			*/
 			return this.subscribe("Products", Session.get("productScrollLimit"));
 		}
 	  });
@@ -225,36 +238,39 @@ Router.map(function () {
   //     }
   //   }
   // });
-
-// this.route("product", {
-// 	controller: ShopController,
-// 	path: "product/:_id/:variant?",
-// 	template: "productDetail",
-// 	subscriptions: function () {
-// 		return this.subscribe("Product", this.params._id);
-// 	},
-// 	onBeforeAction: function () {
-// 		let variant;
-// 		variant = this.params.variant || this.params.query.variant;
-// 		EFrameworkCore.setProduct(this.params._id, variant);
-// 		return this.next();
-// 	},
-// 	data: function () {
-// 		let product;
-// 		product = selectedProduct();
-// 		if (this.ready() && product) {
-// 			if (!product.isVisible) {
-// 				if (!EFrameworkCore.hasPermission("createProduct")) {
-// 					this.render("unauthorized");
-// 				}
-// 			}
-// 			return product;
-// 		}
-// 		if (this.ready() && !product) {
-// 			return this.render("productNotFound");
-// 		}
-// 	}
-// });
+	
+	/*
+		Ruta para acceder a los detalles de un producto.
+	*/
+	this.route("product", {
+		controller: ShopController,
+		path: "product/:_id/:variant?",
+		template: "productDetail",
+		subscriptions: function () {
+			return this.subscribe("Product", this.params._id);
+		},
+		onBeforeAction: function () {
+			let variant;
+			variant = this.params.variant || this.params.query.variant;
+			EFrameworkCore.setProduct(this.params._id, variant);
+			return this.next();
+		},
+		data: function () {
+			let product;
+			product = selectedProduct();
+			if (this.ready() && product) {
+				if (!product.isVisible) {
+					if (!EFrameworkCore.hasPermission("createProduct")) {
+						this.render("unauthorized");
+					}
+				}
+				return product;
+			}
+			if (this.ready() && !product) {
+				return this.render("productNotFound");
+			}
+		}
+	});
 
 //   this.route("cartCheckout", {
 //     layoutTemplate: "coreLayout",

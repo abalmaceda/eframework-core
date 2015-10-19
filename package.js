@@ -181,10 +181,10 @@ api.imply("matb33:collection-hooks");
   api.addFiles("common/global.js");
 
   // init reaction core
-  api.addFiles("client/main.js", "client");
-  api.addFiles("server/main.js", "server");
+	api.addFiles("client/main.js", "client");
+	api.addFiles("server/main.js", "server");
 api.addFiles("server/register.js", "server");
-api.addFiles("common/common.js");
+	api.addFiles("common/common.js");
 
   // Private fixture data
   api.addAssets("private/data/Products.json", "server");
@@ -243,7 +243,7 @@ api.addFiles("common/common.js");
   // api.addFiles("server/security.js", "server");
 
   // common
-  api.addFiles("common/router.js");
+	api.addFiles("common/router.js");
 
 	api.addFiles("common/methods/layout.js");
   // api.addFiles("common/methods/workflow.js");
@@ -295,8 +295,8 @@ api.addFiles("client/templates/layout/layout.js", "client");
   api.addFiles("client/templates/layout/header/header.html", "client");
   api.addFiles("client/templates/layout/header/header.js", "client");
 
-  api.addFiles("client/templates/layout/header/tags/tags.html", "client");
-  api.addFiles("client/templates/layout/header/tags/tags.js", "client");
+  // api.addFiles("client/templates/layout/header/tags/tags.html", "client");
+  // api.addFiles("client/templates/layout/header/tags/tags.js", "client");
 
   api.addFiles("client/templates/layout/header/i18n/i18n.html", "client");
   api.addFiles("client/templates/layout/header/i18n/i18n.js", "client");
@@ -309,10 +309,10 @@ api.addFiles("client/templates/layout/layout.js", "client");
   api.addFiles("client/templates/layout/alerts/alerts.html", "client");
   api.addFiles("client/templates/layout/alerts/alerts.js", "client");
 
-	api.addFiles("client/templates/layout/loading/loading.html", "client");
+  api.addFiles("client/templates/layout/loading/loading.html", "client");
 	api.addFiles("client/templates/layout/notFound/notFound.html", "client");
 
-	api.addFiles("client/templates/layout/notice/unauthorized.html", "client");
+	// api.addFiles("client/templates/layout/notice/unauthorized.html", "client");
   api.addFiles("client/templates/layout/notice/shopNotFound.html", "client");
 
   // api.addFiles("client/templates/cart/cartDrawer/cartDrawer.html", "client");
@@ -438,24 +438,24 @@ api.addFiles("client/templates/layout/layout.js", "client");
   // api.addFiles("client/templates/dashboard/shop/settings/settings.html", "client");
   // api.addFiles("client/templates/dashboard/shop/settings/settings.js", "client");
 
-  // Product Templates
-  api.addFiles("client/templates/products/products.html", "client");
-  api.addFiles("client/templates/products/products.js", "client");
+	// Product Templates
+	api.addFiles("client/templates/products/products.html", "client");
+	api.addFiles("client/templates/products/products.js", "client");
 
-  api.addFiles("client/templates/products/productList/productList.html", "client");
-  api.addFiles("client/templates/products/productList/productList.js", "client");
+  // api.addFiles("client/templates/products/productList/productList.html", "client");
+  // api.addFiles("client/templates/products/productList/productList.js", "client");
 
-  api.addFiles("client/templates/products/productGrid/productGrid.html", "client");
-  api.addFiles("client/templates/products/productGrid/productGrid.js", "client");
+	api.addFiles("client/templates/products/productGrid/productGrid.html", "client");
+	api.addFiles("client/templates/products/productGrid/productGrid.js", "client");
 
-  api.addFiles("client/templates/products/productDetail/productDetail.html", "client");
-  api.addFiles("client/templates/products/productDetail/productDetail.js", "client");
+	api.addFiles("client/templates/products/productDetail/productDetail.html", "client");
+	api.addFiles("client/templates/products/productDetail/productDetail.js", "client");
 
-  // api.addFiles("client/templates/products/productDetail/edit/edit.html", "client");
-  // api.addFiles("client/templates/products/productDetail/edit/edit.js", "client");
+	api.addFiles("client/templates/products/productDetail/edit/edit.html", "client");
+	api.addFiles("client/templates/products/productDetail/edit/edit.js", "client");
 
-  api.addFiles("client/templates/products/productDetail/images/productImageGallery.html", "client");
-  api.addFiles("client/templates/products/productDetail/images/productImageGallery.js", "client");
+  // api.addFiles("client/templates/products/productDetail/images/productImageGallery.html", "client");
+  // api.addFiles("client/templates/products/productDetail/images/productImageGallery.js", "client");
 
   // api.addFiles("client/templates/products/productDetail/tags/tags.html", "client");
   // api.addFiles("client/templates/products/productDetail/tags/tags.js", "client");
@@ -496,18 +496,18 @@ api.addFiles("client/templates/layout/layout.js", "client");
 
 
 Package.onTest(function (api) {
-  api.use("sanjo:jasmine@0.20.1");
-  api.use("underscore");
-  api.use("dburles:factory@0.3.10");
-  api.use("velocity:html-reporter@0.9.0");
-  api.use("velocity:console-reporter@0.1.3");
+  // api.use("sanjo:jasmine@0.20.1");
+  // api.use("underscore");
+  // api.use("dburles:factory@0.3.10");
+  // api.use("velocity:html-reporter@0.9.0");
+  // api.use("velocity:console-reporter@0.1.3");
 
-  api.use("eframework:core");
-  api.use("reactioncommerce:bootstrap-theme");
+  // api.use("eframework:core");
+  // api.use("reactioncommerce:bootstrap-theme");
 
-  api.addFiles("tests/jasmine/server/integration/shops.js", "server");
-  api.addFiles("tests/jasmine/server/integration/accounts.js", "server");
-  api.addFiles("tests/jasmine/server/integration/methods.js", "server");
-  api.addFiles("tests/jasmine/server/integration/products.js", "server");
-  api.addFiles("tests/jasmine/server/integration/publications.js", "server");
+  // api.addFiles("tests/jasmine/server/integration/shops.js", "server");
+  // api.addFiles("tests/jasmine/server/integration/accounts.js", "server");
+  // api.addFiles("tests/jasmine/server/integration/methods.js", "server");
+  // api.addFiles("tests/jasmine/server/integration/products.js", "server");
+  // api.addFiles("tests/jasmine/server/integration/publications.js", "server");
 });

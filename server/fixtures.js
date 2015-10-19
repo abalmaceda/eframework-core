@@ -1,3 +1,5 @@
+/* TODO: verificar todo este código*/
+
 /*
  * Fixtures is a global server object that it can be reused in packages
  * assumes collection data in reaction-core/private/data, optionally jsonFile

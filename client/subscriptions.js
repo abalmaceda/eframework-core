@@ -1,3 +1,7 @@
+
+/*TODO: revizar todo esto */
+
+
 /*
  * EFrameworkCore.session
  * Create persistent sessions for users
