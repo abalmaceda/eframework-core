@@ -49,19 +49,14 @@
 				<div class="row">
 					<!-- BEGIN Left Side -->
 					<div class="col-sm-5 pdp-left-column">
-						<!-- TODO: descomentar-->
-						<!--{{> productImageGallery}}-->
-							<h3 data-i18n="productDetail.tags">Tags</h3>
-							<!--
-								+++++++ TODO : Comprender como funcioná {{>tagsComponent tags=tags}}
-								+++++++ Considerando que tagsComponent es un Helper ( no un template)
-								+++++++ Averiguar de donde proviene la variable "tags"
-							-->
-						<!-- TODO: descomentar-->
-						<!--{{>tagsComponent tags=tags}}-->
-							<h3 data-i18n="productDetail.details">Details</h3>
-						<!-- TODO: descomentar-->
-						<!--{{> metaComponent }}-->
+						{{> productImageGallery}}
+						<h3 data-i18n="productDetail.tags">Tags</h3>
+						<!--
+							Se llama al helper productDetail.tagsComponent ( el cual retorna un Template) y se le pasa como parametro data "tags", que corresponde al resultado del helper productDetail.tags (retorna un arreglo de tags)
+						-->
+						{{>tagsComponent tags=tags}}
+						<h3 data-i18n="productDetail.details">Details</h3>
+						{{> metaComponent }}
 					</div>
 					<!-- END Left Side -->
 					<!-- BEGIN Right Side -->
@@ -106,8 +101,7 @@
 							{{!-- Variants & Options --}}
 							<div class="row options-add-to-cart">
 								<h3 data-i18n="productDetail.options">Options</h3>
-							<!-- TODO: descomentar-->	
-							<!--{{>variantList}}-->
+							{{>variantList}}
 							</div>
 
 							<!-- TODO -->

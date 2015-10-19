@@ -4,22 +4,30 @@
  * productDetail helpers
  */
 Template.productDetail.helpers({
-//   tags: function () {
-//     let product = selectedProduct();
-//     if (product) {
-//       if (product.hashtags) {
-//         return _.map(product.hashtags, function (id) {
-//           return Tags.findOne(id);
-//         });
-//       }
-//     }
-//   },
-//   tagsComponent: function () {
-//     if (EFrameworkCore.hasPermission("createProduct")) {
-//       return Template.productTagInputForm;
-//     }
-//     return Template.productDetailTags;
-//   },
+	/** 
+	* Retorna los tags do producto seleccionado actualmente
+	* @return [Template]
+	*/
+	tags: function () {
+		let product = selectedProduct();
+		if (product) {
+			if (product.hashtags) {
+				return _.map(product.hashtags, function (id) {
+					return Tags.findOne(id);
+				});
+			}
+		}
+	},
+	/**
+	* Retorna el Template de descripción de los Tags dependiendo si es propietario o no
+	* @return [Template] 
+	*/
+	tagsComponent: function () {
+		if (EFrameworkCore.hasPermission("createProduct")) {
+			return Template.productTagInputForm;
+		}
+		return Template.productDetailTags;
+	},
 //   actualPrice: function () {
 //     let childVariants;
 //     let purchasable;
@@ -53,13 +61,18 @@ Template.productDetail.helpers({
 		}
 		return Template.productDetailField;
 	},
-//   metaComponent: function () {
-//     if (EFrameworkCore.hasPermission("createProduct")) {
-//       return Template.productMetaFieldForm;
-//     }
-//     return Template.productMetaField;
-//   }
-// });
+	/**
+	* Retorna el Template dependiendo de los permisos del usuario
+	* @return {Template}
+	* @todo Mejorar descripcion, hablar de los Templates
+	*/
+	metaComponent: function () {
+		if (EFrameworkCore.hasPermission("createProduct")) {
+			return Template.productMetaFieldForm;
+		}
+		return Template.productMetaField;
+	}
+});
 
 // /**
 //  * productDetail events
@@ -264,4 +277,4 @@ Template.productDetail.helpers({
 //     Session.set("editing-" + this.field, false);
 //     return $(".social-media-inputs > *").hide();
 //   }
-});
+//});

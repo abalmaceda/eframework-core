@@ -278,7 +278,7 @@ api.addFiles("server/methods/shop.js", "server");
   // api.addFiles("server/methods/hooks/cart.js", "server");
 
 	// client
-//api.addFiles("client/subscriptions.js", "client");
+	api.addFiles("client/subscriptions.js", "client");
 	api.addFiles("client/helpers/layout.js", "client");
 //api.addFiles("client/helpers/packages.js", "client");
   // api.addFiles("client/helpers/cart.js", "client");
@@ -454,20 +454,20 @@ api.addFiles("client/templates/layout/layout.js", "client");
 	api.addFiles("client/templates/products/productDetail/edit/edit.html", "client");
 	api.addFiles("client/templates/products/productDetail/edit/edit.js", "client");
 
-  // api.addFiles("client/templates/products/productDetail/images/productImageGallery.html", "client");
-  // api.addFiles("client/templates/products/productDetail/images/productImageGallery.js", "client");
+	api.addFiles("client/templates/products/productDetail/images/productImageGallery.html", "client");
+	api.addFiles("client/templates/products/productDetail/images/productImageGallery.js", "client");
 
-  // api.addFiles("client/templates/products/productDetail/tags/tags.html", "client");
-  // api.addFiles("client/templates/products/productDetail/tags/tags.js", "client");
+	api.addFiles("client/templates/products/productDetail/tags/tags.html", "client");
+	api.addFiles("client/templates/products/productDetail/tags/tags.js", "client");
 
   // api.addFiles("client/templates/products/productDetail/social/social.html", "client");
   // api.addFiles("client/templates/products/productDetail/social/social.js", "client");
 
-  // api.addFiles("client/templates/products/productDetail/variants/variant.html", "client");
-  // api.addFiles("client/templates/products/productDetail/variants/variant.js", "client");
+	api.addFiles("client/templates/products/productDetail/variants/variant.html", "client");
+	api.addFiles("client/templates/products/productDetail/variants/variant.js", "client");
 
-  // api.addFiles("client/templates/products/productDetail/variants/variantList/variantList.html", "client");
-  // api.addFiles("client/templates/products/productDetail/variants/variantList/variantList.js", "client");
+	api.addFiles("client/templates/products/productDetail/variants/variantList/variantList.html", "client");
+	api.addFiles("client/templates/products/productDetail/variants/variantList/variantList.js", "client");
 
   // api.addFiles("client/templates/products/productDetail/variants/variantForm/variantForm.html", "client");
   // api.addFiles("client/templates/products/productDetail/variants/variantForm/variantForm.js", "client");
@@ -478,8 +478,8 @@ api.addFiles("client/templates/layout/layout.js", "client");
   // api.addFiles("client/templates/products/productDetail/variants/variantForm/childVariant/childVariant.html", "client");
   // api.addFiles("client/templates/products/productDetail/variants/variantForm/childVariant/childVariant.js", "client");
 
-  // api.addFiles("client/templates/products/productDetail/attributes/attributes.html", "client");
-  // api.addFiles("client/templates/products/productDetail/attributes/attributes.js", "client");
+	api.addFiles("client/templates/products/productDetail/attributes/attributes.html", "client");
+	api.addFiles("client/templates/products/productDetail/attributes/attributes.js", "client");
 
   // api.addFiles("client/templates/products/productSettings/productSettings.html", "client");
   // api.addFiles("client/templates/products/productSettings/productSettings.js", "client");

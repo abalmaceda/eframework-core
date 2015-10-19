@@ -1,6 +1,8 @@
-// /**
-//  * productDetailEdit helpers
-//  */
+/* TODO */
+
+/**
+ * productDetailEdit helpers
+ */
 
 // Template.productDetailEdit.helpers({
 //   i18nPlaceholder: function () {
@@ -38,25 +40,30 @@
 //   }
 // });
 
-// /**
-//  * productDetailField events
-//  */
+/**
+ * productDetailField events
+ */
+/*
+TODO: ver esta funcion
+Template.productDetailField.events({
 
-// Template.productDetailField.events({
-//   "click .product-detail-field": function () {
-//     if (EFrameworkCore.hasOwnerAccess()) {
-//       let fieldClass = "editing-" + this.field;
-//       Session.set(fieldClass, true);
-//       Tracker.flush();
-//       return $(`.${this.field}-edit-input`).focus();
-//     }
-//   }
-// });
+	"click .product-detail-field": function () {
+		if (EFrameworkCore.hasOwnerAccess()) {
+			let fieldClass = "editing-" + this.field;
+			Session.set(fieldClass, true);
+			Tracker.flush();
+			return $(`.${this.field}-edit-input`).focus();
+		}
+	}
+	
+});
+*/
 
-// /**
-//  * productDetailEdit onRendered
-//  */
-
-// Template.productDetailEdit.onRendered(function () {
-//   return autosize($("textarea"));
-// });
+/**
+ * productDetailEdit onRendered
+ */
+ /*
+Template.productDetailEdit.onRendered(function () {
+	return autosize($("textarea"));
+});
+*/

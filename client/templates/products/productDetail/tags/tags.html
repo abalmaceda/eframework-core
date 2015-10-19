@@ -1,4 +1,6 @@
-<template name="productTagInputForm">
+
+<!-- TODO: Comentarios -->
+<!-- <template name="productTagInputForm">
 <div class="tags">
   <ul class="list-inline tag-edit-list" id="tag-edit-list">
   {{#each ./tags}}
@@ -29,17 +31,20 @@
   </ul>
 </div>
 </template>
-
+ -->
+ <!-- TODO : Comentarios -->
 <template name="productDetailTags">
-<div class="tags">
-  <ul class="list-inline">
-  {{#each ./tags}}
-    {{#unless currentHashTag}}
-      <li class="list-group-item product-detail-tags-list">
-        <a href="{{pathForSEO "product/tag" "slug"}}" data-event-category="tag" data-event-action="tag-click" data-event-label="product detail tag click" data-event-value="{{name}}">{{name}}</a>
-      </li>
-    {{/unless}}
-  {{/each}}
-  </ul>
-</div>
+	<div class="tags">
+		<ul class="list-inline">
+			<!-- ./tags corresponde al parametro "tags" que se paso al template antes de llamarlo-->
+			{{#each ./tags}}
+				<!-- TODO: No entiendo la logica de esto. La idea es que si no tienes Tags el producto actual, entonces ahi muestro los tags... Pero eso no significaria que no tengo tags para mostrar ??-->
+				{{#unless currentHashTag}}
+					<li class="list-group-item product-detail-tags-list">
+						<a href="{{pathForSEO "product/tag" "slug"}}" data-event-category="tag" data-event-action="tag-click" data-event-label="product detail tag click" data-event-value="{{name}}">{{name}}</a>
+					</li>
+				{{/unless}}
+			{{/each}}
+		</ul>
+	</div>
 </template>

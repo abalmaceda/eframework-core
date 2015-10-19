@@ -78,10 +78,10 @@ Meteor.publish("Product", function (productId) {
 });
 
 /**
- * tags
+ * Publicación del Collection Tags
  */
-// Meteor.publish("Tags", function () {
-//   return EFrameworkCore.Collections.Tags.find({
-//     shopId: EFrameworkCore.getShopId()
-//   });
-// });
+Meteor.publish("Tags", function () {
+	return EFrameworkCore.Collections.Tags.find({
+		shopId: EFrameworkCore.getShopId()
+	});
+});
