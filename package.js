@@ -180,25 +180,29 @@ api.imply("matb33:collection-hooks");
   // exports
   api.addFiles("common/global.js");
 
-  // init reaction core
+  	// init reaction core
+
+  	//TODO : all
 	api.addFiles("client/main.js", "client");
+
+	//TODO : all
 	api.addFiles("server/main.js", "server");
 api.addFiles("server/register.js", "server");
 	api.addFiles("common/common.js");
 
   // Private fixture data
-  api.addAssets("private/data/Products.json", "server");
-  api.addAssets("private/data/Shops.json", "server");
-  api.addAssets("private/data/Tags.json", "server");
+	api.addAssets("private/data/Products.json", "server");
+	api.addAssets("private/data/Shops.json", "server");
+	api.addAssets("private/data/Tags.json", "server");
 
   // // i18n translations
   // api.addAssets("private/data/i18n/ar.json", "server");
   // api.addAssets("private/data/i18n/cn.json", "server");
   // api.addAssets("private/data/i18n/cs.json", "server");
   // api.addAssets("private/data/i18n/de.json", "server");
-  api.addAssets("private/data/i18n/en.json", "server");
+	api.addAssets("private/data/i18n/en.json", "server");
   // api.addAssets("private/data/i18n/el.json", "server");
-  api.addAssets("private/data/i18n/es.json", "server");
+	api.addAssets("private/data/i18n/es.json", "server");
   // api.addAssets("private/data/i18n/fr.json", "server");
   // api.addAssets("private/data/i18n/he.json", "server");
   // api.addAssets("private/data/i18n/hr.json", "server");
@@ -219,17 +223,25 @@ api.addFiles("server/register.js", "server");
   // schemas
   // api.addFiles("common/schemas/address.js");
   // api.addFiles("common/schemas/layouts.js");
-  // api.addFiles("common/schemas/packages.js");
-  // api.addFiles("common/schemas/shops.js");
+ api.addFiles("common/schemas/packages.js");
+
+  	//TODO: revizar
+	api.addFiles("common/schemas/shops.js");
   // api.addFiles("common/schemas/payments.js");
   // api.addFiles("common/schemas/shipping.js");
   // api.addFiles("common/schemas/taxes.js");
   // api.addFiles("common/schemas/discounts.js");
-  // api.addFiles("common/schemas/products.js");
-  // api.addFiles("common/schemas/tags.js");
+
+  	//TODO: revizar
+	api.addFiles("common/schemas/products.js");
+
+	//TODO: revizar
+ 	api.addFiles("common/schemas/tags.js");
   // api.addFiles("common/schemas/cart.js");
   // api.addFiles("common/schemas/orders.js");
-  // api.addFiles("common/schemas/translations.js");
+
+  	//TODO: revizar
+	api.addFiles("common/schemas/translations.js");
 
   // // collections
   api.addFiles("common/collections/collections.js");
@@ -242,19 +254,26 @@ api.addFiles("server/register.js", "server");
   // api.addFiles("server/browserPolicy.js", "server");
   // api.addFiles("server/security.js", "server");
 
-  // common
+	// common
+	//TODO: revizar
 	api.addFiles("common/router.js");
-
-	api.addFiles("common/methods/layout.js");
+	//TODO: revizar
+	// api.addFiles("common/methods/layout.js");
   // api.addFiles("common/methods/workflow.js");
   // api.addFiles("common/methods/cart.js", "client");
 
-  api.addFiles("common/factories/faker.js");
-  api.addFiles("common/factories/users.js");
-  api.addFiles("common/factories/shops.js");
-  api.addFiles("common/factories/products.js");
-  api.addFiles("common/factories/cart.js");
-  api.addFiles("common/factories/orders.js");
+  	//TODO: revizar
+  	api.addFiles("common/factories/faker.js");
+  	//TODO: revizar
+	api.addFiles("common/factories/users.js");
+	//TODO: revizar
+	api.addFiles("common/factories/shops.js");
+	//TODO: revizar
+	api.addFiles("common/factories/products.js");
+	//TODO: revizar
+	api.addFiles("common/factories/cart.js");
+	//TODO: revizar
+	api.addFiles("common/factories/orders.js");
 
   // // publications
 	// api.addFiles("server/publications/sessions.js", "server");
@@ -421,7 +440,7 @@ api.addFiles("client/templates/layout/layout.js", "client");
   // api.addFiles("client/templates/dashboard/orders/workflow/tracking/tracking.html", "client");
   // api.addFiles("client/templates/dashboard/orders/workflow/tracking/tracking.js", "client");
 
-//api.addFiles("client/templates/dashboard/packages/packages.html", "client");
+	api.addFiles("client/templates/dashboard/packages/packages.html", "client");
 
   // api.addFiles("client/templates/dashboard/packages/grid/package/package.html", "client");
   // api.addFiles("client/templates/dashboard/packages/grid/package/package.js", "client");
@@ -429,8 +448,8 @@ api.addFiles("client/templates/layout/layout.js", "client");
   // api.addFiles("client/templates/dashboard/packages/grid/grid.html", "client");
   // api.addFiles("client/templates/dashboard/packages/grid/grid.js", "client");
 
-  // api.addFiles("client/templates/dashboard/dashboard.html", "client");
-  // api.addFiles("client/templates/dashboard/dashboard.js", "client");
+  api.addFiles("client/templates/dashboard/dashboard.html", "client");
+  api.addFiles("client/templates/dashboard/dashboard.js", "client");
 
   // api.addFiles("client/templates/dashboard/settings/settings.html", "client");
   // api.addFiles("client/templates/dashboard/settings/settings.js", "client");

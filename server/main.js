@@ -1,3 +1,5 @@
+/* TODO : all */
+
 /**
  * Application Startup
  * EFrameworkCore Server Configuration
@@ -36,21 +38,22 @@ EFrameworkCore.Log = logger.bunyan.createLogger({
   level: "debug"
 });
 
-// set logging level
+// Establecer logging level
 EFrameworkCore.Log.level(isDebug);
 
 /**
- * EFrameworkCore methods (server)
+ * Metodos EFrameworkCore (server)
  */
 _.extend(EFrameworkCore, {
-  init: function () {
-    try {
-      ReactionRegistry.loadFixtures();
-    } catch (error) {
-      EFrameworkCore.Log.error("loadFixtures: ", error.message);
-    }
-    return true;
-  },
+	/* TODO : funcion */
+	init: function () {
+		try {
+			ReactionRegistry.loadFixtures();
+		} catch (error) {
+			EFrameworkCore.Log.error("loadFixtures: ", error.message);
+		}
+		return true;
+	},
 
   getCurrentShopCursor: function (client) {
     let domain = this.getDomain(client);
@@ -65,15 +68,23 @@ _.extend(EFrameworkCore, {
     }
     return cursor;
   },
-  getCurrentShop: function (client) {
-    let cursor = this.getCurrentShopCursor(client);
-    return cursor.fetch()[0];
-  },
-  getShopId: function (client) {
-    if (this.getCurrentShop(client)) {
-      return this.getCurrentShop(client)._id;
-    }
-  },
+  	/* TODO : descripcion */
+	getCurrentShop: function (client) {
+		let cursor = this.getCurrentShopCursor(client);
+		return cursor.fetch()[0];
+	},
+
+  	/* TODO : descripcion */
+	/**
+	* getShopId - 
+	* @param {String} client - 
+	* @return {String} String - Id de la shop para el client 
+	*/
+	getShopId: function (client) {
+		if (this.getCurrentShop(client)) {
+			return this.getCurrentShop(client)._id;
+		}
+	},
   getDomain: function () {
     return Meteor.absoluteUrl().split("/")[2].split(":")[0];
   },

@@ -1,4 +1,4 @@
-
+/* TODO: agregar descripcion */
 /*
 * translations schema
 * mostly just a blackbox for now

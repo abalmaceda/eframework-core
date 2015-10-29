@@ -1,15 +1,17 @@
+
+/* TODO : por que va en este archio. NO seria mejor dejarlo fuera ?? */
 /**
 * Permissions Schema
 */
 
-EFrameworkCore.Schemas.Permissions = new SimpleSchema({
-  permission: {
-    type: String
-  },
-  label: {
-    type: String
-  }
-});
+// EFrameworkCore.Schemas.Permissions = new SimpleSchema({
+//   permission: {
+//     type: String
+//   },
+//   label: {
+//     type: String
+//   }
+// });
 
 /**
  * workflow schema for attaching to collection where
@@ -17,17 +19,19 @@ EFrameworkCore.Schemas.Permissions = new SimpleSchema({
  * Shop defaultWorkflow is defined in Shop
  */
 
-EFrameworkCore.Schemas.Workflow = new SimpleSchema({
-  status: {
-    type: String,
-    defaultValue: "new"
-  },
-  workflow: {
-    type: [String],
-    optional: true
-  }
-});
+// EFrameworkCore.Schemas.Workflow = new SimpleSchema({
+//   status: {
+//     type: String,
+//     defaultValue: "new"
+//   },
+//   workflow: {
+//     type: [String],
+//     optional: true
+//   }
+// });
 
+
+/* TODO: Schema */
 /**
 * PackageConfig Schema
 */
@@ -107,55 +111,56 @@ EFrameworkCore.Schemas.PackageConfig = new SimpleSchema({
 });
 
 
+/* TODO: Schema */
 /**
 * CorePackageConfig Schema
 * Core Reaction Settings
 */
 
-EFrameworkCore.Schemas.CorePackageConfig = new SimpleSchema([
-  EFrameworkCore.Schemas.PackageConfig, {
-    "settings.mail": {
-      type: Object,
-      optional: true,
-      label: "Mail Settings"
-    },
-    "settings.mail.user": {
-      type: String,
-      label: "Username"
-    },
-    "settings.mail.password": {
-      type: String,
-      label: "Password"
-    },
-    "settings.mail.host": {
-      type: String,
-      label: "Host"
-    },
-    "settings.mail.port": {
-      type: String,
-      label: "Port"
-    },
-    "settings.openexchangerates.appId": {
-      type: String,
-      label: "Open Exchange Rates App Id"
-    },
-    "settings.google.clientId": {
-      type: String,
-      label: "Google Client Id",
-      defaultValue: null
-    },
-    "settings.google.apiKey": {
-      type: String,
-      label: "Google Api Key",
-      defaultValue: null
-    },
-    "settings.public": {
-      type: Object,
-      optional: true
-    },
-    "settings.public.allowGuestCheckout": {
-      type: Boolean,
-      label: "Allow Guest Checkout"
-    }
-  }
-]);
+// EFrameworkCore.Schemas.CorePackageConfig = new SimpleSchema([
+//   EFrameworkCore.Schemas.PackageConfig, {
+//     "settings.mail": {
+//       type: Object,
+//       optional: true,
+//       label: "Mail Settings"
+//     },
+//     "settings.mail.user": {
+//       type: String,
+//       label: "Username"
+//     },
+//     "settings.mail.password": {
+//       type: String,
+//       label: "Password"
+//     },
+//     "settings.mail.host": {
+//       type: String,
+//       label: "Host"
+//     },
+//     "settings.mail.port": {
+//       type: String,
+//       label: "Port"
+//     },
+//     "settings.openexchangerates.appId": {
+//       type: String,
+//       label: "Open Exchange Rates App Id"
+//     },
+//     "settings.google.clientId": {
+//       type: String,
+//       label: "Google Client Id",
+//       defaultValue: null
+//     },
+//     "settings.google.apiKey": {
+//       type: String,
+//       label: "Google Api Key",
+//       defaultValue: null
+//     },
+//     "settings.public": {
+//       type: Object,
+//       optional: true
+//     },
+//     "settings.public.allowGuestCheckout": {
+//       type: Boolean,
+//       label: "Allow Guest Checkout"
+//     }
+//   }
+// ]);

@@ -41,7 +41,8 @@
 
   <div class="admin-controls action-view {{adminControlsClassname}}">
     <div class="admin-controls-heading">
-      {{> settingsHeader}}
+    <!-- TODO : descomentar -->
+      <!--{{> settingsHeader}}-->
     </div>
     <div class="admin-controls-content action-view-body">
       {{!-- {{>yield region="adminControlsContent"}} --}}
@@ -62,9 +63,11 @@
   <!--<div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>-->
   <main role="main" id="main">
     <span id="layout-alerts">{{>bootstrapAlerts}}</span>
-    {{> settingsHeader}}
+    <!-- TODO : descomentar -->
+    <!--{{> settingsHeader}}-->
     <div class="container-fluid">
-      <div class="col-sm-2">{{> settingsSidebar}}</div>
+    <!-- TODO : descomentar -->
+      <!-- <div class="col-sm-2">{{> settingsSidebar}}</div>-->
       <div class="col-sm-10 container-settings">{{> yield}}</div>
     </div>
   </main>

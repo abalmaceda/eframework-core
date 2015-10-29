@@ -1,3 +1,5 @@
+/* TODO: agregar descripcion */
+
 /**
  * shops
  * @returns {Object} shop - current shop cursor

@@ -84,11 +84,13 @@
 //   }
 // };
 
-// /**
-// * EFrameworkCore Collections Cart
-// */
+/*TODO*/
+/**
+* EFrameworkCore Collections Cart
+*/
 // EFrameworkCore.Collections.Cart = Cart = this.Cart = new Mongo.Collection("Cart", {
 //   transform: function (cart) {
+//   	// TODO: cartTransform esta comentado 
 //     let newInstance = Object.create(EFrameworkCore.Helpers.cartTransform);
 //     return _.extend(newInstance, cart);
 //   }

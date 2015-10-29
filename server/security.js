@@ -27,7 +27,7 @@
 
 // let Packages = EFrameworkCore.Collections.Packages;
 
-let Products = EFrameworkCore.Collections.Products;
+//let Products = EFrameworkCore.Collections.Products;
 
 // let Shipping = EFrameworkCore.Collections.Shipping;
 

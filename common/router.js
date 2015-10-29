@@ -16,7 +16,8 @@ Router.configure({
 
 	onRun: function () {
 		$(window).scrollTop(0);
-		EFrameworkCore.clearActionView();
+		/* TODO: descomentar  1 linea */
+		//EFrameworkCore.clearActionView();
 		this.next();
 	},
 
@@ -32,8 +33,10 @@ Router.configure({
 				this.layout("coreAdminLayout");
 				// Find a registry entry for this page that provides settings
 				// -- Settings is the default view for the "Action View"
-				EFrameworkCore.setActionView();
-				// this.render("dashboardPackages")
+				
+				/* TODO : descomentar  */
+				//EFrameworkCore.setActionView();
+				 this.render("dashboardPackages")
 				$("body").addClass("admin");
 			} else {
 				$("body").removeClass("admin");
@@ -85,56 +88,56 @@ this.ShopController = ShopController;
  * restricts access of accounts views
  */
 
-// let ShopAccountsController = RouteController.extend({
-//   onBeforeAction: function () {
-//     if (!EFrameworkCore.hasPermission(this.route.getName())) {
-//       this.render("layoutHeader", {
-//         to: "layoutHeader"
-//       });
-//       this.render("layoutFooter", {
-//         to: "layoutFooter"
-//       });
-//       this.render("unauthorized");
-//     } else {
-//       this.next();
-//     }
-//   },
-//   yieldTemplates: {
-//     layoutHeader: {
-//       to: "layoutHeader"
-//     },
-//     layoutFooter: {
-//       to: "layoutFooter"
-//     },
-//     dashboard: {
-//       to: "dashboard"
-//     }
-//   }
-// });
+let ShopAccountsController = RouteController.extend({
+  onBeforeAction: function () {
+    if (!EFrameworkCore.hasPermission(this.route.getName())) {
+      this.render("layoutHeader", {
+        to: "layoutHeader"
+      });
+      this.render("layoutFooter", {
+        to: "layoutFooter"
+      });
+      this.render("unauthorized");
+    } else {
+      this.next();
+    }
+  },
+  yieldTemplates: {
+    layoutHeader: {
+      to: "layoutHeader"
+    },
+    layoutFooter: {
+      to: "layoutFooter"
+    },
+    dashboard: {
+      to: "dashboard"
+    }
+  }
+});
 
-// this.ShopAccountsController = ShopAccountsController;
+this.ShopAccountsController = ShopAccountsController;
 
 /*
  * ShopAdminController Controller
  * restricts access of admin views
  */
-// let ShopAdminController = this.ShopController.extend({
-//   onBeforeAction: function () {
-//     if (!EFrameworkCore.hasPermission(this.route.getName())) {
-//       this.render("layoutHeader", {
-//         to: "layoutHeader"
-//       });
-//       this.render("layoutFooter", {
-//         to: "layoutFooter"
-//       });
-//       this.render("unauthorized");
-//     } else {
-//       this.next();
-//     }
-//   }
-// });
+let ShopAdminController = this.ShopController.extend({
+  onBeforeAction: function () {
+    if (!EFrameworkCore.hasPermission(this.route.getName())) {
+      this.render("layoutHeader", {
+        to: "layoutHeader"
+      });
+      this.render("layoutFooter", {
+        to: "layoutFooter"
+      });
+      this.render("unauthorized");
+    } else {
+      this.next();
+    }
+  }
+});
 
-// this.ShopAdminController = ShopAdminController;
+ this.ShopAdminController = ShopAdminController;
 
 // /*
 //  * Print Controller
@@ -182,14 +185,14 @@ Router.map(function () {
 		}
 	  });
 
-//   this.route("dashboard", {
-//     controller: ShopAdminController,
-//     template: "dashboardPackages",
-//     onBeforeAction: function () {
-//       Session.set("dashboard", true);
-//       return this.next();
-//     }
-//   });
+  this.route("dashboard", {
+    controller: ShopAdminController,
+    template: "dashboardPackages",
+    onBeforeAction: function () {
+      Session.set("dashboard", true);
+      return this.next();
+    }
+  });
 
 //   this.route("dashboard/shop", {
 //     controller: ShopAdminController,

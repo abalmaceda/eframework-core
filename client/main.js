@@ -1,188 +1,206 @@
+// /* TODO: all */
+
 /**
  * EFrameworkCore
  * Global reaction shop permissions methods and shop initialization
  */
 _.extend(EFrameworkCore, {
-  shopId: null,
-  init: function () {
-    let self;
-    self = this;
-    return Tracker.autorun(function () {
-      let domain;
-      let shop;
-      let shopHandle;
-      // keep an eye out for shop change
-      shopHandle = Meteor.subscribe("Shops");
-      if (shopHandle.ready()) {
-        domain = Meteor.absoluteUrl().split("/")[2].split(":")[0];
-        shop = EFrameworkCore.Collections.Shops.findOne({
-          domains: domain
-        });
-        self.shopId = shop._id;
-        return self;
-      }
-    });
-  },
-  /**
-   * hasPermission - client permissions checks
-   * @param {String | Array} checkPermissions -String or Array of permissions if empty, defaults to "admin, owner"
-   * @param {String} checkUserId - userId, defaults to Meteor.userId()
-   * @param {String} group - default to shopId
-   * @return {Boolean} Boolean - true if has permission
-   */
-  hasPermission: function (checkPermissions, checkUserId, group) {
-    check(checkPermissions, Match.OneOf(String, Array));
-    // use current user if userId if not provided
-    let userId = checkUserId || this.userId || Meteor.userId();
-    let shopId = group || this.getShopId();
-    let permissions = [];
+	/* TODO: agregar descipcion */
+	shopId: null,
+	/* TODO: agregar descipcion */
+	init: function () {
+		let self;
+		self = this;
+		return Tracker.autorun(function () {
+			let domain;
+			let shop;
+			let shopHandle;
+			// keep an eye out for shop change
+			shopHandle = Meteor.subscribe("Shops");
+			if (shopHandle.ready()) {
+				domain = Meteor.absoluteUrl().split("/")[2].split(":")[0];
+				shop = EFrameworkCore.Collections.Shops.findOne({
+					domains: domain
+				});
+				self.shopId = shop._id;
+				return self;
+			}
+		});
+	},
+	/* TODO: agregar descipcion */
+	/**
+	* hasPermission - Check permisos del cliente
+	* @param {String | Array} checkPermissions -String o Array de permisos. Si la variable es empty, defaults "admin, owner"
+	* @param {String} checkUserId - userId, defaults Meteor.userId()
+	* @param {String} group - default shopId
+	* @return {Boolean} Boolean - true si tiene permisos
+	*/
+	hasPermission: function (checkPermissions, checkUserId, group) {
+		check(checkPermissions, Match.OneOf(String, Array));
 
-    // permissions can be either a string or an array
-    // we'll force it into an array so we can add
-    // admin roles
-    if (!_.isArray(checkPermissions)) {
-      permissions = [checkPermissions];
-    } else {
-      permissions = checkPermissions;
-    }
-    // if the user has admin, owner permissions we'll always check if those roles are enough
-    permissions.push("admin", "owner");
-    // check if userIs the Roles
-    if (Roles.userIsInRole(userId, permissions, shopId)) {
-      return true;
-    } else if (Roles.userIsInRole(userId,
-        permissions,
-        Roles.GLOBAL_GROUP
-      )) {
-      return true;
-    }
+		// Utilizar el usuario actual si userId es null
+		let userId = checkUserId || this.userId || Meteor.userId();
+		let shopId = group || this.getShopId();
+		let permissions = [];
 
-    // global roles check
-    let sellerShopPermissions = Roles.getGroupsForUser(userId, "admin");
-    // we're looking for seller permissions.
-    if (sellerShopPermissions) {
-      // loop through shops roles and check permissions
-      for (let key in sellerShopPermissions) {
-        if (key) {
-          let shop = sellerShopPermissions[key];
-          if (Roles.userIsInRole(checkUserId, permissions, shop)) {
-            return true;
-          }
-        }
-      }
-    }
-    // no specific permissions found returning false
-    return false;
-  },
-  hasOwnerAccess: function () {
-    let ownerPermissions = ["owner"];
-    return this.hasPermission(ownerPermissions);
-  },
-  hasAdminAccess: function () {
-    let adminPermissions = ["owner", "admin"];
-    return this.hasPermission(adminPermissions);
-  },
-  hasDashboardAccess: function () {
-    let dashboardPermissions = ["owner", "admin", "dashboard"];
-    return this.hasPermission(dashboardPermissions);
-  },
-  getShopId: function () {
-    return this.shopId;
-  },
-  allowGuestCheckout: function () {
-    let allowGuest = true;
-    let packageRegistry = EFrameworkCore.Collections.Packages.findOne({
-      name: "core",
-      shopId: this.shopId
-    });
-    // we can disable in admin, let's check.
-    if (packageRegistry !== undefined) {
-      if (packageRegistry.settings) {
-        if (packageRegistry.settings.allowGuestCheckout) {
-          allowGuest = packageRegistry.settings.allowGuestCheckout;
-        }
-      }
-    }
-    return allowGuest;
-  },
-  getSellerShopId: function () {
-    return Roles.getGroupsForUser(this.userId, "admin");
-  },
+		// permissions can be either a string or an array
+		// we'll force it into an array so we can add
+		// admin roles
+		if (!_.isArray(checkPermissions)) {
+			permissions = [checkPermissions];
+		} else {
+			permissions = checkPermissions;
+		}
+		// if the user has admin, owner permissions we'll always check if those roles are enough
+		permissions.push("admin", "owner");
+		// check if userIs the Roles
+		if (Roles.userIsInRole(userId, permissions, shopId)) {
+			return true;
+		} else if (Roles.userIsInRole(userId, permissions, Roles.GLOBAL_GROUP)) {
+			return true;
+		}
 
-  /**
-   * @description showActionView
-   *
-   * @param {String} viewData {label, template, data}
-   * @returns {String} Session "admin/showActionView"
-   */
-  showActionView: function (viewData) {
-    Session.set("admin/showActionView", true);
-    EFrameworkCore.setActionView(viewData);
-  },
+		// global roles check
+		let sellerShopPermissions = Roles.getGroupsForUser(userId, "admin");
+		// we're looking for seller permissions.
+		if (sellerShopPermissions) {
+		// loop through shops roles and check permissions
+		for (let key in sellerShopPermissions) {
+			if (key) {
+				let shop = sellerShopPermissions[key];
+				if (Roles.userIsInRole(checkUserId, permissions, shop)) {
+					return true;
+				}
+			}
+		}
+		}
+		// no specific permissions found returning false
+		return false;
+	},
+//   hasOwnerAccess: function () {
+//     let ownerPermissions = ["owner"];
+//     return this.hasPermission(ownerPermissions);
+//   },
+//   hasAdminAccess: function () {
+//     let adminPermissions = ["owner", "admin"];
+//     return this.hasPermission(adminPermissions);
+//   },
+	/* TODO: comentarios */
+	hasDashboardAccess: function () {
+		let dashboardPermissions = ["owner", "admin", "dashboard"];
+		return this.hasPermission(dashboardPermissions);
+	},
+	/*
+	TODO : comentar funcion, Averiguar bien que es this.shopId
+	*/
+	getShopId: function () {
+		return this.shopId;
+	},
+	/*
+	TODO : comentar funcion
+	*/
+	allowGuestCheckout: function () {
+		let allowGuest = true;
+		let packageRegistry = EFrameworkCore.Collections.Packages.findOne({
+			name: "core",
+			shopId: this.shopId
+		});
+		// we can disable in admin, let's check.
+		if (packageRegistry !== undefined) {
+			if (packageRegistry.settings) {
+				if (packageRegistry.settings.allowGuestCheckout) {
+					allowGuest = packageRegistry.settings.allowGuestCheckout;
+				}
+			}
+		}
+		return allowGuest;
+	},
+//   getSellerShopId: function () {
+//     return Roles.getGroupsForUser(this.userId, "admin");
+//   },
 
-  isActionViewOpen: function () {
-    return Session.equals("admin/showActionView", true);
-  },
+//   /**
+//    * @description showActionView
+//    *
+//    * @param {String} viewData {label, template, data}
+//    * @returns {String} Session "admin/showActionView"
+//    */
+//   showActionView: function (viewData) {
+//     Session.set("admin/showActionView", true);
+//     EFrameworkCore.setActionView(viewData);
+//   },
 
-  setActionView: function (viewData) {
-    if (viewData) {
-      Session.set("admin/actionView", viewData);
-    } else {
-      let registryItem = EFrameworkCore.getRegistryForCurrentRoute(
-        "settings");
+	/*
+		TODO: entender esta funcion.
+	*/
+	isActionViewOpen: function () {
+		return Session.equals("admin/showActionView", true);
+	},
 
-      if (registryItem) {
-        EFrameworkCore.setActionView(registryItem);
-      } else {
-        EFrameworkCore.setActionView({
-          template: "blankControls"
-        });
-      }
-    }
-  },
+//   setActionView: function (viewData) {
+//     if (viewData) {
+//       Session.set("admin/actionView", viewData);
+//     } else {
+//       let registryItem = EFrameworkCore.getRegistryForCurrentRoute(
+//         "settings");
 
-  getActionView: function () {
-    return Session.get("admin/actionView");
-  },
+//       if (registryItem) {
+//         EFrameworkCore.setActionView(registryItem);
+//       } else {
+//         EFrameworkCore.setActionView({
+//           template: "blankControls"
+//         });
+//       }
+//     }
+//   },
 
-  hideActionView: function () {
-    Session.set("admin/showActionView", false);
-  },
+	/*
+		TODO: entender esta funcion.
+	*/
+	getActionView: function () {
+		return Session.get("admin/actionView");
+	},
 
-  clearActionView: function () {
-    Session.set("admin/actionView", undefined);
-  },
+//   hideActionView: function () {
+//     Session.set("admin/showActionView", false);
+//   },
 
-  getCurrentTag: function () {
-    if (Router.current().route.getName() === "/product/tag") {
-      return Router.current().params._id;
-    }
-  },
-  getRegistryForCurrentRoute: function (provides) {
-    let routeName = Router.current().route.getName();
-    // find registry entries for routeName
-    let reactionApp = EFrameworkCore.Collections.Packages.findOne({
-      // "registry.provides": provides,
-      "registry.route": routeName
-    }, {
-      enabled: 1,
-      registry: 1,
-      name: 1,
-      route: 1
-    });
+//   clearActionView: function () {
+//     Session.set("admin/actionView", undefined);
+//   },
 
-    if (reactionApp) {
-      let settingsData = _.find(reactionApp.registry, function (item) {
-        return item.provides === provides && item.route === routeName;
-      });
+//   getCurrentTag: function () {
+//     if (Router.current().route.getName() === "/product/tag") {
+//       return Router.current().params._id;
+//     }
+//   },
+//   getRegistryForCurrentRoute: function (provides) {
+//     let routeName = Router.current().route.getName();
+//     // find registry entries for routeName
+//     let reactionApp = EFrameworkCore.Collections.Packages.findOne({
+//       // "registry.provides": provides,
+//       "registry.route": routeName
+//     }, {
+//       enabled: 1,
+//       registry: 1,
+//       name: 1,
+//       route: 1
+//     });
 
-      return settingsData;
-    }
+//     if (reactionApp) {
+//       let settingsData = _.find(reactionApp.registry, function (item) {
+//         return item.provides === provides && item.route === routeName;
+//       });
 
-    return null;
-  }
+//       return settingsData;
+//     }
+
+//     return null;
+//   }
 
 });
+
+/*TODO : todo para abajo */
 
 /*
  * configure bunyan logging module for reaction client

@@ -1,3 +1,8 @@
+/*
+ TODO: entender esto
+ Por que se agrega directamente en Meteor
+*/
+
 /**
  * User factory
  *

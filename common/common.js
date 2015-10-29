@@ -1,36 +1,38 @@
 /**
- * Match.OptionalOrNull
- * See Meteor Match methods
- * @param {String} pattern - match pattern
- * @return {Boolen} matches - void, null, or pattern
- */
+* Match.OptionalOrNull
+* See Meteor Match methods
+* @param {String} pattern - match pattern
+* @return {Boolen} matches - void, null, or pattern
+*/
 Match.OptionalOrNull = function (pattern) {
-  return Match.OneOf(void 0, null, pattern);
+	return Match.OneOf(void 0, null, pattern);
 };
+
 /*
- * extend EFrameworkCore and add common methods
- */
+* extend EFrameworkCore and add common methods
+*/
 _.extend(EFrameworkCore, {
-  /**
-   * EFrameworkCore.shopIdAutoValue
-   * @summary used for schemea injection autoValue
-   * @example autoValue: EFrameworkCore.shopIdAutoValue
-   * @return {String} returns current shopId
-   */
-  // shopIdAutoValue: function () {
-  //   // we should always have a shopId
-  //   if (EFrameworkCore.getShopId()) {
-  //     if (this.isSet && this.isFromTrustedCode) {
-  //       return EFrameworkCore.getShopId();
-  //     }
-  //     if (Meteor.isClient && this.isInsert) {
-  //       return EFrameworkCore.getShopId();
-  //     } else if (Meteor.isServer && (this.isInsert || this.isUpsert)) {
-  //       return EFrameworkCore.getShopId();
-  //     }
-  //     return this.unset();
-  //   }
-  // },
+	/* TODO : descripion */
+	/**
+	* EFrameworkCore.shopIdAutoValue
+	* @summary used for schemea injection autoValue
+	* @example autoValue: EFrameworkCore.shopIdAutoValue
+	* @return {String} returns current shopId
+	*/
+	shopIdAutoValue: function () {
+		// we should always have a shopId
+		if (EFrameworkCore.getShopId()) {
+			if (this.isSet && this.isFromTrustedCode) {
+				return EFrameworkCore.getShopId();
+			}
+			if (Meteor.isClient && this.isInsert) {
+				return EFrameworkCore.getShopId();
+			} else if (Meteor.isServer && (this.isInsert || this.isUpsert)) {
+				return EFrameworkCore.getShopId();
+			}
+			return this.unset();
+		}
+	},
   /**
    * EFrameworkCore.schemaIdAutoValue
    * @summary used for schemea injection autoValue
@@ -48,7 +50,7 @@ _.extend(EFrameworkCore, {
   //   }
   //   return this.unset();
   // },
-  
+  /* TODO : descripion */
   /**
    * EFrameworkCore.setProduct
    * @summary Metodo para set default/parameterized product variant. Si no entrego un ProducId valido, entonces se busca un producto cualquiera en Products collections.
