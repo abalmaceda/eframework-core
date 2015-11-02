@@ -130,33 +130,30 @@ _.extend(EFrameworkCore, {
 //     EFrameworkCore.setActionView(viewData);
 //   },
 
-	/*
-		TODO: entender esta funcion.
-	*/
+	/* TODO: entender esta funcion. */
 	isActionViewOpen: function () {
 		return Session.equals("admin/showActionView", true);
 	},
 
-//   setActionView: function (viewData) {
-//     if (viewData) {
-//       Session.set("admin/actionView", viewData);
-//     } else {
-//       let registryItem = EFrameworkCore.getRegistryForCurrentRoute(
-//         "settings");
+	/* TODO: entender esta funcion. */
+	setActionView: function (viewData) {
+		if (viewData) {
+			Session.set("admin/actionView", viewData);
+		} else {
+			let registryItem = EFrameworkCore.getRegistryForCurrentRoute(
+			"settings");
 
-//       if (registryItem) {
-//         EFrameworkCore.setActionView(registryItem);
-//       } else {
-//         EFrameworkCore.setActionView({
-//           template: "blankControls"
-//         });
-//       }
-//     }
-//   },
+			if (registryItem) {
+				EFrameworkCore.setActionView(registryItem);
+			} else {
+				EFrameworkCore.setActionView({
+					template: "blankControls"
+				});
+			}
+		}
+	},
 
-	/*
-		TODO: entender esta funcion.
-	*/
+	/* TODO: entender esta funcion. */
 	getActionView: function () {
 		return Session.get("admin/actionView");
 	},
@@ -174,29 +171,31 @@ _.extend(EFrameworkCore, {
 //       return Router.current().params._id;
 //     }
 //   },
-//   getRegistryForCurrentRoute: function (provides) {
-//     let routeName = Router.current().route.getName();
-//     // find registry entries for routeName
-//     let reactionApp = EFrameworkCore.Collections.Packages.findOne({
-//       // "registry.provides": provides,
-//       "registry.route": routeName
-//     }, {
-//       enabled: 1,
-//       registry: 1,
-//       name: 1,
-//       route: 1
-//     });
 
-//     if (reactionApp) {
-//       let settingsData = _.find(reactionApp.registry, function (item) {
-//         return item.provides === provides && item.route === routeName;
-//       });
+/* TODO: entender esta funcion. */
+  getRegistryForCurrentRoute: function (provides) {
+    let routeName = Router.current().route.getName();
+    // find registry entries for routeName
+    let reactionApp = EFrameworkCore.Collections.Packages.findOne({
+      // "registry.provides": provides,
+      "registry.route": routeName
+    }, {
+      enabled: 1,
+      registry: 1,
+      name: 1,
+      route: 1
+    });
 
-//       return settingsData;
-//     }
+    if (reactionApp) {
+      let settingsData = _.find(reactionApp.registry, function (item) {
+        return item.provides === provides && item.route === routeName;
+      });
 
-//     return null;
-//   }
+      return settingsData;
+    }
+
+    return null;
+  }
 
 });
 

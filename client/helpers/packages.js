@@ -46,6 +46,9 @@
  *  }]
  */
 
+
+/* TODO: Entender profundamente este codigo */
+/* TODO: Parece que esta relacionado con el panel administrador*/
 Template.registerHelper("reactionApps", function (optionHash) {
   let fields;
   let filter;

@@ -388,7 +388,17 @@
             "guest",
             "account/profile"
         ],
-        "languages": [],
+        "languages": [
+            {
+            "label": "English",
+            "i18n": "en",
+            "enabled": true
+          }, {
+            "label": "Español",
+            "i18n": "es",
+            "enabled": true
+          }
+        ],
         "layout": [
             {
                 "enabled": true,
@@ -2970,7 +2980,7 @@
                 }
             }
         },
-        "name": "REACTION",
+        "name": "My Custom Name",
         "taxes": [
             {
                 "countyTaxes": true,

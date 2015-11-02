@@ -1,10 +1,12 @@
+
+<!-- TODO -->
 <template name="bootstrapAlerts">
     {{#each alerts placement id}}
       {{> bootstrapAlert}}
     {{/each}}
 </template>
 
-
+<!-- TODO -->
 <template name="bootstrapAlert">
     <div class="alert alert-{{mode}} {{#if options.dismissable}}alert-dismissable{{/if}} {{#if isFirstRender}}hide{{/if}} {{options.classes}}">
         {{#if options.dismissable}}

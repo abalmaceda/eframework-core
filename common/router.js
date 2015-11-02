@@ -35,7 +35,7 @@ Router.configure({
 				// -- Settings is the default view for the "Action View"
 				
 				/* TODO : descomentar  */
-				//EFrameworkCore.setActionView();
+				EFrameworkCore.setActionView();
 				 this.render("dashboardPackages")
 				$("body").addClass("admin");
 			} else {
@@ -47,16 +47,12 @@ Router.configure({
 	}
 });
 
-/*
-	Es importante siempre estar suscrito a estas publicaciones antes de acceder a una nueva UI
-*/
-
-/* TODO: Agregar cuando corresponda
-Router.waitOn(function () {
+/* Es importante siempre estar suscrito a estas publicaciones antes de acceder a una nueva UI */
+Router.waitOn( function () {
 	this.subscribe("Shops");
 	return this.subscribe("Packages");
 });
-*/
+
 /*
  * ShopController Controller
  * Controlador principal para shop, mayoria de las vistas excepto admin

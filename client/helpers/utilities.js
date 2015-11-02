@@ -178,20 +178,20 @@ Template.registerHelper("pathForSEO", function (path, params) {
 //   return active && "active";
 // });
 
-// /**
-//  * siteName
-//  * @summary get the shop name
-//  * @return {String} returns site name
-//  */
-// Template.registerHelper("siteName", function () {
-//   let shop = EFrameworkCore.Collections.Shops.findOne();
-//   if (shop) {
-//     if (shop.name) {
-//       return shop.name;
-//     }
-//   }
-//   return "";
-// });
+/**
+ * siteName
+ * @summary Obtiene el nombre de Shop
+ * @return {String} return nombre del sitio
+ */
+Template.registerHelper("siteName", function () {
+	let shop = EFrameworkCore.Collections.Shops.findOne();
+	if (shop) {
+		if (shop.name) {
+			return shop.name;
+		}
+	}
+	return "";
+});
 
 // /*
 //  *  General helpers for template functionality
@@ -206,6 +206,7 @@ Template.registerHelper("pathForSEO", function (path, params) {
  * @param {String} v2 - segunda variable a comparar
  * @return {Boolean} retorna true/false
  */
+ /* TODO */
 Template.registerHelper("condition", function (v1, operator, v2) {
   switch (operator) {
   case "==":

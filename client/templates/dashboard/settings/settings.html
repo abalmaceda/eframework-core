@@ -1,30 +1,27 @@
 
+<!-- TODO -->
 <template name="settingsHeader">
-  <div class="nav nav-dashboard">
-<!--     <a class="btn btn-primary btn-dashboard-home" href="/dashboard">
-      <i class="fa fa-angle-left"></i> <span data-i18n="app.dashboard">Dashboard</span>
-    </a>
- -->
-    <div class="nav-dashboard-heading">
-      <h3 class="nav-dashboard-title">
-        <span>
-          {{i18n registry.i18nKey registry.i18nLabel}}
-        </span>
-        {{> yield "settingsHeaderControls"}}
-      </h3>
+	<div class="nav nav-dashboard">
+		<!-- INFO: Estaba comentado -->
+		<!--     <a class="btn btn-primary btn-dashboard-home" href="/dashboard">
+		<i class="fa fa-angle-left"></i> <span data-i18n="app.dashboard">Dashboard</span>
+		</a>
+		-->
+		<div class="nav-dashboard-heading">
+			<h3 class="nav-dashboard-title">
+				<span> {{i18n registry.i18nKey registry.i18nLabel}} </span>
+				{{> yield "settingsHeaderControls"}}
+			</h3>
+		</div>
 
+		<div class="nav-dashboard-controls">
+			<button class="btn btn-default" data-event-action="closeSettings"><i class="fa fa-times"></i></button>
+		</div>
 
-
-    </div>
-
-    <div class="nav-dashboard-controls">
-      <button class="btn btn-default" data-event-action="closeSettings"><i class="fa fa-times"></i></button>
-    </div>
-
-  </div>
+	</div>
 </template>
 
-
+<!-- TODO -->
 <template name="settingsSidebar">
   <div class="dashboard-nav">
     <ul class="nav nav-pills nav-stacked nav-default">
@@ -37,7 +34,7 @@
   </div>
 </template>
 
-
+<!-- TODO -->
 <template name="settingsSidebarItem">
 
   {{#if enabled}}

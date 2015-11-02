@@ -2,139 +2,152 @@
 //  * Reaction i18n Translations, RTL and Currency Exchange Support
 //  */
 
-// /**
-//  * getLabelsFor
-//  * get Labels for simple.schema keys
-//  * @param  {Object} schema - schema
-//  * @param  {String} name - name
-//  * @return {Object} return schema label object
-//  */
-// function getLabelsFor(schema, name) {
-//   let labels = {};
-//   // loop through all the rendered form fields and generate i18n keys
-//   for (let fieldName of schema._schemaKeys) {
-//     let i18nKey = name.charAt(0).toLowerCase() + name.slice(1) + "." +
-//       fieldName
-//       .split(".$").join("");
-//     // translate autoform label
-//     let translation = i18n.t(i18nKey);
-//     if (new RegExp("string").test(translation) !== true && translation !==
-//       i18nKey) {
-//       if (translation) labels[fieldName] = translation;
-//     }
-//   }
-//   return labels;
-// }
+/**
+ * getLabelsFor
+ * get Labels for simple.schema keys
+ * @param  {Object} schema - schema
+ * @param  {String} name - name
+ * @return {Object} return schema label object
+ */
+ /* TODO */
+function getLabelsFor(schema, name) {
+  let labels = {};
+  // loop through all the rendered form fields and generate i18n keys
+  for (let fieldName of schema._schemaKeys) {
+    let i18nKey = name.charAt(0).toLowerCase() + name.slice(1) + "." +
+      fieldName
+      .split(".$").join("");
+    // translate autoform label
+    let translation = i18n.t(i18nKey);
+    if (new RegExp("string").test(translation) !== true && translation !==
+      i18nKey) {
+      if (translation) labels[fieldName] = translation;
+    }
+  }
+  return labels;
+}
 
-// /**
-//  * getMessagesFor
-//  * get i18n messages for autoform messages
-//  * currently using a globalMessage namespace only*
-//  * (1) Use schema-specific message for specific key
-//  * (2) Use schema-specific message for generic key
-//  * (3) Use schema-specific message for type
-//  * @todo implement messaging hierarchy from simple-schema
-//  * @return {Object} returns i18n translated message for schema labels
-//  */
-// function getMessagesFor() {
-//   let messages = {};
-//   for (let message in SimpleSchema._globalMessages) {
-//     if ({}.hasOwnProperty.call(SimpleSchema._globalMessages, message)) {
-//       let i18nKey = `globalMessages.${message}`;
-//       let translation = i18n.t(i18nKey);
-//       if (new RegExp("string").test(translation) !== true && translation !==
-//         i18nKey) {
-//         messages[message] = translation;
-//       }
-//     }
-//   }
-//   return messages;
-// }
+/**
+ * getMessagesFor
+ * get i18n messages for autoform messages
+ * currently using a globalMessage namespace only*
+ * (1) Use schema-specific message for specific key
+ * (2) Use schema-specific message for generic key
+ * (3) Use schema-specific message for type
+ * @todo implement messaging hierarchy from simple-schema
+ * @return {Object} returns i18n translated message for schema labels
+ */
+ /* TODO */
+function getMessagesFor() {
+  let messages = {};
+  for (let message in SimpleSchema._globalMessages) {
+    if ({}.hasOwnProperty.call(SimpleSchema._globalMessages, message)) {
+      let i18nKey = `globalMessages.${message}`;
+      let translation = i18n.t(i18nKey);
+      if (new RegExp("string").test(translation) !== true && translation !==
+        i18nKey) {
+        messages[message] = translation;
+      }
+    }
+  }
+  return messages;
+}
 
-// /**
-//  *  set language and autorun on change of language
-//  *  initialize i18n and load data resources for the current language and fallback 'EN'
-//  *
-//  */
-
-// this.i18nextDep = new Tracker.Dependency();
-
+/**
+ *  set language and autorun on change of language
+ *  initialize i18n and load data resources for the current language and fallback 'EN'
+ *
+ */
+/* TODO */
+this.i18nextDep = new Tracker.Dependency();
+/* TODO */
   this.localeDep = new Tracker.Dependency();
+/* TODO */
+Meteor.startup(function () {
+	/* TODO */
+  // i18nNext detectLanguage
+   Session.set("language", i18n.detectLanguage());
+  // // use i18n detected language to getLocale info
+  // Meteor.call("shop/getLocale", function (error, result) {
+  //   if (result) {
+  //     EFrameworkCore.Locale = result;
+  //     EFrameworkCore.Locale.language = Session.get("language");
+  //     moment.locale(EFrameworkCore.Locale.language);
+  //     localeDep.changed();
+  //   }
+  // });
 
-// Meteor.startup(function () {
-//   // i18nNext detectLanguage
-//   Session.set("language", i18n.detectLanguage());
-//   // use i18n detected language to getLocale info
-//   Meteor.call("shop/getLocale", function (error, result) {
-//     if (result) {
-//       EFrameworkCore.Locale = result;
-//       EFrameworkCore.Locale.language = Session.get("language");
-//       moment.locale(EFrameworkCore.Locale.language);
-//       localeDep.changed();
-//     }
-//   });
-//   // use tracker autorun to detect language changes
-//   Tracker.autorun(function () {
-//     EFrameworkCore.Locale.language = Session.get("language");
-//     return Meteor.subscribe("Translations", EFrameworkCore.Locale.language,
-//       function () {
-//         // fetch reaction translations
-//         let reactionTranslations = EFrameworkCore.Collections.Translations
-//           .find({}, {
-//             fields: {
-//               _id: 0
-//             },
-//             reactive: false
-//           }).fetch();
-//         // map reduce translations into i18next formatting
-//         let resources = reactionTranslations.reduce(function (x, y) {
-//           x[y.i18n] = y.translation;
-//           return x;
-//         }, {});
-//         // initialize i18next
-//         return $.i18n.init({
-//           lng: EFrameworkCore.Locale.language,
-//           fallbackLng: "en",
-//           ns: "core",
-//           resStore: resources
-//         }, function () {
-//           for (let schema in EFrameworkCore.Schemas) {
-//             if ({}.hasOwnProperty.call(EFrameworkCore.Schemas,
-//                 schema)) {
-//               let ss = EFrameworkCore.Schemas[schema];
-//               ss.labels(getLabelsFor(ss, schema));
-//               ss.messages(getMessagesFor(ss, schema));
-//             }
-//           }
-//           // trigger dependency change
-//           i18nextDep.changed();
-//           // apply language direction to html
-//           if ($.t("languageDirection") === "rtl") {
-//             return $("html").addClass("rtl");
-//           }
-//           return $("html").removeClass("rtl");
-//         });
-//       });
-//   });
+	/* TODO */
+ 	 // use tracker autorun to detect language changes
+	Tracker.autorun(function () {
+		EFrameworkCore.Locale.language = Session.get("language");
+		return Meteor.subscribe("Translations", EFrameworkCore.Locale.language,
+		function () {
+			// fetch reaction translations
+			let reactionTranslations = EFrameworkCore.Collections.Translations.find(
+				{},
+				{
+					fields: {
+						_id: 0
+					},
+					reactive: false
+				}
+			).fetch();
+			// map reduce translations into i18next formatting
+			let resources = reactionTranslations.reduce(
+				function (x, y) {
+					x[y.i18n] = y.translation;
+					return x;
+				},
+				{}
+			);
+			// initialize i18next
+			return $.i18n.init(
+				{
+					lng: EFrameworkCore.Locale.language,
+					fallbackLng: "en",
+					ns: "core",
+					resStore: resources
+				},
+				function () {
+					for (let schema in EFrameworkCore.Schemas) {
+						if ({}.hasOwnProperty.call(EFrameworkCore.Schemas, schema)) {
+							let ss = EFrameworkCore.Schemas[schema];
+							ss.labels(getLabelsFor(ss, schema));
+							ss.messages(getMessagesFor(ss, schema));
+						}
+					}
+					// trigger dependency change
+					i18nextDep.changed();
+					// apply language direction to html
+					if ($.t("languageDirection") === "rtl") {
+						return $("html").addClass("rtl");
+					}
+					return $("html").removeClass("rtl");
+				}
+			);
+		});
+  	});
 
-//   // global onRendered event finds and replaces
-//   // data-i18n attributes in html/template source.
-//   Template.onRendered(function () {
-//     this.autorun((function (_this) {
-//       return function () {
-//         let $elements;
-//         i18nextDep.depend();
-//         $elements = _this.$("[data-i18n]");
-//         if (typeof $elements.i18n === "function") {
-//           $elements.i18n();
-//         }
-//       };
-//     })(this));
-//   });
-//   return Template.onDestroyed(function () {
-//     i18nextDep.changed();
-//   });
-// });
+  // global onRendered event finds and replaces
+  // data-i18n attributes in html/template source.
+  /* TODO */
+  Template.onRendered(function () {
+    this.autorun((function (_this) {
+      return function () {
+        let $elements;
+        i18nextDep.depend();
+        $elements = _this.$("[data-i18n]");
+        if (typeof $elements.i18n === "function") {
+          $elements.i18n();
+        }
+      };
+    })(this));
+  });
+  return Template.onDestroyed(function () {
+    i18nextDep.changed();
+  });
+});
 
 /* TODO funcion */
 /**
@@ -184,6 +197,7 @@ Template.registerHelper("i18n", function (i18nKey, i18nMessage) {
  * @param {String} currentPrice - precio actual ó formato String "xx.xx - xx.xx"
  * @return {String} returns locale formatted and exchange rate converted values
  */
+ /* TODO */
 Template.registerHelper("formatPrice", function (currentPrice) {
 	let actualPrice;
 	let formattedPrice;

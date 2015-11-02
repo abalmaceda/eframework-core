@@ -44,8 +44,8 @@ EFrameworkCore.Subscriptions.Sessions = Meteor.subscribe("Sessions", currentSess
 /**
  * General Subscriptions
  */
-// EFrameworkCore.Subscriptions.Packages =
-//   Meteor.subscribe("Packages");
+ /* TODO: entender esta subscription */
+EFrameworkCore.Subscriptions.Packages = Meteor.subscribe("Packages");
 
 // EFrameworkCore.Subscriptions.Tags = Meteor.subscribe("Tags");
 

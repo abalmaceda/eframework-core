@@ -71,14 +71,11 @@ api.use("mquandalle:bower@1.5.2");
   Adds template features currently missing from the templating package
   */
   api.use("aldeed:template-extension@3.4.3", "client");
-  /*
-  * A router that works on the server and the browser, designed specifically for Meteor
-  */
+
+  /* A router that works on the server and the browser, designed specifically for Meteor */
   api.use("iron:router@1.0.10");
 
-	/*
-	*	Generate a slug. Wraps the speakingurl package for Meteor
-	*/
+	/* Generate a slug. Wraps the speakingurl package for Meteor */
 	api.use("ongoworks:speakingurl@5.0.1");
 
   /*
@@ -196,26 +193,27 @@ api.addFiles("server/register.js", "server");
 	api.addAssets("private/data/Tags.json", "server");
 
   // // i18n translations
-  // api.addAssets("private/data/i18n/ar.json", "server");
-  // api.addAssets("private/data/i18n/cn.json", "server");
-  // api.addAssets("private/data/i18n/cs.json", "server");
-  // api.addAssets("private/data/i18n/de.json", "server");
+  //TODO : Eliminar los lenguajes que no voy a usar ( solo usare español e ingles )
+  api.addAssets("private/data/i18n/ar.json", "server");
+  api.addAssets("private/data/i18n/cn.json", "server");
+  api.addAssets("private/data/i18n/cs.json", "server");
+  api.addAssets("private/data/i18n/de.json", "server");
 	api.addAssets("private/data/i18n/en.json", "server");
-  // api.addAssets("private/data/i18n/el.json", "server");
+  api.addAssets("private/data/i18n/el.json", "server");
 	api.addAssets("private/data/i18n/es.json", "server");
-  // api.addAssets("private/data/i18n/fr.json", "server");
-  // api.addAssets("private/data/i18n/he.json", "server");
-  // api.addAssets("private/data/i18n/hr.json", "server");
-  // api.addAssets("private/data/i18n/hu.json", "server");
-  // api.addAssets("private/data/i18n/it.json", "server");
-  // api.addAssets("private/data/i18n/my.json", "server");
-  // api.addAssets("private/data/i18n/nl.json", "server");
-  // api.addAssets("private/data/i18n/pl.json", "server");
-  // api.addAssets("private/data/i18n/pt.json", "server");
-  // api.addAssets("private/data/i18n/ru.json", "server");
-  // api.addAssets("private/data/i18n/sl.json", "server");
-  // api.addAssets("private/data/i18n/sv.json", "server");
-  // api.addAssets("private/data/i18n/vi.json", "server");
+  api.addAssets("private/data/i18n/fr.json", "server");
+  api.addAssets("private/data/i18n/he.json", "server");
+  api.addAssets("private/data/i18n/hr.json", "server");
+  api.addAssets("private/data/i18n/hu.json", "server");
+  api.addAssets("private/data/i18n/it.json", "server");
+  api.addAssets("private/data/i18n/my.json", "server");
+  api.addAssets("private/data/i18n/nl.json", "server");
+  api.addAssets("private/data/i18n/pl.json", "server");
+  api.addAssets("private/data/i18n/pt.json", "server");
+  api.addAssets("private/data/i18n/ru.json", "server");
+  api.addAssets("private/data/i18n/sl.json", "server");
+  api.addAssets("private/data/i18n/sv.json", "server");
+  api.addAssets("private/data/i18n/vi.json", "server");
 
   // import fixture data
   api.addFiles("server/fixtures.js", "server");
@@ -281,7 +279,7 @@ api.addFiles("server/publications/shops.js", "server");
   // api.addFiles("server/publications/cart.js", "server");
   // api.addFiles("server/publications/media.js", "server");
   // api.addFiles("server/publications/orders.js", "server");
-  // api.addFiles("server/publications/packages.js", "server");
+  api.addFiles("server/publications/packages.js", "server");
 	api.addFiles("server/publications/products.js", "server");
 api.addFiles("server/publications/translations.js", "server");
 
@@ -299,7 +297,7 @@ api.addFiles("server/methods/shop.js", "server");
 	// client
 	api.addFiles("client/subscriptions.js", "client");
 	api.addFiles("client/helpers/layout.js", "client");
-//api.addFiles("client/helpers/packages.js", "client");
+api.addFiles("client/helpers/packages.js", "client");
   // api.addFiles("client/helpers/cart.js", "client");
 api.addFiles("client/helpers/globals.js", "client");
 api.addFiles("client/helpers/products.js", "client");
@@ -320,7 +318,7 @@ api.addFiles("client/templates/layout/layout.js", "client");
   api.addFiles("client/templates/layout/header/i18n/i18n.html", "client");
   api.addFiles("client/templates/layout/header/i18n/i18n.js", "client");
 
-  //api.addFiles("client/templates/layout/header/brand/brand.html", "client");
+  api.addFiles("client/templates/layout/header/brand/brand.html", "client");
 
 	api.addFiles("client/templates/layout/footer/footer.html", "client");
 
@@ -442,16 +440,16 @@ api.addFiles("client/templates/layout/layout.js", "client");
 
 	api.addFiles("client/templates/dashboard/packages/packages.html", "client");
 
-  // api.addFiles("client/templates/dashboard/packages/grid/package/package.html", "client");
+  api.addFiles("client/templates/dashboard/packages/grid/package/package.html", "client");
   // api.addFiles("client/templates/dashboard/packages/grid/package/package.js", "client");
 
-  // api.addFiles("client/templates/dashboard/packages/grid/grid.html", "client");
-  // api.addFiles("client/templates/dashboard/packages/grid/grid.js", "client");
+    api.addFiles("client/templates/dashboard/packages/grid/grid.html", "client");
+    api.addFiles("client/templates/dashboard/packages/grid/grid.js", "client");
 
   api.addFiles("client/templates/dashboard/dashboard.html", "client");
   api.addFiles("client/templates/dashboard/dashboard.js", "client");
 
-  // api.addFiles("client/templates/dashboard/settings/settings.html", "client");
+  //api.addFiles("client/templates/dashboard/settings/settings.html", "client");
   // api.addFiles("client/templates/dashboard/settings/settings.js", "client");
 
   // api.addFiles("client/templates/dashboard/shop/settings/settings.html", "client");

@@ -4,6 +4,7 @@
  * @param {Object} shopCursor - current shop object
  * @returns {Object} packagesCursor - current packages for shop
  */
+ /* TODO */
 Meteor.publish("Packages", function (shopCursor) {
   check(shopCursor, Match.Optional(Object));
   let Packages = EFrameworkCore.Collections.Packages;

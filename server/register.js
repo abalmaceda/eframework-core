@@ -32,7 +32,7 @@ EFrameworkCore.registerPackage({
     route: "dashboard/shop",
     provides: "dashboard",
     label: "Core",
-    description: "Reaction Commerce Core",
+    description: "E-Commerce Framework Core",
     icon: "fa fa-th",
     cycle: 1,
     container: "dashboard",

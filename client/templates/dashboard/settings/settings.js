@@ -47,7 +47,7 @@ Template.settingsHeader.events({
 });
 
 
-// Templte.settingsSidebar.inheritsHelpersFrom("packagesGrid");
+Templte.settingsSidebar.inheritsHelpersFrom("packagesGrid");
 
 Template.settingsSidebar.helpers({
   pkgPermissions: function () {

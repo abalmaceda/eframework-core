@@ -165,7 +165,7 @@ PackageFixture = class PackageFixture {
 					i18n: "en"
 				}];
 			}
-
+			EFrameworkCore.Log.info( "Loading " + shop.languages.length +" languages ");
 			/*
 				Recorro los languages disponibles del shop y los cargo
 			*/
@@ -251,8 +251,9 @@ ReactionRegistry.createDefaultAdminUser = function () {
 	// if server is not confgured. Error in configuration
 	// are caught, but admin isn't verified.
 	try {
+		//TODO : Descomentar
 		Accounts.sendVerificationEmail(accountId);
-	} catch (_error) {
+	} catch (error) {
 		EFrameworkCore.Log.warn("Unable to send admin account verification email.", error);
 	}
 
@@ -319,7 +320,7 @@ ReactionRegistry.loadFixtures = function () {
 	*/
 	try {
 		currentDomain = EFrameworkCore.Collections.Shops.findOne().domains[0];
-	} catch (_error) {
+	} catch (error) {
 		EFrameworkCore.Log.error("Failed to determine default shop.", _error);
 	}
 
