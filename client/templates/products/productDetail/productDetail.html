@@ -1,4 +1,5 @@
-<!-- TODO -->
+<!-- Estructura de la UI de detalles del producto -->
+<!-- TODO: comentar este Template-->
 <template name="productDetail">
 	<div class="container-main">
 		<div class="container-fluid pdp-container">
@@ -7,13 +8,16 @@
 			{{#if hasPermission "createProduct"}}
 				<div class="row">
 					<span data-i18n="productDetail.productManagement">Product management:</span>
+					<!--  Si el producto es visible, permitir al usuario ( con permisos ) hacer el producto invisible -->
 					{{#if isVisible}}
 						<a href="#" class="toggle-product-isVisible-link" data-i18n="productDetail.makeInvisible">Make invisible</a> |
 					{{/if}}
+					<!-- Si tiene permisos de administrador del producto, dar la opcion de elimiar -->
 					{{#if hasAdminAccess}}
 						<a href="#" class="delete-product-link" data-i18n="app.delete">Delete</a>
 					{{/if}}
 				</div>
+				<!-- Si el producto no es visible para todos los customers ( clientes ), entonces informar al usuario de la situación -->
 				{{#unless isVisible}}
 					<div class="row">
 						<div class="alert alert-warning">
@@ -49,13 +53,16 @@
 				<div class="row">
 					<!-- BEGIN Left Side -->
 					<div class="col-sm-5 pdp-left-column">
-						{{> productImageGallery}}
+						<!-- TODO : Descomentar -->
+						<!-- {{> productImageGallery}} -->
 						<h3 data-i18n="productDetail.tags">Tags</h3>
 						<!--
 							Se llama al helper productDetail.tagsComponent ( el cual retorna un Template) y se le pasa como parametro data "tags", que corresponde al resultado del helper productDetail.tags (retorna un arreglo de tags)
 						-->
 						{{>tagsComponent tags=tags}}
+						<!-- Detalles del producto -->
 						<h3 data-i18n="productDetail.details">Details</h3>
+						<!-- metaComponent eliige el template adecuado de acuerdo con los permisos del usuario -->
 						{{> metaComponent }}
 					</div>
 					<!-- END Left Side -->
@@ -101,7 +108,8 @@
 							{{!-- Variants & Options --}}
 							<div class="row options-add-to-cart">
 								<h3 data-i18n="productDetail.options">Options</h3>
-							{{>variantList}}
+								<!-- TODO : Descomentar -->
+								{{>variantList}}
 							</div>
 
 							<!-- TODO -->

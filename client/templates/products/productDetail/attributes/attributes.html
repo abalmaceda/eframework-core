@@ -9,6 +9,7 @@
 	./hashTags
 	etc....
 -->
+<!-- TODO : por que aca producto es una variable local ???? -->
 <template name="productMetaField">
 	<!-- Si ./metafields es distinto de null, entonces existen atributos para mostrar-->
 	{{#if ./metafields}}
@@ -26,23 +27,32 @@
 	{{/if}}
 </template>
 
-<!-- <template name="productMetaFieldForm">
-<ul class="list-group product-detail-edit">
-  {{#each ./metafields}}
-    <li class="list-group-item metafield-list-item">
-      {{>metaComponent}}
-      <span class="metafield-remove"><i class="fa fa-times-circle"></i></span>
-    </li>
-  {{/each}}
-  <li class="list-group-item metafield-new-item">
-    {{>metaComponent}}
-  </li>
-</ul>
-</template> -->
+<!-- Tempplate para usuario con permisos de "crearProduct" -->
+<template name="productMetaFieldForm">
+	<ul class="list-group product-detail-edit">
+		<!-- Se recorre metafilds -->
+		{{#each ./metafields}}
+			<li class="list-group-item metafield-list-item">
+				<!-- Template.metaComponent. No es una función que retorne un Template -->
+				<!-- Se agrega un Template.metaComponent con la información de cada "meta data" del producto-->
+				<!--  Cada "metada data" tiene un "key-value"-->
+				<!-- TODO: Entender como funciona el tema de las varialbes. Como se le pasa como parametro los "key-value" a Template.metaComponent si no se le pasa explicitamente ( por ejemplo {{>metaComponent  key=key value=value}} ó alago por el estilo-->
+				{{>metaComponent}}
+				<span class="metafield-remove"><i class="fa fa-times-circle"></i></span>
+			</li>
+		{{/each}}
+		<!-- Se agrega un Template.metaComponent sin nada para permitir nueva metaComponent info. -->
+		<li class="list-group-item metafield-new-item">
+			{{>metaComponent}}
+		</li>
+	</ul>
+</template>
 
+<!-- Este atributo puede llamarse con un scope en donde existen los "keu-value"-->
 <!-- TODO : agregar comentarios -->
 <template name="metaComponent">
 	<form role="form" name="metafield-component" class="form form-inline metafield-component">
+		<!-- TODO: averiguar por que si los valores "key-value" no existen simplemente se reemplazan por un string vacio -->
 		<input type="text" name="key" class="form-control metafield-key-input" value="{{key}}" placeholder="{{i18n 'productDetail.detailsName'}}"/>
 		<input type="text" name="value" class="form-control metafield-value-input" value="{{value}}" placeholder="{{i18n 'productDetail.detailsInfo'}}"/>
 	</form>

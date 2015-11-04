@@ -19,7 +19,7 @@ Template.productDetail.helpers({
 		}
 	},
 	/**
-	* Retorna el Template de descripción de los Tags dependiendo si es propietario o no
+	* @summary Retorna el Template de descripción de los Tags dependiendo si es propietario o no
 	* @return [Template] 
 	*/
 	tagsComponent: function () {
@@ -74,11 +74,8 @@ Template.productDetail.helpers({
 	}
 });
 
-// /**
-//  * productDetail events
-//  */
-
-// Template.productDetail.events({
+/** productDetail events */
+Template.productDetail.events({
 //   "click #price": function () {
 //     let formName;
 //     if (EFrameworkCore.hasPermission("createProduct")) {
@@ -277,4 +274,4 @@ Template.productDetail.helpers({
 //     Session.set("editing-" + this.field, false);
 //     return $(".social-media-inputs > *").hide();
 //   }
-//});
+});

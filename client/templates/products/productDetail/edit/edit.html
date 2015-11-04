@@ -1,24 +1,28 @@
-<!-- <template name="productDetailEdit">
-{{#if condition type "eq" "textarea"}}
-<p class="product-detail-edit {{field}}-edit">
-  <textarea class="{{field}}-edit-input" placeholder="{{i18nPlaceholder}}">{{value}}</textarea>
-</p>
-{{else}}
-<div class="product-detail-edit {{field}}-edit">
-  <input type="text" value="{{value}}" class="{{field}}-edit-input" placeholder="{{i18nPlaceholder}}"/>
-</div>
-{{/if}}
-<span class="product-detail-message" id="{{field}}-message"></span>
-</template> -->
-
-<template name="productDetailField">
+<!-- Templates para los campos en modo edicion de un producto -->
+<!-- Recive como parametro 3 variables [ field | value | type ] --> 
+<template name="productDetailEdit">
+	<!-- Es necesario diferenciar el caso de si es un textarea -->
+	<!-- TODO: Aun no veo la diferencia entre diferenciar el textarea-->
 	{{#if condition type "eq" "textarea"}}
-		<p class="product-detail-field {{field}}">
-			{{value}}
+		<p class="product-detail-edit {{field}}-edit">
+			<textarea class="{{field}}-edit-input" placeholder="{{i18nPlaceholder}}">{{value}}</textarea>
 		</p>
 	{{else}}
-		<div class="product-detail-field {{field}}">
-			{{value}}
+		<div class="product-detail-edit {{field}}-edit">
+			<input type="text" value="{{value}}" class="{{field}}-edit-input" placeholder="{{i18nPlaceholder}}"/>
 		</div>
+	{{/if}}
+	<span class="product-detail-message" id="{{field}}-message"></span>
+</template> 
+
+<!-- Template para los campos en modo lectura de un producto ( Detalles del producto ) -->
+<!-- Recive como parametro 3 variables [ field value type ] --> 
+<template name="productDetailField">
+	<!--  Los campos se diferencian solo en si es un textarea, para en ves de poner un <div>, utilizamos un <p> para darle formato al texto-->
+	<!-- TODO: Aun no veo la diferencia entre diferenciar el textarea-->
+	{{#if condition type "eq" "textarea"}}
+		<p class="product-detail-field {{field}}">{{value}}</p>
+	{{else}}
+		<div class="product-detail-field {{field}}">{{value}}</div>
 	{{/if}}
 </template>

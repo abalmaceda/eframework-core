@@ -35,6 +35,7 @@ _.extend(EFrameworkCore, {
 	* @param {String} group - default shopId
 	* @return {Boolean} Boolean - true si tiene permisos
 	*/
+	/* TODO : comprender a fondo */
 	hasPermission: function (checkPermissions, checkUserId, group) {
 		check(checkPermissions, Match.OneOf(String, Array));
 
@@ -77,15 +78,29 @@ _.extend(EFrameworkCore, {
 		// no specific permissions found returning false
 		return false;
 	},
-//   hasOwnerAccess: function () {
-//     let ownerPermissions = ["owner"];
-//     return this.hasPermission(ownerPermissions);
-//   },
-//   hasAdminAccess: function () {
-//     let adminPermissions = ["owner", "admin"];
-//     return this.hasPermission(adminPermissions);
-//   },
-	/* TODO: comentarios */
+
+	/**
+	 * @summary Determina si el usuario actual tiene permisos de propietario
+	 * @return {boolean} True si tiene permisos de propietario
+	 */
+	hasOwnerAccess: function () {
+		let ownerPermissions = ["owner"];
+		return this.hasPermission(ownerPermissions);
+	},
+
+	/**
+	 * @summary Determina si el usuario actual es un administrador
+	 * @return {boolean} True si tiene permisos de administrador
+	 */
+	hasAdminAccess: function () {
+		let adminPermissions = ["owner", "admin"];
+		return this.hasPermission(adminPermissions);
+	},
+	
+	/**
+	 * @summary Determina si el usuario actual tiene permisos para acceder al dashboard
+	 * @return {boolean} True si tiene permisos de acceso al dashboard
+	 */
 	hasDashboardAccess: function () {
 		let dashboardPermissions = ["owner", "admin", "dashboard"];
 		return this.hasPermission(dashboardPermissions);

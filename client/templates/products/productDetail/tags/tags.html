@@ -1,42 +1,45 @@
 
 <!-- TODO: Comentarios -->
-<!-- <template name="productTagInputForm">
-<div class="tags">
-  <ul class="list-inline tag-edit-list" id="tag-edit-list">
-  {{#each ./tags}}
-    <li data-tag-id="{{_id}}">
-      <div class="tag-input-group">
-        <span class="tag-input-group-handle">
-          <i class="fa fa-bars"></i>
-        </span>
-        <span class="tag-input">
-          <input type="text" class="tags-input-select" value="{{name}}" placeholder="Edit tags"/>
-        </span>
-        <span class="tag-input-hashtag">
-          <i class="fa {{hashtagMark}}"></i>
-        </span>
-        <span class="tag-input-group-remove">
-           <i class="fa fa-times-circle"></i>
-        </span>
-      </div>
-    </li>
-  {{/each}}
-    <li data-tag-id="{{_id}}">
-      <div class="tag-input-group">
-        <span class="tag-input">
-          <input type="text" class="tags-input-select tags-submit-new" value="{{name}}" placeholder="{{i18n 'productDetail.tagsAdd'}}" />
-        </span>
-      </div>
-    </li>
-  </ul>
-</div>
+ <!-- se pasa como parametro la variable "tags" al llamar el template -->
+<template name="productTagInputForm">
+	<div class="tags">
+		<ul class="list-inline tag-edit-list" id="tag-edit-list">
+			{{#each ./tags}}
+				<li data-tag-id="{{_id}}">
+					<div class="tag-input-group">
+						<span class="tag-input-group-handle">
+							<i class="fa fa-bars"></i>
+						</span>
+						<span class="tag-input">
+							<input type="text" class="tags-input-select" value="{{name}}" placeholder="Edit tags"/>
+						</span>
+						<span class="tag-input-hashtag">
+							<i class="fa {{hashtagMark}}"></i>
+						</span>
+						<span class="tag-input-group-remove">
+							<i class="fa fa-times-circle"></i>
+						</span>
+					</div>
+				</li>
+			{{/each}}
+			<li data-tag-id="{{_id}}">
+				<div class="tag-input-group">
+					<span class="tag-input">
+						<input type="text" class="tags-input-select tags-submit-new" value="{{name}}" placeholder="{{i18n 'productDetail.tagsAdd'}}" />
+					</span>
+				</div>
+			</li>
+		</ul>
+	</div>
 </template>
- -->
+
  <!-- TODO : Comentarios -->
+ <!-- se pasa como parametro la variable "tags" al llamar el template -->
 <template name="productDetailTags">
 	<div class="tags">
 		<ul class="list-inline">
-			<!-- ./tags corresponde al parametro "tags" que se paso al template antes de llamarlo-->
+			<!-- ./tags corresponde al parametro "tags" que se paso al template antes de llamarlo -->
+			<!-- TODO : entender el por que de "./tags" -->
 			{{#each ./tags}}
 				<!-- TODO: No entiendo la logica de esto. La idea es que si no tienes Tags el producto actual, entonces ahi muestro los tags... Pero eso no significaria que no tengo tags para mostrar ??-->
 				{{#unless currentHashTag}}
