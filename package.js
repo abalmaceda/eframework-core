@@ -329,7 +329,7 @@ api.addFiles("client/templates/layout/layout.js", "client");
   api.addFiles("client/templates/layout/loading/loading.html", "client");
 	api.addFiles("client/templates/layout/notFound/notFound.html", "client");
 
-	// api.addFiles("client/templates/layout/notice/unauthorized.html", "client");
+  api.addFiles("client/templates/layout/notice/unauthorized.html", "client");
   api.addFiles("client/templates/layout/notice/shopNotFound.html", "client");
 
   // api.addFiles("client/templates/cart/cartDrawer/cartDrawer.html", "client");

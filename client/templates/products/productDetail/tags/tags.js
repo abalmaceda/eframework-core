@@ -18,7 +18,7 @@ Template.productDetailTags.helpers({
 	}
 });
 
-// Template.productTagInputForm.helpers({
+Template.productTagInputForm.helpers({
 //   hashtagMark: function () {
 //     let product = selectedProduct();
 //     if (product) {
@@ -66,28 +66,28 @@ Template.productDetailTags.helpers({
 //       }
 //     });
 //   },
-//   "focusout .tags-input-select": function (event, template) {
-//     let val = $(event.currentTarget).val();
-//     if (val) {
-//       let currentTag = Session.get("currentTag");
-//       return Meteor.call("products/updateProductTags", selectedProductId(),
-//         val, this._id, currentTag,
-//         function (error) {
-//           template.$(".tags-submit-new").val("").focus();
-//           if (error) {
-//             Alerts.add("Tag already exists, duplicate add failed.",
-//               "danger", {
-//                 autoHide: true
-//               });
-//             return false;
-//           }
-//         });
-//     }
-//   },
+  "focusout .tags-input-select": function (event, template) {
+    let val = $(event.currentTarget).val();
+    if (val) {
+      let currentTag = Session.get("currentTag");
+      return Meteor.call("products/updateProductTags", selectedProductId(),
+        val, this._id, currentTag,
+        function (error) {
+          template.$(".tags-submit-new").val("").focus();
+          if (error) {
+            Alerts.add("Tag already exists, duplicate add failed.",
+              "danger", {
+                autoHide: true
+              });
+            return false;
+          }
+        });
+    }
+  },
 //   "mousedown .tag-input-group-handle": function (event, template) {
 //     return template.$(".tag-edit-list").sortable("refresh");
 //   }
-// });
+});
 
 // Template.productTagInputForm.onRendered(function () {
 //   return $(".tag-edit-list").sortable({

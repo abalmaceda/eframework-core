@@ -47,7 +47,8 @@ EFrameworkCore.Subscriptions.Sessions = Meteor.subscribe("Sessions", currentSess
  /* TODO: entender esta subscription */
 EFrameworkCore.Subscriptions.Packages = Meteor.subscribe("Packages");
 
-// EFrameworkCore.Subscriptions.Tags = Meteor.subscribe("Tags");
+/* TODO: Por que es necesario tener una subscripcion de tags */
+EFrameworkCore.Subscriptions.Tags = Meteor.subscribe("Tags");
 
 // EFrameworkCore.Subscriptions.Media =
 //   Meteor.subscribe("Media");

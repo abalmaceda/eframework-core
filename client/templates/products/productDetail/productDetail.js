@@ -28,28 +28,37 @@ Template.productDetail.helpers({
 		}
 		return Template.productDetailTags;
 	},
-//   actualPrice: function () {
-//     let childVariants;
-//     let purchasable;
-//     let current = selectedVariant();
-//     let product = selectedProduct();
-//     if (product && current) {
-//       childVariants = (function () {
-//         let _results = [];
-//         for (let variant of product.variants) {
-//           if ((variant !== null ? variant.parentId : void 0) === current._id) {
-//             _results.push(variant);
-//           }
-//         }
-//         return _results;
-//       })();
-//       purchasable = childVariants.length > 0 ? false : true;
-//     }
-//     if (purchasable) {
-//       return current.price;
-//     }
-//     return getProductPriceRange();
-//   },
+	/**
+	* @summary Retorna el Template de descripción de los Tags dependiendo si es propietario o no
+	* @return [Template] 
+	*/
+	actualPrice: function () {
+		let childVariants;
+		let purchasable;
+		let current = selectedVariant();
+		let product = selectedProduct();
+		if (product && current) {
+			childVariants = (function () {
+				let _results = [];
+				/* TODO : ( NO estoy seguro ) En este for se verifica que cada variant.parendId en el product sea igual al current._id 
+					Si el current._id pertenece al variant seleccionado. Entonces solo habría uno.... Tal vez me falta entender mejor que es un Variant.
+					PArece que ve todos los variants, con la idea de poner el invervalo de precios.
+				*/
+				for (let variant of product.variants) {
+					if ((variant !== null ? variant.parentId : void 0) === current._id) {
+						_results.push(variant);
+					}
+				}
+				return _results;
+			})();
+			/* TODO : no entiendo por que si es mayor, entonces es falso */
+			purchasable = childVariants.length > 0 ? false : true;
+		}
+		if (purchasable) {
+			return current.price;
+		}
+		return getProductPriceRange();
+	},
 
 	/**
 	* Retorna el Template dependiendo de los permisos del usuario (creación o solo lectura)
@@ -218,31 +227,31 @@ Template.productDetail.events({
 //       });
 //     }
 //   },
-//   "click .toggle-product-isVisible-link": function (event, template) {
-//     let errorMsg = "";
-//     if (!this.title) {
-//       errorMsg += "Product title is required. ";
-//       template.$(".title-edit-input").focus();
-//     }
-//     let variants = this.variants;
-//     for (let variant of variants) {
-//       let index = _.indexOf(variants, variant);
-//       if (!variant.title) {
-//         errorMsg += "Variant " + (index + 1) + " label is required. ";
-//       }
-//       if (!variant.price) {
-//         errorMsg += "Variant " + (index + 1) + " price is required. ";
-//       }
-//     }
-//     if (errorMsg.length) {
-//       Alerts.add(errorMsg, "danger", {
-//         placement: "productManagement",
-//         i18nKey: "productDetail.errorMsg"
-//       });
-//     } else {
-//       Meteor.call("products/publishProduct", this._id);
-//     }
-//   },
+  // "click .toggle-product-isVisible-link": function (event, template) {
+  //   let errorMsg = "";
+  //   if (!this.title) {
+  //     errorMsg += "Product title is required. ";
+  //     template.$(".title-edit-input").focus();
+  //   }
+  //   let variants = this.variants;
+  //   for (let variant of variants) {
+  //     let index = _.indexOf(variants, variant);
+  //     if (!variant.title) {
+  //       errorMsg += "Variant " + (index + 1) + " label is required. ";
+  //     }
+  //     if (!variant.price) {
+  //       errorMsg += "Variant " + (index + 1) + " price is required. ";
+  //     }
+  //   }
+  //   if (errorMsg.length) {
+  //     Alerts.add(errorMsg, "danger", {
+  //       placement: "productManagement",
+  //       i18nKey: "productDetail.errorMsg"
+  //     });
+  //   } else {
+  //     Meteor.call("products/publishProduct", this._id);
+  //   }
+  // },
 //   "click .delete-product-link": function () {
 //     maybeDeleteProduct(this);
 //   },

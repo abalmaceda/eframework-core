@@ -773,43 +773,37 @@ Meteor.methods({
 
     return updateResult;
   },
-  /**
-   * products/updateMetaFields
-   * @summary update product grid positions
-   * @param {String} productId - productId
-   * @param {Object} updatedMeta - update object with metadata
-   * @param {Object} meta - current meta object
-   * @return {String} returns update result
-   */
-  "products/updateMetaFields": function (productId, updatedMeta, meta) {
-    check(productId, String);
-    check(updatedMeta, Object);
-    check(meta, Match.OptionalOrNull(Object));
-    // must have createProduct permission
-    if (!EFrameworkCore.hasPermission("createProduct")) {
-      throw new Meteor.Error(403, "Access Denied");
-    }
-    this.unblock();
-    // update existing metadata
-    if (meta) {
-      return Products.update({
-        _id: productId,
-        metafields: meta
-      }, {
-        $set: {
-          "metafields.$": updatedMeta
-        }
-      });
-    }
-    // adds metadata
-    return Products.update({
-      _id: productId
-    }, {
-      $addToSet: {
-        metafields: updatedMeta
-      }
-    });
-  },
+	/**
+	* products/updateMetaFields
+	* @summary update update metadata de un producto
+	* @param {String} productId - productId
+	* @param {Object} updatedMeta - update object con metadata
+	* @param {Object} meta - meta object actual
+	* @return {String} returns resultado actualizado
+	*/
+	"products/updateMetaFields": function (productId, updatedMeta, meta) {
+		check(productId, String);
+		check(updatedMeta, Object);
+		check(meta, Match.OptionalOrNull(Object));
+		/* Se verifica que el usuario tenga permisos de creación del producto*/
+		if (!EFrameworkCore.hasPermission("createProduct")) {
+		  	throw new Meteor.Error(403, "Access Denied");
+		}
+		/* TODO: Para que sirve esta funion*/
+		this.unblock();
+		/* Caso en el metada existia. Se actualiza */
+		if (meta) {
+			return Products.update(
+				{ _id: productId,metafields: meta },
+				{ $set: { "metafields.$": updatedMeta }}
+			);
+		}
+		/* Se crea un nuevo metada para el producto */
+		return Products.update(
+			{ _id: productId},
+			{ $addToSet: { metafields: updatedMeta } }
+		);
+	},
   /**
    * products/publishProduct
    * @summary publish (visibility) of product

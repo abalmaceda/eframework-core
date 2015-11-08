@@ -78,8 +78,9 @@ Meteor.publish("Product", function (productId) {
 });
 
 /**
- * Publicación del Collection Tags
- */
+* Tags detail publication
+* @return {Object} return tag cursor
+*/
 Meteor.publish("Tags", function () {
 	return EFrameworkCore.Collections.Tags.find({
 		shopId: EFrameworkCore.getShopId()

@@ -151,14 +151,12 @@ let ShopAdminController = this.ShopController.extend({
 
 // this.PrintController = PrintController;
 
-// /*
-//  * General Route Declarations
-//  */
-
+/*
+ * Declarar las URL generales
+ */
+ /* TODO : agregar una descripcion */
 Router.map(function () {
-	/*
-	Si no se tiene permisos para ingresar a la ruta, se reenvia a este Template
-	*/
+	/* Si no se tiene permisos para ingresar a la ruta, se reenvia a este Template */
 	this.route("unauthorized", {
 		template: "unauthorized",
 		name: "unauthorized"
