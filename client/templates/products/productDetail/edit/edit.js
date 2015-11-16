@@ -4,17 +4,18 @@
  * productDetailEdit helpers
  */
 
-// Template.productDetailEdit.helpers({
-//   i18nPlaceholder: function () {
-//     i18nextDep.depend();
-//     let i18nKey = `productDetailEdit.${this.field}`;
-//     if (i18n.t(i18nKey) === i18nKey) {
-//       EFrameworkCore.Log.info(`returning empty placeholder productDetailEdit: ${i18nKey} no i18n key found.`);
-//     } else {
-//       return i18n.t(i18nKey);
-//     }
-//   }
-// });
+Template.productDetailEdit.helpers({
+	// i18nPlaceholder: function () {
+	// 	i18nextDep.depend();
+	// 	let i18nKey = `productDetailEdit.${this.field}`;
+	// 	if (i18n.t(i18nKey) === i18nKey) {
+	// 		EFrameworkCore.Log.info(`returning empty placeholder productDetailEdit: ${i18nKey} no i18n key found.`);
+	// 	}
+	// 	else {
+	// 		return i18n.t(i18nKey);
+	// 	}
+	// }
+});
 
 
 /** productDetailEdit events */

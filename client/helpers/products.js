@@ -45,23 +45,25 @@ currentProduct = this.currentProduct;
 
 /**
  * setCurrentVariant
- * @param {String} variantId - set current variantId
- * @return {undefined}
+ * @param {String} variantId - settear actual variantId
+ * @return {void}
+ * @todo Entender para que se utiliza esto.
  */
 this.setCurrentVariant = function (variantId) {
-  let currentId;
-  if (variantId === null) {
-    currentProduct.set("variantId", null);
-    currentProduct.set("variantId", selectedVariantId());
-  }
-  if (!variantId) {
-    return;
-  }
-  currentId = selectedVariantId();
-  if (currentId === variantId) {
-    return;
-  }
-  currentProduct.set("variantId", variantId);
+	let currentId;
+	if (variantId === null) {
+		/*Redundante */
+		//currentProduct.set("variantId", null);
+		currentProduct.set("variantId", selectedVariantId());
+	}
+	if (!variantId) {
+		return;
+	}
+	currentId = selectedVariantId();
+	if (currentId === variantId) {
+		return;
+	}
+	currentProduct.set("variantId", variantId);
 };
 
 /**

@@ -5,6 +5,7 @@
 		{{#each variants}}
 			{{> variant}}
 		{{else}}
+			<!-- TODO: Al parecer si no hay ningun variant, aparece el boton para crear uno -->
 			<a href="#" id="create-variant">+ <span data-i18n="variantList.createVariant">Create Variant</span></a>
 		{{/each}}
 	</ul>

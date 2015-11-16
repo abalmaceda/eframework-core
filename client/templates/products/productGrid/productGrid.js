@@ -45,7 +45,7 @@ Template.productGrid.helpers({
 //      * take natural sort, sorting by updatedAt
 //      * then resort using positions.position for this tag
 //      * retaining natural sort of untouched items
-//      */  
+//      */
 //     let hashtags;
 //     let newRelatedTags;
 //     let position;
@@ -218,7 +218,8 @@ Template.productGridItems.helpers({
 //  * productGridItems events
 //  */
 
-// Template.productGridItems.events({
+Template.productGridItems.events({
+	/*Este evento lo usa Template.productGridItems, por lo tanto se movio a su helper */
 //   "click [data-event-action=showProductSettings]": function (event) {
 //     event.preventDefault();
 
@@ -229,26 +230,27 @@ Template.productGridItems.helpers({
 //       data: this
 //     });
 //   },
-//   "click .clone-product": function () {
-//     let title;
-//     title = this.title;
-//     return Meteor.call("products/cloneProduct", this, function (error,
-//       productId) {
-//       if (error) {
-//         throw new Meteor.Error("error cloning product", error);
-//       }
-//       Router.go("product", {
-//         _id: productId
-//       });
-//       return Alerts.add("Cloned " + title, "success", {
-//         placement: "productManagement",
-//         id: productId,
-//         i18nKey: "productDetail.cloneMsg",
-//         autoHide: true,
-//         dismissable: false
-//       });
-//     });
-//   },
+
+
+	// "click .clone-product": function () {
+	// 	let title;
+	// 	title = this.title;
+	// 	return Meteor.call("products/cloneProduct", this, function (error, productId) {
+	// 		if (error) {
+	// 			throw new Meteor.Error("error cloning product", error);
+	// 		}
+	// 		Router.go("product", {
+	// 			_id: productId
+	// 		});
+	// 		return Alerts.add("Cloned " + title, "success", {
+	// 			placement: "productManagement",
+	// 			id: productId,
+	// 			i18nKey: "productDetail.cloneMsg",
+	// 			autoHide: true,
+	// 			dismissable: false
+	// 		});
+	// 	});
+	// },
 //   "click .delete-product": function (event) {
 //     event.preventDefault();
 //     maybeDeleteProduct(this);
@@ -320,7 +322,7 @@ Template.productGridItems.helpers({
 //       });
 //     });
 //   }
-// });
+});
 
 // /**
 //  * gridNotice helpers
@@ -402,6 +404,18 @@ Template.gridContent.helpers({
 //   });
 // });
 
+Template.productGridItems.events({
+	"click [data-event-action=showProductSettings]": function (event) {
+		event.preventDefault();
+		/*TODO: Que estoy haciendo aca ?*/
+		EFrameworkCore.showActionView({
+			label: "Edit Product",
+			template: "productSettings",
+			type: "product",
+			data: this
+		});
+	}
+});
 // Template.productGridItems.onRendered(function () {
 //   if (EFrameworkCore.hasPermission("createProduct")) {
 //     let productSort = $(".product-grid-list");

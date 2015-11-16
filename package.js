@@ -100,7 +100,7 @@ api.use("matb33:collection-hooks@0.8.1");
   api.use("alanning:roles@1.2.13");
   // api.use("momentjs:moment@2.10.6");
   // api.use("risul:moment-timezone@0.4.0");
-  	/* 
+  	/*
 	*	A Meteor package wrapper for Spin.js via Npm.depends().
 	*/
 	api.use("utilities:spin@2.3.1", "client");
@@ -109,7 +109,9 @@ api.use("matb33:collection-hooks@0.8.1");
 	*/
   	api.use("utilities:avatar@0.9.2");
 
+  	/*Filesystem for Meteor, collectionFS*/
   // api.use("cfs:standard-packages@0.5.9");
+
   // api.use("cfs:storage-adapter@0.2.2");
   // api.use("cfs:graphicsmagick@0.0.18");
   // api.use("cfs:gridfs@0.0.33");
@@ -128,10 +130,10 @@ api.imply("es5-shim");
 api.imply("browser-policy");
 api.imply("service-configuration");
 
-	
+
 	api.imply("ongoworks:speakingurl");
 
-	
+
 	api.imply("ongoworks:security");
    api.imply("dburles:factory");
   api.imply("mquandalle:bower");
@@ -147,10 +149,10 @@ api.imply("iron:router");
 api.imply("matb33:collection-hooks");
   api.imply("alanning:roles");
   // api.imply("momentjs:moment");
-	
+
 	api.imply("utilities:spin", ["client"]);
 
-	
+
   	api.imply("utilities:avatar");
 
   // reaction core dependencies
@@ -242,8 +244,8 @@ api.addFiles("server/register.js", "server");
 	api.addFiles("common/schemas/translations.js");
 
   // // collections
-  api.addFiles("common/collections/collections.js");
-  // api.addFiles("common/collections/collectionFS.js");
+  	api.addFiles("common/collections/collections.js");
+	api.addFiles("common/collections/collectionFS.js");
 
   // // collection hooks
 //api.addFiles("common/collections/hooks/hooks.js");
@@ -277,7 +279,7 @@ api.addFiles("server/register.js", "server");
 	// api.addFiles("server/publications/sessions.js", "server");
 api.addFiles("server/publications/shops.js", "server");
   // api.addFiles("server/publications/cart.js", "server");
-  // api.addFiles("server/publications/media.js", "server");
+	api.addFiles("server/publications/media.js", "server");
   // api.addFiles("server/publications/orders.js", "server");
   api.addFiles("server/publications/packages.js", "server");
 	api.addFiles("server/publications/products.js", "server");
@@ -312,8 +314,8 @@ api.addFiles("client/templates/layout/layout.js", "client");
   api.addFiles("client/templates/layout/header/header.html", "client");
   api.addFiles("client/templates/layout/header/header.js", "client");
 
-  // api.addFiles("client/templates/layout/header/tags/tags.html", "client");
-  // api.addFiles("client/templates/layout/header/tags/tags.js", "client");
+  api.addFiles("client/templates/layout/header/tags/tags.html", "client");
+  api.addFiles("client/templates/layout/header/tags/tags.js", "client");
 
   api.addFiles("client/templates/layout/header/i18n/i18n.html", "client");
   api.addFiles("client/templates/layout/header/i18n/i18n.js", "client");
@@ -486,14 +488,14 @@ api.addFiles("client/templates/layout/layout.js", "client");
 	api.addFiles("client/templates/products/productDetail/variants/variantList/variantList.html", "client");
 	api.addFiles("client/templates/products/productDetail/variants/variantList/variantList.js", "client");
 
-  // api.addFiles("client/templates/products/productDetail/variants/variantForm/variantForm.html", "client");
-  // api.addFiles("client/templates/products/productDetail/variants/variantForm/variantForm.js", "client");
+  api.addFiles("client/templates/products/productDetail/variants/variantForm/variantForm.html", "client");
+  api.addFiles("client/templates/products/productDetail/variants/variantForm/variantForm.js", "client");
 
-  // api.addFiles("client/templates/products/productDetail/variants/variantForm/inventoryVariant/inventoryVariant.html", "client");
-  // api.addFiles("client/templates/products/productDetail/variants/variantForm/inventoryVariant/inventoryVariant.js", "client");
+  api.addFiles("client/templates/products/productDetail/variants/variantForm/inventoryVariant/inventoryVariant.html", "client");
+  api.addFiles("client/templates/products/productDetail/variants/variantForm/inventoryVariant/inventoryVariant.js", "client");
 
-  // api.addFiles("client/templates/products/productDetail/variants/variantForm/childVariant/childVariant.html", "client");
-  // api.addFiles("client/templates/products/productDetail/variants/variantForm/childVariant/childVariant.js", "client");
+    api.addFiles("client/templates/products/productDetail/variants/variantForm/childVariant/childVariant.html", "client");
+	api.addFiles("client/templates/products/productDetail/variants/variantForm/childVariant/childVariant.js", "client");
 
 	api.addFiles("client/templates/products/productDetail/attributes/attributes.html", "client");
 	api.addFiles("client/templates/products/productDetail/attributes/attributes.js", "client");

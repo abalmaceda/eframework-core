@@ -34,7 +34,6 @@ Router.configure({
 				// Find a registry entry for this page that provides settings
 				// -- Settings is the default view for the "Action View"
 				
-				/* TODO : descomentar  */
 				EFrameworkCore.setActionView();
 				 this.render("dashboardPackages")
 				$("body").addClass("admin");
@@ -47,7 +46,11 @@ Router.configure({
 	}
 });
 
-/* Es importante siempre estar suscrito a estas publicaciones antes de acceder a una nueva UI */
+/**
+ * @summary Acción global para la subscripción a estas publicaciones antes de acceder a una nueva UI
+ * @event Router.waitOn
+ * @returns {void}
+ */
 Router.waitOn( function () {
 	this.subscribe("Shops");
 	return this.subscribe("Packages");
@@ -58,12 +61,9 @@ Router.waitOn( function () {
  * Controlador principal para shop, mayoria de las vistas excepto admin
  */
 let ShopController = RouteController.extend({
-	/*
-	*TODO : Agregar cuando corresponda
 	onAfterAction: function () {
 		return EFrameworkCore.MetaData.refresh(this.route, this.params);
 	},
-	*/
 	yieldTemplates: {
 		layoutHeader: {
 			to: "layoutHeader"
@@ -179,14 +179,14 @@ Router.map(function () {
 		}
 	  });
 
-  this.route("dashboard", {
-    controller: ShopAdminController,
-    template: "dashboardPackages",
-    onBeforeAction: function () {
-      Session.set("dashboard", true);
-      return this.next();
-    }
-  });
+	this.route("dashboard", {
+		controller: ShopAdminController,
+		template: "dashboardPackages",
+		onBeforeAction: function () {
+			Session.set("dashboard", true);
+			return this.next();
+		}
+  	});
 
 //   this.route("dashboard/shop", {
 //     controller: ShopAdminController,
@@ -213,32 +213,41 @@ Router.map(function () {
 //     }
 //   });
 
-  // this.route("product/tag", {
-  //   controller: ShopController,
-  //   path: "product/tag/:_id",
-  //   template: "products",
-  //   waitOn: function () {
-  //     return this.subscribe("Products", Session.get("productScrollLimit"));
-  //   },
-  //   subscriptions: function () {
-  //     return this.subscribe("Tags");
-  //   },
-  //   data: function () {
-  //     let id;
-  //     if (this.ready()) {
-  //       id = this.params._id;
-  //       return {
-  //         tag: Tags.findOne({
-  //           slug: id
-  //         }) || Tags.findOne(id)
-  //       };
-  //     }
-  //   }
-  // });
+
+	/**
+	 * @summary Ruta para acceder a los productos que tienen determinado tag.
+	 * @param {String} _id - tagId
+	 * @returns {void} 
+	 * @todo Descripcion
+	 */
+	this.route("product/tag", {
+		controller: ShopController,
+		path: "product/tag/:_id",
+		template: "products",
+		waitOn: function () {
+			return this.subscribe("Products", Session.get("productScrollLimit"));
+		},
+		subscriptions: function () {
+			return this.subscribe("Tags");
+		},
+		data: function () {
+			let id;
+			if (this.ready()) {
+				id = this.params._id;
+				return {
+					tag: Tags.findOne({ slug: id }) || Tags.findOne(id)
+				};
+			}
+		}
+	});
 	
-	/*
-		Ruta para acceder a los detalles de un producto.
-	*/
+	/**
+	 * @summary Ruta para acceder a los detalles de un producto.
+	 * @param {String} _id - productId
+	 * @param {String} variant -
+	 * @returns {void} 
+	 * @todo Descripcion
+	 */
 	this.route("product", {
 		controller: ShopController,
 		path: "product/:_id/:variant?",
@@ -255,6 +264,7 @@ Router.map(function () {
 		data: function () {
 			let product;
 			product = selectedProduct();
+			/*TODO: Que es this.ready()*/
 			if (this.ready() && product) {
 				if (!product.isVisible) {
 					if (!EFrameworkCore.hasPermission("createProduct")) {

@@ -3,10 +3,10 @@
 /**
  * productImageGallery helpers
  */
-// let Media = EFrameworkCore.Collections.Media;
-// /*
-//  * uploadHandler method
-//  */
+let Media = EFrameworkCore.Collections.Media;
+/*
+ * uploadHandler method
+ */
 // function uploadHandler(event) {
 //   let productId = selectedProductId();
 //   let variantId = selectedVariantId();
@@ -31,9 +31,9 @@
 //   });
 // }
 
-// /*
-//  * updateImagePriorities method
-//  */
+/*
+ * updateImagePriorities method
+ */
 // function updateImagePriorities() {
 //   let sortedMedias = _.map($(".gallery").sortable("toArray", {
 //     attribute: "data-index"
@@ -54,10 +54,10 @@
 //   return _results;
 // }
 
-// /*
-//  *  Product Image Gallery
-//  */
-// Template.productImageGallery.helpers({
+/*
+ *  Product Image Gallery
+ */
+Template.productImageGallery.helpers({
 //   media: function () {
 //     let mediaArray = [];
 //     let variant = selectedVariant();
@@ -102,13 +102,13 @@
 //   variant: function () {
 //     return selectedVariant();
 //   }
-// });
+});
 
-// /**
-//  * productImageGallery onRendered
-//  */
+/**
+ * productImageGallery onRendered
+ */
 
-// Template.productImageGallery.onRendered(function () {
+Template.productImageGallery.onRendered(function () {
 //   return this.autorun(function () {
 //     let $gallery;
 //     if (EFrameworkCore.hasAdminAccess()) {
@@ -136,12 +136,12 @@
 //       });
 //     }
 //   });
-// });
+});
 
-// /**
-//  * productImageGallery events
-//  */
-// Template.productImageGallery.events({
+/**
+ * productImageGallery events
+ */
+Template.productImageGallery.events({
 //   "mouseenter .gallery > li": function (event) {
 //     let ids = [];
 //     event.stopImmediatePropagation();
@@ -203,26 +203,26 @@
 //     updateImagePriorities();
 //   },
 //   "dropped #galleryDropPane": uploadHandler
-// });
+});
 
 
-// /**
-//  * imageUploader events
-//  */
+/**
+ * imageUploader events
+ */
 
-// Template.imageUploader.events({
+Template.imageUploader.events({
 //   "click #btn-upload": function () {
 //     return $("#files").click();
 //   },
 //   "change #files": uploadHandler,
 //   "dropped #dropzone": uploadHandler
-// });
+});
 
-// /**
-//  * productImageGallery events
-//  */
+/**
+ * productImageGallery events
+ */
 
-// Template.productImageGallery.events({
+Template.productImageGallery.events({
 //   "click #img-upload": function () {
 //     return $("#files").click();
 //   },
@@ -230,4 +230,4 @@
 //     return Session.set("variantImgSrc", template.$(".img-responsive").attr(
 //       "src"));
 //   }
-// });
+});

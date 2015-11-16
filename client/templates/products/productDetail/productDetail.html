@@ -53,8 +53,7 @@
 				<div class="row">
 					<!-- BEGIN Left Side -->
 					<div class="col-sm-5 pdp-left-column">
-						<!-- TODO : Descomentar -->
-						<!-- {{> productImageGallery}} -->
+						{{> productImageGallery}}
 						<h3 data-i18n="productDetail.tags">Tags</h3>
 						<!--
 							Se llama al helper productDetail.tagsComponent ( el cual retorna un Template) y se le pasa como parametro data "tags", que corresponde al resultado del helper productDetail.tags (retorna un arreglo de tags)
@@ -62,7 +61,7 @@
 						{{>tagsComponent tags=tags}}
 						<!-- Detalles del producto -->
 						<h3 data-i18n="productDetail.details">Details</h3>
-						<!-- metaComponent eliige el template adecuado de acuerdo con los permisos del usuario -->
+						<!-- metaComponent elige el template adecuado de acuerdo con los permisos del usuario -->
 						{{> metaComponent }}
 					</div>
 					<!-- END Left Side -->
@@ -79,6 +78,7 @@
 							<div class="col-xs-3 col-xs-offset-1">
 								{{!-- Social Commentary --}}
 								{{#if hasPermission "createProduct"}}
+								<!-- TODO: descomentar social-media
 									<div class="social-media">
 										<a href="#"><i class="fa fa-facebook fa-lg"></i></a>
 										<a href="#"><i class="fa fa-twitter fa-lg"></i></a>
@@ -91,6 +91,7 @@
 										{{>fieldComponent field="googleplusMsg" value=googleplusMsg}}
 										</div>
 									</div>
+									-->
 								{{else}}
 									<!-- TODO: descomentar-->
 									<!--{{> productSocial }}-->
@@ -108,7 +109,6 @@
 							{{!-- Variants & Options --}}
 							<div class="row options-add-to-cart">
 								<h3 data-i18n="productDetail.options">Options</h3>
-								<!-- TODO : Descomentar -->
 								{{>variantList}}
 							</div>
 

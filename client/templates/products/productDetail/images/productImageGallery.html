@@ -3,20 +3,19 @@
 	<div id="galleryDropPane" class="galleryDropPane">
 		<ul class="gallery">
 			{{#each media}}
-				<!-- TODO :descomentar-->
-				<!-- {> imageDetail}} -->
+				{> imageDetail}}
 			{{else}}
 				<li>
 					<img src= "/resources/placeholder.gif" class="img-responsive" id="img-upload">
 				</li>
 			{{/each}}
 		</ul>
-		<!-- TODO :descomentar-->
-		<!-- {{>imageUploader}} -->
+		{{>imageUploader}}
 	</div>
 </template>
 
-<!-- <template name="imageDetail">
+<!-- TODO -->
+<template name="imageDetail">
   <li class="gallery-sortable" data-index="{{_id}}">
     <img src="{{url uploading='/resources/placeholder.gif' storing='/resources/placeholder.gif' store='large'}}" class="img-responsive" alt="{{title}}">
     {{#unless this.isUploaded}}
@@ -30,6 +29,7 @@
   </li>
 </template>
 
+<!-- TODO -->
 <template name="imageUploader">
 {{#if hasPermission "createProduct"}}
   <div id="dropzone" class="dropzone">
@@ -37,4 +37,4 @@
     <div class="btn btn-default btn-block" id="btn-upload" data-i18n="productDetail.dropFile">Drop file to upload</div>
   </div>
 {{/if}}
-</template> -->
+</template>

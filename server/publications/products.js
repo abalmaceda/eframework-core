@@ -4,6 +4,7 @@
  * @param {Array} shops - array of shopId to retrieve product from.
  * @return {Object} return product cursor
  */
+ /*TODO*/
 Meteor.publish("Products", function (productScrollLimit, shops) {
   check(productScrollLimit, Match.OneOf(null, undefined, Number));
   check(shops, Match.Optional(Array));
@@ -52,6 +53,7 @@ Meteor.publish("Products", function (productScrollLimit, shops) {
  * @param {String} productId - productId
  * @return {Object} return product cursor
  */
+ /*TODO*/
 Meteor.publish("Product", function (productId) {
   check(productId, String);
   let shop = EFrameworkCore.getCurrentShop(this);
@@ -81,6 +83,7 @@ Meteor.publish("Product", function (productId) {
 * Tags detail publication
 * @return {Object} return tag cursor
 */
+/*TODO*/
 Meteor.publish("Tags", function () {
 	return EFrameworkCore.Collections.Tags.find({
 		shopId: EFrameworkCore.getShopId()

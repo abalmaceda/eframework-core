@@ -96,7 +96,7 @@ _.extend(EFrameworkCore, {
 		let adminPermissions = ["owner", "admin"];
 		return this.hasPermission(adminPermissions);
 	},
-	
+
 	/**
 	 * @summary Determina si el usuario actual tiene permisos para acceder al dashboard
 	 * @return {boolean} True si tiene permisos de acceso al dashboard
@@ -134,16 +134,17 @@ _.extend(EFrameworkCore, {
 //     return Roles.getGroupsForUser(this.userId, "admin");
 //   },
 
-//   /**
-//    * @description showActionView
-//    *
-//    * @param {String} viewData {label, template, data}
-//    * @returns {String} Session "admin/showActionView"
-//    */
-//   showActionView: function (viewData) {
-//     Session.set("admin/showActionView", true);
-//     EFrameworkCore.setActionView(viewData);
-//   },
+	/**
+	* @description showActionView
+	* @summary
+	* @param {String} viewData {label, template, data}
+	* @returns {String} Session "admin/showActionView"
+	* @todo
+	*/
+	showActionView: function (viewData) {
+		Session.set("admin/showActionView", true);
+		EFrameworkCore.setActionView(viewData);
+	},
 
 	/* TODO: entender esta funcion. */
 	isActionViewOpen: function () {
@@ -251,7 +252,7 @@ EFrameworkCore.Log.level(isDebug);
  * registerLoginHandler
  * method to create anonymous users
  */
-
+/*TODO*/
 Accounts.loginWithAnonymous = function (anonymous, callback) {
   Accounts.callLoginMethod({
     methodArguments: [{
@@ -265,7 +266,7 @@ Accounts.loginWithAnonymous = function (anonymous, callback) {
  *  Startup Reaction
  *  Init Reaction client
  */
-
+/*TODO*/
 Meteor.startup(function () {
   // warn on insecure exporting of PackageRegistry settings
   if (typeof PackageRegistry !== "undefined" && PackageRegistry !== null) {

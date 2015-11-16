@@ -48,10 +48,9 @@
 				{{else}}
 					<span class="product-image" style="background-image: url(/resources/placeholder.gif)"></span>
 				{{/with}}
-				
+
 			</div>
 
-			<!--
 			{{#if additionalMedia}}
 				{{#if isMediumWeight}}
 					<div class="product-additional-images">
@@ -61,7 +60,6 @@
 					</div>
 				{{/if}}
 			{{/if}}
-			-->
 		</a>
 
 		{{> gridControls}}
@@ -75,7 +73,7 @@
 	Se muestra información cuando:
 	- Backorder
 	- No hay Stock
-	- Queda poco 
+	- Queda poco
 -->
  <!-- TODO: More Info Backorder -->
 <template name="gridNotice">
@@ -92,7 +90,7 @@
 	{{/if}}
 </template>
 
-<!-- 
+<!--
 	Muestra información extra del producto
 	TITULO y PRECIO
 -->
@@ -113,31 +111,24 @@
 	- Clonar producto
 	- Eliminar producto
 	- Publicar producto
-	- 
+	-
 -->
- <!-- TODO : agregar opcion faltante de admin-->
 <template name="gridControls">
 	{{#if hasPermission "createProduct"}}
 		<div class="product-grid-controls">
-			<button
-			class="publish-product"
-			data-toggle="tooltip"
-			title="{{i18n 'productDetailEdit.publish' 'Publish'}}"
-			data-original-title="{{i18n 'productDetailEdit.publish' 'Publish'}}"
-			>
+			<button class="publish-product" data-toggle="tooltip" title="{{i18n 'productDetailEdit.publish' 'Publish'}}" data-original-title="{{i18n 'productDetailEdit.publish' 'Publish'}}" >
+				<!-- Si es visible, agrego opcion-->
 				{{#if isVisible}}
 					<i class="fa fa-eye"></i>
+				<!-- Si el producto no es visible, agrego boton para hacerlo visible-->
 				{{else}}
 					<i class="fa fa-eye-slash"></i>
 				{{/if}}
 			</button>
 
-			<button
-			class="admin-controls-open"
-			data-toggle="dropdown"
-			title="{{i18n 'productDetailEdit.moreOptions' 'More Options'}}"
-			data-original-title="{{i18n 'productDetailEdit.moreOptions' 'More Options'}}"
-			data-event-action="showProductSettings">
+			<!-- Boton de para ver mas opciones -->
+			<!-- Puedo utilizar los helper del padre, por eso puedo agregar data-event-action="showProductSettings el cual -->
+			<button class="admin-controls-open" data-toggle="dropdown" title="{{i18n 'productDetailEdit.moreOptions' 'More Options'}}" data-original-title="{{i18n 'productDetailEdit.moreOptions' 'More Options'}}" data-event-action="showProductSettings">
 				<i class="fa fa-gear"></i>
 			</button>
 		</div>

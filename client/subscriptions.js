@@ -50,5 +50,8 @@ EFrameworkCore.Subscriptions.Packages = Meteor.subscribe("Packages");
 /* TODO: Por que es necesario tener una subscripcion de tags */
 EFrameworkCore.Subscriptions.Tags = Meteor.subscribe("Tags");
 
-// EFrameworkCore.Subscriptions.Media =
-//   Meteor.subscribe("Media");
+/**
+ * @summary Suscripcion al collection "Media"
+ * @todo Mas descripcion sobre "Media"
+ */
+EFrameworkCore.Subscriptions.Media = Meteor.subscribe("Media");

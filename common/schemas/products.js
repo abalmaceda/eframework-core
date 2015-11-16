@@ -37,6 +37,7 @@ EFrameworkCore.Schemas.VariantMedia = new SimpleSchema({
 /**
  * ProductPosition Schema
  */
+ /* TODO */
 EFrameworkCore.Schemas.ProductPosition = new SimpleSchema({
   tag: {
     type: String,
@@ -65,175 +66,173 @@ EFrameworkCore.Schemas.ProductPosition = new SimpleSchema({
 /**
  * ProductVariant Schema
  */
-
+/* TODO */
 EFrameworkCore.Schemas.ProductVariant = new SimpleSchema({
-  _id: {
-    type: String
-  },
-  parentId: {
-    type: String,
-    optional: true
-  },
-  cloneId: {
-    type: String,
-    optional: true
-  },
-  index: {
-    type: String,
-    optional: true
-  },
-  barcode: {
-    label: "Barcode",
-    type: String,
-    optional: true,
-    custom: function () {
-      if (Meteor.isClient) {
-        if (this.siblingField("type").value === "inventory" && !this.value) {
-          return "required";
-        }
-      }
-    }
-  },
-  compareAtPrice: {
-    label: "MSRP",
-    type: Number,
-    optional: true,
-    decimal: true,
-    min: 0
-  },
-  fulfillmentService: {
-    label: "Fulfillment service",
-    type: String,
-    optional: true
-  },
-  weight: {
-    label: "Weight",
-    type: Number,
-    min: 0,
-    optional: true,
-    custom: function () {
-      if (Meteor.isClient) {
-        if (!(this.siblingField("type").value === "inventory" || this.value ||
-            this.value === 0)) {
-          return "required";
-        }
-      }
-    }
-  },
-  inventoryManagement: {
-    type: Boolean,
-    label: "Inventory Tracking",
-    optional: true,
-    custom: function () {
-      if (Meteor.isClient) {
-        if (!(this.siblingField("type").value === "inventory" || this.value ||
-            this.value === false)) {
-          return "required";
-        }
-      }
-    }
-  },
-  inventoryPolicy: {
-    type: Boolean,
-    label: "Deny when out of stock",
-    optional: true,
-    custom: function () {
-      if (Meteor.isClient) {
-        if (!(this.siblingField("type").value === "inventory" || this.value ||
-            this.value === false)) {
-          return "required";
-        }
-      }
-    }
-  },
-  lowInventoryWarningThreshold: {
-    type: Number,
-    label: "Warn @",
-    min: 0,
-    optional: true
-  },
-  inventoryQuantity: {
-    type: Number,
-    label: "Quantity",
-    optional: true,
-    custom: function () {
-      if (Meteor.isClient) {
-        if (this.siblingField("type").value !== "inventory") {
-          if (checkChildVariants(this.docId) === 0 && !this.value) {
-            return "required";
-          }
-        }
-      }
-    }
-  },
-  price: {
-    label: "Price",
-    type: Number,
-    decimal: true,
-    min: 0,
-    optional: true,
-    custom: function () {
-      if (Meteor.isClient) {
-        if (this.siblingField("type").value !== "inventory") {
-          if (checkChildVariants(this.docId) === 0 && !this.value) {
-            return "required";
-          }
-        }
-      }
-    }
-  },
-  sku: {
-    label: "SKU",
-    type: String,
-    optional: true
-  },
-  type: {
-    label: "Type",
-    type: String,
-    defaultValue: "variant"
-  },
-  taxable: {
-    label: "Taxable",
-    type: Boolean,
-    optional: true
-  },
-  title: {
-    label: "Label",
-    type: String,
-    optional: true,
-    custom: function () {
-      if (Meteor.isClient) {
-        if (!(this.siblingField("type").value === "inventory" || this.value)) {
-          return "required";
-        }
-      }
-    }
-  },
-  optionTitle: {
-    label: "Option",
-    type: String,
-    optional: true
-  },
-  metafields: {
-    type: [EFrameworkCore.Schemas.Metafield],
-    optional: true
-  },
-  createdAt: {
-    label: "Created at",
-    type: Date,
-    optional: true
-  },
-  updatedAt: {
-    label: "Updated at",
-    type: Date,
-    optional: true
-  }
+	_id: {
+		type: String
+	},
+	parentId: {
+		type: String,
+		optional: true
+	},
+	cloneId: {
+		type: String,
+		optional: true
+	},
+	index: {
+		type: String,
+		optional: true
+	},
+	barcode: {
+		label: "Barcode",
+		type: String,
+		optional: true,
+		custom: function () {
+			if (Meteor.isClient) {
+				if (this.siblingField("type").value === "inventory" && !this.value) {
+					return "required";
+				}
+			}
+		}
+	},
+	/* TODO : No entiendo que es esto */
+	compareAtPrice: {
+		label: "MSRP",
+		type: Number,
+		optional: true,
+		decimal: true,
+		min: 0
+	},
+	fulfillmentService: {
+		label: "Fulfillment service",
+		type: String,
+		optional: true
+	},
+	weight: {
+		label: "Weight",
+		type: Number,
+		min: 0,
+		optional: true,
+		custom: function () {
+			if (Meteor.isClient) {
+				if (!(this.siblingField("type").value === "inventory" || this.value || this.value === 0)) {
+					return "required";
+				}
+			}
+		}
+	},
+	inventoryManagement: {
+		type: Boolean,
+		label: "Inventory Tracking",
+		optional: true,
+		custom: function () {
+			if (Meteor.isClient) {
+				if (!(this.siblingField("type").value === "inventory" || this.value || this.value === false)) {
+					return "required";
+				}
+			}
+		}
+	},
+	inventoryPolicy: {
+		type: Boolean,
+		label: "Deny when out of stock",
+		optional: true,
+		custom: function () {
+			if (Meteor.isClient) {
+				if (!(this.siblingField("type").value === "inventory" || this.value || this.value === false)) {
+					return "required";
+				}
+			}
+		}
+	},
+	lowInventoryWarningThreshold: {
+		type: Number,
+		label: "Warn @",
+		min: 0,
+		optional: true
+	},
+		inventoryQuantity: {
+		type: Number,
+		label: "Quantity",
+		optional: true,
+		custom: function () {
+			if (Meteor.isClient) {
+				if (this.siblingField("type").value !== "inventory") {
+					if (checkChildVariants(this.docId) === 0 && !this.value) {
+						return "required";
+					}
+				}
+			}
+		}
+	},
+	price: {
+		label: "Price",
+		type: Number,
+		decimal: true,
+		min: 0,
+		optional: true,
+		custom: function () {
+			if (Meteor.isClient) {
+				if (this.siblingField("type").value !== "inventory") {
+					if (checkChildVariants(this.docId) === 0 && !this.value) {
+						return "required";
+					}
+				}
+			}
+		}
+	},
+	sku: {
+		label: "SKU",
+		type: String,
+		optional: true
+	},
+	type: {
+		label: "Type",
+		type: String,
+		defaultValue: "variant"
+	},
+	taxable: {
+		label: "Taxable",
+		type: Boolean,
+		optional: true
+	},
+	title: {
+		label: "Label",
+		type: String,
+		optional: true,
+		custom: function () {
+			if (Meteor.isClient) {
+				if (!(this.siblingField("type").value === "inventory" || this.value)) {
+					return "required";
+				}
+			}
+		}
+	},
+	optionTitle: {
+		label: "Option",
+		type: String,
+		optional: true
+	},
+	metafields: {
+		type: [EFrameworkCore.Schemas.Metafield],
+		optional: true
+	},
+	createdAt: {
+		label: "Created at",
+		type: Date,
+		optional: true
+	},
+	updatedAt: {
+		label: "Updated at",
+		type: Date,
+		optional: true
+	}
 });
 
 /**
  * Product Schema
  */
-
+/* TODO */
 EFrameworkCore.Schemas.Product = new SimpleSchema({
   _id: {
     type: String,

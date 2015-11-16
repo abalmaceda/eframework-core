@@ -1,33 +1,38 @@
-// /**
-//  * productMetaFieldForm events
-//  */
-
-// Template.productMetaFieldForm.events({
-//   "click .metafield-remove": function () {
-//     let productId;
-//     productId = selectedProductId();
-//     return Products.update(productId, {
-//       $pull: {
-//         metafields: this
-//       }
-//     });
-//   }
-// });
 
 /**
- * metaComponent helpers
+ * @summary Eventos de Template.productMetaFieldForm
  */
+Template.productMetaFieldForm.events({
+	/**
+	 * @summary Remueve el metafield (this) del producto actual
+	 * @event click .metafield-remove
+	 * @returns {void}
+	 */
+	"click .metafield-remove": function () {
+		let productId;
+		let updateMeta;
+		/*Obtengo el productId del producto al cual deseo eliminar el metafield*/
+		productId = selectedProductId();
 
+		/* Remuevo el metafield*/
+		Meteor.call( "products/removeMetaFields", productId, this);
+		return Tracker.flush();
+	}
+});
+
+/**
+ * @summary Eventos de Template.metaComponent
+ */
 Template.metaComponent.events({
 	/**
-	* Graba los cambios en los campos simplemente cambiando el foco.
+	* @summary Graba los cambios en los campos simplemente cambiando el foco.
 	* @note Se guarda automaticamente. No es necesario presionar un boton guardar.
 	* @event name [description]
 	* Event tags
 	* @param event [Event] Información de los elemntos DOM del contexto
 	* @todo Comentar código
 	*/
-	
+
 	"change input": function (event) {
 		/* Obtengo los valores a guardar*/
 		let updateMeta = {
@@ -38,21 +43,17 @@ Template.metaComponent.events({
 		if (this.key) {
 			let productId = selectedProductId();
 			/* Notar que al entregar un terecer atributo ( no null )"products/updateMetaFields" es para hacer update de un metada existente */
-			Meteor.call(
-				"products/updateMetaFields",
-				productId,
-				updateMeta,
-				this/*,
+			Meteor.call( "products/updateMetaFields", productId, updateMeta, this/*,
 				function (error, results) {
 					if( results){
-						// Animación de feedback para mostrar un update correcto 
+						// Animación de feedback para mostrar un update correcto
 						$(event.currentTarget).animate({ backgroundColor: "#e2f2e2" }).animate({ backgroundColor: "#fff" });
 					}
 					else{
 						$(event.currentTarget).animate({ backgroundColor: "#e2f2e2" }).animate({ backgroundColor: "#fff" });
 					}
 				}*/
-				);
+			);
 			$(event.currentTarget).animate({ backgroundColor: "#e2f2e2" }).animate({ backgroundColor: "#fff" });
 			/* Para ejecutar acciones inmediatamente en caso de existir errores*/
 			return Tracker.flush();
@@ -72,5 +73,5 @@ Template.metaComponent.events({
 			return $(event.currentTarget).parent().children(".metafield-value-input").val("");
 		}
 	}
-	
+
 });
