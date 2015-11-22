@@ -1,10 +1,9 @@
-/*TODO*/
-
 /**
- * productDetail helpers
+ * Template.productDetail.helpers
+ * @summary Helpers para Template.productDetail
  */
 Template.productDetail.helpers({
-	/** 
+	/**
 	* Retorna los tags do producto seleccionado actualmente
 	* @return [Template]
 	*/
@@ -20,7 +19,7 @@ Template.productDetail.helpers({
 	},
 	/**
 	* @summary Retorna el Template de descripción de los Tags dependiendo si es propietario o no
-	* @return [Template] 
+	* @return [Template]
 	*/
 	tagsComponent: function () {
 		if (EFrameworkCore.hasPermission("createProduct")) {
@@ -30,7 +29,7 @@ Template.productDetail.helpers({
 	},
 	/**
 	* @summary Retorna el Template de descripción de los Tags dependiendo si es propietario o no
-	* @return [Template] 
+	* @return [Template]
 	*/
 	actualPrice: function () {
 		let childVariants;
@@ -40,7 +39,7 @@ Template.productDetail.helpers({
 		if (product && current) {
 			childVariants = (function () {
 				let _results = [];
-				/* TODO : ( NO estoy seguro ) En este for se verifica que cada variant.parendId en el product sea igual al current._id 
+				/* TODO : ( NO estoy seguro ) En este for se verifica que cada variant.parendId en el product sea igual al current._id
 					Si el current._id pertenece al variant seleccionado. Entonces solo habría uno.... Tal vez me falta entender mejor que es un Variant.
 					PArece que ve todos los variants, con la idea de poner el invervalo de precios.
 				*/
@@ -83,7 +82,10 @@ Template.productDetail.helpers({
 	}
 });
 
-/** productDetail events */
+/**
+ * Template.productDetail.events
+ * @summary Events para Template.productDetail
+ */
 Template.productDetail.events({
 //   "click #price": function () {
 //     let formName;

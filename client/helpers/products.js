@@ -45,6 +45,7 @@ currentProduct = this.currentProduct;
 
 /**
  * setCurrentVariant
+ * @summary
  * @param {String} variantId - settear actual variantId
  * @return {void}
  * @todo Entender para que se utiliza esto.
@@ -68,8 +69,10 @@ this.setCurrentVariant = function (variantId) {
 
 /**
  * setCurrentProduct
+ * @summary
  * @param {String} productId - set current productId
  * @return {undefined}
+ * @todo Entender para que se utiliza esto.
  */
 this.setCurrentProduct = function (productId) {
   let currentId;
@@ -91,6 +94,7 @@ this.setCurrentProduct = function (productId) {
  * selectedVariant
  * @summary get the currently active/requested variant object
  * @return {Object} currently selected variant object
+ * @todo Entender para que se utiliza esto.
  */
 this.selectedVariant = function () {
   let id;
@@ -114,6 +118,7 @@ this.selectedVariant = function () {
 * selectedProduct
 * @summary Obtiene el objeto del producto actual active/requested
 * @return {Product} el puntero del producto actualmente seleccionado
+* @todo Documentar
 */
 this.selectedProduct = function () {
 	let id;
@@ -125,6 +130,7 @@ this.selectedProduct = function () {
  * selectedProductId
  * @summary Obtener el producto actualmente active/requested
  * @return {String} id del producto actual seleccionado
+ * @todo Documentar
  */
 this.selectedProductId = function () {
 	return currentProduct.get("productId");
@@ -134,6 +140,7 @@ this.selectedProductId = function () {
  * selectedVariantId
  * @summary get the currently active/requested variant
  * @return {String} currently selected variant id
+ * @todo Documentar
  */
 this.selectedVariantId = function () {
   let id = currentProduct.get("variantId");
@@ -170,6 +177,7 @@ this.selectedVariantId = function () {
  * @summary return number of child variants for a parent
  * @param {String} parentVariantId - parentVariantId
  * @return {Number} count of childVariants for this parentVariantId
+ * @todo Documentar
  */
 this.checkChildVariants = function (parentVariantId) {
   let product = selectedProduct();
@@ -196,6 +204,7 @@ this.checkChildVariants = function (parentVariantId) {
  * @summary return number of inventory variants for a parent
  * @param {String} parentVariantId - parentVariantId
  * @return {Number} count of inventory variants for this parentVariantId
+ * @todo Documentar
  */
 this.checkInventoryVariants = function (parentVariantId) {
   let product = selectedProduct();
@@ -225,6 +234,7 @@ this.checkInventoryVariants = function (parentVariantId) {
  * @param {String} currentVariantId - currentVariantId
  * @param {String} currentProductId - currentProductId
  * @return {String} formatted price or price range
+ * @todo Documentar
  */
 this.getVariantPriceRange = function (currentVariantId, currentProductId) {
   let productId = currentProductId || selectedProductId();
@@ -277,7 +287,6 @@ this.getVariantPriceRange = function (currentVariantId, currentProductId) {
   return `${priceMin} - ${priceMax}`;
 };
 
-/* TODO */
 /**
  * getProductPriceRange
  * @summary get price range of a product
@@ -286,6 +295,7 @@ this.getVariantPriceRange = function (currentVariantId, currentProductId) {
  * @todo remove string return and replace with object
  * @param {String} currentProductId - currentProductId
  * @return {String} formatted price or price range
+ * @todo Documentar
  */
 this.getProductPriceRange = function (currentProductId) {
   let productId = currentProductId || selectedProductId();

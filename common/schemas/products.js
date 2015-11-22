@@ -242,6 +242,7 @@ EFrameworkCore.Schemas.Product = new SimpleSchema({
     type: String,
     optional: true
   },
+  /*TODO: Entender que es esto */
   shopId: {
     type: String,
     autoValue: EFrameworkCore.shopIdAutoValue,
@@ -264,10 +265,12 @@ EFrameworkCore.Schemas.Product = new SimpleSchema({
     type: String,
     defaultValue: "simple"
   },
+  /*TODO: Entender que es esto */
   vendor: {
     type: String,
     optional: true
   },
+  /*Corresponden a una cualidad que permite identificar a un producto de sus semejantes.*/
   metafields: {
     type: [EFrameworkCore.Schemas.Metafield],
     optional: true
@@ -318,27 +321,33 @@ EFrameworkCore.Schemas.Product = new SimpleSchema({
     type: String,
     optional: true
   },
+  /*TODO: Entender que es esto */
   handle: {
     type: String,
     optional: true,
     index: 1
   },
+  /*TODO: Entender que es esto */
   isVisible: {
     type: Boolean,
     index: 1
   },
+  /*TODO: Entender que es esto */
   publishedAt: {
     type: Date,
     optional: true
   },
+  /*TODO: Entender que es esto */
   publishedScope: {
     type: String,
     optional: true
   },
+  /*TODO: Entender que es esto */
   templateSuffix: {
     type: String,
     optional: true
   },
+  /*TODO: Entender que es esto */
   createdAt: {
     type: Date,
     autoValue: function () {
@@ -351,6 +360,7 @@ EFrameworkCore.Schemas.Product = new SimpleSchema({
       }
     }
   },
+  /*TODO: Entender que es esto */
   updatedAt: {
     type: Date,
     autoValue: function () {

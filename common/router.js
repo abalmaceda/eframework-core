@@ -17,7 +17,7 @@ Router.configure({
 	onRun: function () {
 		$(window).scrollTop(0);
 		/* TODO: descomentar  1 linea */
-		//EFrameworkCore.clearActionView();
+		EFrameworkCore.clearActionView();
 		this.next();
 	},
 
@@ -33,7 +33,7 @@ Router.configure({
 				this.layout("coreAdminLayout");
 				// Find a registry entry for this page that provides settings
 				// -- Settings is the default view for the "Action View"
-				
+
 				EFrameworkCore.setActionView();
 				 this.render("dashboardPackages")
 				$("body").addClass("admin");
@@ -217,7 +217,7 @@ Router.map(function () {
 	/**
 	 * @summary Ruta para acceder a los productos que tienen determinado tag.
 	 * @param {String} _id - tagId
-	 * @returns {void} 
+	 * @returns {void}
 	 * @todo Descripcion
 	 */
 	this.route("product/tag", {
@@ -240,19 +240,19 @@ Router.map(function () {
 			}
 		}
 	});
-	
+
 	/**
 	 * @summary Ruta para acceder a los detalles de un producto.
 	 * @param {String} _id - productId
 	 * @param {String} variant -
-	 * @returns {void} 
+	 * @returns {void}
 	 * @todo Descripcion
 	 */
 	this.route("product", {
 		controller: ShopController,
 		path: "product/:_id/:variant?",
 		template: "productDetail",
-		subscriptions: function () {
+		waitOn: function () {
 			return this.subscribe("Product", this.params._id);
 		},
 		onBeforeAction: function () {

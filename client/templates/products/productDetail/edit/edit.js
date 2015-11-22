@@ -1,24 +1,30 @@
-/* TODO */
-
 /**
- * productDetailEdit helpers
+ * Template.productDetailEdit.helpers
+ * @summary Helpers para Template.productDetailEdit
  */
-
 Template.productDetailEdit.helpers({
-	// i18nPlaceholder: function () {
-	// 	i18nextDep.depend();
-	// 	let i18nKey = `productDetailEdit.${this.field}`;
-	// 	if (i18n.t(i18nKey) === i18nKey) {
-	// 		EFrameworkCore.Log.info(`returning empty placeholder productDetailEdit: ${i18nKey} no i18n key found.`);
-	// 	}
-	// 	else {
-	// 		return i18n.t(i18nKey);
-	// 	}
-	// }
+	/**
+	 * i18nPlaceholder
+	 * @summary Obtiene el texto Localizado para utilizar en la componente actual (elemento HTML) como PlaceHolder.
+	 * @return {String} Si existe, retorna el texto localizado. En caso contratio no retorna nada.
+	 */
+	i18nPlaceholder: function () {
+		i18nextDep.depend();
+		let i18nKey = `productDetailEdit.${this.field}`;
+		if (i18n.t(i18nKey) === i18nKey) {
+			EFrameworkCore.Log.info(`returning empty placeholder productDetailEdit: ${i18nKey} no i18n key found.`);
+		}
+		else {
+			return i18n.t(i18nKey);
+		}
+	}
 });
 
 
-/** productDetailEdit events */
+/**
+ * Template.productDetailEdit.events
+ * @summary Events para Template.productDetailEdit
+ */
 Template.productDetailEdit.events({
 	/**
 	 * @summary Evento que se ejecuta cuando se detecta cambios de input en el textarea.
@@ -49,7 +55,10 @@ Template.productDetailEdit.events({
 	}
 });
 
-/* productDetailField events */
+/**
+ * Template.productDetailField.events
+ * @summary Events para Template.productDetailField
+ */
 Template.productDetailField.events({
 	/**
 	 * @summary.
@@ -67,7 +76,7 @@ Template.productDetailField.events({
 			return $(`.${this.field}-edit-input`).focus();
 		}
 	}
-	
+
 });
 
 /**

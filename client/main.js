@@ -146,12 +146,22 @@ _.extend(EFrameworkCore, {
 		EFrameworkCore.setActionView(viewData);
 	},
 
-	/* TODO: entender esta funcion. */
+	/**
+	 * isActionViewOpen
+	 * @summary
+	 * @returns {}
+	 * @todo Documentar
+	 */
 	isActionViewOpen: function () {
 		return Session.equals("admin/showActionView", true);
 	},
 
-	/* TODO: entender esta funcion. */
+	/**
+	 * setActionView
+	 * @summary
+	 * @returns {}
+	 * @todo Documentar
+	 */
 	setActionView: function (viewData) {
 		if (viewData) {
 			Session.set("admin/actionView", viewData);
@@ -169,7 +179,12 @@ _.extend(EFrameworkCore, {
 		}
 	},
 
-	/* TODO: entender esta funcion. */
+	/**
+	 * getActionView
+	 * @summary
+	 * @returns {}
+	 * @todo Documentar
+	 */
 	getActionView: function () {
 		return Session.get("admin/actionView");
 	},
@@ -178,9 +193,16 @@ _.extend(EFrameworkCore, {
 //     Session.set("admin/showActionView", false);
 //   },
 
-//   clearActionView: function () {
-//     Session.set("admin/actionView", undefined);
-//   },
+	/**
+	 * clearActionView
+	 * @summary
+	 * @returns {}
+	 * @todo Documentar
+	 */
+	clearActionView: function () {
+		/*TODO: Por que undefined y no null ????*/
+		Session.set("admin/actionView", undefined);
+	},
 
 //   getCurrentTag: function () {
 //     if (Router.current().route.getName() === "/product/tag") {

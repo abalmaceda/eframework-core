@@ -3,45 +3,68 @@
  */
 
 Template.childVariantForm.helpers({
-//   childVariantFormId: function () {
-//     return "child-variant-form-" + this._id;
-//   },
+	/**
+	 * childVariantFormId
+	 * @summary
+	 * @returns {String}
+	 * @todo Documentar
+	 */
+	childVariantFormId: function () {
+		return "child-variant-form-" + this._id;
+	},
 	/**
 	 * @summary
 	 * @returns {Boolean} True
-	 * @todo DESCRIPCIÓN
+	 * @todo Documentar
 	 */
 	hasInventoryVariants: function () {
 		if (checkInventoryVariants(this._id) > 0) {
 			return true;
 		}
 	},
-//   inventoryVariants: function () {
-//     let product = selectedProduct();
-//     if (!product) {
-//       return [];
-//     }
-//     let _results = [];
-//     for (let variant of product.variants) {
-//       if ((variant !== null ? variant.parentId : void 0) === this._id &&
-//         variant.type === "inventory") {
-//         _results.push(variant);
-//       }
-//     }
-//     return _results.reverse();
-//   },
-//   showInventoryVariants: function () {
-//     if (Session.get("showInventoryVariants" + this._id)) {
-//       return "";
-//     }
-//     return "hidden";
-//   },
-//   editInventoryToggleText: function () {
-//     if (Session.get("showInventoryVariants" + this._id)) {
-//       return i18n.t("productDetail.hideBarcodes");
-//     }
-//     return i18n.t("productDetail.showBarcodes");
-//   }
+
+	/**
+	 * inventoryVariants
+	 * @summary
+	 * @returns {Variant[]}
+	 * @todo Documentar
+	 */
+	 /*TODO: Que es un inventory variant*/
+	inventoryVariants: function () {
+		let product = selectedProduct();
+		if (!product) {
+			return [];
+		}
+		let _results = [];
+		for (let variant of product.variants) {
+			if ((variant !== null ? variant.parentId : void 0) === this._id && variant.type === "inventory") {
+				_results.push(variant);
+			}
+		}
+		return _results.reverse();
+	},
+	/**
+	 * @summary Entrega clase CSS para esconder o visualizar el inventario
+	 * @returns {String} String correspondiente a clase CSS
+	 * @todo Documentar
+	 */
+	showInventoryVariants: function () {
+		if (Session.get("showInventoryVariants" + this._id)) {
+			return "";
+		}
+		return "hidden";
+	},
+	/**
+	 * @summary Texto que debe tener el bóton edit inventory
+	 * @returns {String} texto
+	 * @todo Documentar
+	 */
+	editInventoryToggleText: function () {
+		if (Session.get("showInventoryVariants" + this._id)) {
+			return i18n.t("productDetail.hideBarcodes");
+		}
+		return i18n.t("productDetail.showBarcodes");
+	}
 });
 
 /**
@@ -49,16 +72,23 @@ Template.childVariantForm.helpers({
  * @summary Events para Template.childVariantForm
  */
 Template.childVariantForm.events({
-//   "click .child-variant-form :input, click li": function (event, template) {
-//     return setCurrentVariant(template.data._id);
-//   },
-//   "click .edit-inventory-variants": function () {
-//     let showInventoryVariantsId = "showInventoryVariants" + this._id;
-//     if (!Session.get(showInventoryVariantsId)) {
-//       return Session.set(showInventoryVariantsId, true);
-//     }
-//     return Session.set(showInventoryVariantsId, false);
-//   },
+	"click .child-variant-form :input, click li": function (event, template) {
+	return setCurrentVariant(template.data._id);
+	},
+
+	/**
+	 * @summary Elimina un child Variant
+	 * @event click .edit-inventory-variants
+	 * @returns {void}
+	 */
+	"click .edit-inventory-variants": function () {
+		let showInventoryVariantsId = "showInventoryVariants" + this._id;
+		/*Se guarda el estado en una variable Session, para que todo siga igual incluso si me cambio de pagina dentro del sitio*/
+		if (!Session.get(showInventoryVariantsId)) {
+			return Session.set(showInventoryVariantsId, true);
+		}
+		return Session.set(showInventoryVariantsId, false);
+	},
 
 	/**
 	 * @summary Elimina un child Variant

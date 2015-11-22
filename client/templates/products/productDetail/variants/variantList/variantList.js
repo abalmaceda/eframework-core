@@ -100,11 +100,20 @@ Template.variantList.events({
   "click #create-variant": function(event) {
     return Meteor.call("products/createVariant", this._id);
   },
-//   "click .variant-select-option": function(event, template) {
-//     template.$(".variant-select-option").removeClass("active");
-//     $(event.target).addClass("active");
-//     Alerts.removeSeen();
-//     return setCurrentVariant(this._id);
-//   }
+	/**
+	* @summary Se guarda en una variable la nueva variant seleccionada
+	* @event click .variant-select-option
+	* @returns {}
+	*/
+	"click .variant-select-option": function(event, template) {
+		/*Se elimina el feedback de seleccion de la seleccion previa( de existir ) de un variant*/
+		template.$(".variant-select-option").removeClass("active");
+		/*Se agrega feedback de selecciòn de variant*/
+		$(event.target).addClass("active");
+		/*TODO: entender que hace esto*/
+		Alerts.removeSeen();
+		/*Se guarda el variant actual seleccionada*/
+		return setCurrentVariant(this._id);
+	}
 });
 

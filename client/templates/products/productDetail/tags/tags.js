@@ -128,6 +128,7 @@ Template.productTagInputForm.events({
  */
 Template.productTagInputForm.onRendered(function () {
 	return $(".tag-edit-list").sortable({
+		/* TODO : Entender que significa  esto "> li" */
 		items: "> li",
 		handle: ".tag-input-group-handle",
 		opacity: 0.7,

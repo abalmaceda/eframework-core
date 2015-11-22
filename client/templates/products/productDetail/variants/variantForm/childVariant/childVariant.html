@@ -5,12 +5,15 @@
 <template name="childVariantForm">
 	<tr class="child-variant-form" id="{{childVariantFormId}}">
 		<td>
+			<!-- Correspondel al nombre de la opcíon. Este nombre aparecerá sobre el botón para seleccionar el Variant-->
 			<input type="text" class="form-control input-sm child-variant-input" value="{{optionTitle}}" name="optionTitle" placeholder="Add option name"/>
 		</td>
 		<td>
 			<input type="text" class="form-control input-sm child-variant-input" value="{{title}}" name="title" placeholder="Add option label"/>
 		</td>
 		<td>
+			<!-- Inventario del variant. La vista depende de si tiene o no stock disponible. -->
+			<!-- TODO: Por que el campo si tiene inventario esta deshabilitado ????-->
 			{{#if hasInventoryVariants}}
 				<input type="number" class="form-control input-sm child-variant-input" value="{{inventoryQuantity}}" name="inventoryQuantity" placeholder="QTY" disabled=disabled/>
 			{{else}}
@@ -18,6 +21,7 @@
 			{{/if}}
 		</td>
 		<td>
+			<!-- Campo que contiene el precio del Variant-->
 			<input type="number" class="form-control input-sm child-variant-input" value="{{price}}" name="price" placeholder="Add price"/>
 		</td>
 		<td>
@@ -28,10 +32,13 @@
 			{{/if}}
 		</td>
 		<td>
+			<!-- Permite eliminar el child variant agregado al Variant del product -->
 			<i class="fa fa-times-circle remove-child-variant" id="remove-child-variant"></i>
 		</td>
 	</tr>
+
 	{{#if hasInventoryVariants}}
+		<!-- TODO: Por que aca no se pone un if para agregar y quitar código html en vez de esconderlo con "hidden"-->
 		<tr class="{{showInventoryVariants}}">
 			<td colspan="7">
 			    <table class="inventory-variant-table table table-striped">
@@ -42,7 +49,9 @@
 			        	</tr>
 			      	</thead>
 			      	<tbody>
+			      		<!-- Llamamos al template generateInventoryVariantForm -->
 				        {{> generateInventoryVariantForm}}
+				        <!-- Llamamos al template addInventoryVariantForm -->
 				        {{> addInventoryVariantForm}}
 				        {{#each inventoryVariants}}
 			          		{{> inventoryVariantForm}}

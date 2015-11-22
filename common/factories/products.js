@@ -2,7 +2,7 @@
  * tag Factory
  *
  */
-// TODO
+// TODO : descomentar
 // Factory.define("tag", EFrameworkCore.Collections.Tags, {
 //   name: "Tag",
 //   slug: "tag",

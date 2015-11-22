@@ -247,8 +247,8 @@ api.addFiles("server/register.js", "server");
   	api.addFiles("common/collections/collections.js");
 	api.addFiles("common/collections/collectionFS.js");
 
-  // // collection hooks
-//api.addFiles("common/collections/hooks/hooks.js");
+	// collection hooks
+	api.addFiles("common/collections/hooks/hooks.js");
 
   // // security
   // api.addFiles("server/browserPolicy.js", "server");

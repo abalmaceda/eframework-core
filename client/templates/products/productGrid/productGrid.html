@@ -6,6 +6,7 @@
 	<div class="container-main">
 		<div class="product-grid" data-event-category="grid" data-event-action="generic-click" data-event-label="product grid click">
 			<ul class="product-grid-list list-unstyled" id="product-grid-list">
+				<!-- Por cada producto disponible, se genera una vista previa  -->
 				{{#each products}}
 					{{> productGridItems}}
 				{{/each}}
@@ -28,18 +29,13 @@
  <!-- TODO: More Info -->
 <template name="productGridItems">
 	<li class="product-grid-item {{#if position.pinned}}pinned{{/if}} {{weightClass}}" data-id="{{_id}}" id="{{_id}}">
-	<!-- Agrega noticia relacionada al producto -->
+		<!-- Agrega noticia relacionada al producto -->
 		{{> gridNotice}}
 		<span class="product-grid-item-alerts">
 			{{> bootstrapAlerts placement="productGridItem" id=_id}}
 		</span>
 
-		<a class="product-grid-item-images"
-		href="{{pathForSEO 'product' 'handle'}}"
-		data-event-category="grid"
-		data-event-action="product-click"
-		data-event-label="grid product click"
-		data-event-value="{{_id}}">
+		<a class="product-grid-item-images" href="{{pathForSEO 'product' 'handle'}}" data-event-category="grid" data-event-action="product-click" data-event-label="grid product click" data-event-value="{{_id}}">
 			<div class="product-primary-images">
 
 				<!-- Muestra foto de produecto si tiene, en caso contrario muestrra una foto Default -->

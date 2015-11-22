@@ -71,6 +71,7 @@
                     "pageTitle": "Product page title",
                     "vendor": "Product vendor",
                     "description": "Add a product description",
+                    "tags": "Add a tag",
                     "facebookMsg": "Facebook Message",
                     "twitterMsg": "Twitter Message",
                     "pinterestMsg": "Pinterest Message",

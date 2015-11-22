@@ -106,6 +106,7 @@ Template.variant.events({
  * @summary Evento onRendered para Template.variant
  */
 Template.variant.onRendered(function() {
+	/*TODO*/
 	return this.autorun(function() {
 		var variantSort;
 		if (EFrameworkCore.hasPermission('createProduct')) {

@@ -18,3 +18,4 @@ Template.products.events({
   //   });
   // }
 });
+

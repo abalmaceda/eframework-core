@@ -1,7 +1,7 @@
 /**
- * variantForm helpers
+ * Template.variantForm.helpers
+ * @summary Helpers para Template.variantForm
  */
-/* TODO */
 Template.variantForm.helpers({
   // variantDetails: function () {
   //   if (this.parentId === null) {
@@ -50,9 +50,15 @@ Template.variantForm.helpers({
 			}
 		}
 	},
-  // nowDate: function () {
-  //   return new Date();
-  // },
+
+	/**
+	* nowDate
+	* @summary Obtiene la fecha actual
+	* @return {Date} Contiene la fecha actual
+	*/
+	nowDate: function () {
+		return new Date();
+	},
 	/**
 	* @summary id del Variant Form
 	* @return {String} id del VariantForm
@@ -95,10 +101,16 @@ Template.variantForm.helpers({
 });
 
 /**
- * variantForm events
+ * Template.variantForm.events
+ * @summary Events para Template.variantForm
  */
-/* TODO */
 Template.variantForm.events({
+	/**
+	* @summary
+	* @event change form :input
+	* @return {void}
+	* @todo Docuentacion
+	*/
 	"change form :input": function (event, template) {
 		let formId;
 		formId = "#variant-form-" + template.data._id;
@@ -119,6 +131,7 @@ Template.variantForm.events({
 		if (!productId) {
 			return;
 		}
+		/*Envio el ori*/
 		Meteor.call("products/cloneVariant", productId, template.data._id, this._id);
 	},
 

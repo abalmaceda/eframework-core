@@ -28,33 +28,41 @@ EFrameworkCore.Schemas.CustomEmailSettings = new SimpleSchema({
  * Metafield Schema
  */
 
+/*Corresponden a una cualidad que permite identificar a un producto de sus semejantes.*/
+
+/**
+ *
+ * @summary
+ * @description Un Metafield Corresponden a una cualidad que permite identificar a un producto de sus semejantes
+ * @todo Documentar
+ */
 EFrameworkCore.Schemas.Metafield = new SimpleSchema({
-  key: {
-    type: String,
-    max: 30,
-    optional: true
-  },
-  namespace: {
-    type: String,
-    max: 20,
-    optional: true
-  },
-  scope: {
-    type: String,
-    optional: true
-  },
-  value: {
-    type: String,
-    optional: true
-  },
-  valueType: {
-    type: String,
-    optional: true
-  },
-  description: {
-    type: String,
-    optional: true
-  }
+	key: {
+		type: String,
+		max: 30,
+		optional: true
+	},
+	namespace: {
+		type: String,
+		max: 20,
+		optional: true
+	},
+	scope: {
+		type: String,
+		optional: true
+	},
+	value: {
+		type: String,
+		optional: true
+	},
+	valueType: {
+		type: String,
+		optional: true
+	},
+	description: {
+		type: String,
+		optional: true
+	}
 });
 
 /**
@@ -111,56 +119,56 @@ EFrameworkCore.Schemas.Locale = new SimpleSchema({
  */
 
 EFrameworkCore.Schemas.Shop = new SimpleSchema({
-  "_id": {
+  _id: {
     type: String,
     optional: true
   },
-  "status": {
+  status: {
     type: String,
     defaultValue: "active"
   },
-  "name": {
+  name: {
     type: String,
     index: 1
   },
-  "description": {
+  description: {
     type: String,
     optional: true
   },
-  "keywords": {
+  keywords: {
     type: String,
     optional: true
   },
-  "addressBook": {
+  addressBook: {
     type: [EFrameworkCore.Schemas.Address],
     optional: true
   },
-  "domains": {
+  domains: {
     type: [String],
     defaultValue: ["localhost"],
     index: 1
   },
-  "emails": {
+  emails: {
     type: [EFrameworkCore.Schemas.Email],
     optional: true
   },
-  "currency": {
+  currency: {
     label: "Base Currency",
     type: String,
     defaultValue: "USD"
   },
-  "currencies": {
+  currencies: {
     type: Object, // EFrameworkCore.Schemas.Currency
     blackbox: true
   },
-  "locale": {
+  locale: {
     type: String,
     defaultValue: "en"
   },
-  "locales": {
+  locales: {
     type: EFrameworkCore.Schemas.Locale
   },
-  "languages": {
+  languages: {
     type: [Object],
     optional: true
   },
@@ -174,28 +182,28 @@ EFrameworkCore.Schemas.Shop = new SimpleSchema({
     type: Boolean,
     defaultValue: false
   },
-  "public": {
+  public: {
     type: String,
     optional: true
   },
-  "timezone": {
+  timezone: {
     type: String
   },
-  "baseUOM": {
+  baseUOM: {
     type: String,
     optional: true,
     defaultValue: "OZ",
     label: "Base Unit of Measure"
   },
-  "metafields": {
+  metafields: {
     type: [EFrameworkCore.Schemas.Metafield],
     optional: true
   },
-  "defaultRoles": {
+  defaultRoles: {
     type: [String],
     defaultValue: ["guest", "account/profile"]
   },
-  "layout": {
+  layout: {
     type: [Object],
     optional: true
   },
@@ -220,7 +228,7 @@ EFrameworkCore.Schemas.Shop = new SimpleSchema({
     defaultValue: true
 
   },
-  "createdAt": {
+  createdAt: {
     type: Date,
     autoValue: function () {
       if (this.isInsert) {
@@ -233,7 +241,7 @@ EFrameworkCore.Schemas.Shop = new SimpleSchema({
     },
     denyUpdate: true
   },
-  "updatedAt": {
+  updatedAt: {
     type: Date,
     autoValue: function () {
       if (this.isUpdate) {
