@@ -1,7 +1,7 @@
 /**
  * CartItem Schema
  */
-
+/*TODO*/
 EFrameworkCore.Schemas.CartItem = new SimpleSchema({
   _id: {
     type: String
@@ -30,7 +30,7 @@ EFrameworkCore.Schemas.CartItem = new SimpleSchema({
 /**
  * Cart Schema
  */
-
+/*TODO*/
 EFrameworkCore.Schemas.Cart = new SimpleSchema({
   shopId: {
     type: String,

@@ -2,7 +2,8 @@
  * Template.variantList.helpers
  * @summary Helpers para Template.variantList
  */
-Template.variantList.helpers({/**
+Template.variantList.helpers({
+	/**
 	 * variants
 	 * @summary
 	 * @returns {}

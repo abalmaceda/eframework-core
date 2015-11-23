@@ -35,8 +35,7 @@ PackageFixture = class PackageFixture {
     // if jsonFile was path wasn't provided
     // we'll assume we're loading collection data
     if (!jsonFile) {
-      json = EJSON.parse(Assets.getText("private/data/" + collection._name +
-        ".json"));
+      json = EJSON.parse(Assets.getText("private/data/" + collection._name + ".json"));
     } else {
       json = EJSON.parse(jsonFile);
     }
@@ -51,8 +50,7 @@ PackageFixture = class PackageFixture {
         `Success importing fixture data to ${collection._name}`
       );
     } else {
-      EFrameworkCore.Log.error("Error adding fixture data to " +
-        collection._name, error.message);
+      EFrameworkCore.Log.error("Error adding fixture data to " + collection._name, error.message);
     }
   }
 
@@ -152,7 +150,7 @@ PackageFixture = class PackageFixture {
 			TODO: no entiendo por que es necesario que existe al menos un shop
 
 			Las tiendas (shop) tienen languages disponibles.
-		
+
 		*/
 		shop = EFrameworkCore.Collections.Shops.findOne();
 		if (shop) {
@@ -226,7 +224,7 @@ ReactionRegistry.createDefaultAdminUser = function () {
 	if (Roles.getUsersInRole(defaultAdminRoles, shopId).count() !== 0) {
 		return;
 	}
-	
+
 	if (process.env.REACTION_EMAIL) {
 		url = process.env.MONGO_URL;
 		options.username = "Owner";
@@ -237,7 +235,7 @@ ReactionRegistry.createDefaultAdminUser = function () {
 	} else {
 		/*
 			Meteor.settings.REACTION_EMAIL
-			Si se agrego un email en el archivo que se pasa a meteor a travez de --settings 
+			Si se agrego un email en el archivo que se pasa a meteor a travez de --settings
 		*/
 		options.username = Meteor.settings.REACTION_USER || "Owner";
 		options.password = Meteor.settings.REACTION_AUTH || Random.secret(8);

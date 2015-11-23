@@ -1,54 +1,43 @@
+<!-- TODO -->
 <template name="orders">
-  <div class="container-fluid-sm">
-
-    {{#each orders}}
-
-    <div class="panel panel-default order-panel">
-
-      <div class="panel-heading">
-
-        <div class="order-details">
-          <div class="order-detail-item address">
-            {{> orderDetail}}
-
-          </div>
-
-          <div class="order-detail-item status">
-            {{> orderStatusDetail}}
-
-          </div>
-
-          <div class="order-detail-item summary">
-            {{> ordersListSummary}}
-          </div>
-        </div>
-
-        <div class="order-controls">
-          {{> orderViewButton}}
-        </div>
-      </div>
-
-      <div class="order-panel-items">
-        {{> ordersListItems}}
-      </div>
-
-    </div>
-
-    {{/each}}
-
-  </div>
+	<div class="container-fluid-sm">
+		{{#each orders}}
+			<div class="panel panel-default order-panel">
+				<div class="panel-heading">
+					<div class="order-details">
+						<div class="order-detail-item address">
+							{{> orderDetail}}
+						</div>
+						<div class="order-detail-item status">
+							{{> orderStatusDetail}}
+						</div>
+						<div class="order-detail-item summary">
+							{{> ordersListSummary}}
+						</div>
+					</div>
+					<div class="order-controls">
+						{{> orderViewButton}}
+					</div>
+				</div>
+				<div class="order-panel-items">
+					{{> ordersListItems}}
+				</div>
+			</div>
+		{{/each}}
+	</div>
 </template>
 
+<!-- TODO -->
 <template name="orderStatusDetail">
-  <div class="col-xs-8">
-    <div data-i18n="orderDetail.created">Created {{orderAge}} {{dateFormat createdAt format="MMM D"}}</div>
-    {{#if shipmentTracking}}
-    <p>Tracking: <a href="#">{{shipmentTracking}}</a></p>
-    {{/if}}
-  </div>
+	<div class="col-xs-8">
+		<div data-i18n="orderDetail.created">Created {{orderAge}} {{dateFormat createdAt format="MMM D"}}</div>
+		{{#if shipmentTracking}}
+			<p>Tracking: <a href="#">{{shipmentTracking}}</a></p>
+		{{/if}}
+	</div>
 </template>
 
-
+<!-- TODO -->
 <template name="orderViewButton">
-  <button class="btn btn-success" type="button"><i class="fa fa-edit"></i></button>
+	<button class="btn btn-success" type="button"><i class="fa fa-edit"></i></button>
 </template>

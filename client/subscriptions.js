@@ -27,19 +27,22 @@ EFrameworkCore.Subscriptions.Sessions = Meteor.subscribe("Sessions", currentSess
 
 /* TODO */
 // Load order is important here, sessions come before cart.
-// EFrameworkCore.Subscriptions.Cart = Meteor.subscribe("Cart",
-//   Session.get("sessionId"),
-//   Meteor.userId()
-// );
+EFrameworkCore.Subscriptions.Cart = Meteor.subscribe(
+	"Cart",
+	Session.get("sessionId"),
+	Meteor.userId()
+);
 // detect when a cart has been deleted
 // resubscribe will force cart to be rebuilt
 
-// let cart = EFrameworkCore.Collections.Cart.find();
-// cart.observeChanges({
-//   removed: function () {
-//     Meteor.subscribe("Cart", Session.get("sessionId"), Meteor.userId());
-//   }
-// });
+let cart = EFrameworkCore.Collections.Cart.find();
+cart.observeChanges(
+	{
+		removed: function () {
+			Meteor.subscribe("Cart", Session.get("sessionId"), Meteor.userId());
+		}
+	}
+);
 
 /**
  * General Subscriptions

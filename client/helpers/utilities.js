@@ -244,16 +244,17 @@ Template.registerHelper("condition", function (v1, operator, v2) {
   }
 });
 
-// /**
-//  * orElse
-//  * @summary if this is true, or else this
-//  * @param {String} v1 - variable one
-//  * @param {String} v2 - variable two
-//  * @return {String} returns v1 || v2
-//  */
-// Template.registerHelper("orElse", function (v1, v2) {
-//   return v1 || v2;
-// });
+/**
+ * orElse
+ * @summary Si v1, o entonces v2
+ * @param {String} v1 - variable one
+ * @param {String} v2 - variable two
+ * @return {String} returns v1 || v2
+ * @description Esta helper function esta disponible en todos los templates
+ */
+Template.registerHelper("orElse", function (v1, v2) {
+	return v1 || v2;
+});
 
 // /**
 //  * key_value

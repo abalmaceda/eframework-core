@@ -19,16 +19,16 @@
  * Shop defaultWorkflow is defined in Shop
  */
 
-// EFrameworkCore.Schemas.Workflow = new SimpleSchema({
-//   status: {
-//     type: String,
-//     defaultValue: "new"
-//   },
-//   workflow: {
-//     type: [String],
-//     optional: true
-//   }
-// });
+EFrameworkCore.Schemas.Workflow = new SimpleSchema({
+  status: {
+    type: String,
+    defaultValue: "new"
+  },
+  workflow: {
+    type: [String],
+    optional: true
+  }
+});
 
 
 /* TODO: Schema */

@@ -1,22 +1,21 @@
 <!-- TODO -->
-
 <template name="dashboard">
-{{#if hasDashboardAccess}}
-  {{#if displayConsoleNavBar}}
-    <div class="dashboard-drawer">
-    {{#if displayConsoleDrawer}}
-      <div class="dashboard-container">
-        <div class="dashboard-widget-wrapper">
-          {{#each reactionApps provides='widget' route=route}}
-            {{> consoleWidgets}}
-          {{/each}}
-        </div>
-      </div>
-    {{/if}}
-    </div>
-    {{> consoleNavBar}}
-  {{/if}}
-{{/if}}
+	{{#if hasDashboardAccess}}
+		{{#if displayConsoleNavBar}}
+			<div class="dashboard-drawer">
+				{{#if displayConsoleDrawer}}
+					<div class="dashboard-container">
+						<div class="dashboard-widget-wrapper">
+						{{#each reactionApps provides='widget' route=route}}
+							{{> consoleWidgets}}
+						{{/each}}
+						</div>
+					</div>
+				{{/if}}
+			</div>
+			{{> consoleNavBar}}
+		{{/if}}
+	{{/if}}
 </template>
 
 <!-- TODO -->

@@ -42,9 +42,7 @@ Template.productGrid.helpers({
 //     return !(EFrameworkCore.Collections.Products.find().count() < Session.get(
 //       "productScrollLimit"));
 //   },
-	/* TODO : hacer funcion completa */
 	products: function () {
-		//return Products.find({}).fetch();
 		/*
 		* take natural sort, sorting by updatedAt
 		* then resort using positions.position for this tag
@@ -221,6 +219,11 @@ Template.productGridItems.helpers({
  * @summary Helpers para Template.gridNotice
  */
 Template.gridNotice.helpers({
+	/**
+	* isLowQuantity
+	* @summary Verifica si alguno de los variant tiene un inventario inferior o igual a su cantidad para warning.
+	* @return {Boolean} retorna el resultado de la verificación
+	*/
 	isLowQuantity: function () {
 		let variants = [];
 		for (let variant of this.variants) {
@@ -231,52 +234,72 @@ Template.gridNotice.helpers({
 		}
 		if (variants.length > 0) {
 			for (let variant of variants) {
+				/*Si alguno de los variant tiene un inventario menor o igual a su warning, entonces retornamos True*/
 				if (variant.inventoryQuantity <= variant.lowInventoryWarningThreshold) {
 					return true;
 				}
 			}
-		} else {
+		} /*else {
+			return false;
+		}*/
+		/*No hay inventario bajo*/
+		return false;
+	},
+
+	/**
+	* isSoldOut
+	* @summary Verifica si todos los variant del product estan sin stock.
+	* @return {Boolean} false si algun variant tiene stock
+	*/
+	isSoldOut: function () {
+		let variants = [];
+		for (let variant of this.variants) {
+			if (!variant.parentId) {
+				variants.push(variant);
+			}
+		}
+
+		if (variants.length > 0) {
+			for (let variant of variants) {
+				if (!variant.inventoryManagement || variant.inventoryQuantity > 0) {
+					/*Este variant tiene stock, por lo tanto se retorna false*/
+					return false;
+				}
+			}
+			/*No queda ningun variant con stock*/
+			return true;
+		}
+
+		/*Como el product no tiene variants, se retorna false*/
+		return false;
+	},
+
+	/**
+	* isBackorder
+	* @summary
+	* @return {Boolean}
+	*/
+	isBackorder: function () {
+		let variants = [];
+		for (let variant of this.variants) {
+			if (!variant.parentId) {
+			variants.push(variant);
+			}
+		}
+		if (variants.length > 0) {
+			for (let variant of variants) {
+				if (!variant.inventoryManagement || variant.inventoryQuantity > 0) {
+					return false;
+				}
+			}
+			for (let variant of variants) {
+				if (!variant.inventoryPolicy) {
+					return true;
+				}
+			}
 			return false;
 		}
-	},
-//   isSoldOut: function () {
-//     let variants = [];
-//     for (let variant of this.variants) {
-//       if (!variant.parentId) {
-//         variants.push(variant);
-//       }
-//     }
-
-//     if (variants.length > 0) {
-//       for (let variant of variants) {
-//         if (!variant.inventoryManagement || variant.inventoryQuantity > 0) {
-//           return false;
-//         }
-//       }
-//       return true;
-//     }
-//   },
-//   isBackorder: function () {
-//     let variants = [];
-//     for (let variant of this.variants) {
-//       if (!variant.parentId) {
-//         variants.push(variant);
-//       }
-//     }
-//     if (variants.length > 0) {
-//       for (let variant of variants) {
-//         if (!variant.inventoryManagement || variant.inventoryQuantity > 0) {
-//           return false;
-//         }
-//       }
-//       for (let variant of variants) {
-//         if (!variant.inventoryPolicy) {
-//           return true;
-//         }
-//       }
-//       return false;
-//     }
-//   }
+	}
 });
 
 /**

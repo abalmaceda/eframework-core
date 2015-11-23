@@ -22,10 +22,10 @@ Template.inventoryVariantForm.helpers({
 	}
 });
 
-// /**
-//  * inventoryVariantForm events
-//  */
-
+/**
+ * Template.inventoryVariantForm.events
+ * @summary Events para Template.inventoryVariantForm
+ */
 Template.inventoryVariantForm.events({
 	/**
 	 * @summary
@@ -52,7 +52,7 @@ Template.inventoryVariantForm.events({
 				throw new Meteor.Error("error updating variant", error);
 			}
 		});
-		/*TODO: Descomentar esto si tiene sentido.*/
+		/*TODO: Descomentar esto si tiene sentido. Dado que para que haya un evento "change" tuvo que existir antes un evento "click". Entonces ya se hizo  */
 		//return setCurrentVariant(template.data._id);
 	},
 
@@ -76,44 +76,51 @@ Template.inventoryVariantForm.events({
 	}
 });
 
-// /**
-//  * generateInventoryVariantForm events
-//  */
+/**
+ * Template.generateInventoryVariantForm.events
+ * @summary Events para Template.generateInventoryVariantForm
+ */
+Template.generateInventoryVariantForm.events({
+	/**
+	 * @summary
+	 * @event submit .generate-inventory-variants-form
+	 * @returns {void}
+	 * @todo Documentar
+	 */
+	"submit .generate-inventory-variants-form": function (event) {
+		event.stopPropagation();
+		/* Evita que se haga un refresh de la pagina*/
+		event.preventDefault();
+		let productId = selectedProductId();
+		let qty = event.target.generateqty.value;
+		if (qty && parseInt(qty, 10) > 0) {
+			Meteor.call("products/createInventoryVariants", productId, this._id, qty);
+			event.target.generateqty.value = "";
+		} else {
+			Alerts.add(
+				i18n.t("productDetail.quantityGreaterThanZero"),
+				danger,
+				{ placement: "generateBarcodes" }
+			);
+		}
+		return false;
+	}
+});
 
-// Template.generateInventoryVariantForm.events({
-//   "submit .generate-inventory-variants-form": function (event) {
-//     event.stopPropagation();
-//     event.preventDefault();
-//     let productId = selectedProductId();
-//     let qty = event.target.generateqty.value;
-//     if (qty && parseInt(qty, 10) > 0) {
-//       Meteor.call("products/createInventoryVariants", productId, this._id,
-//         qty);
-//       event.target.generateqty.value = "";
-//     } else {
-//       Alerts.add(i18n.t("productDetail.quantityGreaterThanZero"),
-//         danger, {
-//           placement: "generateBarcodes"
-//         });
-//     }
-//     return false;
-//   }
-// });
-
-// /**
-//  * addInventoryVariantForm events
-//  */
-
-// Template.addInventoryVariantForm.events({
-//   "submit .add-inventory-variant-form": function (event) {
-//     event.stopPropagation();
-//     event.preventDefault();
-//     let productId = selectedProductId();
-//     let barcode = event.target.barcode.value;
-//     Meteor.call("products/createInventoryVariant", productId, this._id, {
-//       barcode: barcode
-//     });
-//     event.target.barcode.value = "";
-//     return false;
-//   }
-// });
+/**
+ * Template.addInventoryVariantForm.events
+ * @summary Events para Template.addInventoryVariantForm
+ */
+Template.addInventoryVariantForm.events({
+	"submit .add-inventory-variant-form": function (event) {
+		event.stopPropagation();
+		event.preventDefault();
+		let productId = selectedProductId();
+		let barcode = event.target.barcode.value;
+		Meteor.call("products/createInventoryVariant", productId, this._id, {
+			barcode: barcode
+		});
+		event.target.barcode.value = "";
+		return false;
+	}
+});

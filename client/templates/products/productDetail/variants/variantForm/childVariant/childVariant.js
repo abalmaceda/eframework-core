@@ -94,11 +94,13 @@ Template.childVariantForm.events({
 	 * @summary Elimina un child Variant
 	 * @event click .init-inventory-variants
 	 * @returns {}
+	 * @todo Documentar
 	 */
 	"click .init-inventory-variants": function () {
 		let showInventoryVariantsId = "showInventoryVariants" + this._id;
 		Session.set(showInventoryVariantsId, true);
 		let productId = selectedProductId();
+		/*TODO*/
 		return Meteor.call("products/createInventoryVariants", productId, this._id, this.inventoryQuantity, "default");
 	},
 

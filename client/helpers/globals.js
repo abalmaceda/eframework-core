@@ -6,6 +6,7 @@
  * String.prototype.toCamelCase
  * @summary special toCamelCase for converting a string to camelCase for use with i18n keys
  * @return {String} camelCased string
+ * @todo Entender
  */
 String.prototype.toCamelCase = function () {
   let s;
@@ -25,17 +26,19 @@ String.prototype.toCamelCase = function () {
  * @param {String} sessionVariable - string name, see http://docs.meteor.com/#/basic/session
  * @param {String} positiveState - optional, if is is positiveState, set opposite
  * @return {Object} return session value
+ * @todo Entender
  */
 this.toggleSession = function (sessionVariable, positiveState) {
-  let session;
-  session = Session.get(sessionVariable);
-  positive = positiveState || true;
-  if (_.isEqual(positive, session)) {
-    Session.set(sessionVariable, false);
-  } else {
-    Session.set(sessionVariable, positive);
-  }
-  return Session.get(sessionVariable);
+	let session;
+	session = Session.get(sessionVariable);
+	positive = positiveState || true;
+	if (_.isEqual(positive, session)) {
+		Session.set(sessionVariable, false);
+	}
+	else {
+		Session.set(sessionVariable, positive);
+	}
+	return Session.get(sessionVariable);
 };
 
 /**
@@ -43,6 +46,7 @@ this.toggleSession = function (sessionVariable, positiveState) {
  * @summary method to return tag specific product
  * @param {String} tag - tag string
  * @return {Object} - return products collection cursor filtered by tag
+ * @todo Entender
  */
 this.getProductsByTag = function (tag) {
   let hashtags;
@@ -74,30 +78,36 @@ this.getProductsByTag = function (tag) {
 /**
  * maybeDeleteProduct
  * @summary confirm product deletion, delete, and alert
- * @todo - refactor this back into templates. this is bad.
- * @param {Object} product - product Object
- * @return {Object} - returns nothing, and alerts,happen here
+ * @param {Object} product - Objeto product
+ * @return {Object} - returns nothing, and alerts,chappen here
+ * @todo - Esto debe estar en un template.
  */
 this.maybeDeleteProduct = function (product) {
-  let title = product.title || "the product";
-  let id = product._id;
-  if (confirm("Delete this product?")) {
-    return Meteor.call("products/deleteProduct", id, function (error, result) {
-      if (error || !result) {
-        Alerts.add("There was an error deleting " + title, "danger", {
-          type: "prod-delete-" + id,
-          i18nKey: "productDetail.productDeleteError"
-        });
-        throw new Meteor.Error("Error deleting product " + id, error);
-      } else {
-        setCurrentProduct(null);
-        Router.go("/");
-        return Alerts.add("Deleted " + title, "info", {
-          type: "prod-delete-" + id
-        });
-      }
-    });
-  }
+	let title = product.title || "the product";
+	let id = product._id;
+	if (confirm("Delete this product?")) {
+		return Meteor.call("products/deleteProduct", id, function (error, result) {
+			/*En caso de que ocurriera un error en el proceso*/
+			if (error || !result) {
+				/*Informfo del error */
+				Alerts.add("There was an error deleting " + title, "danger", {
+					type: "prod-delete-" + id,
+					i18nKey: "productDetail.productDeleteError"
+				});
+				/*Agrego al log que sobre el error ocurrido */
+				throw new Meteor.Error("Error deleting product " + id, error);
+			}
+			/*En caso de que a eliminación fue exitosa*/
+			else {
+				setCurrentProduct(null);
+				Router.go("/");
+				/*Informfo que se realizo la eliminación*/
+				return Alerts.add("Deleted " + title, "info", {
+					type: "prod-delete-" + id
+				});
+			}
+		});
+	}
 };
 
 /**

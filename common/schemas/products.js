@@ -83,6 +83,7 @@ EFrameworkCore.Schemas.ProductVariant = new SimpleSchema({
 		type: String,
 		optional: true
 	},
+	/*TODO: Que es un Barcode y para que se utiliza*/
 	barcode: {
 		label: "Barcode",
 		type: String,
@@ -151,7 +152,12 @@ EFrameworkCore.Schemas.ProductVariant = new SimpleSchema({
 		min: 0,
 		optional: true
 	},
-		inventoryQuantity: {
+	/*
+		Aunque se exige que el valor sea distinto de 0 para la cantidad, si es posible que sea menor que cero.
+		Esto se da, para informar al usuario  ( en el formulario de creación ), que necesita agregar inventario.
+		De esto se puede concluir tambien, que es "correcto" colocar una cantidad menor que 0
+	*/
+	inventoryQuantity: {
 		type: Number,
 		label: "Quantity",
 		optional: true,
@@ -186,6 +192,13 @@ EFrameworkCore.Schemas.ProductVariant = new SimpleSchema({
 		type: String,
 		optional: true
 	},
+	/*TODO: A que corresponde este type ???*/
+	/*
+	Creo que hay estos type disponibles
+		- variant
+		- inventory
+		- ???
+	*/
 	type: {
 		label: "Type",
 		type: String,
@@ -213,6 +226,7 @@ EFrameworkCore.Schemas.ProductVariant = new SimpleSchema({
 		type: String,
 		optional: true
 	},
+	/* Ir a deficinión EFrameworkCore.Schemas.Metafield para entender conceptaualmente a que corresponde. */
 	metafields: {
 		type: [EFrameworkCore.Schemas.Metafield],
 		optional: true

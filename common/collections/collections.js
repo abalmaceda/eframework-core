@@ -15,113 +15,162 @@
 /**
 * EFrameworkCore transform collections
 */
-// EFrameworkCore.Helpers.cartTransform = {
-//   cartCount: function () {
-//     let count = 0;
-//     if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
-//       for (let items of this.items) {
-//         count += items.quantity;
-//       }
-//     }
-//     return count;
-//   },
-//   cartShipping: function () {
-//     let shipping = 0;
-//     if (this.shipping) {
-//       if (this.shipping[0].shipmentMethod) {
-//         shipping += this.shipping[0].shipmentMethod.rate;
-//       }
-//     }
-//     return shipping;
-//   },
-//   cartSubTotal: function () {
-//     let subtotal = 0;
-//     if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
-//       for (let items of this.items) {
-//         subtotal += items.quantity * items.variants.price;
-//       }
-//     }
-//     subtotal = subtotal.toFixed(2);
-//     return subtotal;
-//   },
-//   cartTaxes: function () {
-//     let subtotal = 0;
-//     if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
-//       for (let items of this.items) {
-//         let tax = this.tax || 0;
-//         subtotal += items.variants.price * tax;
-//       }
-//     }
-//     subtotal = subtotal.toFixed(2);
-//     return subtotal;
-//   },
-//   cartDiscounts: function () {
-//     return "0.00";
-//   },
-//   cartTotal: function () {
-//     let total;
-//     let subtotal = 0;
-//     if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
-//       for (let items of this.items) {
-//         subtotal += items.quantity * items.variants.price;
-//       }
-//     }
-//     let shipping = 0;
-//     if (this.shipping) {
-//       if (this.shipping.shippingMethod) {
-//         for (let shippingMethod of this.shipping.shippingMethod) {
-//           shipping += shippingMethod.rate;
-//         }
-//       }
-//     }
 
-//     shipping = parseFloat(shipping);
-//     if (!isNaN(shipping)) {
-//       subtotal = subtotal + shipping;
-//     }
-//     total = subtotal.toFixed(2);
-//     return total;
-//   }
-// };
+/**
+ * EFrameworkCore.Helpers.cartTransform
+ * @summary Helpers para cartTransform
+ */
+EFrameworkCore.Helpers.cartTransform = {
+	/**
+	 *
+	 * @summary
+	 * @provides
+	 * @returns
+	 * @todo Documentar y entender
+	 */
+	cartCount: function () {
+	let count = 0;
+	if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
+	for (let items of this.items) {
+	count += items.quantity;
+	}
+	}
+	return count;
+	},
+
+	/**
+	 *
+	 * @summary
+	 * @provides
+	 * @returns
+	 * @todo Documentar y entender
+	 */
+	cartShipping: function () {
+	let shipping = 0;
+	if (this.shipping) {
+	if (this.shipping[0].shipmentMethod) {
+	shipping += this.shipping[0].shipmentMethod.rate;
+	}
+	}
+	return shipping;
+	},
+	cartSubTotal: function () {
+	let subtotal = 0;
+	if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
+	for (let items of this.items) {
+	subtotal += items.quantity * items.variants.price;
+	}
+	}
+	subtotal = subtotal.toFixed(2);
+	return subtotal;
+	},
+
+	/**
+	 *
+	 * @summary
+	 * @provides
+	 * @returns
+	 * @todo Documentar y entender
+	 */
+	cartTaxes: function () {
+	let subtotal = 0;
+	if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
+	for (let items of this.items) {
+	let tax = this.tax || 0;
+	subtotal += items.variants.price * tax;
+	}
+	}
+	subtotal = subtotal.toFixed(2);
+	return subtotal;
+	},
+
+	/**
+	 *
+	 * @summary
+	 * @provides
+	 * @returns
+	 * @todo Documentar y entender
+	 */
+	cartDiscounts: function () {
+	return "0.00";
+	},
+
+	/**
+	 *
+	 * @summary
+	 * @provides
+	 * @returns
+	 * @todo Documentar y entender
+	 */
+	cartTotal: function () {
+	let total;
+	let subtotal = 0;
+	if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
+	for (let items of this.items) {
+	subtotal += items.quantity * items.variants.price;
+	}
+	}
+	let shipping = 0;
+	if (this.shipping) {
+	if (this.shipping.shippingMethod) {
+	for (let shippingMethod of this.shipping.shippingMethod) {
+	shipping += shippingMethod.rate;
+	}
+	}
+	}
+
+	shipping = parseFloat(shipping);
+	if (!isNaN(shipping)) {
+	subtotal = subtotal + shipping;
+	}
+	total = subtotal.toFixed(2);
+	return total;
+	}
+};
 
 /*TODO*/
 /**
 * EFrameworkCore Collections Cart
 */
-// EFrameworkCore.Collections.Cart = Cart = this.Cart = new Mongo.Collection("Cart", {
-//   transform: function (cart) {
-//   	// TODO: cartTransform esta comentado 
-//     let newInstance = Object.create(EFrameworkCore.Helpers.cartTransform);
-//     return _.extend(newInstance, cart);
-//   }
-// });
+EFrameworkCore.Collections.Cart = Cart = this.Cart = new Mongo.Collection("Cart", {
+	transform: function (cart) {
+		let newInstance = Object.create(EFrameworkCore.Helpers.cartTransform);
+		return _.extend(newInstance, cart);
+	}
+});
 
-// EFrameworkCore.Collections.Cart.attachSchema(EFrameworkCore.Schemas.Cart);
+EFrameworkCore.Collections.Cart.attachSchema(EFrameworkCore.Schemas.Cart);
 
 
-// /**
-// * EFrameworkCore Collections Orders
-// */
-// EFrameworkCore.Collections.Orders = Orders = this.Orders = new Mongo.Collection("Orders", {
-//   transform: function (order) {
-//     order.itemCount = function () {
-//       let count = 0;
-//       if (order !== null ? order.items : void 0) {
-//         for (let items of order.items) {
-//           count += items.quantity;
-//         }
-//       }
-//       return count;
-//     };
-//     return order;
-//   }
-// });
+/**
+* EFrameworkCore Collections Orders
+*/
 
-// EFrameworkCore.Collections.Orders.attachSchema([
-//   EFrameworkCore.Schemas.Cart,
-//   EFrameworkCore.Schemas.Order,
-//   EFrameworkCore.Schemas.OrderItem
-// ]);
+/**
+ * EFrameworkCore Collections Orders
+ * @summary Definición del Collection Orders
+ * @todo Documentar y entender
+ */
+EFrameworkCore.Collections.Orders = Orders = this.Orders = new Mongo.Collection("Orders", {
+	transform: function (order) {
+		order.itemCount = function () {
+			let count = 0;
+			if (order !== null ? order.items : void 0) {
+				for (let items of order.items) {
+					count += items.quantity;
+				}
+			}
+			return count;
+		};
+		return order;
+	}
+});
+
+EFrameworkCore.Collections.Orders.attachSchema([
+	EFrameworkCore.Schemas.Cart,
+	EFrameworkCore.Schemas.Order,
+	EFrameworkCore.Schemas.OrderItem
+]);
 
 /**
 * EFrameworkCore Collections Packages

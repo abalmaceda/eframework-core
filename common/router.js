@@ -16,7 +16,6 @@ Router.configure({
 
 	onRun: function () {
 		$(window).scrollTop(0);
-		/* TODO: descomentar  1 linea */
 		EFrameworkCore.clearActionView();
 		this.next();
 	},
@@ -197,21 +196,21 @@ Router.map(function () {
 //     }
 //   });
 
-//   this.route("dashboard/orders", {
-//     controller: ShopAdminController,
-//     path: "dashboard/orders/:_id?",
-//     template: "orders",
-//     waitOn: function () {
-//       return this.subscribe("Orders");
-//     },
-//     data: function () {
-//       if (Orders.findOne(this.params._id)) {
-//         return EFrameworkCore.Collections.Orders.findOne({
-//           _id: this.params._id
-//         });
-//       }
-//     }
-//   });
+	this.route("dashboard/orders", {
+		controller: ShopAdminController,
+		path: "dashboard/orders/:_id?",
+		template: "orders",
+		waitOn: function () {
+			return this.subscribe("Orders");
+		},
+		data: function () {
+			if (Orders.findOne(this.params._id)) {
+				return EFrameworkCore.Collections.Orders.findOne({
+					_id: this.params._id
+				});
+			}
+		}
+	});
 
 
 	/**

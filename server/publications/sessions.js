@@ -4,7 +4,7 @@
  * Load the session
  * If no session is loaded, creates a new one
  */
-
+/*TODO */
 this.ServerSessions = new Mongo.Collection("Sessions");
 
 Meteor.publish("Sessions", function (sessionId) {

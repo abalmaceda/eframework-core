@@ -6,19 +6,23 @@
 Template.variant.helpers({
 	/**
 	 * progressBar
-	 * @summary Informa si hay stock disponible
-	 * @returns {Boolean} true si hay stock, false si no queda
+	 * @summary Informa visualmente ( con colores ) el porcentaje aproximado de stock disponible
+	 * @description Se define los colores como sigue :
+	 * - 10% o menos, rojo ( stock critico )
+	 * - mas de 10% hasta 30% , amarillo ( warning )
+	 * - Màs de 30% , verde . ( Se considera un stock saludable )
+	 * @returns {String} CSS que representa el porcentaje de stock disponible
 	 * @todo Documentar y descomentar
 	 */
-	// progressBar: function() {
-	// 	if (this.inventoryPercentage <= 10) {
-	// 		return "progress-bar-danger";
-	// 	} else if (this.inventoryPercentage <= 30) {
-	// 		return "progress-bar-warning";
-	// 	} else {
-	// 		return "progress-bar-success";
-	// 	}
-	// },
+	progressBar: function() {
+		if (this.inventoryPercentage <= 10) {
+			return "progress-bar-danger";
+		} else if (this.inventoryPercentage <= 30) {
+			return "progress-bar-warning";
+		} else {
+			return "progress-bar-success";
+		}
+	},
 	/**
 	 * selectedVariant
 	 * @summary Agrega Feedback al Variant seleccionado

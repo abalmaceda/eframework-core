@@ -1,6 +1,6 @@
 Package.describe({
   summary: "E-Framework Core",
-  name: "eframework:core",
+  name: "eframework:eframework-core",
   version: "0.1.0",
   git: ""
 });
@@ -100,12 +100,16 @@ api.use("matb33:collection-hooks@0.8.1");
   api.use("alanning:roles@1.2.13");
   // api.use("momentjs:moment@2.10.6");
   // api.use("risul:moment-timezone@0.4.0");
-  	/*
-	*	A Meteor package wrapper for Spin.js via Npm.depends().
+
+	/*
+	* @summary A Meteor package wrapper for Spin.js via Npm.depends().
+	* @see {@link https://atmospherejs.com/utilities/spin|ATMOSPHERE}
 	*/
 	api.use("utilities:spin@2.3.1", "client");
+
 	/*
-	*	Consolidated Avatar Template Package for Meteor
+	* @summary Consolidated Avatar Template Package for Meteor
+	* @see {@link https://atmospherejs.com/utilities/avatar|ATMOSPHERE}
 	*/
   	api.use("utilities:avatar@0.9.2");
 
@@ -237,8 +241,8 @@ api.addFiles("server/register.js", "server");
 
 	//TODO: revizar
  	api.addFiles("common/schemas/tags.js");
-  // api.addFiles("common/schemas/cart.js");
-  // api.addFiles("common/schemas/orders.js");
+  	api.addFiles("common/schemas/cart.js");
+ 	api.addFiles("common/schemas/orders.js");
 
   	//TODO: revizar
 	api.addFiles("common/schemas/translations.js");
@@ -260,7 +264,7 @@ api.addFiles("server/register.js", "server");
 	//TODO: revizar
 	// api.addFiles("common/methods/layout.js");
   // api.addFiles("common/methods/workflow.js");
-  // api.addFiles("common/methods/cart.js", "client");
+	api.addFiles("common/methods/cart.js", "client");
 
   	//TODO: revizar
   	api.addFiles("common/factories/faker.js");
@@ -276,31 +280,31 @@ api.addFiles("server/register.js", "server");
 	api.addFiles("common/factories/orders.js");
 
   // // publications
-	// api.addFiles("server/publications/sessions.js", "server");
+	api.addFiles("server/publications/sessions.js", "server");
 api.addFiles("server/publications/shops.js", "server");
-  // api.addFiles("server/publications/cart.js", "server");
+	api.addFiles("server/publications/cart.js", "server");
 	api.addFiles("server/publications/media.js", "server");
-  // api.addFiles("server/publications/orders.js", "server");
+	api.addFiles("server/publications/orders.js", "server");
   api.addFiles("server/publications/packages.js", "server");
 	api.addFiles("server/publications/products.js", "server");
 api.addFiles("server/publications/translations.js", "server");
 
   // // methods
-  // api.addFiles("server/methods/cart.js", "server");
-  // api.addFiles("server/methods/orders.js", "server");
+	api.addFiles("server/methods/cart.js", "server");
+	api.addFiles("server/methods/orders.js", "server");
 api.addFiles("server/methods/products.js", "server");
   // api.addFiles("server/methods/shipping.js", "server");
 api.addFiles("server/methods/shop.js", "server");
 
   // // method hooks
 //api.addFiles("server/methods/hooks/hooks.js");
-  // api.addFiles("server/methods/hooks/cart.js", "server");
+	api.addFiles("server/methods/hooks/cart.js", "server");
 
 	// client
 	api.addFiles("client/subscriptions.js", "client");
 	api.addFiles("client/helpers/layout.js", "client");
 api.addFiles("client/helpers/packages.js", "client");
-  // api.addFiles("client/helpers/cart.js", "client");
+	api.addFiles("client/helpers/cart.js", "client");
 api.addFiles("client/helpers/globals.js", "client");
 api.addFiles("client/helpers/products.js", "client");
 api.addFiles("client/helpers/i18n.js", "client");
@@ -334,20 +338,20 @@ api.addFiles("client/templates/layout/layout.js", "client");
   api.addFiles("client/templates/layout/notice/unauthorized.html", "client");
   api.addFiles("client/templates/layout/notice/shopNotFound.html", "client");
 
-  // api.addFiles("client/templates/cart/cartDrawer/cartDrawer.html", "client");
-  // api.addFiles("client/templates/cart/cartDrawer/cartDrawer.js", "client");
+	api.addFiles("client/templates/cart/cartDrawer/cartDrawer.html", "client");
+	api.addFiles("client/templates/cart/cartDrawer/cartDrawer.js", "client");
 
   // api.addFiles("client/templates/cart/cartDrawer/cartItems/cartItems.html", "client");
   // api.addFiles("client/templates/cart/cartDrawer/cartItems/cartItems.js", "client");
 
-  // api.addFiles("client/templates/cart/cartDrawer/cartSubTotals/cartSubTotals.html", "client");
-  // api.addFiles("client/templates/cart/cartDrawer/cartSubTotals/cartSubTotals.js", "client");
+	api.addFiles("client/templates/cart/cartDrawer/cartSubTotals/cartSubTotals.html", "client");
+	api.addFiles("client/templates/cart/cartDrawer/cartSubTotals/cartSubTotals.js", "client");
 
-  // api.addFiles("client/templates/cart/cartIcon/cartIcon.html", "client");
-  // api.addFiles("client/templates/cart/cartIcon/cartIcon.js", "client");
+	api.addFiles("client/templates/cart/cartIcon/cartIcon.html", "client");
+	api.addFiles("client/templates/cart/cartIcon/cartIcon.js", "client");
 
-  // api.addFiles("client/templates/cart/cartPanel/cartPanel.html", "client");
-  // api.addFiles("client/templates/cart/cartPanel/cartPanel.js", "client");
+	api.addFiles("client/templates/cart/cartPanel/cartPanel.html", "client");
+	api.addFiles("client/templates/cart/cartPanel/cartPanel.js", "client");
 
   // api.addFiles("client/templates/cart/checkout/checkout.html", "client");
   // api.addFiles("client/templates/cart/checkout/checkout.js", "client");
@@ -382,8 +386,8 @@ api.addFiles("client/templates/layout/layout.js", "client");
   // api.addFiles("client/templates/dashboard/console/icon/icon.html", "client");
   // api.addFiles("client/templates/dashboard/console/icon/icon.js", "client");
 
-  // api.addFiles("client/templates/dashboard/orders/orders.html", "client");
-  // api.addFiles("client/templates/dashboard/orders/orders.js", "client");
+	api.addFiles("client/templates/dashboard/orders/orders.html", "client");
+	api.addFiles("client/templates/dashboard/orders/orders.js", "client");
 
   // api.addFiles("client/templates/dashboard/orders/orderPage/orderPage.html", "client");
   // api.addFiles("client/templates/dashboard/orders/orderPage/orderPage.js", "client");
@@ -406,8 +410,8 @@ api.addFiles("client/templates/layout/layout.js", "client");
   // api.addFiles("client/templates/dashboard/orders/widget/widget.html", "client");
   // api.addFiles("client/templates/dashboard/orders/widget/widget.js", "client");
 
-  // api.addFiles("client/templates/dashboard/orders/details/detail.html", "client");
-  // api.addFiles("client/templates/dashboard/orders/details/detail.js", "client");
+	api.addFiles("client/templates/dashboard/orders/details/detail.html", "client");
+	api.addFiles("client/templates/dashboard/orders/details/detail.js", "client");
 
   // api.addFiles("client/templates/dashboard/orders/social/orderSocial.html", "client");
 
@@ -521,8 +525,8 @@ Package.onTest(function (api) {
   // api.use("velocity:html-reporter@0.9.0");
   // api.use("velocity:console-reporter@0.1.3");
 
-  // api.use("eframework:core");
-  // api.use("reactioncommerce:bootstrap-theme");
+  // api.use("eframework:eframework-core");
+  // api.use("eframework:eframework-bootstrap-theme");
 
   // api.addFiles("tests/jasmine/server/integration/shops.js", "server");
   // api.addFiles("tests/jasmine/server/integration/accounts.js", "server");

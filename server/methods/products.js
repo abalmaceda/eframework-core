@@ -152,54 +152,50 @@ Meteor.methods({
 //     return newVariantId;
 //   },
 
-//   /**
-//    * products/createInventoryVariant
-//    * @summary initializes inventory variant template
-//    * should only be called to create variants of type=inventory
-//    * pass newVariant object to create with options
-//    * @param {String} productId - productId
-//    * @param {String} parentId -  parent variantId
-//    * @param {Object} newVariant -  optional variant object
-//    * @return {String} returns new variantId
-//    */
-//   "products/createInventoryVariant": function (productId, parentId,
-//     newVariant) {
-//     check(productId, String);
-//     check(parentId, String);
-//     check(newVariant, Match.OneOf(Object, void 0));
-//     // must have admin permissions
-//     if (!Roles.userIsInRole(Meteor.userId(), ["admin"])) {
-//       throw new Meteor.Error(403, "Access Denied");
-//     }
-//     this.unblock();
-//     let inventoryVariant = newVariant;
-//     let newVariantId = Random.id();
-//     let newBarcode = Random.id();
+	/**
+	* products/createInventoryVariant
+	* @summary inicializa template inventory variant
+	* Solo debe ser llamado para crear variantes type=inventory
+	* utilizar el object newVariant para crear con opciones
+	* @param {String} productId - productId
+	* @param {String} parentId -  parent variantId
+	* @param {Object} newVariant -  variant object opcional
+	* @return {String} returns new variantId
+	* @todo documentar
+	*/
+	"products/createInventoryVariant": function (productId, parentId, newVariant) {
+		check(productId, String);
+		check(parentId, String);
+		check(newVariant, Match.OneOf(Object, void 0));
+		/*Verificar permisos*/
+		if (!Roles.userIsInRole(Meteor.userId(), ["admin"])) {
+			throw new Meteor.Error(403, "Access Denied");
+		}
+		this.unblock();
+		let inventoryVariant = newVariant;
+		let newVariantId = Random.id();
+		let newBarcode = Random.id();
 
-//     if (inventoryVariant) {
-//       inventoryVariant._id = newVariantId;
-//       inventoryVariant.parentId = parentId;
-//       inventoryVariant.type = "inventory";
-//       check(inventoryVariant, EFrameworkCore.Schemas.ProductVariant);
-//     } else {
-//       inventoryVariant = {
-//         _id: newVariantId,
-//         parentId: parentId,
-//         barcode: newBarcode,
-//         type: "inventory"
-//       };
-//     }
-//     Products.update({
-//       _id: productId
-//     }, {
-//       $addToSet: {
-//         variants: newVariant
-//       }
-//     }, {
-//       validate: false
-//     });
-//     return newVariantId;
-//   },
+		if (inventoryVariant) {
+			inventoryVariant._id = newVariantId;
+			inventoryVariant.parentId = parentId;
+			inventoryVariant.type = "inventory";
+			check(inventoryVariant, EFrameworkCore.Schemas.ProductVariant);
+		} else {
+			inventoryVariant = {
+				_id: newVariantId,
+				parentId: parentId,
+				barcode: newBarcode,
+				type: "inventory"
+			};
+		}
+		Products.update(
+			{_id: productId},
+			{ $addToSet: { variants: newVariant }},
+			{ validate: false }
+		);
+		return newVariantId;
+	},
 
 	/**
 	* products/createInventoryVariants
@@ -474,38 +470,39 @@ Meteor.methods({
 			validate: false
 		});
 	},
-//   /**
-//    * products/deleteProduct
-//    * @summary delete a product and unlink it from all media
-//    * @param {String} productId - productId to delete
-//    * @returns {Boolean} returns delete result
-//    */
-//   "products/deleteProduct": function (productId) {
-//     check(productId, String);
-//     // must have admin permission to delete
-//     if (!EFrameworkCore.hasAdminAccess()) {
-//       throw new Meteor.Error(403, "Access Denied");
-//     }
-//     this.unblock();
+	/**
+	* products/deleteProduct
+	* @summary Eliminar un product y desvincularlo de toda su Media
+	* @param {String} productId - productId para eliminar
+	* @returns {Boolean} returns resultado de la eliminación
+	*/
+	"products/deleteProduct": function (productId) {
+		check(productId, String);
+		/*Verifico los permisos para eliminación de un producto*/
+		if (!EFrameworkCore.hasAdminAccess()) {
+			throw new Meteor.Error(403, "Access Denied");
+		}
+		this.unblock();
 
-//     let numRemoved = Products.remove(productId);
-//     if (numRemoved > 0) {
-//       EFrameworkCore.Collections.Media.update({
-//         "metadata.productId": productId
-//       }, {
-//         $unset: {
-//           "metadata.productId": "",
-//           "metadata.variantId": "",
-//           "metadata.priority": ""
-//         }
-//       }, {
-//         multi: true
-//       });
-//       return true;
-//     }
-//     // return false if unable to delete
-//     return false;
-//   },
+		let numRemoved = Products.remove(productId);
+		/*Si el producto se eliminó, entonces eliminamos las referencias en el Collection Media a dicho producto*/
+		if (numRemoved > 0) {
+			EFrameworkCore.Collections.Media.update(
+				{ "metadata.productId": productId},
+				{
+					$unset: {
+						"metadata.productId": "",
+						"metadata.variantId": "",
+						"metadata.priority": ""
+					}
+				},
+				{ multi: true}
+			);
+			return true;
+		}
+		/* No se pudo realizar la eliminación*/
+		return false;
+	},
 
 	/**
 	* products/updateProductField
@@ -812,38 +809,43 @@ Meteor.methods({
 			$pull: { metafields: meta }
 		});
 	},
-//   /**
-//    * products/publishProduct
-//    * @summary publish (visibility) of product
-//    * @todo hook into publishing flow
-//    * @param {String} productId - productId
-//    * @return {String} return
-//    */
-//   "products/publishProduct": function (productId) {
-//     check(productId, String);
-//     if (!EFrameworkCore.hasPermission("createProduct")) {
-//       throw new Meteor.Error(403, "Access Denied");
-//     }
-//     this.unblock();
+	/**
+	* products/publishProduct
+	* @summary Publica  (visibilidad) del product
+	* @param {String} productId - productId
+	* @return {String} return
+	* @todo hook into publishing flow
+	*/
+	"products/publishProduct": function (productId) {
+		check(productId, String);
+		if (!EFrameworkCore.hasPermission("createProduct")) {
+			throw new Meteor.Error(403, "Access Denied");
+		}
+		this.unblock();
 
-//     let product = EFrameworkCore.Collections.Products.findOne(productId);
+		let product = EFrameworkCore.Collections.Products.findOne(productId);
 
-//     if ((product !== null ? product.variants[0].price : void 0) && (
-//         product !== null ? product.variants[0].title : void 0) && (
-//         product !==
-//         null ? product.title : void 0)) {
-//       // update product visibility
-//       EFrameworkCore.Log.info("toggle product visibility ", product._id, !
-//         product.isVisible);
+		/*
+			Se verifica que tenga lo mínimo para poder publicar un product.
+			Notar que aunque se desee ocultar el producto, de todas maneras se hace el check ( aunque en este caso es innecesario )
+		*/
+		if (
+				( product !== null ? product.variants[0].price : void 0) &&
+				( product !== null ? product.variants[0].title : void 0) &&
+				( product !== null ? product.title : void 0))
+		{
+			// update product visibility
+			EFrameworkCore.Log.info("toggle product visibility ", product._id, !product.isVisible);
 
-//       Products.update(product._id, {
-//         $set: {
-//           isVisible: !product.isVisible
-//         }
-//       });
-//       return Products.findOne(product._id).isVisible;
-//     }
-//     EFrameworkCore.Log.debug("invalid product visibility ", productId);
-//     throw new Meteor.Error(400, "Bad Request");
-//   }
+			Products.update(product._id, {
+				$set: {
+					isVisible: !product.isVisible
+				}
+			});
+			return Products.findOne(product._id).isVisible;
+		}
+		/*El product no cuenta con la información mínima para publicarse*/
+		EFrameworkCore.Log.debug("invalid product visibility ", productId);
+		throw new Meteor.Error(400, "Bad Request");
+	}
 });

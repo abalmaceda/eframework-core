@@ -1,24 +1,25 @@
 <!--TODO-->
-
 <template name="coreHead">
-  <head>
-    <title>{{metaData.name}} | {{metaData.title}}</title>
-    {{#each metaData.meta}}
-      <meta name="{{name}}" content="{{content}}">
-    {{/each}}
-  </head>
-</template>
+	<head>
+		<title>{{metaData.name}} | {{metaData.title}}</title>
+		{{#each metaData.meta}}
+			<meta name="{{name}}" content="{{content}}">
+		{{/each}}
+	</head>
 
+</template>
+<!--TODO-->
 <template name="print">
-  {{> yield}}
+	{{> yield}}
 </template>
 
+<!--TODO-->
 <template name="coreLayout">
 	<nav class="reaction-navigation-header">{{> yield region="layoutHeader"}}</nav>
-		<!-- TODO : descomentar -->
-		<!--  <nav class="reaction-cart-drawer">{{>cartDrawer}}</nav>-->
-		<!-- TODO : descomentar -->
-		<!-- <div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>-->
+	<!-- Icono del cart -->
+	<nav class="reaction-cart-drawer">{{>cartDrawer}}</nav>
+	<!-- TODO : descomentar -->
+	<!-- <div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>-->
 	<main role="main" id="main">
 		<span id="layout-alerts">{{>bootstrapAlerts}}</span>
 		{{> yield}}
@@ -32,8 +33,8 @@
 	<span class="layout-alerts-global">{{>bootstrapAlerts}}</span>
 	<div class="page {{adminControlsClassname}}">
 		<nav class="reaction-navigation-header">{{> yield region="layoutHeader"}}</nav>
-		<!-- TODO : descomentar -->
-		<!-- <nav class="reaction-cart-drawer">{{>cartDrawer}}</nav>-->
+		<!-- Icono del cart -->
+		<nav class="reaction-cart-drawer">{{>cartDrawer}}</nav>
 		<!-- TODO : descomentar -->
 		<!--<div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>-->
 		<main role="main" id="main">
@@ -61,6 +62,7 @@
 	</div>
 </template>
 
+<!--TODO-->
 <template name="coreSettingsLayout">
   <nav class="reaction-navigation-header">{{> yield region="layoutHeader"}}</nav>
  <!-- <nav class="reaction-cart-drawer">{{>cartDrawer}}</nav>-->
