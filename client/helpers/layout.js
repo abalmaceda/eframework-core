@@ -5,87 +5,82 @@
  * @param {String} workflow defaults to "default"
  * @peram {id} workflow collection id
  * @returns
+ * @todo Documentar y entender
  */
 
 Template.registerHelper("reactionTemplate", function (options) {
-  let shopId = options.hash.shopId || EFrameworkCore.getShopId();
-  // get shop info, defaults to current
-  let Shop = EFrameworkCore.Collections.Shops.findOne(shopId);
-  // let layoutConfiguration = Shop.layout;
-  let reactionTemplates = [];
+	let shopId = options.hash.shopId || EFrameworkCore.getShopId();
+	// get shop info, defaults to current
+	let Shop = EFrameworkCore.Collections.Shops.findOne(shopId);
+	// let layoutConfiguration = Shop.layout;
+	let reactionTemplates = [];
 
-  // fetch collection from shop.layout configuration
-  let layout = _.findWhere(Shop.layout, {
-    workflow: options.hash.workflow
-  });
+	// fetch collection from shop.layout configuration
+	let layout = _.findWhere(Shop.layout, { workflow: options.hash.workflow });
 
-  // potentially we can make the default a workflow collection
-  let layoutConfigCollection = layout.collection || "Cart";
+	// potentially we can make the default a workflow collection
+	let layoutConfigCollection = layout.collection || "Cart";
 
-  // if we've got an id, we'll use it with the layout's collection
-  if (Template.currentData()) {
-    currentId = Template.currentData()._id;
-  } else {
-    let currentCart = EFrameworkCore.Collections.Cart.findOne({
-      userId: Meteor.userId()
-    });
-    currentId = currentCart._id;
-  }
-  // we'll get current cart status by default, as the most common case
-  // TODO: expand query options
-  currentId = options.hash.id || currentId;
+	// if we've got an id, we'll use it with the layout's collection
+	if (Template.currentData()) {
+		currentId = Template.currentData()._id;
+	}
+	else {
+		let currentCart = EFrameworkCore.Collections.Cart.findOne({ userId: Meteor.userId() });
+		currentId = currentCart._id;
+	}
+	// we'll get current cart status by default, as the most common case
+	// TODO: expand query options
+	currentId = options.hash.id || currentId;
 
-  // The currentCollection must have workflow schema attached.
-  // layoutConfigCollection is the collection defined in Shops.workflow
-  let workflowTargetCollection = EFrameworkCore.Collections[
-    layoutConfigCollection];
-  let currentCollection = workflowTargetCollection.findOne(currentId);
+	// The currentCollection must have workflow schema attached.
+	// layoutConfigCollection is the collection defined in Shops.workflow
+	let workflowTargetCollection = EFrameworkCore.Collections[
+	layoutConfigCollection];
+	let currentCollection = workflowTargetCollection.findOne(currentId);
 
-  // if we be here without a workflow, we're layouteers
-  // if there isn't a layout defined
-  if (!currentCollection) {
-    currentCollection = EFrameworkCore.Collections.Layouts.findOne(
-      currentId);
-    if (!currentCollection) {
-      return [];
-    }
-  }
+	// if we be here without a workflow, we're layouteers
+	// if there isn't a layout defined
+	if (!currentCollection) {
+		currentCollection = EFrameworkCore.Collections.Layouts.findOne(
+		currentId);
+		if (!currentCollection) {
+			return [];
+		}
+	}
 
-  let currentStatus = currentCollection.workflow.status;
-  let currentCollectionWorkflow = currentCollection.workflow.workflow;
+	let currentStatus = currentCollection.workflow.status;
+	let currentCollectionWorkflow = currentCollection.workflow.workflow;
 
-  // find the packages with these options
-  let Packages = EFrameworkCore.Collections.Packages.find({
-    layout: {
-      $elemMatch: options.hash
-    }
-  });
-  //  we can have multiple packages contributing to the layout / workflow
-  Packages.forEach(function (reactionPackage) {
-    // match template or workflow
-    let layoutWorkflows = _.where(reactionPackage.layout, options.hash);
-    for (layout of layoutWorkflows) {
-      // audience is layout permissions
-      if (layout.audience === undefined) {
-        defaultRoles = EFrameworkCore.Collections.Shops.findOne().defaultRoles;
-        layout.audience = defaultRoles;
-      }
+	// find the packages with these options
+	let Packages = EFrameworkCore.Collections.Packages.find({
+		layout: {$elemMatch: options.hash}
+	});
+	//  we can have multiple packages contributing to the layout / workflow
+	Packages.forEach(function (reactionPackage) {
+		// match template or workflow
+		let layoutWorkflows = _.where(reactionPackage.layout, options.hash);
+		for (layout of layoutWorkflows) {
+			// audience is layout permissions
+			if (layout.audience === undefined) {
+				defaultRoles = EFrameworkCore.Collections.Shops.findOne().defaultRoles;
+				layout.audience = defaultRoles;
+			}
 
-      // check permissions so you don't have to on template.
-      if (EFrameworkCore.hasPermission(layout.audience)) {
-        // default boolean status
-        layout.status = _.contains(currentCollectionWorkflow,
-          layout.template);
-        // if the current template is already the current status
-        if (layout.template === currentStatus) {
-          layout.status = currentStatus;
-        }
-        // add to templates list
-        reactionTemplates.push(layout);
-      }
-    }
-  });
+			// check permissions so you don't have to on template.
+			if (EFrameworkCore.hasPermission(layout.audience)) {
+				// default boolean status
+				layout.status = _.contains(currentCollectionWorkflow, layout.template);
+				// if the current template is already the current status
+				if (layout.template === currentStatus) {
+					layout.status = currentStatus;
+				}
+				// add to templates list
+				reactionTemplates.push(layout);
+			}
+		}
+	});
 
-  EFrameworkCore.Log.debug("reactionTemplates", reactionTemplates);
-  return reactionTemplates;
+	EFrameworkCore.Log.debug("reactionTemplates", reactionTemplates);
+	return reactionTemplates;
 });

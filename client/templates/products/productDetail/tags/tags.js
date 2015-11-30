@@ -1,4 +1,8 @@
-	Template.productDetailTags.helpers({
+/**
+ * Template.productDetailTags.helpers
+ * @summary Helpers para Template.productDetailTags
+ */
+Template.productDetailTags.helpers({
 	/**
 	 * currentHashTag
 	 * @summary
@@ -19,6 +23,10 @@
 	}
 });
 
+/**
+ * Template.productTagInputForm.helpers
+ * @summary Helpers para Template.productTagInputForm
+ */
 Template.productTagInputForm.helpers({
 	/**
 	 * @summary Agrega un simbolo al tag
@@ -38,6 +46,10 @@ Template.productTagInputForm.helpers({
 	}
 });
 
+/**
+ * Template.productTagInputForm.events
+ * @summary Events para Template.productTagInputForm
+ */
 Template.productTagInputForm.events({
 	"click .tag-input-hashtag": function () {
 		return Meteor.call("products/setHandleTag", selectedProductId(), this ._id, function (error, result) {

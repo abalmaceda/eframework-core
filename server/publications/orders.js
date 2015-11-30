@@ -18,21 +18,18 @@ Meteor.publish("Orders", function () {
 // /*
 //  * account orders
 //  */
+// TODO
+Meteor.publish("AccountOrders", function (userId, currentShopId) {
+	check(userId, Match.OptionalOrNull(String));
+	check(currentShopId, Match.OptionalOrNull(String));
+	shopId = currentShopId || EFrameworkCore.getShopId(this);
 
-// Meteor.publish("AccountOrders", function (userId, currentShopId) {
-//   check(userId, Match.OptionalOrNull(String));
-//   check(currentShopId, Match.OptionalOrNull(String));
-//   shopId = currentShopId || EFrameworkCore.getShopId(this);
+	if (userId && userId !== this.userId) {
+		this.ready();
+	}
 
-//   if (userId && userId !== this.userId) {
-//     this.ready();
-//   }
-
-//   return EFrameworkCore.Collections.Orders.find({
-//     shopId: shopId,
-//     userId: this.userId
-//   });
-// });
+	return EFrameworkCore.Collections.Orders.find({ shopId: shopId, userId: this.userId });
+});
 
 // /*
 //  * completed cart order

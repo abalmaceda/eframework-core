@@ -343,8 +343,16 @@ ReactionRegistry.loadFixtures = function () {
 			return EFrameworkCore.Collections.Shops.find().forEach(function (shop) {
 				let shopId = shop._id;
 				EFrameworkCore.Log.info("Initializing " + shop.name + " " + pkgName);
+				_.each(config.layout, function( element ){
+					EFrameworkCore.Log.info("template " +element.template);
+					EFrameworkCore.Log.info("workflow " +element.workflow);
+					EFrameworkCore.Log.info("container " +element.container);
+				});
 				// existing registry will be upserted with changes
-				if (!shopId) return [];
+				if (!shopId){
+					return [];
+				}
+
 				let result = EFrameworkCore.Collections.Packages.upsert(
 				{
 					shopId: shopId,

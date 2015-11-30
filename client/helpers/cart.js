@@ -14,11 +14,14 @@
 //  * in code: EFrameworkCore.Collections.Cart.findOne().cartTotal()
 //  * @return {Object} returns inventory helpers
 //  */
-// Template.registerHelper("cart", function () {
-//   let cartHelpers = {
+Template.registerHelper("cart", function () {
+
+	let cartHelpers = {
+
 //     /**
 //      * showCartIconWarning
 //      * @return {Boolean} return true if low inventory on any item in cart
+//		* @info Funcion deprecada. Movida a helper de carticon
 //      */
 //     showCartIconWarning() {
 //       if (this.showLowInventoryWarning()) {
@@ -26,9 +29,11 @@
 //       }
 //       return false;
 //     },
+
 //     /**
 //      * showLowInventoryWarning
 //      * @return {Boolean} return true if low inventory on any item in cart
+//		* @info Funcion deprecada. Movida a helper de carticon
 //      */
 //     showLowInventoryWarning() {
 //       let item;
@@ -46,26 +51,22 @@
 //         }
 //       }
 //     },
-//     /**
-//      * showLowInventoryWarning
-//      * @param {Object} variant - variant object to check inventory levels on
-//      * @return {Boolean} return true if low inventory on variant
-//      */
-//     showItemLowInventoryWarning(variant) {
-//       if ((variant !== null ? variant.inventoryPolicy : void 0) && (
-//           variant !== null ? variant.lowInventoryWarningThreshold :
-//           void 0
-//         )) {
-//         if ((variant !== null ? variant.inventoryQuantity : void 0) <=
-//           variant.lowInventoryWarningThreshold) {
-//           return true;
-//         }
-//       }
-//       return false;
-//     }
-//   };
-//   return cartHelpers;
-// });
+	    /**
+	     * showLowInventoryWarning
+	     * @param {Object} variant - variant object to check inventory levels on
+	     * @return {Boolean} return true if low inventory on variant
+	     */
+		showItemLowInventoryWarning: function(variant) {
+			if ((variant !== null ? variant.inventoryPolicy : void 0) && ( variant !== null ? variant.lowInventoryWarningThreshold : void 0 )) {
+				if ((variant !== null ? variant.inventoryQuantity : void 0) <= variant.lowInventoryWarningThreshold) {
+					return true;
+				}
+			}
+			return false;
+		}
+	};
+	return cartHelpers;
+});
 
 // /**
 //  * cartPayerName

@@ -1,6 +1,6 @@
-
 /**
- * @summary Eventos de Template.productMetaFieldForm
+ * Template.productMetaFieldForm.events
+ * @summary Events para Template.productMetaFieldForm
  */
 Template.productMetaFieldForm.events({
 	/**
@@ -21,7 +21,8 @@ Template.productMetaFieldForm.events({
 });
 
 /**
- * @summary Eventos de Template.metaComponent
+ * Template.metaComponent.events
+ * @summary Events para Template.metaComponent
  */
 Template.metaComponent.events({
 	/**
@@ -32,7 +33,6 @@ Template.metaComponent.events({
 	* @param event [Event] Información de los elemntos DOM del contexto
 	* @todo Comentar código
 	*/
-
 	"change input": function (event) {
 		/* Obtengo los valores a guardar*/
 		let updateMeta = {

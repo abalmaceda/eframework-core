@@ -1,6 +1,7 @@
 /*
  * Forked and modifed from https://github.com/asktomsk/bootstrap-alerts/
  */
+//TODO. Revizar esto
 Alerts = {
 
   /*

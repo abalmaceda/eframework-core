@@ -93,8 +93,8 @@ Meteor.methods({
 
 	/**
 	* cart/createCart
-	* @summary create and return new cart for user
-	* @param {String} createForUserId - userId to create cart for
+	* @summary crea y retorna un nuevo "cart" para el "user"
+	* @param {String} createForUserId - userId al que se le crearà el "cart"
 	* @returns {String} cartId - users cartId
 	* @todo Documentar y entender
 	*/
@@ -164,95 +164,94 @@ Meteor.methods({
 		return currentCartId;
 	},
 
-//   /**
-//    *  cart/addToCart
-//    *  @summary add items to a user cart
-//    *  when we add an item to the cart, we want to break all relationships
-//    *  with the existing item. We want to fix price, qty, etc into history
-//    *  however, we could check reactively for price /qty etc, adjustments on
-//    *  the original and notify them
-//    *  @param {String} cartId - cartId
-//    *  @param {String} productId - productId to add to Cart
-//    *  @param {String} variantData - variant object
-//    *  @param {String} quantity - qty to add to cart, deducts from inventory
-//    *  @return {Number} Mongo insert response
-//    */
-//   "cart/addToCart": function (cartId, productId, variantData, quantity) {
-//     check(cartId, String);
-//     check(productId, String);
-//     check(variantData, EFrameworkCore.Schemas.ProductVariant);
-//     check(quantity, String);
+	/**
+	*  @function cart/addToCart
+	*  @summary agrega items a un cart del usuario
+	*  when we add an item to the cart, we want to break all relationships
+	*  with the existing item. We want to fix price, qty, etc into history
+	*  however, we could check reactively for price /qty etc, adjustments on
+	*  the original and notify them
+	*  @param {String} cartId - cartId
+	*  @param {String} productId - productId para agregar al Cart
+	*  @param {String} variantData - variant object
+	*  @param {String} quantity - camtidad para agregar al cart, reducir desde el inventory
+	*  @return {Number} Mongo insert response
+	*/
+	"cart/addToCart": function (cartId, productId, variantData, quantity) {
+		check(cartId, String);
+		check(productId, String);
+		check(variantData, EFrameworkCore.Schemas.ProductVariant);
+		check(quantity, String);
 
-//     let currentCart = EFrameworkCore.Collections.Cart.findOne(cartId);
-//     let cartVariantExists = EFrameworkCore.Collections.Cart.findOne({
-//       "_id": currentCart._id,
-//       "items.variants._id": variantData._id
-//     });
+		let currentCart = EFrameworkCore.Collections.Cart.findOne(cartId);
+		let cartVariantExists = EFrameworkCore.Collections.Cart.findOne({
+			"_id": currentCart._id,
+			"items.variants._id": variantData._id
+		});
 
-//     if (cartVariantExists) {
-//       Cart.update({
-//         "_id": currentCart._id,
-//         "items.variants._id": variantData._id
-//       }, {
-//         $set: {
-//           updatedAt: new Date()
-//         },
-//         $inc: {
-//           "items.$.quantity": quantity
-//         }
-//       });
-//       return function (error) {
-//         if (error) {
-//           EFrameworkCore.Log.warn("error adding to cart", EFrameworkCore.Collections
-//             .Cart.simpleSchema().namedContext().invalidKeys());
-//           return error;
-//         }
-//       };
-//     }
-//     // cart variant doesn't exist
-//     let product = EFrameworkCore.Collections.Products.findOne(productId);
-//     return Cart.update({
-//       _id: currentCart._id
-//     }, {
-//       $addToSet: {
-//         items: {
-//           _id: Random.id(),
-//           shopId: product.shopId,
-//           productId: productId,
-//           quantity: quantity,
-//           variants: variantData
-//         }
-//       }
-//     }, function (error) {
-//       if (error) {
-//         EFrameworkCore.Log.warn("error adding to cart", EFrameworkCore.Collections
-//           .Cart.simpleSchema().namedContext().invalidKeys());
-//         return;
-//       }
-//     });
-//   },
-//   /**
-//    * cart/removeFromCart
-//    * @summary removes a variant from the cart
-//    * @param {String} cartId - user cartId
-//    * @param {String} variantData - variant object
-//    * @returns {String} returns Mongo update result
-//    */
-//   "cart/removeFromCart": function (cartId, variantData) {
-//     check(cartId, String);
-//     check(variantData, Object);
-//     this.unblock();
+		//verificamos si la misma variant ha sido guardada previamente
+		if (cartVariantExists) {
+			Cart.update({
+				"_id": currentCart._id,
+				"items.variants._id": variantData._id
+			}, {
+				$set: {
+					updatedAt: new Date()
+				},
+				$inc: {
+					"items.$.quantity": quantity
+				}
+			});
+			return function (error) {
+				if (error) {
+					EFrameworkCore.Log.warn("error adding to cart", EFrameworkCore.Collections.Cart.simpleSchema().namedContext().invalidKeys());
+					return error;
+				}
+			};
+		}
 
-//     return Cart.update({
-//       _id: cartId
-//     }, {
-//       $pull: {
-//         items: {
-//           variants: variantData
-//         }
-//       }
-//     });
-//   },
+		// cart variant NO EXISTE
+		let product = EFrameworkCore.Collections.Products.findOne(productId);
+		return Cart.update(
+		{
+			_id: currentCart._id
+		},
+		{
+			$addToSet: {
+				items: {
+					_id: Random.id(),
+					shopId: product.shopId,
+					productId: productId,
+					quantity: quantity,
+					variants: variantData
+				}
+			}
+		},
+		function (error) {
+			if (error) {
+				//Agrego log en caso de error
+				EFrameworkCore.Log.warn("error adding to cart", EFrameworkCore.Collections.Cart.simpleSchema().namedContext().invalidKeys());
+				return;
+			}
+		});
+	},
+	/**
+	* @function cart/removeFromCart
+	* @summary Elimina una variant del cart
+	* @param {String} cartId - user cartId
+	* @param {String} variantData - Objecto variant
+	* @returns {String} retorna  resultado de Mongo update
+	*/
+	"cart/removeFromCart": function (cartId, variantData) {
+		check(cartId, String);
+		check(variantData, Object);
+		this.unblock();
+
+		return Cart.update(
+			{_id: cartId},
+			{ $pull: { items: { variants: variantData} }
+		});
+	},
 
 //   *
 //    * cart/copyCartToOrder
@@ -402,130 +401,107 @@ Meteor.methods({
 //     });
 //   },
 
-//   /**
-//    * cart/setShipmentAddress
-//    * @summary adds address book to cart shipping
-//    * @param {String} cartId - cartId to apply shipmentMethod
-//    * @param {Object} address - addressBook object
-//    * @return {String} return Mongo update result
-//    */
-//   "cart/setShipmentAddress": function (cartId, address) {
-//     check(cartId, String);
-//     check(address, EFrameworkCore.Schemas.Address);
-//     this.unblock();
+	/**
+	* cart/setShipmentAddress
+	* @summary adds address book to cart shipping
+	* @param {String} cartId - cartId to apply shipmentMethod
+	* @param {Object} address - addressBook object
+	* @return {String} return Mongo update result
+	*/
+	"cart/setShipmentAddress": function (cartId, address) {
+		check(cartId, String);
+		check(address, EFrameworkCore.Schemas.Address);
+		this.unblock();
 
-//     let cart = EFrameworkCore.Collections.Cart.findOne({
-//       _id: cartId,
-//       userId: Meteor.userId()
-//     });
+		let cart = EFrameworkCore.Collections.Cart.findOne({
+			_id: cartId,
+			userId: Meteor.userId()
+		});
 
-//     if (cart) {
-//       let selector;
-//       let update;
-//       // temp hack until we build out multiple shipment handlers
-//       // if we have an existing item update it, otherwise add to set.
-//       if (cart.shipping) {
-//         selector = {
-//           "_id": cartId,
-//           "shipping._id": cart.shipping[0]._id
-//         };
-//         update = {
-//           $set: {
-//             "shipping.$.address": address
-//           }
-//         };
-//       } else {
-//         selector = {
-//           _id: cartId
-//         };
-//         update = {
-//           $addToSet: {
-//             shipping: {
-//               address: address
-//             }
-//           }
-//         };
-//       }
+		if (cart) {
+			let selector;
+			let update;
+			// temp hack until we build out multiple shipment handlers
+			// if we have an existing item update it, otherwise add to set.
+			if (cart.shipping) {
+				selector = {
+					"_id": cartId,
+					"shipping._id": cart.shipping[0]._id
+				};
+				update = { $set: { "shipping.$.address": address } };
+			}
+			else {
+				selector = { _id: cartId };
+				update = { $addToSet: { shipping: { address: address }}};
+			}
 
-//       // add / or set the shipping address
-//       EFrameworkCore.Collections.Cart.update(selector, update, function (
-//         error) {
-//         if (error) {
-//           EFrameworkCore.Log.warn(error);
-//           return;
-//         }
-//         // refresh shipping quotes
-//         Meteor.call("shipping/updateShipmentQuotes", cartId);
+			// add / or set the shipping address
+			EFrameworkCore.Collections.Cart.update(selector, update, function (error) {
+				if (error) {
+					EFrameworkCore.Log.warn(error);
+					return;
+				}
+				// refresh shipping quotes
+				Meteor.call("shipping/updateShipmentQuotes", cartId);
 
-//         // it's ok for this to be called multiple times
-//         Meteor.call("workflow/pushCartWorkflow", "coreCartWorkflow",
-//           "coreCheckoutShipping");
+				// it's ok for this to be called multiple times
+				Meteor.call("workflow/pushCartWorkflow", "coreCartWorkflow", "coreCheckoutShipping");
 
-//         // this is probably a crappy way to do this
-//         // let's default the payment address
-//         if (!cart.payment) {
-//           Meteor.call("cart/setPaymentAddress", cartId, address);
-//         }
-//         return;
-//       });
-//     }
-//   },
-//   /**
-//    * cart/setPaymentAddress
-//    * @summary adds addressbook to cart payments
-//    * @param {String} cartId - cartId to apply payment address
-//    * @param {Object} address - addressBook object
-//    * @return {String} return Mongo update result
-//    */
-//   "cart/setPaymentAddress": function (cartId, address) {
-//     check(cartId, String);
-//     check(address, EFrameworkCore.Schemas.Address);
-//     this.unblock();
+				// this is probably a crappy way to do this
+				// let's default the payment address
+				if (!cart.payment) {
+					Meteor.call("cart/setPaymentAddress", cartId, address);
+				}
+				return;
+			});
+		}
+	},
 
-//     let cart = EFrameworkCore.Collections.Cart.findOne({
-//       _id: cartId,
-//       userId: Meteor.userId()
-//     });
+	/**
+	* cart/setPaymentAddress
+	* @summary Agrega addressbook a pagos del cart
+	* @param {String} cartId - cartId para realizar pagos
+	* @param {Object} address - Objeto addressBook
+	* @return {String} return Mongo update result
+	*/
+	"cart/setPaymentAddress": function (cartId, address) {
+		check(cartId, String);
+		check(address, EFrameworkCore.Schemas.Address);
+		this.unblock();
 
-//     if (cart) {
-//       let selector;
-//       let update;
-//       // temp hack until we build out multiple billing handlers
-//       // if we have an existing item update it, otherwise add to set.
-//       if (cart.billing) {
-//         selector = {
-//           "_id": cartId,
-//           "billing._id": cart.billing[0]._id
-//         };
-//         update = {
-//           $set: {
-//             "billing.$.address": address
-//           }
-//         };
-//       } else {
-//         selector = {
-//           _id: cartId
-//         };
-//         update = {
-//           $addToSet: {
-//             billing: {
-//               address: address
-//             }
-//           }
-//         };
-//       }
+		let cart = EFrameworkCore.Collections.Cart.findOne({
+			_id: cartId,
+			userId: Meteor.userId()
+		});
 
-//       EFrameworkCore.Collections.Cart.update(selector, update,
-//         function (error, result) {
-//           if (error) {
-//             EFrameworkCore.Log.warn(error);
-//           } else {
-//             // post payment address Methods
-//             return result;
-//           }
-//         });
-//     }
-//   },
+		if (cart) {
+			let selector;
+			let update;
+			// temp hack until we build out multiple billing handlers
+			// if we have an existing item update it, otherwise add to set.
+			if (cart.billing) {
+				selector = {
+					"_id": cartId,
+					"billing._id": cart.billing[0]._id
+				};
+				update = { $set: { "billing.$.address": address }};
+			}
+			else {
+				selector = { _id: cartId };
+				update = { $addToSet: { billing: { address: address} }};
+			}
+
+			EFrameworkCore.Collections.Cart.update(selector, update, function (error, result) {
+				if (error) {
+					EFrameworkCore.Log.warn(error);
+				}
+				else {
+					// post payment address Methods
+					return result;
+				}
+			});
+		}
+	},
 
 //   /**
 //    * cart/submitPayment

@@ -10,21 +10,30 @@
 // see helpers/cart.coffee
 //
 
+/**
+ * Template.cartCheckout.helpers
+ * @summary Helpers para Template.cartCheckout
+ */
 Template.cartCheckout.helpers({
-  cart: function () {
-    return EFrameworkCore.Collections.Cart.findOne();
-  }
+	/**
+	 * @function cart
+	 * @summary Busca un cart del usuario
+	 * @returns {Cart}
+	 */
+	cart: function () {
+		return EFrameworkCore.Collections.Cart.findOne();
+	}
 });
 
-Template.cartCheckout.onRendered(function () {
-  // ensure checkout drawer does not display
-  Session.set("displayCartDrawer", false);
-  // init cart workflow
-  if (!EFrameworkCore.Collections.Cart.findOne().workflow.workflow) {
-    Meteor.call("workflow/pushCartWorkflow", "coreCartWorkflow",
-      "checkoutLogin");
-  }
-});
+// Template.cartCheckout.onRendered(function () {
+//   // ensure checkout drawer does not display
+//   Session.set("displayCartDrawer", false);
+//   // init cart workflow
+//   if (!EFrameworkCore.Collections.Cart.findOne().workflow.workflow) {
+//     Meteor.call("workflow/pushCartWorkflow", "coreCartWorkflow",
+//       "checkoutLogin");
+//   }
+// });
 
 /**
  * checkoutSteps Helpers
@@ -33,19 +42,19 @@ Template.cartCheckout.onRendered(function () {
  *
  */
 Template.checkoutSteps.helpers({
-  isCompleted: function () {
-    if (this.status === true) {
-      return this.status;
-    }
-    return false;
-  },
+  // isCompleted: function () {
+  //   if (this.status === true) {
+  //     return this.status;
+  //   }
+  //   return false;
+  // },
 
-  isPending: function () {
-    if (this.status === this.template) {
-      return this.status;
-    }
-    return false;
-  }
+  // isPending: function () {
+  //   if (this.status === this.template) {
+  //     return this.status;
+  //   }
+  //   return false;
+  // }
 });
 
 /**
@@ -54,12 +63,12 @@ Template.checkoutSteps.helpers({
  */
 
 Template.checkoutStepBadge.helpers({
-  checkoutStepBadgeClass: function () {
-    let workflowStep = Template.instance().data;
-    // let currentStatus = EFrameworkCore.Collections.Cart.findOne().workflow.status;
-    if (workflowStep.status === true || workflowStep.status === this.template) {
-      return "active";
-    }
-    return "";
-  }
+  // checkoutStepBadgeClass: function () {
+  //   let workflowStep = Template.instance().data;
+  //   // let currentStatus = EFrameworkCore.Collections.Cart.findOne().workflow.status;
+  //   if (workflowStep.status === true || workflowStep.status === this.template) {
+  //     return "active";
+  //   }
+  //   return "";
+  // }
 });

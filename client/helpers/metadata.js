@@ -3,6 +3,7 @@
  * Spiderable method to set meta tags for crawl
  * accepts current iron-router route
  */
+ //TODO
 EFrameworkCore.MetaData = {
 	settings: {
 		title: "",

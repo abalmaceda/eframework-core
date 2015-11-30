@@ -39,15 +39,15 @@ Meteor.publish("Cart", function (sessionId, userId) {
 	return EFrameworkCore.Collections.Cart.find(cartId);
 });
 
-// /**
-//  * shipping
-//  */
+/**
+ * shipping
+ */
 
-// Meteor.publish("Shipping", function () {
-//   return EFrameworkCore.Collections.Shipping.find({
-//     shopId: EFrameworkCore.getShopId()
-//   });
-// });
+Meteor.publish("Shipping", function () {
+  return EFrameworkCore.Collections.Shipping.find({
+    shopId: EFrameworkCore.getShopId()
+  });
+});
 
 // /**
 //  * taxes

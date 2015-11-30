@@ -278,22 +278,19 @@ Router.map(function () {
 		}
 	});
 
-//   this.route("cartCheckout", {
-//     layoutTemplate: "coreLayout",
-//     path: "checkout",
-//     template: "cartCheckout",
-//     yieldTemplates: {
-//       checkoutHeader: {
-//         to: "layoutHeader"
-//       }
-//     },
-//     waitOn: function () {
-//       this.subscribe("Packages");
-//       this.subscribe("Products");
-//       this.subscribe("Shipping");
-//       return this.subscribe("AccountOrders");
-//     }
-//   });
+	this.route("cartCheckout", {
+		layoutTemplate: "coreLayout",
+		path: "checkout",
+		template: "cartCheckout",
+		yieldTemplates: { checkoutHeader: { to: "layoutHeader" } },
+		waitOn: function () {
+			this.subscribe("Packages");
+			this.subscribe("Products");
+			//descomentar
+			//this.subscribe("Shipping");
+			return this.subscribe("AccountOrders");
+		}
+	});
 
 //   this.route("cartCompleted", {
 //     controller: ShopController,

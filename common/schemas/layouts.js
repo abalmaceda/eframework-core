@@ -3,7 +3,7 @@
  * package workflow schema for defining workflow patterns
  * defaults are set in Shops.defaultWorkflows
  */
-
+//TODO
 EFrameworkCore.Schemas.Layout = new SimpleSchema({
   template: {
     type: String,

@@ -1,4 +1,6 @@
+<!-- Icono del carro de compra. Muestra además la cantidad de elementos agregado al "cart". Al hacer click me despliega la UI del cart-->
 <template name="cartIcon">
+	<!-- Agrega Data Cotext -->
 	{{#with cart}}
 		<div class="cart-icon">
 			<span data-event-category="cart" data-event-action="cart-click" data-event-label="cart toggle click" data-event-value="{{_id}}">

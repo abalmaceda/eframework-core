@@ -4,7 +4,8 @@
  */
 Template.productDetail.helpers({
 	/**
-	* Retorna los tags do producto seleccionado actualmente
+	* @function tags
+	* @summary Retorna los tags do producto seleccionado actualmente
 	* @return [Template]
 	*/
 	tags: function () {
@@ -18,6 +19,7 @@ Template.productDetail.helpers({
 		}
 	},
 	/**
+	* @function tagsComponent
 	* @summary Retorna el Template de descripción de los Tags dependiendo si es propietario o no
 	* @return [Template]
 	*/
@@ -28,6 +30,7 @@ Template.productDetail.helpers({
 		return Template.productDetailTags;
 	},
 	/**
+	* @function actualPrice
 	* @summary Retorna el Template de descripción de los Tags dependiendo si es propietario o no
 	* @return [Template]
 	*/
@@ -60,7 +63,8 @@ Template.productDetail.helpers({
 	},
 
 	/**
-	* Retorna el Template dependiendo de los permisos del usuario (creación o solo lectura)
+	* @function fieldComponent
+	* @summary Retorna el Template dependiendo de los permisos del usuario (creación o solo lectura)
 	* @return [Template]
 	*/
 	fieldComponent: function () {
@@ -70,7 +74,8 @@ Template.productDetail.helpers({
 		return Template.productDetailField;
 	},
 	/**
-	* Retorna el Template dependiendo de los permisos del usuario
+	* @function metaComponent
+	* @summary Retorna el Template dependiendo de los permisos del usuario
 	* @return {Template}
 	* @todo Mejorar descripcion, hablar de los Templates
 	*/
@@ -162,7 +167,7 @@ Template.productDetail.events({
 		let currentVariant = selectedVariant();
 		let currentProduct = selectedProduct();
 
-		/*Si tengo un Variant seleccionado */
+		//Si tengo un Variant seleccionado
 		if (currentVariant) {
 			if (currentVariant.parentId === null) {
 				options = (function () {
@@ -184,7 +189,7 @@ Template.productDetail.events({
 					return [];
 				}
 			}
-
+			//Si tengo politicas de inventario ( mostrar alertas de inventario ) y el inventario es menor que uno ( no tengo inventario )
 			if (currentVariant.inventoryPolicy && currentVariant.inventoryQuantity < 1) {
 				Alerts.add("Sorry, this item is out of stock!", "danger", {
 					placement: "productDetail",
@@ -200,12 +205,12 @@ Template.productDetail.events({
 			if (quantity < 1) {
 				quantity = 1;
 			}
-			/*Se define que si el producto no es visible, entonces no se venderá. Este caso se da cuando el mismo creador, intenta agregar al cart el producto, en condiciones que este no es visible.*/
+			//Se define que si el producto no es visible, entonces no se venderá. Este caso se da cuando el mismo creador, intenta agregar al cart el producto, en condiciones que este no es visible.
 			if (!this.isVisible) {
 				Alerts.add("Publish product before adding to cart.", "danger", {
-				placement: "productDetail",
-				i18nKey: "productDetail.publishFirst",
-				autoHide: 10000
+					placement: "productDetail",
+					i18nKey: "productDetail.publishFirst",
+					autoHide: 10000
 				});
 			} else {
 				cartId = EFrameworkCore.Collections.Cart.findOne()._id;
@@ -216,14 +221,14 @@ Template.productDetail.events({
 
 					Meteor.call("cart/addToCart", cartId, productId, currentVariant, quantity, function (error) {
 					let address;
-					if (!error && count === 0) {
-						address = Session.get("address");
-						if (!address) {
-							return locateUser();
-						}
-					} else if (error) {
-						EFrameworkCore.Log.error("Failed to add to cart.", error);
-						return error;
+						if (!error && count === 0) {
+							address = Session.get("address");
+							if (!address) {
+								return locateUser();
+							}
+						} else if (error) {
+							EFrameworkCore.Log.error("Failed to add to cart.", error);
+							return error;
 						}
 					});
 				}
@@ -277,9 +282,9 @@ Template.productDetail.events({
 			}
 		}
 		if (errorMsg.length) {
-			Alerts.add(errorMsg, "danger", {
-			placement: "productManagement",
-			i18nKey: "productDetail.errorMsg"
+				Alerts.add(errorMsg, "danger", {
+				placement: "productManagement",
+				i18nKey: "productDetail.errorMsg"
 			});
 		} else {
 			Meteor.call("products/publishProduct", this._id);

@@ -1,11 +1,14 @@
-<!-- TODO -->
+<!-- Contenedor para elegir el Template adecuado a mostrar emptyCartDrawer/openCartDrawer -->
 <template name="cartDrawer">
 	<div id="cart-drawer-container">
 		{{> displayCartDrawer}}
 	</div>
 </template>
 
-<!-- TODO -->
+<!--
+ TODO
+	Tempatel en caso de que el cart este vacio
+ -->
 <template name="emptyCartDrawer">
 	<div class="cart-drawer" id="cart-drawer">
 		<div class="cart-drawer-empty">
@@ -21,7 +24,10 @@
 	</div>
 </template>
 
-<!-- TODO -->
+<!--
+ TODO
+	Tempatel en caso de que el cart tenga al menos un elemento
+ -->
 <template name="openCartDrawer">
 	<div class="cart-drawer" id="cart-drawer">
 		<div class="cart-drawer-swiper-container">

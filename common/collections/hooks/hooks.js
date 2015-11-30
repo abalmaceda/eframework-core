@@ -94,6 +94,7 @@ applyVariantDefaults = function (variant) {
 
 /**
  * create unpublished product
+ * TODO
  */
 EFrameworkCore.Collections.Products.before.insert(function (userId, product) {
 	let variant, _i, _len, _ref, _results;

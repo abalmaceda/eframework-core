@@ -3,8 +3,8 @@
  * @param {Number} productScrollLimit - optional, defaults to 20
  * @param {Array} shops - array of shopId to retrieve product from.
  * @return {Object} return product cursor
+ * @todo all
  */
- /*TODO*/
 Meteor.publish("Products", function (productScrollLimit, shops) {
   check(productScrollLimit, Match.OneOf(null, undefined, Number));
   check(shops, Match.Optional(Array));

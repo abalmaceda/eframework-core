@@ -189,9 +189,9 @@ EFrameworkCore.Collections.Products.attachSchema(EFrameworkCore.Schemas.Product)
 /**
 * EFrameworkCore Collections Shipping
 */
-// EFrameworkCore.Collections.Shipping = new Mongo.Collection("Shipping");
+EFrameworkCore.Collections.Shipping = new Mongo.Collection("Shipping");
 
-// EFrameworkCore.Collections.Shipping.attachSchema(EFrameworkCore.Schemas.Shipping);
+EFrameworkCore.Collections.Shipping.attachSchema(EFrameworkCore.Schemas.Shipping);
 
 /**
 * EFrameworkCore Collections Taxes
@@ -231,6 +231,6 @@ EFrameworkCore.Collections.Translations.attachSchema(EFrameworkCore.Schemas.Tran
 /**
 * EFrameworkCore Collections Accounts
 */
-// EFrameworkCore.Collections.Layouts = new Mongo.Collection("Layouts");
+EFrameworkCore.Collections.Layouts = new Mongo.Collection("Layouts");
 
-// EFrameworkCore.Collections.Layouts.attachSchema(EFrameworkCore.Schemas.Layouts);
+EFrameworkCore.Collections.Layouts.attachSchema(EFrameworkCore.Schemas.Layouts);

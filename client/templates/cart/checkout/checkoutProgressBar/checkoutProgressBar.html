@@ -1,0 +1,14 @@
+<!-- TODO -->
+<template name="checkoutProgressBar">
+	CHECKOUTBAR
+	<div class="checkout-progress-container">
+		<ul class="checkout-progress-bar">
+			{{#each reactionTemplate workflow="coreCartWorkflow"}}
+				<li class="{{progressbarStatusClass}}">
+					<span class="progress-step-badge">{{position}}</span>
+					<span class="progress-step-label" data-i18n="checkoutProgressBar.{{toCamelCase label}}">{{label}}</span>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+</template>

@@ -32,7 +32,7 @@ Template.productDetailEdit.events({
 	 * @returns {void}
 	 */
 	 /* Entender como funciona */
-	"change input,textarea": function (event) {
+	"change input,textarea": function (event, template) {
 		/* TODO : entender esta funcion */
 		Meteor.call(
 			"products/updateProductField",
@@ -43,6 +43,10 @@ Template.productDetailEdit.events({
 				if (results) {
 					/* TODO ; Entender como funciona la animación */
 					return $(event.currentTarget).animate({ backgroundColor: "#e2f2e2" }).animate({ backgroundColor: "#fff" });
+				}
+				else{
+					$(event.currentTarget).val(template.data.value)
+					return false;
 				}
 			}
 		);
