@@ -29,6 +29,7 @@ Template.productDetailTags.helpers({
  */
 Template.productTagInputForm.helpers({
 	/**
+	 * @function hashtagMark
 	 * @summary Agrega un simbolo al tag
 	 * @returns {void}
 	 * @todo entender para que sirve, y como discrimina entre los dos tipos de marcas

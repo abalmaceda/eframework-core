@@ -22,45 +22,37 @@ Meteor.methods({
     this.unblock();
 
     let defaultPackageWorkflows = [];
-    let nextWorkflowStep = {
-      template: ""
-    };
+    let nextWorkflowStep = { template: "" };
     let Cart = EFrameworkCore.Collections.Cart;
-    let currentCart = Cart.findOne({
-      userId: Meteor.userId()
-    });
+    let currentCart = Cart.findOne({ userId: Meteor.userId() });
 
     // exit if a cart doesn't exist.
     if (!currentCart) return [];
 
     let currentWorkflowStatus = currentCart.workflow.status;
     let Packages = EFrameworkCore.Collections.Packages.find({
-      "shopId": EFrameworkCore.getShopId(),
-      "layout.workflow": workflow
+		"shopId": EFrameworkCore.getShopId(),
+		"layout.workflow": workflow
     });
 
     // loop through packages and set the defaultPackageWorkflows
     Packages.forEach(function (reactionPackage) {
-      let layouts = _.where(reactionPackage.layout, {
-        workflow: workflow
-      });
-      // for every layout, process the associated workflows
-      _.each(layouts, function (layout) {
-        // audience is the layout permissions
-        if (layout.audience === undefined) {
-          let defaultRoles = EFrameworkCore.Collections.Shops.findOne(
-            EFrameworkCore.getShopId(), {
-              sort: {
-                priority: 1
-              }
-            }).defaultRoles;
-          layout.audience = defaultRoles;
-        }
-        // check permissions so you don't have to on template.
-        if (EFrameworkCore.hasPermission(layout.audience)) {
-          defaultPackageWorkflows.push(layout);
-        }
-      });
+		let layouts = _.where(reactionPackage.layout, { workflow: workflow });
+		// for every layout, process the associated workflows
+		_.each(layouts, function (layout) {
+		// audience is the layout permissions
+			if (layout.audience === undefined) {
+				let defaultRoles = EFrameworkCore.Collections.Shops.findOne(
+					EFrameworkCore.getShopId(),
+					{ sort: { priority: 1 }
+				}).defaultRoles;
+				layout.audience = defaultRoles;
+			}
+			// check permissions so you don't have to on template.
+			if (EFrameworkCore.hasPermission(layout.audience)) {
+				defaultPackageWorkflows.push(layout);
+			}
+		});
     });
 
     // statusExistsInWorkflow boolean
@@ -74,66 +66,52 @@ Meteor.methods({
     // loop through all shop configured layouts, and their default workflows
     // to determine what the next workflow step should be
     // the cart workflow status while processing is neither true nor false (set to template)
-    _.each(defaultPackageWorkflows, function (workflow,
-      currentStatusIndex) {
-      if (workflow.template === currentWorkflowStatus) {
-        // don't go past the end of the workflow
-        if (currentStatusIndex < maxSteps - 1) {
-          EFrameworkCore.Log.debug("currentStatusIndex, maxSteps",
-            currentStatusIndex, maxSteps);
-          nextWorkflowStepIndex = currentStatusIndex + 1;
-        } else {
-          nextWorkflowStepIndex = currentStatusIndex;
-        }
+    _.each(defaultPackageWorkflows, function (workflow, currentStatusIndex) {
+		if (workflow.template === currentWorkflowStatus) {
+			// don't go past the end of the workflow
+			if (currentStatusIndex < maxSteps - 1) {
+				EFrameworkCore.Log.debug("currentStatusIndex, maxSteps", currentStatusIndex, maxSteps);
+				nextWorkflowStepIndex = currentStatusIndex + 1;
+			}
+			else {
+				nextWorkflowStepIndex = currentStatusIndex;
+			}
 
-        EFrameworkCore.Log.debug("nextWorkflowStepIndex",
-          nextWorkflowStepIndex);
-        // set the nextWorkflowStep as the next workflow object from registry
-        nextWorkflowStep = defaultPackageWorkflows[
-          nextWorkflowStepIndex];
+			EFrameworkCore.Log.debug("nextWorkflowStepIndex", nextWorkflowStepIndex);
+			// set the nextWorkflowStep as the next workflow object from registry
+			nextWorkflowStep = defaultPackageWorkflows[nextWorkflowStepIndex];
 
-        EFrameworkCore.Log.debug("setting nextWorkflowStep",
-          nextWorkflowStep.template);
-      }
+			EFrameworkCore.Log.debug("setting nextWorkflowStep", nextWorkflowStep.template);
+		}
     });
 
     // check to see if the next step has aready been processed.
     // templateProcessedinWorkflow boolean
     gotoNextWorkflowStep = nextWorkflowStep.template;
-    templateProcessedinWorkflow = _.contains(currentCart.workflow.workflow,
-      nextWorkflowStep.template);
+    templateProcessedinWorkflow = _.contains(currentCart.workflow.workflow, nextWorkflowStep.template);
 
     // debug info
-    EFrameworkCore.Log.debug("currentWorkflowStatus:",
-      currentWorkflowStatus);
-    EFrameworkCore.Log.debug("workflow/pushCartWorkflow workflow:",
-      workflow);
+    EFrameworkCore.Log.debug("currentWorkflowStatus:", currentWorkflowStatus);
+    EFrameworkCore.Log.debug("workflow/pushCartWorkflow workflow:", workflow);
     EFrameworkCore.Log.debug("newWorkflowStatus: ", newWorkflowStatus);
     EFrameworkCore.Log.debug("current cartId: ", currentCart._id);
     EFrameworkCore.Log.debug("currentWorkflow: ", currentCart.workflow.workflow);
     EFrameworkCore.Log.debug("nextWorkflowStep: ", nextWorkflowStep.template);
-    EFrameworkCore.Log.debug("statusExistsInWorkflow: ",
-      statusExistsInWorkflow);
-    EFrameworkCore.Log.debug("templateProcessedinWorkflow: ",
-      templateProcessedinWorkflow);
-    EFrameworkCore.Log.debug("gotoNextWorkflowStep: ",
-      gotoNextWorkflowStep);
+    EFrameworkCore.Log.debug("statusExistsInWorkflow: ", statusExistsInWorkflow);
+    EFrameworkCore.Log.debug("templateProcessedinWorkflow: ",templateProcessedinWorkflow);
+    EFrameworkCore.Log.debug("gotoNextWorkflowStep: ",gotoNextWorkflowStep);
 
     // Condition One
     // if you're going to join the workflow you need a status that is a template name.
     // this status/template is how we know
     // where you are in the flow and configures `gotoNextWorkflowStep`
 
-    if (!gotoNextWorkflowStep && currentWorkflowStatus !==
-      newWorkflowStatus) {
-      EFrameworkCore.Log.debug(
-        "######## Condition One #########: initialise the " + workflow +
-        ":  " + defaultPackageWorkflows[0].template);
-      return Cart.update(currentCart._id, {
-        $set: {
-          "workflow.status": defaultPackageWorkflows[0].template
-        }
-      });
+    if (!gotoNextWorkflowStep && currentWorkflowStatus !== newWorkflowStatus) {
+    	EFrameworkCore.Log.debug(
+    		"######## Condition One #########: initialise the " + workflow + ":  " + defaultPackageWorkflows[0].template);
+	      return Cart.update(currentCart._id, {
+	        $set: { "workflow.status": defaultPackageWorkflows[0].template }
+	      });
     }
 
     // Condition Two

@@ -11,8 +11,9 @@ Media = EFrameworkCore.Collections.Media;
  */
 Template.productList.helpers({
 	/**
+	 * @function products
 	 * @summary
-	 * @returns {}
+	 * @returns {String}
 	 * @todo Documentar
 	 */
 	products: function () {
@@ -20,6 +21,7 @@ Template.productList.helpers({
 	},
 
 	/**
+	 * @function media
 	 * @summary
 	 * @returns {String}
 	 * @todo Documentar

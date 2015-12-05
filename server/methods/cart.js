@@ -403,9 +403,9 @@ Meteor.methods({
 
 	/**
 	* cart/setShipmentAddress
-	* @summary adds address book to cart shipping
-	* @param {String} cartId - cartId to apply shipmentMethod
-	* @param {Object} address - addressBook object
+	* @summary Agrega address book para cart shipping
+	* @param {String} cartId - cartId a quien se le aplica un shipmentMethod
+	* @param {Object} address - Objeto addressBook
 	* @return {String} return Mongo update result
 	*/
 	"cart/setShipmentAddress": function (cartId, address) {

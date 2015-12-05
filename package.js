@@ -17,88 +17,268 @@ Package.onUse(function (api) {
 	api.versionsFrom("METEOR@1.2");
 
 	// meteor base packages
-api.use("standard-minifiers");
-api.use("mobile-experience");
-api.use("meteor-base");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
+	api.use("standard-minifiers");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
+	api.use("mobile-experience");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
+	api.use("meteor-base");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("mongo");
-api.use("ecmascript");
-/*
-	Compiler plugin that supports ES2015+ in all .js files
-*/
- api.use("es5-shim");
+
+	/*
+	* @summary Compiler plugin that supports ES2015+ in all .js files
+	* This package lets you use new JavaScript language features that are part of the ECMAScript 2015 specification but are not yet supported by all engines or browsers. Unsupported syntax is automatically translated into standard JavaScript that behaves the same way.
+	* @see {@link |ATMOSPHERE}
+	*/
+	api.use("ecmascript");
+
+	/*
+	* @summary This package improves ECMAScript 5 compliance in all browers, particularly older browsers, and especially Internet Explorer 8 (and earlier).
+	* @see {@link https://atmospherejs.com/meteor/ecmascript|ATMOSPHERE}
+	*/
+ 	api.use("es5-shim");
+
+ 	/*
+	* @summary
+	* @see {@link https://atmospherejs.com/meteor/es5-shim|ATMOSPHERE}
+	*/
 	api.use("blaze-html-templates");
-api.use("session");
-api.use("jquery");
-api.use("tracker");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
+	api.use("session");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
+	api.use("jquery");
+
+	/*
+	* @summary Dependency tracker to allow reactive callbacks
+	* @see {@link https://atmospherejs.com/meteor/tracker|ATMOSPHERE}
+	*/
+	api.use("tracker");
 
 	// // meteor add-on packages
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("underscore");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("logging");
+
+	/*
+	* @summary Reload the page while preserving application state.
+	* @see {@link https://atmospherejs.com/meteor/reload|ATMOSPHERE}
+	*/
 	api.use("reload");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("random");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("ejson");
-api.use("check");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
+	api.use("check");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("less");
+
+	/*
+	* @summary Make HTTP calls to remote servers
+	* @see {@link https://atmospherejs.com/meteor/http|ATMOSPHERE}
+	*/
 	api.use("http");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("reactive-var");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("email");
+
+	/*
+	* @summary Configure security policies enforced by the browser
+	* @see {@link https://atmospherejs.com/meteor/browser-policy|ATMOSPHERE}
+	*/
 	api.use("browser-policy");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("service-configuration");
+
+
+
+	/*
+	* @summary API for Persistent Storage, PubSub and Request
+	* @see {@link https://atmospherejs.com/meteor/amplify|ATMOSPHERE}
+	*/
 	api.use("amplify@1.0.0");
 
-	// // meteor authentication packages
+	// meteor authentication packages
+
+	/*
+	* @summary Encrypt account secrets stored in the database
+	* @see {@link https://atmospherejs.com/meteor/oauth-encryption|ATMOSPHERE}
+	*/
 	api.use("oauth-encryption");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("accounts-base");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("accounts-password");
 
 	// // community packages
-api.use("mquandalle:bower@1.5.2");
-	// api.use("d3js:d3@3.5.5");
- api.use("underscorestring:underscore.string@3.2.2");
+
 	/*
-	*   AutoForm is a Meteor package that adds UI components and helpers to easily create basic forms with automatic insert and update events, and automatic reactive validation. This package requires and automatically installs the simple-schema package. You can optionally use it with the collection2 package, which you have to add to your app yourself.
+	* @summary
+	* @see {@link |ATMOSPHERE}
 	*/
-	api.use("aldeed:autoform@5.6.0");
+api.use("mquandalle:bower@1.5.2");
+
 	/*
-	*   A Meteor package that allows you to attach a schema to a Mongo.Collection. Automatically validates against that schema when inserting and updating from client or server code.
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
+	// api.use("d3js:d3@3.5.5");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
+	api.use("underscorestring:underscore.string@3.2.2");
+
+	/*
+	* @summary AutoForm is a Meteor package that adds UI components and helpers to easily create basic forms with automatic insert and update events, and automatic reactive validation. This package requires and automatically installs the simple-schema package. You can optionally use it with the collection2 package, which you have to add to your app yourself.
+	* @see {@link |ATMOSPHERE}
+	*/
+
+	api.use("aldeed:autoform@5.6.0");
+
+	/*
+	* @summary  A Meteor package that allows you to attach a schema to a Mongo.Collection. Automatically validates against that schema when inserting and updating from client or server code.
+	* @see {@link |ATMOSPHERE}
 	*/
 	api.use("aldeed:collection2@2.5.0");
+
 	/*
-	*  A simple, reactive schema validation package for Meteor. It's used by the Collection2 and AutoForm packages, but you can use it by itself, too.
+	* @summary A simple, reactive schema validation package for Meteor. It's used by the Collection2 and AutoForm packages, but you can use it by itself, too.
+	* @see {@link |ATMOSPHERE}
 	*/
 	api.use("aldeed:simple-schema@1.3.3");
+
 	/*
-	Adds template features currently missing from the templating package
+	* @summary Adds template features currently missing from the templating package
+	* @see {@link |ATMOSPHERE}
 	*/
 	api.use("aldeed:template-extension@3.4.3", "client");
 
-	/* A router that works on the server and the browser, designed specifically for Meteor */
+	/*
+	* @summary A router that works on the server and the browser, designed specifically for Meteor
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("iron:router@1.0.10");
 
-	/* Generate a slug. Wraps the speakingurl package for Meteor */
+	/*
+	* @summary Generate a slug. Wraps the speakingurl package for Meteor
+	* @see {@link |ATMOSPHERE}
+	*/
 	api.use("ongoworks:speakingurl@5.0.1");
 
 	/*
-	* Implements the Bunyan logging module for Meteor.
+	* @summary Implements the Bunyan logging module for Meteor.
 	* Bunyan is a simple and fast JSON logging library for node.js services.
+	* @see {@link |ATMOSPHERE}
 	*/
 	api.use("ongoworks:bunyan-logger@2.5.0");
 
 	/*
-	*	A Meteor package that provides a simple, logical, plain language API for defining write security on your MongoDB collections. Wraps the core allow/deny security.
+	* @summary A Meteor package that provides a simple, logical, plain language API for defining write security on your MongoDB collections. Wraps the core allow/deny security.
+	* @see {@link |ATMOSPHERE}
 	*/
 	api.use("ongoworks:security@1.3.0");
 
-/*
-	*   A package for creating test data or for generating fixtures.
+	/*
+	* @summary A package for creating test data or for generating fixtures.
+	* @see {@link |ATMOSPHERE}
 	*/
 	api.use("dburles:factory@0.3.10");
-api.use("matb33:collection-hooks@0.8.1");
+
 	/*
-	* Authorization package for Meteor - compatible with built-in accounts package.
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
+	api.use("matb33:collection-hooks@0.8.1");
+
+	/*
+	* @summary Authorization package for Meteor - compatible with built-in accounts package.
+	* @see {@link |ATMOSPHERE}
 	*/
 	api.use("alanning:roles@1.2.13");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	// api.use("momentjs:moment@2.10.6");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	// api.use("risul:moment-timezone@0.4.0");
 
 	/*
@@ -111,7 +291,7 @@ api.use("matb33:collection-hooks@0.8.1");
 	* @summary Consolidated Avatar Template Package for Meteor
 	* @see {@link https://atmospherejs.com/utilities/avatar|ATMOSPHERE}
 	*/
-		api.use("utilities:avatar@0.9.2");
+	api.use("utilities:avatar@0.9.2");
 
 
 	/*
@@ -120,7 +300,16 @@ api.use("matb33:collection-hooks@0.8.1");
 	*/
 	api.use("cfs:standard-packages@0.5.9");
 
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	// api.use("cfs:storage-adapter@0.2.2");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	// api.use("cfs:graphicsmagick@0.0.18");
 
 	/*
@@ -128,10 +317,35 @@ api.use("matb33:collection-hooks@0.8.1");
 	* @see {@link https://atmospherejs.com/cfs/gridfs|ATMOSPHERE}
 	*/
 	api.use("cfs:gridfs@0.0.33");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	// api.use("cfs:filesystem@0.1.2");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	// api.use("cfs:ui@0.1.3");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	// api.use("raix:ui-dropped-event@0.0.7");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	// api.use("meteorhacks:ssr@2.1.2");
+
+	/*
+	* @summary
+	* @see {@link |ATMOSPHERE}
+	*/
 	// api.use("aslagle:reactive-table@0.8.12");
 
 	// // imply exports package vars
@@ -383,8 +597,8 @@ api.addFiles("client/templates/layout/layout.js", "client");
 	// api.addFiles("client/templates/cart/checkout/completed/completed.html", "client");
 	// api.addFiles("client/templates/cart/checkout/completed/completed.js", "client");
 
-	// api.addFiles("client/templates/cart/checkout/shipping/shipping.html", "client");
-	// api.addFiles("client/templates/cart/checkout/shipping/shipping.js", "client");
+	api.addFiles("client/templates/cart/checkout/shipping/shipping.html", "client");
+	api.addFiles("client/templates/cart/checkout/shipping/shipping.js", "client");
 
 	api.addFiles("client/templates/cart/checkout/addressBook/addressBook.html", "client");
 	api.addFiles("client/templates/cart/checkout/addressBook/addressBook.js", "client");

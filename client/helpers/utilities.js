@@ -154,15 +154,15 @@ Template.registerHelper("pathForSEO", function (path, params) {
 //   return str.charAt(0).toUpperCase() + str.slice(1);
 // });
 
-// /**
-//  * toCamelCase
-//  * @summary camelCases a string
-//  * @param {String} str - string
-//  * @return {String} returns camelCased string
-//  */
-// Template.registerHelper("toCamelCase", function (str) {
-//   if (!!str) return str.toCamelCase();
-// });
+/**
+ * @function toCamelCase
+ * @summary camelCases a string
+ * @param {String} str - string
+ * @return {String} returns camelCased string
+ */
+Template.registerHelper("toCamelCase", function (str) {
+	if (!!str) return str.toCamelCase();
+});
 
 // /**
 //  * activeRouteClass

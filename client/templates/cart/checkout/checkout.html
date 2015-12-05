@@ -1,23 +1,20 @@
 <!-- TODO -->
 <template name="cartCheckout">
 	{{#if cart.items}}
-	TEST
 		<div class="checkout-progress">
 			<div class="container">
+				<!-- UI de progreso de checkout -->
 				{{>checkoutProgressBar}}
 			</div>
 		</div>
-TEST 2
 		<div class="checkout">
 			<div class="container container-lg">
 				<div class="checkout-steps">
 					<div class="checkout-steps-main">
-					TEST reacuib each
 						{{#each reactionTemplate workflow="coreCartWorkflow" container="checkout-steps-main"}}
 							{{> checkoutSteps}}
 						{{/each}}
 						</div>
-TEST reaction each 2
 						<div class="checkout-steps-side">
 						{{#each reactionTemplate workflow="coreCartWorkflow" container="checkout-steps-side"}}
 							{{> checkoutSteps}}
@@ -29,12 +26,10 @@ TEST reaction each 2
 	{{else}}
 		{{> emptyCheckoutCart}}
 	{{/if}}
-	TEST final
 </template>
 
-<!-- TODO-->
+<!-- Pasos de Checkout -->
 <template name="checkoutSteps">
-CHECKOUTSTEPS
 	{{#if isPending }}
 		<div class="checkout-step">
 			{{> Template.dynamic template=template}}
@@ -54,27 +49,26 @@ CHECKOUTSTEPS
 	{{/if}}
 </template>
 
-<!-- TODO -->
+<!-- Pasos de checkout pendientes  -->
 <template name="checkoutStepPending">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      {{> checkoutStepBadge}}
-    </div>
-  </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">{{> checkoutStepBadge}}</div>
+	</div>
 </template>
 
+<!-- Cart vacio e intentando realizar checkout -->
 <template name="emptyCheckoutCart">
-<div class="container container-lg">
-  <h2>
-    <span data-i18n="cartCheckout.surprise">Woah!</span>&nbsp;
-    <small>
-      <span data-i18n="cartCheckout.emptyCheckoutCart">looks like your cart is empty!</span>
-    </small>
-  </h2>
-</div>
+	<div class="container container-lg">
+		<h2>
+			<span data-i18n="cartCheckout.surprise">Woah!</span>&nbsp;
+			<small>
+				<span data-i18n="cartCheckout.emptyCheckoutCart">looks like your cart is empty!</span>
+			</small>
+		</h2>
+	</div>
 </template>
 
-
+<!-- TODO-->
 <template name="checkoutStepBadge">
-  <i class="checkout-step-badge {{checkoutStepBadgeClass}}">{{position}}</i>
+	<i class="checkout-step-badge {{checkoutStepBadgeClass}}">{{position}}</i>
 </template>
