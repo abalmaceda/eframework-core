@@ -3,30 +3,30 @@
  */
 
 EFrameworkCore.Schemas.ShippingMethod = new SimpleSchema({
-  "_id": {
+  _id: {
     type: String,
     label: "Shipment Method Id",
     autoValue: EFrameworkCore.schemaIdAutoValue
   },
-  "name": {
+  name: {
     type: String,
     label: "Method Name"
   },
-  "label": {
+  label: {
     type: String,
     label: "Public Label"
   },
-  "group": {
+  group: {
     type: String,
     label: "Group"
   },
-  "cost": {
+  cost: {
     type: Number,
     label: "Cost",
     decimal: true,
     optional: true
   },
-  "handling": {
+  handling: {
     type: Number,
     label: "Handling",
     optional: true,
@@ -34,18 +34,18 @@ EFrameworkCore.Schemas.ShippingMethod = new SimpleSchema({
     defaultValue: 0,
     min: 0
   },
-  "rate": {
+  rate: {
     type: Number,
     label: "Rate",
     decimal: true,
     min: 0
   },
-  "enabled": {
+  enabled: {
     type: Boolean,
     label: "Enabled",
     defaultValue: true
   },
-  "validRanges": {
+  validRanges: {
     type: Array,
     optional: true,
     label: "Matching Cart Ranges"
@@ -66,7 +66,7 @@ EFrameworkCore.Schemas.ShippingMethod = new SimpleSchema({
     label: "End",
     optional: true
   },
-  "validLocales": {
+  validLocales: {
     type: Array,
     optional: true,
     label: "Matching Locales"

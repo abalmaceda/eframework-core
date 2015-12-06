@@ -41,6 +41,10 @@ EFrameworkCore.Schemas.Cart = new SimpleSchema({
   userId: {
     type: String,
     unique: true,
+    /**
+    * @description "isInsert", "isUpdate" e "isFromTrustedCode" son variables del package collection2
+    * @see {@link https://atmospherejs.com/aldeed/collection2|ATMOSPHERE}
+    */
     autoValue: function () {
       if (this.isInsert || this.isUpdate) {
         if (!this.isFromTrustedCode) {

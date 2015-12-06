@@ -1,11 +1,12 @@
+<!-- TODO -->
 <template name="checkoutReview">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      {{> checkoutStepBadge}}
-      <h3 class="panel-title" data-i18n="checkoutReview.review">Review</h3>
-    </div>
-    <div class="panel-body">
-      {{>cartSubTotals}}
-    </div>
-  </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<!-- Número de checkout que le corresponde a review -->
+			{{> checkoutStepBadge}}
+			<h3 class="panel-title" data-i18n="checkoutReview.review">Review</h3>
+		</div>
+		<!-- Llama a Template.cartSubTotals-->
+		<div class="panel-body">{{>cartSubTotals}}</div>
+	</div>
 </template>

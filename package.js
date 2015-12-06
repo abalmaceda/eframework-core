@@ -210,7 +210,7 @@ api.use("mquandalle:bower@1.5.2");
 
 	/*
 	* @summary  A Meteor package that allows you to attach a schema to a Mongo.Collection. Automatically validates against that schema when inserting and updating from client or server code.
-	* @see {@link |ATMOSPHERE}
+	* @see {@link https://atmospherejs.com/aldeed/collection2|ATMOSPHERE}
 	*/
 	api.use("aldeed:collection2@2.5.0");
 
@@ -455,7 +455,7 @@ api.addFiles("server/register.js", "server");
 		//TODO: revizar
 	api.addFiles("common/schemas/shops.js");
 	// api.addFiles("common/schemas/payments.js");
-	// api.addFiles("common/schemas/shipping.js");
+	api.addFiles("common/schemas/shipping.js");
 	// api.addFiles("common/schemas/taxes.js");
 	// api.addFiles("common/schemas/discounts.js");
 
@@ -587,10 +587,10 @@ api.addFiles("client/templates/layout/layout.js", "client");
 	api.addFiles("client/templates/cart/checkout/checkoutProgressBar/checkoutProgressBar.html", "client");
 	api.addFiles("client/templates/cart/checkout/checkoutProgressBar/checkoutProgressBar.js", "client");
 
-	// api.addFiles("client/templates/cart/checkout/review/review.html", "client");
-	// api.addFiles("client/templates/cart/checkout/review/review.js", "client");
+	api.addFiles("client/templates/cart/checkout/review/review.html", "client");
+	api.addFiles("client/templates/cart/checkout/review/review.js", "client");
 
-	// api.addFiles("client/templates/cart/checkout/payment/payment.html", "client");
+	api.addFiles("client/templates/cart/checkout/payment/payment.html", "client");
 	// api.addFiles("client/templates/cart/checkout/payment/methods/cards.html", "client");
 	// api.addFiles("client/templates/cart/checkout/payment/methods/cards.js", "client");
 

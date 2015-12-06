@@ -21,7 +21,7 @@ Template.cartCheckout.helpers({
 	 * @returns {Cart}
 	 */
 	cart: function () {
-		return EFrameworkCore.Collections.Cart.findOne();
+		 return EFrameworkCore.Collections.Cart.findOne();
 	}
 });
 
@@ -79,6 +79,7 @@ Template.checkoutStepBadge.helpers({
 	 */
 	checkoutStepBadgeClass: function () {
 		let workflowStep = Template.instance().data;
+		//TODO: verificar si es necesario eliminar
 		// let currentStatus = EFrameworkCore.Collections.Cart.findOne().workflow.status;
 		if (workflowStep.status === true || workflowStep.status === this.template) {
 			return "active";

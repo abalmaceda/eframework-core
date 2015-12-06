@@ -2,7 +2,11 @@
 * review status
 * trigger checkoutPayment step on template checkoutReview render
 */
-//TODO
+/**
+ * Template.cartCheckout.onRendered
+ * @summary Gatilla el step checkoutPayment
+ */
 Template.checkoutReview.onRendered(function () {
-  Meteor.call("workflow/pushCartWorkflow", "coreCartWorkflow", "checkoutReview");
+	//TODO: Entender que hace esto
+	Meteor.call("workflow/pushCartWorkflow", "coreCartWorkflow", "checkoutReview");
 });
