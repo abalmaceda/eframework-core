@@ -26,7 +26,7 @@ String.prototype.toCamelCase = function () {
  * @param {String} sessionVariable - string name, see http://docs.meteor.com/#/basic/session
  * @param {String} positiveState - optional, if is is positiveState, set opposite
  * @return {Object} return session value
- * @todo Entender
+ * @todo all
  */
 this.toggleSession = function (sessionVariable, positiveState) {
 	let session;

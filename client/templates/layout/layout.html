@@ -18,8 +18,7 @@
 	<nav class="reaction-navigation-header">{{> yield region="layoutHeader"}}</nav>
 	<!-- Icono del cart -->
 	<nav class="reaction-cart-drawer">{{>cartDrawer}}</nav>
-	<!-- TODO : descomentar -->
-	<!-- <div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>-->
+	<div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>
 	<main role="main" id="main">
 		<span id="layout-alerts">{{>bootstrapAlerts}}</span>
 		{{> yield}}
@@ -34,21 +33,17 @@
 	<div class="page {{adminControlsClassname}}">
 		<nav class="reaction-navigation-header">{{> yield region="layoutHeader"}}</nav>
 		<!-- Icono del cart -->
-		<nav class="reaction-cart-drawer">{{>cartDrawer}}</nav>
-		<!-- TODO : descomentar -->
-		<!--<div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>-->
+		<div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>
 		<main role="main" id="main">
 			{{> dashboardHeader}}
 			{{> yield}}
 		</main>
 		<footer class="reaction-navigation-footer footer-default">{{>yield region="layoutFooter"}}</footer>
 	</div>
-
-
 	<div class="admin-controls action-view {{adminControlsClassname}}">
 		<div class="admin-controls-heading">
-			<!-- TODO : descomentar -->
-			<!--{{> settingsHeader}}-->
+			SETTINGS_HEADER
+			{{> settingsHeader}}
 		</div>
 		<div class="admin-controls-content action-view-body">
 			{{!-- {{>yield region="adminControlsContent"}} --}}
@@ -64,18 +59,16 @@
 
 <!--TODO-->
 <template name="coreSettingsLayout">
-  <nav class="reaction-navigation-header">{{> yield region="layoutHeader"}}</nav>
- <!-- <nav class="reaction-cart-drawer">{{>cartDrawer}}</nav>-->
-  <!--<div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>-->
-  <main role="main" id="main">
-    <span id="layout-alerts">{{>bootstrapAlerts}}</span>
-    <!-- TODO : descomentar -->
-    <!--{{> settingsHeader}}-->
-    <div class="container-fluid">
-    <!-- TODO : descomentar -->
-      <!-- <div class="col-sm-2">{{> settingsSidebar}}</div>-->
-      <div class="col-sm-10 container-settings">{{> yield}}</div>
-    </div>
-  </main>
-  <footer class="reaction-navigation-footer footer-default">{{>yield region="layoutFooter"}}</footer>
+	<nav class="reaction-navigation-header">{{> yield region="layoutHeader"}}</nav>
+	<nav class="reaction-cart-drawer">{{>cartDrawer}}</nav>
+	<div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>
+	<main role="main" id="main">
+		<span id="layout-alerts">{{>bootstrapAlerts}}</span>
+		{{> settingsHeader}}
+		<div class="container-fluid">
+			<div class="col-sm-2">{{> settingsSidebar}}</div>
+			<div class="col-sm-10 container-settings">{{> yield}}</div>
+		</div>
+	</main>
+	<footer class="reaction-navigation-footer footer-default">{{>yield region="layoutFooter"}}</footer>
 </template>

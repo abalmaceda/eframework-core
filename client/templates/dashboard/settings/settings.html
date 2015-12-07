@@ -1,4 +1,3 @@
-
 <!-- TODO -->
 <template name="settingsHeader">
 	<div class="nav nav-dashboard">
@@ -23,32 +22,28 @@
 
 <!-- TODO -->
 <template name="settingsSidebar">
-  <div class="dashboard-nav">
-    <ul class="nav nav-pills nav-stacked nav-default">
-    {{#each reactionApps provides='dashboard'}}
-      {{#if pkgPermissions}}
-          {{> settingsSidebarItem}}
-      {{/if}}
-    {{/each}}
-    </ul>
-  </div>
+	<div class="dashboard-nav">
+		<ul class="nav nav-pills nav-stacked nav-default">
+			{{#each reactionApps provides='dashboard'}}
+				{{#if pkgPermissions}}
+					{{> settingsSidebarItem}}
+				{{/if}}
+			{{/each}}
+		</ul>
+	</div>
 </template>
 
 <!-- TODO -->
 <template name="settingsSidebarItem">
-
-  {{#if enabled}}
-
-      {{#each reactionApps provides="settings" name=name container=container}}
-        {{#if hasPermission route}}
-        <li class="{{active route}}">
-
-          <a class="pkg-settings" title="{{i18n 'app.settings' 'Settings'}}" href="{{route}}">
-            <i class="{{../icon}}"></i> {{label}}
-          </a>
-          </li>
-        {{/if}}
-      {{/each}}
-  {{/if}}
-
+	{{#if enabled}}
+		{{#each reactionApps provides="settings" name=name container=container}}
+			{{#if hasPermission route}}
+				<li class="{{active route}}">
+					<a class="pkg-settings" title="{{i18n 'app.settings' 'Settings'}}" href="{{route}}">
+						<i class="{{../icon}}"></i> {{label}}
+					</a>
+				</li>
+			{{/if}}
+		{{/each}}
+	{{/if}}
 </template>

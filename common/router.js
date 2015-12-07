@@ -7,8 +7,9 @@
 * Extend/override en eframework/client/routing.js
 */
 
-/*
-*	Configuración global de Router
+/**
+* @global Router
+* @summary Configuración global de Router
 */
 Router.configure({
 	notFoundTemplate: "notFound",
@@ -187,14 +188,14 @@ Router.map(function () {
 		}
   	});
 
-//   this.route("dashboard/shop", {
-//     controller: ShopAdminController,
-//     path: "/dashboard/shop",
-//     template: "shopDashboard",
-//     data: function () {
-//       return EFrameworkCore.Collections.Shops.findOne();
-//     }
-//   });
+	this.route("dashboard/shop", {
+		controller: ShopAdminController,
+		path: "/dashboard/shop",
+		template: "shopDashboard",
+		data: function () {
+			return EFrameworkCore.Collections.Shops.findOne();
+		}
+	});
 
 	this.route("dashboard/orders", {
 		controller: ShopAdminController,
@@ -263,7 +264,6 @@ Router.map(function () {
 		data: function () {
 			let product;
 			product = selectedProduct();
-			/*TODO: Que es this.ready()*/
 			if (this.ready() && product) {
 				if (!product.isVisible) {
 					if (!EFrameworkCore.hasPermission("createProduct")) {
@@ -286,8 +286,7 @@ Router.map(function () {
 		waitOn: function () {
 			this.subscribe("Packages");
 			this.subscribe("Products");
-			//descomentar
-			//this.subscribe("Shipping");
+			this.subscribe("Shipping");
 			return this.subscribe("AccountOrders");
 		}
 	});

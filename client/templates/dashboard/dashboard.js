@@ -5,22 +5,32 @@
  *
  * manages view / permissions for the console
  */
-/* TODO: descomentar */
-// Template.dashboard.helpers({
+
+/**
+* Template.dashboard.helpers
+* @summary Helpers para Template.dashboard
+*/
+Template.dashboard.helpers({
 //   route: function() {
 //     return Router.current().route.getName();
 //   },
-//   displayConsoleNavBar: function() {
-//     if (EFrameworkCore.hasPermission('console') && Session.get("displayConsoleNavBar")) {
-//       return true;
-//     }
-//   },
+
+	/**
+	* @method displayConsoleNavBar
+	* @summary Si se debe mostrar
+	* @returns {Boolean}
+	*/
+	displayConsoleNavBar: function() {
+		if (EFrameworkCore.hasPermission('console') && Session.get("displayConsoleNavBar")) {
+			return true;
+		}
+	},
 //   displayConsoleDrawer: function() {
 //     if (EFrameworkCore.hasPermission('console') && Session.get("displayConsoleDrawer")) {
 //       return true;
 //     }
 //   }
-// });
+});
 
 /**
  * dashboard events

@@ -1,23 +1,32 @@
 /**
- * shopSettings helpers
- *
- */
+* Template.shopSettings.helpers
+* @summary Helpers para Template.shopSettings
+*/
 Template.shopSettings.helpers({
+	/**
+	* @method shop
+	* @summary Obtiene el Cursor de la collection shop
+	* @returns {Cursor}
+	*/
+	shop: function () {
+		return EFrameworkCore.Collections.Shops.findOne();
+	},
 
-  shop: function () {
-    return EFrameworkCore.Collections.Shops.findOne();
-  },
+	/**
+	* @method packageData
+	* @summary Obtiene el Cursor de la collection package
+	* @returns {Cursor}
+	*/
+	packageData: function() {
+		return EFrameworkCore.Collections.Packages.findOne({ name: "core" });
+	},
 
-  packageData: function() {
-    return EFrameworkCore.Collections.Packages.findOne({
-      name: "core"
-    });
-  },
-  addressBook: function() {
-    var address;
-    address = Shops.findOne().addressBook;
-    return address[0];
-  },
+
+	addressBook: function() {
+		var address;
+		address = Shops.findOne().addressBook;
+		return address[0];
+	},
   countryOptions: function() {
     var countries, country, countryOptions, locale;
     countries = EFrameworkCore.Collections.Shops.findOne().locales.countries;
@@ -73,80 +82,80 @@ Template.shopSettings.helpers({
  * shopSettings autoform alerts
  */
 
-AutoForm.hooks({
-  shopEditForm: {
-    onSuccess: function(operation, result, template) {
-      return Alerts.add("Shop general settings saved.", "success", {
-        autoHide: true
-      });
-    },
-    onError: function(operation, error, template) {
-      return Alerts.add("Shop general settings update failed. " + error, "danger");
-    }
-  }
-});
+// AutoForm.hooks({
+//   shopEditForm: {
+//     onSuccess: function(operation, result, template) {
+//       return Alerts.add("Shop general settings saved.", "success", {
+//         autoHide: true
+//       });
+//     },
+//     onError: function(operation, error, template) {
+//       return Alerts.add("Shop general settings update failed. " + error, "danger");
+//     }
+//   }
+// });
 
-AutoForm.hooks({
-  shopEditAddressForm: {
-    onSuccess: function(operation, result, template) {
-      return Alerts.add("Shop address settings saved.", "success", {
-        autoHide: true
-      });
-    },
-    onError: function(operation, error, template) {
-      return Alerts.add("Shop address settings update failed. " + error, "danger");
-    }
-  }
-});
+// AutoForm.hooks({
+//   shopEditAddressForm: {
+//     onSuccess: function(operation, result, template) {
+//       return Alerts.add("Shop address settings saved.", "success", {
+//         autoHide: true
+//       });
+//     },
+//     onError: function(operation, error, template) {
+//       return Alerts.add("Shop address settings update failed. " + error, "danger");
+//     }
+//   }
+// });
 
-AutoForm.hooks({
-  shopEditEmailForm: {
-    onSuccess: function(operation, result, template) {
-      return Alerts.add("Shop mail settings saved.", "success", {
-        autoHide: true
-      });
-    },
-    onError: function(operation, error, template) {
-      return Alerts.add("Shop mail settings update failed. " + error, "danger");
-    }
-  }
-});
+// AutoForm.hooks({
+//   shopEditEmailForm: {
+//     onSuccess: function(operation, result, template) {
+//       return Alerts.add("Shop mail settings saved.", "success", {
+//         autoHide: true
+//       });
+//     },
+//     onError: function(operation, error, template) {
+//       return Alerts.add("Shop mail settings update failed. " + error, "danger");
+//     }
+//   }
+// });
 
-AutoForm.hooks({
-  shopEditOpenExchangeRatesForm: {
-    onSuccess: function(operation, result, template) {
-      return Alerts.add("Open Exchange settings saved.", "success", {
-        autoHide: true
-      });
-    },
-    onError: function(operation, error, template) {
-      return Alerts.add("Open Exchange settings update failed. " + error, "danger");
-    }
-  }
-});
+// AutoForm.hooks({
+//   shopEditOpenExchangeRatesForm: {
+//     onSuccess: function(operation, result, template) {
+//       return Alerts.add("Open Exchange settings saved.", "success", {
+//         autoHide: true
+//       });
+//     },
+//     onError: function(operation, error, template) {
+//       return Alerts.add("Open Exchange settings update failed. " + error, "danger");
+//     }
+//   }
+// });
 
-AutoForm.hooks({
-  shopEditSettingsForm: {
-    onSuccess: function(operation, result, template) {
-      return Alerts.add("Shop settings saved.", "success", {
-        autoHide: true
-      });
-    },
-    onError: function(operation, error, template) {
-      return Alerts.add("Shop setting update failed. " + error, "danger");
-    }
-  }
-});
+// AutoForm.hooks({
+//   shopEditSettingsForm: {
+//     onSuccess: function(operation, result, template) {
+//       return Alerts.add("Shop settings saved.", "success", {
+//         autoHide: true
+//       });
+//     },
+//     onError: function(operation, error, template) {
+//       return Alerts.add("Shop setting update failed. " + error, "danger");
+//     }
+//   }
+// });
 
-AutoForm.hooks({
-  shopEditOptionsForm: {
-    onSuccess: function(operation, result, template) {
-      return Alerts.add("Shop options saved.", "success", {
-        autoHide: true
-      });
-    },
-    onError: function(operation, error, template) {
-      return Alerts.add("Shop options update failed. " + error, "danger");
-    }
-  }
-});
+// AutoForm.hooks({
+//   shopEditOptionsForm: {
+//     onSuccess: function(operation, result, template) {
+//       return Alerts.add("Shop options saved.", "success", {
+//         autoHide: true
+//       });
+//     },
+//     onError: function(operation, error, template) {
+//       return Alerts.add("Shop options update failed. " + error, "danger");
+//     }
+//   }
+// });

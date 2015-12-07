@@ -1,9 +1,13 @@
-<!-- TODO -->
+<!-- UI para administrar packages -->
 <template name="dashboard">
+	DASHBOARD
+	<!-- Verifico permisos -->
 	{{#if hasDashboardAccess}}
 		{{#if displayConsoleNavBar}}
+		Test_displayConsole
 			<div class="dashboard-drawer">
 				{{#if displayConsoleDrawer}}
+				Test_displayConsoleDrawer
 					<div class="dashboard-container">
 						<div class="dashboard-widget-wrapper">
 						{{#each reactionApps provides='widget' route=route}}
@@ -20,11 +24,11 @@
 
 <!-- TODO -->
 <template name="blankControls">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">No controls for this view.</h3>
-    </div>
-  </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">No controls for this view.</h3>
+		</div>
+	</div>
 </template>
 
 <!-- TODO -->

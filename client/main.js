@@ -29,13 +29,14 @@ _.extend(EFrameworkCore, {
 	},
 	/* TODO: agregar descipcion */
 	/**
-	* hasPermission - Check permisos del cliente
+	* @function hasPermission
+	* @summary Check permisos del cliente
 	* @param {String | Array} checkPermissions -String o Array de permisos. Si la variable es empty, defaults "admin, owner"
 	* @param {String} checkUserId - userId, defaults Meteor.userId()
 	* @param {String} group - default shopId
 	* @return {Boolean} Boolean - true si tiene permisos
+	* @todo all
 	*/
-	/* TODO : comprender a fondo */
 	hasPermission: function (checkPermissions, checkUserId, group) {
 		check(checkPermissions, Match.OneOf(String, Array));
 
@@ -80,39 +81,49 @@ _.extend(EFrameworkCore, {
 	},
 
 	/**
-	 * @summary Determina si el usuario actual tiene permisos de propietario
-	 * @return {boolean} True si tiene permisos de propietario
-	 */
+	* @function hasOwnerAccess
+	* @summary Determina si el usuario actual tiene permisos de propietario
+	* @return {boolean} True si tiene permisos de propietario
+	*/
 	hasOwnerAccess: function () {
 		let ownerPermissions = ["owner"];
 		return this.hasPermission(ownerPermissions);
 	},
 
 	/**
-	 * @summary Determina si el usuario actual es un administrador
-	 * @return {boolean} True si tiene permisos de administrador
-	 */
+	* @function hasAdminAccess
+	* @summary Determina si el usuario actual es un administrador
+	* @return {boolean} True si tiene permisos de administrador
+	*/
 	hasAdminAccess: function () {
 		let adminPermissions = ["owner", "admin"];
 		return this.hasPermission(adminPermissions);
 	},
 
 	/**
-	 * @summary Determina si el usuario actual tiene permisos para acceder al dashboard
-	 * @return {boolean} True si tiene permisos de acceso al dashboard
-	 */
+	* @function hasDashboardAccess
+	* @summary Determina si el usuario actual tiene permisos para acceder al dashboard
+	* @return {boolean} True si tiene permisos de acceso al dashboard
+	*/
 	hasDashboardAccess: function () {
 		let dashboardPermissions = ["owner", "admin", "dashboard"];
 		return this.hasPermission(dashboardPermissions);
 	},
-	/*
-	TODO : comentar funcion, Averiguar bien que es this.shopId
+
+	/**
+	* @function getShopId
+	* @summary Retorna el id de shop
+	* @return {String} shopId
 	*/
 	getShopId: function () {
 		return this.shopId;
 	},
-	/*
-	TODO : comentar funcion
+
+	/**
+	* @function allowGuestCheckout
+	* @summary
+	* @return {boolean}
+	* @todo all
 	*/
 	allowGuestCheckout: function () {
 		let allowGuest = true;
@@ -135,7 +146,7 @@ _.extend(EFrameworkCore, {
 //   },
 
 	/**
-	* @description showActionView
+	* @function showActionView
 	* @summary
 	* @param {String} viewData {label, template, data}
 	* @returns {String} Session "admin/showActionView"
@@ -147,7 +158,7 @@ _.extend(EFrameworkCore, {
 	},
 
 	/**
-	 * isActionViewOpen
+	 * @function isActionViewOpen
 	 * @summary
 	 * @returns {}
 	 * @todo Documentar
@@ -157,7 +168,7 @@ _.extend(EFrameworkCore, {
 	},
 
 	/**
-	 * setActionView
+	 * @function setActionView
 	 * @summary
 	 * @returns {}
 	 * @todo Documentar
@@ -180,7 +191,7 @@ _.extend(EFrameworkCore, {
 	},
 
 	/**
-	 * getActionView
+	 * @function getActionView
 	 * @summary
 	 * @returns {}
 	 * @todo Documentar
@@ -189,16 +200,22 @@ _.extend(EFrameworkCore, {
 		return Session.get("admin/actionView");
 	},
 
-//   hideActionView: function () {
-//     Session.set("admin/showActionView", false);
-//   },
+	/**
+	* @function hideActionView
+	* @summary Cambia el valor de la variable "admin/showActionView"  = false  ( esta es una variable reactiva.)
+	* @returns {void}
+	* @todo Documentar
+	*/
+	hideActionView: function () {
+		Session.set("admin/showActionView", false);
+	},
 
 	/**
-	 * clearActionView
-	 * @summary
-	 * @returns {}
-	 * @todo Documentar
-	 */
+	* @function clearActionView
+	* @summary
+	* @returns {}
+	* @todo Documentar
+	*/
 	clearActionView: function () {
 		/*TODO: Por que undefined y no null ????*/
 		Session.set("admin/actionView", undefined);

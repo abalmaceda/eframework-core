@@ -203,9 +203,8 @@ api.use("mquandalle:bower@1.5.2");
 
 	/*
 	* @summary AutoForm is a Meteor package that adds UI components and helpers to easily create basic forms with automatic insert and update events, and automatic reactive validation. This package requires and automatically installs the simple-schema package. You can optionally use it with the collection2 package, which you have to add to your app yourself.
-	* @see {@link |ATMOSPHERE}
+	* @see {@link https://atmospherejs.com/aldeed/autoform |ATMOSPHERE}
 	*/
-
 	api.use("aldeed:autoform@5.6.0");
 
 	/*
@@ -670,19 +669,19 @@ api.addFiles("client/templates/layout/layout.js", "client");
 	api.addFiles("client/templates/dashboard/packages/packages.html", "client");
 
 	api.addFiles("client/templates/dashboard/packages/grid/package/package.html", "client");
-	// api.addFiles("client/templates/dashboard/packages/grid/package/package.js", "client");
+	api.addFiles("client/templates/dashboard/packages/grid/package/package.js", "client");
 
-		api.addFiles("client/templates/dashboard/packages/grid/grid.html", "client");
-		api.addFiles("client/templates/dashboard/packages/grid/grid.js", "client");
+	api.addFiles("client/templates/dashboard/packages/grid/grid.html", "client");
+	api.addFiles("client/templates/dashboard/packages/grid/grid.js", "client");
 
 	api.addFiles("client/templates/dashboard/dashboard.html", "client");
 	api.addFiles("client/templates/dashboard/dashboard.js", "client");
 
-	//api.addFiles("client/templates/dashboard/settings/settings.html", "client");
-	// api.addFiles("client/templates/dashboard/settings/settings.js", "client");
+	api.addFiles("client/templates/dashboard/settings/settings.html", "client");
+	api.addFiles("client/templates/dashboard/settings/settings.js", "client");
 
-	// api.addFiles("client/templates/dashboard/shop/settings/settings.html", "client");
-	// api.addFiles("client/templates/dashboard/shop/settings/settings.js", "client");
+	api.addFiles("client/templates/dashboard/shop/settings/settings.html", "client");
+	api.addFiles("client/templates/dashboard/shop/settings/settings.js", "client");
 
 	// Product Templates
 	api.addFiles("client/templates/products/products.html", "client");
