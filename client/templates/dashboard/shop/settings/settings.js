@@ -22,59 +22,59 @@ Template.shopSettings.helpers({
 	},
 
 
-	addressBook: function() {
-		var address;
-		address = Shops.findOne().addressBook;
-		return address[0];
-	},
-  countryOptions: function() {
-    var countries, country, countryOptions, locale;
-    countries = EFrameworkCore.Collections.Shops.findOne().locales.countries;
-    countryOptions = [];
-    for (locale in countries) {
-      country = countries[locale];
-      countryOptions.push({
-        label: country.name,
-        value: locale
-      });
-    }
-    countryOptions.sort(function(a, b) {
-      if (a.label < b.label) {
-        return -1;
-      }
-      if (a.label > b.label) {
-        return 1;
-      }
-      return 0;
-    });
-    return countryOptions;
-  },
-  currencyOptions: function() {
-    var currencies, currency, currencyOptions, structure;
-    currencies = EFrameworkCore.Collections.Shops.findOne().currencies;
-    currencyOptions = [];
-    for (currency in currencies) {
-      structure = currencies[currency];
-      currencyOptions.push({
-        label: currency + "  |  " + structure.symbol + "  |  " + structure.format,
-        value: currency
-      });
-    }
-    return currencyOptions;
-  },
-  uomOptions: function() {
-    var measure, unitsOfMeasure, uom, uomOptions;
-    unitsOfMeasure = EFrameworkCore.Collections.Shops.findOne().unitsOfMeasure;
-    uomOptions = [];
-    for (measure in unitsOfMeasure) {
-      uom = unitsOfMeasure[measure];
-      uomOptions.push({
-        label: uom.name,
-        value: measure
-      });
-    }
-    return uomOptions;
-  }
+	// addressBook: function() {
+	// 	var address;
+	// 	address = Shops.findOne().addressBook;
+	// 	return address[0];
+	// },
+ //  countryOptions: function() {
+ //    var countries, country, countryOptions, locale;
+ //    countries = EFrameworkCore.Collections.Shops.findOne().locales.countries;
+ //    countryOptions = [];
+ //    for (locale in countries) {
+ //      country = countries[locale];
+ //      countryOptions.push({
+ //        label: country.name,
+ //        value: locale
+ //      });
+ //    }
+ //    countryOptions.sort(function(a, b) {
+ //      if (a.label < b.label) {
+ //        return -1;
+ //      }
+ //      if (a.label > b.label) {
+ //        return 1;
+ //      }
+ //      return 0;
+ //    });
+ //    return countryOptions;
+ //  },
+ //  currencyOptions: function() {
+ //    var currencies, currency, currencyOptions, structure;
+ //    currencies = EFrameworkCore.Collections.Shops.findOne().currencies;
+ //    currencyOptions = [];
+ //    for (currency in currencies) {
+ //      structure = currencies[currency];
+ //      currencyOptions.push({
+ //        label: currency + "  |  " + structure.symbol + "  |  " + structure.format,
+ //        value: currency
+ //      });
+ //    }
+ //    return currencyOptions;
+ //  },
+ //  uomOptions: function() {
+ //    var measure, unitsOfMeasure, uom, uomOptions;
+ //    unitsOfMeasure = EFrameworkCore.Collections.Shops.findOne().unitsOfMeasure;
+ //    uomOptions = [];
+ //    for (measure in unitsOfMeasure) {
+ //      uom = unitsOfMeasure[measure];
+ //      uomOptions.push({
+ //        label: uom.name,
+ //        value: measure
+ //      });
+ //    }
+ //    return uomOptions;
+ //  }
 });
 
 
