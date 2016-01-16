@@ -1,14 +1,20 @@
-// Template.settingsHeader.helpers({
-
-//   "registry": function () {
-//     // just some handle little helpers for default package i18nKey/i18nLabel
-//     var registry = EFrameworkCore.getActionView() || {};
-//     registry.nameSpace = registry.name || registry.template || "app";
-//     registry.i18nLabel = registry.label || registry.provides || "Settings";
-//     registry.i18nKey = registry.nameSpace.toCamelCase() + "." + registry.i18nLabel.toCamelCase();
-//     return registry;
-
-//   },
+/**
+ * Template.settingsHeader.helpers
+ * @summary Helpers para Template.settingsHeader
+ */
+Template.settingsHeader.helpers({
+	/**
+	 * @method registry
+	 * @summary algo de helpers para apoyar el package default i18nKey/i18nLabel
+	 * @returns {void}
+	 */
+	registry: function () {
+		let registry = EFrameworkCore.getActionView() || {};
+		registry.nameSpace = registry.name || registry.template || "app";
+		registry.i18nLabel = registry.label || registry.provides || "Settings";
+		registry.i18nKey = registry.nameSpace.toCamelCase() + "." + registry.i18nLabel.toCamelCase();
+		return registry;
+	},
 
 //   "thisApp": function () {
 //     var fields = {
@@ -37,33 +43,55 @@
 //     return reactionApp;
 //   }
 
-// });
+});
 
+/**
+ * Template.settingsHeader.events
+ * @summary Events para Template.settingsHeader
+ */
+Template.settingsHeader.events({
+	/**
+	 * @event click [data-event-action=closeSettings]
+	 * @summary Esconde el menú settings
+	 * @returns {void}
+	 */
+	"click [data-event-action=closeSettings]": function () {
+		EFrameworkCore.hideActionView();
+	}
+});
 
-// Template.settingsHeader.events({
-//   "click [data-event-action=closeSettings]": function () {
-//     EFrameworkCore.hideActionView();
-//   }
-// });
+/**
+ * @method Template.settingsSidebar.inheritsHelpersFrom
+ * @summary Se heredan los helpers de packagesGrid
+ */
+Template.settingsSidebar.inheritsHelpersFrom("packagesGrid");
 
+/**
+ * Template.settingsHeader.events
+ * @summary Events para Template.settingsHeader
+ */
+Template.settingsSidebar.helpers({
+	/**
+	 * @method pkgPermissions
+	 * @summary verifica los permisos del package actual
+	 * @returns {Boolean} Si tengo
+	 */
+	pkgPermissions: function () {
+		if (EFrameworkCore.hasPermission('dashboard')) {
+			if (this.route) {
+				return EFrameworkCore.hasPermission(this.route);
+			}
+			else {
+				return EFrameworkCore.hasPermission(this.name);
+			}
+		}
+		else {
+			return false;
+		}
+	}
+});
 
-// Templte.settingsSidebar.inheritsHelpersFrom("packagesGrid");
-
-// Template.settingsSidebar.helpers({
-//   pkgPermissions: function () {
-//     if (EFrameworkCore.hasPermission('dashboard')) {
-//       if (this.route) {
-//         return EFrameworkCore.hasPermission(this.route);
-//       } else {
-//         return EFrameworkCore.hasPermission(this.name);
-//       }
-//     } else {
-//       return false;
-//     }
-//   }
-// });
-
-// Template.settingsSidebarItem.helpers({
+Template.settingsSidebarItem.helpers({
 //   "label": function () {
 //     return Template.parentData(1).label || this.label;
 //   },
@@ -75,4 +103,4 @@
 
 //     return "";
 //   }
-// });
+});

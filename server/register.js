@@ -56,7 +56,8 @@ EFrameworkCore.registerPackage(
 			provides: 	"settings",
 			label: 		"Shop Settings",
 			template: 	"shopSettings",
-			icon: 		"fa fa-cog fa-2x fa-fw",
+			//icon: 		"fa fa-cog fa-2x fa-fw",
+			icon: 		"fa fa-pencil-square-o fa-2x fa-fw",
 			container: 	"dashboard"
 		},
 		{
@@ -64,7 +65,8 @@ EFrameworkCore.registerPackage(
 			provides: 	"dashboard",
 			label: 		"Orders",
 			description: "Fulfill your orders",
-			icon: 		"fa fa-sun-o",
+			icon: 		"fa paperclip",
+			//icon: 		"fa fa-sun-o",
 			cycle: 		3,
 			container: 	"orders"
 		},
@@ -74,7 +76,8 @@ EFrameworkCore.registerPackage(
 			provides: 	"shortcut",
 			label: 		"Orders",
 			description: "Fulfill your orders",
-			icon: 		"fa fa-sun-o",
+			icon: 		"fa paperclip",
+			//icon: 		"fa fa-sun-o",
 			cycle: 		3
 		},
 		{

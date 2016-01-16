@@ -4,7 +4,7 @@
  */
 Template.orders.helpers({
 	/**
-	 * orders
+	 * @method orders
 	 * @summary Obtiene todas las Orders correspondientes al usuario actual
 	 * @returns {Orders[]} Array de Orders
 	 */

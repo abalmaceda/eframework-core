@@ -7,8 +7,11 @@
 					<a href="#general" aria-controls="general" aria-expanded="true" role="button" data-toggle="collapse" data-parent="#shopSettingsAccordian" data-i18n="shopSettings.general" >General</a>
 				</div>
 			</div>
+			<!-- General -->
 			<div id="general" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="General">
 				<div class="panel-body">
+					<!-- El formulario recive como input el resultado de la función packageData-->
+					<!-- Solo tiene un elemento allowGuestCheckout -->
 					{{#autoForm collection="EFrameworkCore.Collections.Packages" schema="EFrameworkCore.Schemas.CorePackageConfig" doc=packageData id="shopEditOptionsForm" type="update" autosave=true}}
 						{{> afFieldInput name='settings.public.allowGuestCheckout'}}
 					{{/autoForm}}
@@ -24,6 +27,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- Dirección -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
@@ -42,14 +46,16 @@
 						{{> afQuickField name='addressBook.0.postal'}}
 						{{> afQuickField name='addressBook.0.country' options=countryOptions}}
 						{{> afQuickField name='addressBook.0.phone'}}
-						{{> afQuickField name='addressBook.0.isCommercial'}}
-						{{> afQuickField name='addressBook.0.isShippingDefault' value=true}}
-						{{> afQuickField name='addressBook.0.isBillingDefault' value=true}}
+						<!-- TODO: Pensar si es necesario mostrar esta información -->
+						{{> afQuickField name='addressBook.0.isCommercial' type="hidden"}}
+						{{> afQuickField name='addressBook.0.isShippingDefault' value=true type="hidden"}}
+						{{> afQuickField name='addressBook.0.isBillingDefault' value=true type="hidden"}}
 						{{> shopSettingsSubmitButton}}
 					{{/autoForm}}
 				</div>
 			</div>
 		</div>
+		<!-- Mail -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">
@@ -76,11 +82,13 @@
 			</div>
 			<div id="localization" class="panel-collapse collapse" role="tabpanel" aria-labelledby="localization">
 				<div class="panel-body">
-					{{#autoForm collection="Shops" doc=shop id="shopEditSettingsForm" type="update" autosave=true}}
+					<!-- TODO: ver si saco el botón o no -->
+					{{#autoForm collection="Shops" doc=shop id="shopEditSettingsForm" type="update" }}
 						{{> afQuickField name='timezone' options=timezoneOptions}}
 						{{> afQuickField name='currency' options=currencyOptions}}
 						{{> afQuickField name='locale' options=countryOptions}}
 						{{> afQuickField name='baseUOM' options=uomOptions}}
+						{{> shopSettingsSubmitButton}}
 					{{/autoForm}}
 				</div>
 			</div>
@@ -113,5 +121,6 @@
 
 
 <template name="shopDashboard">
+	<!-- Se LLama al dashboard shopSettings-->
 	{{> shopSettings }}
 </template>

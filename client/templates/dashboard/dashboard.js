@@ -25,11 +25,17 @@ Template.dashboard.helpers({
 			return true;
 		}
 	},
-//   displayConsoleDrawer: function() {
-//     if (EFrameworkCore.hasPermission('console') && Session.get("displayConsoleDrawer")) {
-//       return true;
-//     }
-//   }
+
+	/**
+	* @method displayConsoleDrawer
+	* @summary Si se debe mostrar
+	* @returns {Boolean}
+	*/
+	displayConsoleDrawer: function() {
+		if (EFrameworkCore.hasPermission('console') && Session.get("displayConsoleDrawer")) {
+			return true;
+		}
+	}
 });
 
 /**

@@ -21,7 +21,10 @@
 					{{/if}}
 					{{#each reactionApps provides="settings" name=name container=container}}
 						{{#if hasPermission route}}
-							<a class="pkg-settings" title="{{i18n 'app.settings' 'Settings'}}"><i class="{{orElse icon 'fa fa-cog fa-2x fa-fw'}}"></i></a>
+							<a class="pkg-settings" title="{{i18n 'app.settings' 'Settings'}}">
+								<!-- <i class="{{orElse icon 'fa fa-cog fa-2x fa-fw'}}"></i> -->
+								<i class="{{orElse icon 'fa fa-pencil-square-o fa-2x fa-fw'}}"></i>
+							</a>
 						{{/if}}
 					{{/each}}
 				{{else}}

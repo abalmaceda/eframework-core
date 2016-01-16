@@ -146,7 +146,7 @@
                     "name": "שם",
                     "email": "דוא\"ל"
                 },
-                "shopEditAdressForm": {
+                "shopEditAddressForm": {
                     "company": "חברה",
                     "fullname": "שם פרטי ומשפחה",
                     "address1": "כתובת 1"

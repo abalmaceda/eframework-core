@@ -2,7 +2,7 @@
 
 /*
  * Fixtures is a global server object that it can be reused in packages
- * assumes collection data in reaction-core/private/data, optionally jsonFile
+ * assumes collection data in eframework-core/private/data, optionally jsonFile
  * use jsonFile when calling from another package, as we can't read the assets from here
  */
 
@@ -242,9 +242,8 @@ ReactionRegistry.createDefaultAdminUser = function () {
 		options.email = Meteor.settings.REACTION_EMAIL || Random.id(8).toLowerCase() + "@" + domain;
 		EFrameworkCore.Log.warn( "\nIMPORTANT! DEFAULT USER INFO (RANDOM)\n  EMAIL/LOGIN: " + options.email + "\n  PASSWORD: " + options.password + "\n");
 	}
-	EFrameworkCore.Log.warn("Accounts create user");
 	accountId = Accounts.createUser(options);
-	EFrameworkCore.Log.warn("Accounts create user 2");
+
 	// account email should print on console
 	// if server is not confgured. Error in configuration
 	// are caught, but admin isn't verified.
@@ -312,10 +311,7 @@ ReactionRegistry.loadFixtures = function () {
 	Fixtures.loadData(EFrameworkCore.Collections.Tags);
 	Fixtures.loadI18n(EFrameworkCore.Collections.Translations);
 
-	/*
-		TODO: entender esta razon
-		Siempre debe haber al menos un Shop
-	*/
+	//Siempre debe haber al menos un Shop
 	try {
 		currentDomain = EFrameworkCore.Collections.Shops.findOne().domains[0];
 	} catch (error) {

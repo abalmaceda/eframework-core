@@ -135,8 +135,10 @@ EFrameworkCore.Schemas.CorePackageConfig = new SimpleSchema([
 			label: "Host"
 		},
 		"settings.mail.port": {
-			type: String,
-			label: "Port"
+			//type: String,
+			type: Number,
+			label: "Port",
+			min: 0
 		},
 		"settings.openexchangerates.appId": {
 			type: String,

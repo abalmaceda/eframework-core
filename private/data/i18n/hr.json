@@ -145,7 +145,7 @@
                     "name": "Ime",
                     "email": "Email"
                 },
-                "shopEditAdressForm": {
+                "shopEditAddressForm": {
                     "company": "Tvrtka",
                     "fullname": "Puno ime",
                     "address1": "Adresa 1"

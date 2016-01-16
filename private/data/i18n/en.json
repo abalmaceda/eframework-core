@@ -18,7 +18,7 @@
                     "loading": "Loading",
                     "toggle": "Toggle",
                     "warning": "Oops!",
-                    "unauthorizedMessage": "You don't have permission to view this content.",
+                    "unauthorizedMessage": "You need special permissions to view this content.",
                     "monthOptions": "Choose month",
                     "yearOptions": "Chose year",
                     "timezoneOptions": "Choose timezone",
@@ -161,8 +161,8 @@
                 "address": {
                     "country": "Country",
                     "fullName": "Full name",
-                    "address1": "Address",
-                    "address2": "Address",
+                    "address1": "Address 1",
+                    "address2": "Address 2",
                     "postal": "Postal",
                     "city": "City",
                     "region": "Region",
@@ -196,7 +196,7 @@
                     "name": "Name",
                     "email": "Email"
                 },
-                "shopEditAdressForm": {
+                "shopEditAddressForm": {
                     "company": "Company",
                     "fullname": "Full name",
                     "address1": "Address 1"

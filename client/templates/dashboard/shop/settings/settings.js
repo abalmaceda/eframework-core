@@ -78,84 +78,223 @@ Template.shopSettings.helpers({
 });
 
 
-/**
- * shopSettings autoform alerts
+ /**
+ * AutoForm.hooks
+ * @summary Hooks para shopSettings
  */
+AutoForm.hooks({
+	/**
+	 * @summary Eventos del formulario id = shopEditForm
+	 */
+	shopEditForm: {
+		/**
+		* @summary Muestra mensaje de exito de operación.
+		* @event onSuccess
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onSuccess: function(operation, result, template) {
+			return Alerts.add("Shop general settings saved.", "success", {autoHide: true});
+		},
+		/**
+		* @summary Muestra mensaje de error en operación.
+		* @event onError
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onError: function(operation, error, template) {
+			return Alerts.add("Shop general settings update failed. " + error, "danger");
+		}
+	}
+});
 
-// AutoForm.hooks({
-//   shopEditForm: {
-//     onSuccess: function(operation, result, template) {
-//       return Alerts.add("Shop general settings saved.", "success", {
-//         autoHide: true
-//       });
-//     },
-//     onError: function(operation, error, template) {
-//       return Alerts.add("Shop general settings update failed. " + error, "danger");
-//     }
-//   }
-// });
+ /**
+ * AutoForm.hooks
+ * @summary Hooks para shopSettings
+ */
+AutoForm.hooks({
+	/**
+	 * @summary Eventos del formulario id = shopEditAddressForm
+	 */
+	shopEditAddressForm: {
+		/**
+		* @summary Muestra mensaje de exito de operación.
+		* @event onSuccess
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onSuccess: function(operation, result, template) {
+			return Alerts.add("Shop address settings saved.", "success", { autoHide: true });
+		},
 
-// AutoForm.hooks({
-//   shopEditAddressForm: {
-//     onSuccess: function(operation, result, template) {
-//       return Alerts.add("Shop address settings saved.", "success", {
-//         autoHide: true
-//       });
-//     },
-//     onError: function(operation, error, template) {
-//       return Alerts.add("Shop address settings update failed. " + error, "danger");
-//     }
-//   }
-// });
+		/**
+		* @summary Muestra mensaje de error en operación.
+		* @event onError
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onError: function(operation, error, template) {
+		return Alerts.add("Shop address settings update failed. " + error, "danger");
+		}
+	}
+});
 
-// AutoForm.hooks({
-//   shopEditEmailForm: {
-//     onSuccess: function(operation, result, template) {
-//       return Alerts.add("Shop mail settings saved.", "success", {
-//         autoHide: true
-//       });
-//     },
-//     onError: function(operation, error, template) {
-//       return Alerts.add("Shop mail settings update failed. " + error, "danger");
-//     }
-//   }
-// });
+ /**
+ * AutoForm.hooks
+ * @summary Hooks para shopSettings
+ */
+AutoForm.hooks({
+	/**
+	 * @summary Eventos del formulario id = shopEditEmailForm
+	 */
+	shopEditEmailForm: {
+		/**
+		* @summary Muestra mensaje de exito de operación.
+		* @event onSuccess
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onSuccess: function(operation, result, template) {
+			return Alerts.add("Shop mail settings saved.", "success", { autoHide: true});
+		},
 
-// AutoForm.hooks({
-//   shopEditOpenExchangeRatesForm: {
-//     onSuccess: function(operation, result, template) {
-//       return Alerts.add("Open Exchange settings saved.", "success", {
-//         autoHide: true
-//       });
-//     },
-//     onError: function(operation, error, template) {
-//       return Alerts.add("Open Exchange settings update failed. " + error, "danger");
-//     }
-//   }
-// });
+		/**
+		* @summary Muestra mensaje de error en operación.
+		* @event onError
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onError: function(operation, error, template) {
+			return Alerts.add("Shop mail settings update failed. " + error, "danger");
+		}
+	}
+});
 
-// AutoForm.hooks({
-//   shopEditSettingsForm: {
-//     onSuccess: function(operation, result, template) {
-//       return Alerts.add("Shop settings saved.", "success", {
-//         autoHide: true
-//       });
-//     },
-//     onError: function(operation, error, template) {
-//       return Alerts.add("Shop setting update failed. " + error, "danger");
-//     }
-//   }
-// });
+ /**
+ * AutoForm.hooks
+ * @summary Hooks para shopSettings
+ */
+AutoForm.hooks({
+	/**
+	 * @summary Eventos del formulario id = shopEditOpenExchangeRatesForm
+	 */
+	shopEditOpenExchangeRatesForm: {
+		/**
+		* @summary Muestra mensaje de exito de operación.
+		* @event onSuccess
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onSuccess: function(operation, result, template) {
+			return Alerts.add("Open Exchange settings saved.", "success", {autoHide: true});
+		},
 
-// AutoForm.hooks({
-//   shopEditOptionsForm: {
-//     onSuccess: function(operation, result, template) {
-//       return Alerts.add("Shop options saved.", "success", {
-//         autoHide: true
-//       });
-//     },
-//     onError: function(operation, error, template) {
-//       return Alerts.add("Shop options update failed. " + error, "danger");
-//     }
-//   }
-// });
+		/**
+		* @summary Muestra mensaje de error en operación.
+		* @event onError
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onError: function(operation, error, template) {
+			return Alerts.add("Open Exchange settings update failed. " + error, "danger");
+		}
+	}
+});
+
+ /**
+ * AutoForm.hooks
+ * @summary Hooks para shopSettings
+ */
+AutoForm.hooks({
+	/**
+	 * @summary Eventos del formulario id = shopEditSettingsForm
+	 */
+	shopEditSettingsForm: {
+		/**
+		* @summary Muestra mensaje de exito de operación.
+		* @event onSuccess
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onSuccess: function(operation, result, template) {
+			return Alerts.add("Shop settings saved.", "success", { autoHide: true});
+		},
+
+		/**
+		* @summary Muestra mensaje de error en operación.
+		* @event onError
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onError: function(operation, error, template) {
+			return Alerts.add("Shop setting update failed. " + error, "danger");
+		}
+	}
+});
+
+ /**
+ * AutoForm.hooks
+ * @summary Hooks para shopSettings
+ */
+AutoForm.hooks({
+	/**
+	 * @summary Eventos del formulario id = shopEditOptionsForm
+	 */
+	shopEditOptionsForm: {
+		/**
+		* @summary Muestra mensaje de exito de operación.
+		* @event onSuccess
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onSuccess: function(operation, result, template) {
+			return Alerts.add("Shop options saved.", "success", { autoHide: true });
+		},
+
+		/**
+		* @summary Muestra mensaje de error en operación.
+		* @event onError
+		* @Param{} - operation
+		* @Param{} - result
+		* @Param{Blaze.Template} - template
+		* @returns {void}
+		* @todo parametros
+		*/
+		onError: function(operation, error, template) {
+			return Alerts.add("Shop options update failed. " + error, "danger");
+		}
+	}
+});

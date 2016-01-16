@@ -2,18 +2,18 @@
 	{
 		"addressBook": [
 			{
-				"address1": "1119 Colorado Ave",
-				"address2": "Ste. 7",
-				"city": "Santa Monica",
-				"company": "Reaction Commerce",
-				"country": "US",
-				"fullName": "Ongo Works",
-				"isBillingDefault": true,
-				"isCommercial": true,
-				"isShippingDefault": true,
-				"phone": "8885551212",
-				"postal": "90401",
-				"region": "CA"
+				"address1": "Beauchef ",
+                "address2": "Blanco Encalada ",
+                "city": "Santiago",
+                "company": "DCC",
+                "country": "CL",
+                "fullName": "Universidad de Chile",
+                "isBillingDefault": true,
+                "isCommercial": true,
+                "isShippingDefault": true,
+                "phone": "+5696745367",
+                "postal": "870000",
+                "region": "Metropolitana"
 			}
 		],
 		"baseUOM": "OZ",

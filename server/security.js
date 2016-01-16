@@ -13,49 +13,61 @@
 //  * database operation is executed in a server method.
 //  */
 
-// /*
-//  * Assign to some local letiables to keep code
-//  * short and sweet
-//  */
-// let Cart = EFrameworkCore.Collections.Cart;
 
-// let Discounts = EFrameworkCore.Collections.Discounts;
+/**
+ * @summary Se definen variables locales
+ */
+let Cart = EFrameworkCore.Collections.Cart;
 
-// let Media = EFrameworkCore.Collections.Media;
+//let Discounts = EFrameworkCore.Collections.Discounts;
 
-// let Orders = EFrameworkCore.Collections.Orders;
+//let Media = EFrameworkCore.Collections.Media;
 
-// let Packages = EFrameworkCore.Collections.Packages;
+let Orders = EFrameworkCore.Collections.Orders;
 
-//let Products = EFrameworkCore.Collections.Products;
+let Packages = EFrameworkCore.Collections.Packages;
 
-// let Shipping = EFrameworkCore.Collections.Shipping;
+let Products = EFrameworkCore.Collections.Products;
 
-// let Shops = EFrameworkCore.Collections.Shops;
+let Shipping = EFrameworkCore.Collections.Shipping;
 
-// let Tags = EFrameworkCore.Collections.Tags;
+let Shops = EFrameworkCore.Collections.Shops;
 
-// let Taxes = EFrameworkCore.Collections.Taxes;
+let Tags = EFrameworkCore.Collections.Tags;
 
-// let Translations = EFrameworkCore.Collections.Translations;
+//let Taxes = EFrameworkCore.Collections.Taxes;
+
+let Translations = EFrameworkCore.Collections.Translations;
 
 // /*
 //  * Define some additional rule chain methods
 //  */
 
-// Security.defineMethod("ifShopIdMatches", {
-//   fetch: [],
-//   deny: function (type, arg, userId, doc) {
-//     return doc.shopId !== EFrameworkCore.getShopId();
-//   }
-// });
+ /**
+ * @method ifShopIdMatches
+ * @summary Verifica si el shopId del formulario es el mismo que el del shopId actual
+ * @return {Boolean}
+ */
+Security.defineMethod("ifShopIdMatches",
+{
+	fetch: [],
+	deny: function (type, arg, userId, doc) {
+		return doc.shopId !== EFrameworkCore.getShopId();
+	}
+});
 
-// Security.defineMethod("ifShopIdMatchesThisId", {
-//   fetch: [],
-//   deny: function (type, arg, userId, doc) {
-//     return doc._id !== EFrameworkCore.getShopId();
-//   }
-// });
+ /**
+ * @method ifShopIdMatchesThisId
+ * @summary Verifica si doc._id del formulario es el mismo que el del shopId actual
+ * @return {Boolean}
+ */
+Security.defineMethod("ifShopIdMatchesThisId",
+{
+	fetch: [],
+	deny: function (type, arg, userId, doc) {
+		return doc._id !== EFrameworkCore.getShopId();
+	}
+});
 
 // Security.defineMethod("ifFileBelongsToShop", {
 //   fetch: [],
@@ -85,21 +97,20 @@
 //   }
 // });
 
-// /**
-//  * Define all security rules
-//  */
+ /**
+ * @summary Definir los roles de seguridad
+ */
 
-// /**
-//  * admin security
-//  * Permissive security for users with the "admin" role
-//  */
-
-// Security.permit(["insert", "update", "remove"]).collections([Products, Tags,
-//   Translations, Discounts, Taxes, Shipping, Orders, Packages
-// ]).ifHasRole({
-//   role: "admin",
-//   group: EFrameworkCore.getShopId()
-// }).ifShopIdMatches().exceptProps(["shopId"]).apply();
+ /**
+ * @description Seguridad para Administrador "admin"
+ * @summary Los usuarios con rol "admin" pueden "insert", "update", "remove" en Products, Tags, Translations, Discounts, Taxes, Shipping, Orders, Packages Excepto si ifShopIdMatches retorna TRUE y que no sea ejecuta la acción sobre shopId
+ * @todo agregar discounts, taxes
+ */
+Security.permit(["insert", "update", "remove"]).collections([Products, Tags, Translations, /*Discounts, Taxes,*/ Shipping, Orders, Packages ]).ifHasRole(
+{
+	role: "admin",
+	group: EFrameworkCore.getShopId()
+}).ifShopIdMatches().exceptProps(["shopId"]).apply();
 
 // /*
 //  * Permissive security for users with the "admin" role for FS.Collections
@@ -115,10 +126,14 @@
 //  * remove their shop but may not insert one.
 //  */
 
-// Shops.permit(["update", "remove"]).ifHasRole({
-//   role: ["admin", "owner"],
-//   group: EFrameworkCore.getShopId()
-// }).ifShopIdMatchesThisId().apply();
+ /**
+ * @description Seguridad para Administrador "admin"
+ * @summary "update"y "remove" Shops si tienen el role "admin" ó "owner" y son del grupo shopId
+ */
+Shops.permit(["update", "remove"]).ifHasRole({
+  role: ["admin", "owner"],
+  group: EFrameworkCore.getShopId()
+}).ifShopIdMatchesThisId().apply();
 
 // /*
 //  * Users with the "admin" or "owner" role may update and

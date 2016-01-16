@@ -159,7 +159,7 @@
                     "name": "Név",
                     "email": "Email"
                 },
-                "shopEditAdressForm": {
+                "shopEditAddressForm": {
                     "company": "Cég",
                     "fullname": "Teljes név",
                     "address1": "Cím 1"

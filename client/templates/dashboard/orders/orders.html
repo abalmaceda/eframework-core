@@ -1,4 +1,4 @@
-<!-- TODO -->
+<!-- Template para mostrar las orders -->
 <template name="orders">
 	<div class="container-fluid-sm">
 		{{#each orders}}
@@ -22,6 +22,11 @@
 				<div class="order-panel-items">
 					{{> ordersListItems}}
 				</div>
+			</div>
+		{{else}}
+			<!-- Se agrega mensaje cuando no hay ordenes disponibles -->
+			<div class="alert alert-info">
+				<span data-i18n="cartCompleted.noOrdersFound">No orders found.</span>
 			</div>
 		{{/each}}
 	</div>

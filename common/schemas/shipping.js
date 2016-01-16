@@ -24,7 +24,9 @@ EFrameworkCore.Schemas.ShippingMethod = new SimpleSchema({
     type: Number,
     label: "Cost",
     decimal: true,
-    optional: true
+    optional: true,
+    //Se agrego valor mínimo 0
+    min: 0
   },
   handling: {
     type: Number,

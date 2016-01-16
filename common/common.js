@@ -64,7 +64,6 @@ _.extend(EFrameworkCore, {
 	* @param {String} currentProductId - set actual productId
 	* @param {String} currentVariantId - set actual variantId
 	* @return {undefined} return nothing, sets en session
-	* @todo all
 	*/
 	setProduct: function (currentProductId, currentVariantId) {
 

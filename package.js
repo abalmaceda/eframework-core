@@ -477,8 +477,8 @@ api.addFiles("server/register.js", "server");
 	api.addFiles("common/collections/hooks/hooks.js");
 
 	// // security
-	// api.addFiles("server/browserPolicy.js", "server");
-	// api.addFiles("server/security.js", "server");
+	api.addFiles("server/browserPolicy.js", "server");
+	api.addFiles("server/security.js", "server");
 
 	// common
 	//TODO: revizar
@@ -590,11 +590,11 @@ api.addFiles("client/templates/layout/layout.js", "client");
 	api.addFiles("client/templates/cart/checkout/review/review.js", "client");
 
 	api.addFiles("client/templates/cart/checkout/payment/payment.html", "client");
-	// api.addFiles("client/templates/cart/checkout/payment/methods/cards.html", "client");
-	// api.addFiles("client/templates/cart/checkout/payment/methods/cards.js", "client");
+	api.addFiles("client/templates/cart/checkout/payment/methods/cards.html", "client");
+	api.addFiles("client/templates/cart/checkout/payment/methods/cards.js", "client");
 
-	// api.addFiles("client/templates/cart/checkout/completed/completed.html", "client");
-	// api.addFiles("client/templates/cart/checkout/completed/completed.js", "client");
+	api.addFiles("client/templates/cart/checkout/completed/completed.html", "client");
+	api.addFiles("client/templates/cart/checkout/completed/completed.js", "client");
 
 	api.addFiles("client/templates/cart/checkout/shipping/shipping.html", "client");
 	api.addFiles("client/templates/cart/checkout/shipping/shipping.js", "client");

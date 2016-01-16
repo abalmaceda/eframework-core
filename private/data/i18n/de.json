@@ -159,7 +159,7 @@
                     "name": "Name",
                     "email": "E-Mail"
                 },
-                "shopEditAdressForm": {
+                "shopEditAddressForm": {
                     "company": "Firma",
                     "fullname": "Vollständiger Name",
                     "address1": "Adresse 1"

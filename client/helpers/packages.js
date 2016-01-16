@@ -19,7 +19,7 @@
  *   @example {{#each reactionApps provides="settings" name=name container=container}}
  *   @example {{#each reactionApps provides="userAccountDropdown" enabled=true}}
  *   @example
- *     {{#each reactionApps provides="social" name="reaction-social"}}
+ *     {{#each reactionApps provides="social" name="eframework-social"}}
  *         {{> Template.dynamic template=template data=customSocialSettings }}
  *     {{/each}}
  *
@@ -36,7 +36,7 @@
  *  [{
  *  	enabled: true
  *   label: "Stripe"
- *   name: "reaction-stripe"
+ *   name: "eframework-stripe"
  *   packageId: "QqkGsQCDRhg2LSn8J"
  *   priority: "1"
  *   provides: "paymentMethod"

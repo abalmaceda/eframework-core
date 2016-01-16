@@ -25,3 +25,4 @@ BrowserPolicy.content.allowImageOrigin("fbcdn-profile-a.akamaihd.net");
 BrowserPolicy.content.allowImageOrigin("secure.gravatar.com");
 
 BrowserPolicy.content.allowImageOrigin("i0.wp.com");
+
