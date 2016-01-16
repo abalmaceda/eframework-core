@@ -15,15 +15,15 @@
 
 <!--TODO-->
 <template name="coreLayout">
-	<nav class="reaction-navigation-header">{{> yield region="layoutHeader"}}</nav>
-	<!-- Icono del cart -->
-	<nav class="reaction-cart-drawer">{{>cartDrawer}}</nav>
-	<div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>
+	<nav class="eframework-navigation-header">{{> yield region="layoutHeader"}}</nav>
+	<!-- Layout para mostrar la información del cart -->
+	<nav class="eframework-cart-drawer">{{>cartDrawer}}</nav>
+	<div class="eframework-dashboard-drawer">{{> yield region="dashboard"}}</div>
 	<main role="main" id="main">
 		<span id="layout-alerts">{{>bootstrapAlerts}}</span>
 		{{> yield}}
 	</main>
-	<footer class="reaction-navigation-footer footer-default">{{>yield region="layoutFooter"}}</footer>
+	<footer class="eframework-navigation-footer footer-default">{{>yield region="layoutFooter"}}</footer>
 </template>
 
 
@@ -31,18 +31,18 @@
 <template name="coreAdminLayout">
 	<span class="layout-alerts-global">{{>bootstrapAlerts}}</span>
 	<div class="page {{adminControlsClassname}}">
-		<nav class="reaction-navigation-header">{{> yield region="layoutHeader"}}</nav>
-		<!-- Icono del cart -->
-		<div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>
+		<nav class="eframework-navigation-header">{{> yield region="layoutHeader"}}</nav>
+		<!-- Layout para mostrar la información del cart -->
+		<nav class="eframework-cart-drawer">{{>cartDrawer}}</nav>
+		<div class="eframework-dashboard-drawer">{{> yield region="dashboard"}}</div>
 		<main role="main" id="main">
 			{{> dashboardHeader}}
 			{{> yield}}
 		</main>
-		<footer class="reaction-navigation-footer footer-default">{{>yield region="layoutFooter"}}</footer>
+		<footer class="eframework-navigation-footer footer-default">{{>yield region="layoutFooter"}}</footer>
 	</div>
 	<div class="admin-controls action-view {{adminControlsClassname}}">
 		<div class="admin-controls-heading">
-			SETTINGS_HEADER
 			{{> settingsHeader}}
 		</div>
 		<div class="admin-controls-content action-view-body">
@@ -59,9 +59,9 @@
 
 <!--TODO-->
 <template name="coreSettingsLayout">
-	<nav class="reaction-navigation-header">{{> yield region="layoutHeader"}}</nav>
-	<nav class="reaction-cart-drawer">{{>cartDrawer}}</nav>
-	<div class="reaction-dashboard-drawer">{{> yield region="dashboard"}}</div>
+	<nav class="eframework-navigation-header">{{> yield region="layoutHeader"}}</nav>
+	<nav class="eframework-cart-drawer">{{>cartDrawer}}</nav>
+	<div class="eframework-dashboard-drawer">{{> yield region="dashboard"}}</div>
 	<main role="main" id="main">
 		<span id="layout-alerts">{{>bootstrapAlerts}}</span>
 		{{> settingsHeader}}
@@ -70,5 +70,5 @@
 			<div class="col-sm-10 container-settings">{{> yield}}</div>
 		</div>
 	</main>
-	<footer class="reaction-navigation-footer footer-default">{{>yield region="layoutFooter"}}</footer>
+	<footer class="eframework-navigation-footer footer-default">{{>yield region="layoutFooter"}}</footer>
 </template>
