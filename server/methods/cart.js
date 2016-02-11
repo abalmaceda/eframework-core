@@ -339,74 +339,66 @@ Meteor.methods({
 //     throw new Meteor.Error("cart/copyCartToOrder: Invalid request");
 //   },
 
-//   /**
-//    * cart/setShipmentMethod
-//    * @summary saves method as order default
-//    * @param {String} cartId - cartId to apply shipmentMethod
-//    * @param {Object} method - shipmentMethod object
-//    * @return {String} return Mongo update result
-//    */
-//   "cart/setShipmentMethod": function (cartId, method) {
-//     check(cartId, String);
-//     check(method, Object);
-//     // get current cart
-//     let cart = EFrameworkCore.Collections.Cart.findOne({
-//       _id: cartId,
-//       userId: Meteor.userId()
-//     });
-//     // a cart is required!
-//     if (!cart) {
-//       return;
-//     }
+	/**
+	* cart/setShipmentMethod
+	* @summary saves method as order default
+	* @param {String} cartId - cartId to apply shipmentMethod
+	* @param {Object} method - shipmentMethod object
+	* @return {}
+	* @todo DOCUMENTACION
+	*/
+	"cart/setShipmentMethod": function (cartId, method) {
+		//se verifíca los parametros
+		check(cartId, String);
+		check(method, Object);
+		// obtener el Car actual
+		let cart = EFrameworkCore.Collections.Cart.findOne(
+		{
+			_id: cartId,
+			userId: Meteor.userId()
+		});
+		// es necesario un Cart
+		if (!cart) {
+			return;
+		}
 
-//     // temp hack until we build out multiple shipping handlers
-//     let selector;
-//     let update;
-//     // temp hack until we build out multiple shipment handlers
-//     // if we have an existing item update it, otherwise add to set.
-//     if (cart.shipping) {
-//       selector = {
-//         "_id": cartId,
-//         "shipping._id": cart.shipping[0]._id
-//       };
-//       update = {
-//         $set: {
-//           "shipping.$.shipmentMethod": method
-//         }
-//       };
-//     } else {
-//       selector = {
-//         _id: cartId
-//       };
-//       update = {
-//         $addToSet: {
-//           shipping: {
-//             shipmentMethod: method
-//           }
-//         }
-//       };
-//     }
-//     // update or insert method
-//     EFrameworkCore.Collections.Cart.update(selector, update, function (
-//       error) {
-//       if (error) {
-//         EFrameworkCore.Log.warn(`Error adding rates to cart ${cartId}`,
-//           error);
-//         return;
-//       }
-//       // this will transition to review
-//       Meteor.call("workflow/pushCartWorkflow", "coreCartWorkflow",
-//         "coreCheckoutShipping");
-//       return;
-//     });
-//   },
+		// temp hack until we build out multiple shipping handlers
+		let selector;
+		let update;
+		// temp hack until we build out multiple shipment handlers
+		// if we have an existing item update it, otherwise add to set.
+		if (cart.shipping) {
+			selector = {
+				"_id": cartId,
+				"shipping._id": cart.shipping[0]._id
+			};
+			update = {
+				$set: {
+					"shipping.$.shipmentMethod": method
+				}
+			};
+		} else {
+			selector = {_id: cartId};
+			update = {$addToSet: {shipping: {shipmentMethod: method}}};
+    	}
+		// update or insert method
+		EFrameworkCore.Collections.Cart.update(selector, update, function ( error) {
+			if (error) {
+				EFrameworkCore.Log.warn(`Error adding rates to cart ${cartId}`,error);
+				return;
+			}
+			// this will transition to review
+			Meteor.call("workflow/pushCartWorkflow", "coreCartWorkflow","coreCheckoutShipping");
+			return;
+		});
+  	},
 
 	/**
 	* cart/setShipmentAddress
 	* @summary Agrega address book para cart shipping
 	* @param {String} cartId - cartId a quien se le aplica un shipmentMethod
 	* @param {Object} address - Objeto addressBook
-	* @return {String} return Mongo update result
+	* @return {String}
 	*/
 	"cart/setShipmentAddress": function (cartId, address) {
 		check(cartId, String);

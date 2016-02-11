@@ -96,7 +96,7 @@ AutoForm.hooks({
 		* @returns {void}
 		* @todo parametros
 		*/
-		onSuccess: function(operation, result, template) {
+		onSuccess: function(operation, result) {
 			return Alerts.add("Shop general settings saved.", "success", {autoHide: true});
 		},
 		/**
@@ -108,7 +108,7 @@ AutoForm.hooks({
 		* @returns {void}
 		* @todo parametros
 		*/
-		onError: function(operation, error, template) {
+		onError: function(operation, error) {
 			return Alerts.add("Shop general settings update failed. " + error, "danger");
 		}
 	}

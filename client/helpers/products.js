@@ -338,32 +338,32 @@ this.getProductPriceRange = function (currentProductId) {
   }
 };
 
-// /**
-//  * getCardTypes
-//  * @summary determine the card type and return label
-//  * @todo needs i18n conversion?
-//  * @param {String} cardNumber - a credit card number
-//  * @return {String} card label, ie: visa
-//  */
-// this.getCardType = function (cardNumber) {
-//   let re = new RegExp("^4");
-//   if (cardNumber.match(re) !== null) {
-//     return "visa";
-//   }
-//   re = new RegExp("^(34|37)");
-//   if (cardNumber.match(re) !== null) {
-//     return "amex";
-//   }
-//   re = new RegExp("^5[1-5]");
-//   if (cardNumber.match(re) !== null) {
-//     return "mastercard";
-//   }
-//   re = new RegExp("^6011");
-//   if (cardNumber.match(re) !== null) {
-//     return "discover";
-//   }
-//   return "";
-// };
+/**
+ * getCardTypes
+ * @summary Identifica el tipo de tarjeta y retorna su label
+ * @param {String} cardNumber - número de una tarjeta de crédito
+ * @return {String} card label, ie: visa
+ * @todo needs i18n conversion?
+ */
+this.getCardType = function (cardNumber) {
+	let re = new RegExp("^4");
+	if (cardNumber.match(re) !== null) {
+		return "visa";
+	}
+	re = new RegExp("^(34|37)");
+	if (cardNumber.match(re) !== null) {
+		return "amex";
+	}
+	re = new RegExp("^5[1-5]");
+		if (cardNumber.match(re) !== null) {
+	return "mastercard";
+	}
+	re = new RegExp("^6011");
+	if (cardNumber.match(re) !== null) {
+		return "discover";
+	}
+	return "";
+};
 
 // /**
 //  * getGuestLoginState

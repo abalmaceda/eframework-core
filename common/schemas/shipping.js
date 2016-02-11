@@ -2,6 +2,11 @@
  * ShippingMethod Schema
  */
 
+/**
+ * @summary EFrameworkCore.Schemas.ShippingMethod
+ * @description
+ * @todo DOCUMENTACION y DESCRIPCION
+ */
 EFrameworkCore.Schemas.ShippingMethod = new SimpleSchema({
   _id: {
     type: String,
@@ -99,24 +104,31 @@ EFrameworkCore.Schemas.ShippingMethod = new SimpleSchema({
   }
 });
 
-/**
- * ShipmentQuote Schema
- */
 
+/**
+ * @summary EFrameworkCore.Schemas.ShipmentQuote
+ * @description
+ * @todo DOCUMENTACION y DESCRIPCION
+ */
 EFrameworkCore.Schemas.ShipmentQuote = new SimpleSchema({
-  carrier: {
-    type: String
-  },
-  method: {
-    type: EFrameworkCore.Schemas.ShippingMethod
-  },
-  rate: {
-    type: Number,
-    decimal: true,
-    defaultValue: "0.00"
-  }
+	carrier: {
+		type: String
+	},
+	method: {
+		type: EFrameworkCore.Schemas.ShippingMethod
+	},
+	rate: {
+		type: Number,
+		decimal: true,
+		defaultValue: "0.00"
+	}
 });
 
+/**
+ * @summary EFrameworkCore.Schemas.ShipmentItem
+ * @description
+ * @todo DOCUMENTACION y DESCRIPCION
+ */
 // populate with order.items that are added to a shipment
 EFrameworkCore.Schemas.ShipmentItem = new SimpleSchema({
   _id: {
@@ -145,10 +157,15 @@ EFrameworkCore.Schemas.ShipmentItem = new SimpleSchema({
   }
 });
 
+
+/**
+ * @summary EFrameworkCore.Schemas.ShippingParcel
+ * @description
+ * @todo DOCUMENTACION y DESCRIPCION
+ */
 /**
  * ShippingParcel Schema
  */
-
 EFrameworkCore.Schemas.ShippingParcel = new SimpleSchema({
   containers: {
     type: String,
@@ -172,11 +189,16 @@ EFrameworkCore.Schemas.ShippingParcel = new SimpleSchema({
   }
 });
 
+
+/**
+ * @summary EFrameworkCore.Schemas.Shipment
+ * @description
+ * @todo DOCUMENTACION y DESCRIPCION
+ */
 /**
  * Shipment Schema
  * used for cart/order shipment tracking
  */
-
 EFrameworkCore.Schemas.Shipment = new SimpleSchema({
   _id: {
     type: String,
@@ -222,10 +244,15 @@ EFrameworkCore.Schemas.Shipment = new SimpleSchema({
   }
 });
 
+
+/**
+ * @summary EFrameworkCore.Schemas.ShippingProvider
+ * @description
+ * @todo DOCUMENTACION y DESCRIPCION
+ */
 /**
  * ShippingProvider Schema
  */
-
 EFrameworkCore.Schemas.ShippingProvider = new SimpleSchema({
   name: {
     type: String,
@@ -256,10 +283,15 @@ EFrameworkCore.Schemas.ShippingProvider = new SimpleSchema({
   }
 });
 
+
+/**
+ * @summary EFrameworkCore.Schemas.Shipping
+ * @description
+ * @todo DOCUMENTACION y DESCRIPCION
+ */
 /**
  * Shipping Schema
  */
-
 EFrameworkCore.Schemas.Shipping = new SimpleSchema({
   shopId: {
     type: String,

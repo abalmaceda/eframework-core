@@ -1,5 +1,3 @@
-/* TODO: verificar toda la clase */
-
 /*
 * E-Framework Core Routing
 * reaction routing and security configuration

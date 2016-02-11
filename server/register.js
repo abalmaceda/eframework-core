@@ -8,6 +8,10 @@ EFrameworkCore.registerPackage = function (packageInfo) {
 	return registeredPackage;
 };
 
+/**
+ * @summary
+ * @todo Documentar
+ */
 EFrameworkCore.registerPackage(
 {
 	label: "Core",

@@ -203,6 +203,9 @@ Template.registerHelper("formatPrice", function (currentPrice) {
 	let formattedPrice;
 	let price;
 
+	//En caso de que currentPrice sea un número
+	currentPrice = currentPrice + "";
+
 	localeDep.depend();
 
 	// TODO: Refactor

@@ -75,22 +75,19 @@ applyVariantDefaults = function (variant) {
 //   };
 // };
 
-// /*
-//  * refresh mail configuration on package change
-//  */
-// EFrameworkCore.Collections.Packages.after.update(function (userId, doc,
-//   fieldNames, modifier) {
-//   let _ref;
-//   let _ref1;
-//   let _ref2;
-//   if (((_ref = modifier.$set) !== null ? (_ref1 = _ref.settings) != null ?
-//       _ref1.mail : void 0 : void 0) || ((_ref2 = modifier.$set) != null ?
-//       _ref2["settings.mail.user"] : void 0)) {
-//     if (Meteor.isServer) {
-//       return EFrameworkCore.configureMailUrl();
-//     }
-//   }
-// });
+/*
+ * refresh mail configuration on package change
+ */
+EFrameworkCore.Collections.Packages.after.update(function (userId, doc, fieldNames, modifier) {
+	let _ref;
+	let _ref1;
+	let _ref2;
+	if (((_ref = modifier.$set) !== null ? (_ref1 = _ref.settings) != null ? _ref1.mail : void 0 : void 0) || ((_ref2 = modifier.$set) != null ? _ref2["settings.mail.user"] : void 0)) {
+		if (Meteor.isServer) {
+			return EFrameworkCore.configureMailUrl();
+		}
+	}
+});
 
 /**
  * create unpublished product

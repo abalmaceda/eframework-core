@@ -9,6 +9,7 @@ Meteor.methods({
    * @todo add orderId argument/fallback
    * @param {String} cartId - cartId
    * @return {undefined}
+   * @todo DOCUMENTACION Y ANALISIS
    */
   "shipping/updateShipmentQuotes": function (cartId) {
     if (!cartId) {
