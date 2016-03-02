@@ -1,8 +1,10 @@
-/**
- * CollectionFS - Image/Video Publication
- * @params {Array} shops - array of current shop object
- */
- /*TODO*/
+ /**
+  * @function Meteor.publish."Media"
+  * @summary CollectionFS - Image/Video Publication
+  * @params {Array} shops - array of current shop object
+  * @returns {Collection.Cursor} Collection.Media
+  * @todo Documentar
+  */
 Meteor.publish("Media", function (shops) {
 	check(shops, Match.Optional(Array));
 	let Media = EFrameworkCore.Collections.Media;

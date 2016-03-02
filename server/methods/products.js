@@ -683,78 +683,85 @@ Meteor.methods({
 		return tag.slug;
 	},
 
-//   /**
-//    * products/updateProductPosition
-//    * @summary update product grid positions
-//    * @param {String} productId - productId
-//    * @param {Object} positionData -  an object with tag,position,dimensions
-//    * @return {String} returns
-//    */
-//   "products/updateProductPosition": function (productId, positionData) {
-//     check(productId, String);
-//     check(positionData, Object);
+	/**
+	* products/updateProductPosition
+	* @summary update  la posición del product en la grid
+	* @param {String} productId - productId
+	* @param {Object} positionData -  an object with tag,position,dimensions
+	* @return {String} returns
+	*/
+	"products/updateProductPosition": function (productId, positionData) {
+		check(productId, String);
+		check(positionData, Object);
 
-//     if (!EFrameworkCore.hasPermission("createProduct")) {
-//       throw new Meteor.Error(403, "Access Denied");
-//     }
+		//verifica los permisos "createProduct"
+		if (!EFrameworkCore.hasPermission("createProduct")) {
+			throw new Meteor.Error(403, "Access Denied");
+		}
 
-//     this.unblock();
+		this.unblock();
 
-//     let updateResult;
-//     let product = Products.findOne({
-//       "_id": productId,
-//       "positions.tag": positionData.tag
-//     });
+		let updateResult;
 
-//     function addPosition() {
-//       updateResult = Products.update({
-//         _id: productId
-//       }, {
-//         $addToSet: {
-//           positions: positionData
-//         },
-//         $set: {
-//           updatedAt: new Date()
-//         }
-//       }, function (error) {
-//         if (error) {
-//           EFrameworkCore.Log.warn(error);
-//           throw new Meteor.Error(403, error);
-//         }
-//       });
-//     }
+		let addPosition = function() {
+			updateResult = Products.update(
+			{_id: productId},
+			{
+				$addToSet: { positions: positionData},
+				$set: { updatedAt: new Date() }
+			},
+			function (error) {
+				if (error) {
+					EFrameworkCore.Log.warn(error);
+					throw new Meteor.Error(403, error);
+				}
+			});
+		};
 
-//     function updatePosition() {
-//       updateResult = Products.update({
-//         "_id": productId,
-//         "positions.tag": positionData.tag
-//       }, {
-//         $set: {
-//           "positions.$.position": positionData.position,
-//           "positions.$.pinned": positionData.pinned,
-//           "positions.$.weight": positionData.weight,
-//           "positions.$.updatedAt": new Date()
-//         }
-//       }, function (error) {
-//         if (error) {
-//           EFrameworkCore.Log.warn(error);
-//           throw new Meteor.Error(403, error);
-//         }
-//       });
-//     }
+		let updatePosition = function() {
+			updateResult = Products.update(
+			{
+				"_id": productId,
+				"positions.tag": positionData.tag
+			},
+			{
+				$set: {
+					"positions.$.position": positionData.position,
+					"positions.$.pinned": positionData.pinned,
+					"positions.$.weight": positionData.weight,
+					"positions.$.updatedAt": new Date()
+				}
+			},
+			function (error) {
+				if (error) {
+					EFrameworkCore.Log.warn(error);
+					throw new Meteor.Error(403, error);
+				}
+			});
+		};
 
-//     if (typeof product === undefined || product === null) {
-//       addPosition();
-//     } else {
-//       if (product.positions) {
-//         updatePosition();
-//       } else {
-//         addPosition();
-//       }
-//     }
+		//busco el producto que tiene el _id y la position.tag
+		let product = Products.findOne({ "_id": productId, "positions.tag": positionData.tag});
 
-//     return updateResult;
-//   },
+		//Caso en que no existia una posición previa para el producto
+		if ( product === undefined || product === null ) {
+			addPosition();
+		}
+		//En el caso que existe un producto
+		else {
+			//Si el producto tenia posición, entonces se acualiza
+			if (product.positions) {
+				updatePosition();
+			}
+			//Si no existía posición, se agrega
+			else {
+				addPosition();
+			}
+		}
+		//Se retorna el resultado de la actualización
+		return updateResult;
+	},
+
 	/**
 	* products/updateMetaFields
 	* @summary update update metadata de un producto

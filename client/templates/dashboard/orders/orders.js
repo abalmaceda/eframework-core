@@ -12,6 +12,13 @@ Template.orders.helpers({
 		return EFrameworkCore.Collections.Orders.find({});
 	},
 
+	/**
+	 * @method settings
+	 * @summary
+	 * @returns {}
+	 * @todo
+	 * @deprecated
+	 */
 //   settings: function () {
 //     // ensure sub is up to date
 //     EFrameworkCore.Subscriptions.Orders = Meteor.subscribe("Orders");
@@ -30,6 +37,13 @@ Template.orders.helpers({
 //     };
 //   },
 
+	/**
+	 * @method isOrder
+	 * @summary
+	 * @returns {}
+	 * @todo
+	 * @deprecated
+	 */
 //   isOrder: function () {
 //     if (this._id) {
 //       return true;
@@ -64,17 +78,26 @@ Template.orders.events({
  * @summary Events para Template.orderViewButton
  */
 Template.orderViewButton.events({
-//   'click button': function (event) {
-//     if (this.workflow.status === "new") {
-//       this.workflow.status = "coreOrderCreated";
-//       Meteor.call("workflow/pushOrderWorkflow", "coreOrderWorkflow", "coreOrderCreated", this._id);
-//     }
+	/**
+	* @event click button
+	* @summary
+	* @param {String} event -
+	* @param {Blaze.Template} template -
+	* @returns {}
+	* @this What_does_the_THIS_keyword_refer_to_here
+	* @todo this
+	*/
+	'click button': function (event, template) {
+		if (this.workflow.status === "new") {
+			this.workflow.status = "coreOrderCreated";
+			Meteor.call("workflow/pushOrderWorkflow", "coreOrderWorkflow", "coreOrderCreated", this._id);
+		}
 
-//     EFrameworkCore.showActionView({
-//       label: "Order Details",
-//       data: this,
-//       template: "coreOrderWorkflow"
-//     });
-
-//   }
+		//Vista settings para editar la Order
+		EFrameworkCore.showActionView({
+			label: "Order Details",
+			data: this,
+			template: "coreOrderWorkflow"
+		});
+	}
 });

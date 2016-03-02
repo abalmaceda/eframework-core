@@ -10,7 +10,7 @@ Npm.depends({
 	*  Fake text and data generator for Meteor.js
 	*/
 	"faker": "3.0.1",
- // "node-geocoder": "3.0.0"
+ 	"node-geocoder": "3.0.0"
 });
 
 Package.onUse(function (api) {
@@ -79,7 +79,7 @@ Package.onUse(function (api) {
 	*/
 	api.use("tracker");
 
-	// // meteor add-on packages
+	// meteor add-on packages
 
 	/*
 	* @summary
@@ -148,8 +148,8 @@ Package.onUse(function (api) {
 	api.use("browser-policy");
 
 	/*
-	* @summary
-	* @see {@link |ATMOSPHERE}
+	* @summary Manage the configuration for third-party services
+	* @see {@link https://atmospherejs.com/meteor/service-configuration|ATMOSPHERE}
 	*/
 	api.use("service-configuration");
 
@@ -196,8 +196,8 @@ api.use("mquandalle:bower@1.5.2");
 	// api.use("d3js:d3@3.5.5");
 
 	/*
-	* @summary
-	* @see {@link |ATMOSPHERE}
+	* @summary underscore.string (official): String manipulation extensions for Underscore.js javascript library.
+	* @see {@link https://atmospherejs.com/underscorestring/underscore.string|ATMOSPHERE}
 	*/
 	api.use("underscorestring:underscore.string@3.2.2");
 
@@ -215,25 +215,25 @@ api.use("mquandalle:bower@1.5.2");
 
 	/*
 	* @summary A simple, reactive schema validation package for Meteor. It's used by the Collection2 and AutoForm packages, but you can use it by itself, too.
-	* @see {@link |ATMOSPHERE}
+	* @see {@link https://atmospherejs.com/aldeed/simple-schema|ATMOSPHERE}
 	*/
 	api.use("aldeed:simple-schema@1.3.3");
 
 	/*
 	* @summary Adds template features currently missing from the templating package
-	* @see {@link |ATMOSPHERE}
+	* @see {@link https://atmospherejs.com/aldeed/template-extension|ATMOSPHERE}
 	*/
 	api.use("aldeed:template-extension@3.4.3", "client");
 
 	/*
 	* @summary A router that works on the server and the browser, designed specifically for Meteor
-	* @see {@link |ATMOSPHERE}
+	* @see {@link https://atmospherejs.com/iron/router|ATMOSPHERE}
 	*/
 	api.use("iron:router@1.0.10");
 
 	/*
 	* @summary Generate a slug. Wraps the speakingurl package for Meteor
-	* @see {@link |ATMOSPHERE}
+	* @see {@link https://atmospherejs.com/ongoworks/speakingurl|ATMOSPHERE}
 	*/
 	api.use("ongoworks:speakingurl@5.0.1");
 
@@ -246,7 +246,7 @@ api.use("mquandalle:bower@1.5.2");
 
 	/*
 	* @summary A Meteor package that provides a simple, logical, plain language API for defining write security on your MongoDB collections. Wraps the core allow/deny security.
-	* @see {@link |ATMOSPHERE}
+	* @see {@link https://atmospherejs.com/ongoworks/security|ATMOSPHERE}
 	*/
 	api.use("ongoworks:security@1.3.0");
 
@@ -257,26 +257,27 @@ api.use("mquandalle:bower@1.5.2");
 	api.use("dburles:factory@0.3.10");
 
 	/*
-	* @summary
-	* @see {@link |ATMOSPHERE}
+	* @summary Extends Mongo.Collection with before/after hooks for insert, update, remove, find, and findOne.
+	* @description Works across client, server or a mix. Also works when a client initiates a collection method and the server runs the hook, all while respecting the collection validators (allow/deny).
+	* @see {@link https://atmospherejs.com/matb33/collection-hooks|ATMOSPHERE}
 	*/
 	api.use("matb33:collection-hooks@0.8.1");
 
 	/*
 	* @summary Authorization package for Meteor - compatible with built-in accounts package.
-	* @see {@link |ATMOSPHERE}
+	* @see {@link https://atmospherejs.com/alanning/roles |ATMOSPHERE}
 	*/
 	api.use("alanning:roles@1.2.13");
 
 	/*
-	* @summary
-	* @see {@link |ATMOSPHERE}
+	* @summary Moment.js (official): parse, validate, manipulate, and display dates - official Meteor packaging
+	* @see {@link https://atmospherejs.com/momentjs/moment|ATMOSPHERE}
 	*/
-	// api.use("momentjs:moment@2.10.6");
+	api.use("momentjs:moment@2.10.6");
 
 	/*
-	* @summary
-	* @see {@link |ATMOSPHERE}
+	* @summary Moment Timezone, Timezone support for moment.js, packaged for Meteor. Currently includes all timezone data files.
+	* @see {@link https://atmospherejs.com/risul/moment-timezone|ATMOSPHERE}
 	*/
 	// api.use("risul:moment-timezone@0.4.0");
 
@@ -294,7 +295,8 @@ api.use("mquandalle:bower@1.5.2");
 
 
 	/*
-	* @summary GridFS storage adapter for CollectionFS.
+	* @summary Filesystem for Meteor, collectionFS
+	* @description This packege serves as a wrapper for several other packages and has no functionality in itself:
 	* @see {@link https://atmospherejs.com/cfs/standard-packages|ATMOSPHERE}
 	*/
 	api.use("cfs:standard-packages@0.5.9");
@@ -303,41 +305,42 @@ api.use("mquandalle:bower@1.5.2");
 	* @summary
 	* @see {@link |ATMOSPHERE}
 	*/
-	// api.use("cfs:storage-adapter@0.2.2");
+	api.use("cfs:storage-adapter@0.2.2");
 
 	/*
-	* @summary
-	* @see {@link |ATMOSPHERE}
+	* @summary his package simply adds gm to scope, but it also tests the environment and automatically uses graphicsmagick or imagemagick if available. This makes debugging much easier.
+	* @see {@link https://atmospherejs.com/cfs/graphicsmagick |ATMOSPHERE}
 	*/
-	// api.use("cfs:graphicsmagick@0.0.18");
+	api.use("cfs:graphicsmagick@0.0.18");
 
 	/*
-	* @summary Filesystem for Meteor, collectionFS.
+	* @summary A Meteor package that adds GridFS file storage for CollectionFS. When you use this storage adapter, file data is stored in chunks in your MongoDB database.
 	* @see {@link https://atmospherejs.com/cfs/gridfs|ATMOSPHERE}
 	*/
 	api.use("cfs:gridfs@0.0.33");
 
 	/*
-	* @summary
-	* @see {@link |ATMOSPHERE}
+	* @summary Filesystem storage adapter for CollectionFS
+	* @description A Meteor package that adds local server filesystem storage for CollectionFS. When you use this storage adapter, file data is stored in a directory of your choosing on the same server on which your Meteor app is running.
+	* @see {@link https://atmospherejs.com/cfs/filesystem|ATMOSPHERE}
 	*/
-	// api.use("cfs:filesystem@0.1.2");
+	api.use("cfs:filesystem@0.1.2");
 
 	/*
-	* @summary
-	* @see {@link |ATMOSPHERE}
+	* @summary Provides additional UI helpers for CollectionFS. Requires Meteor 0.8.0 or higher.
+	* @see {@link https://atmospherejs.com/cfs/ui|ATMOSPHERE}
 	*/
-	// api.use("cfs:ui@0.1.3");
+	api.use("cfs:ui@0.1.3");
 
 	/*
-	* @summary
-	* @see {@link |ATMOSPHERE}
+	* @summary Add dropped event to Meteor UI Templates
+	* @see {@link https://atmospherejs.com/raix/ui-dropped-event|ATMOSPHERE}
 	*/
-	// api.use("raix:ui-dropped-event@0.0.7");
+	api.use("raix:ui-dropped-event@0.0.7");
 
 	/*
-	* @summary
-	* @see {@link |ATMOSPHERE}
+	* @summary Server Side Rendering for Meteor with Blaze
+	* @see {@link https://atmospherejs.com/meteorhacks/ssr|ATMOSPHERE}
 	*/
 	// api.use("meteorhacks:ssr@2.1.2");
 
@@ -349,12 +352,12 @@ api.use("mquandalle:bower@1.5.2");
 
 	// // imply exports package vars
 	api.imply("less");
-api.imply("amplify");
-api.imply("accounts-base");
+	api.imply("amplify");
+	api.imply("accounts-base");
 	api.imply("ecmascript");
-api.imply("es5-shim");
-api.imply("browser-policy");
-api.imply("service-configuration");
+	api.imply("es5-shim");
+	api.imply("browser-policy");
+	api.imply("service-configuration");
 
 
 	api.imply("ongoworks:speakingurl");
@@ -453,12 +456,12 @@ api.addFiles("server/register.js", "server");
 
 		//TODO: revizar
 	api.addFiles("common/schemas/shops.js");
-	// api.addFiles("common/schemas/payments.js");
+	api.addFiles("common/schemas/payments.js");
 	api.addFiles("common/schemas/shipping.js");
 	// api.addFiles("common/schemas/taxes.js");
 	// api.addFiles("common/schemas/discounts.js");
 
-		//TODO: revizar
+	//TODO: revizar
 	api.addFiles("common/schemas/products.js");
 
 	//TODO: revizar
@@ -469,8 +472,8 @@ api.addFiles("server/register.js", "server");
 		//TODO: revizar
 	api.addFiles("common/schemas/translations.js");
 
-	// // collections
-		api.addFiles("common/collections/collections.js");
+	// collections
+	api.addFiles("common/collections/collections.js");
 	api.addFiles("common/collections/collectionFS.js");
 
 	// collection hooks
@@ -519,7 +522,7 @@ api.addFiles("server/register.js", "server");
 	api.addFiles("server/methods/shop.js", "server");
 
 	// // method hooks
-//api.addFiles("server/methods/hooks/hooks.js");
+	api.addFiles("server/methods/hooks/hooks.js");
 	api.addFiles("server/methods/hooks/cart.js", "server");
 
 	// client
@@ -620,11 +623,11 @@ api.addFiles("client/templates/layout/layout.js", "client");
 	api.addFiles("client/templates/dashboard/orders/list/ordersList.html", "client");
 	api.addFiles("client/templates/dashboard/orders/list/ordersList.js", "client");
 
-	// api.addFiles("client/templates/dashboard/orders/list/items/items.html", "client");
-	// api.addFiles("client/templates/dashboard/orders/list/items/items.js", "client");
+	api.addFiles("client/templates/dashboard/orders/list/items/items.html", "client");
+	api.addFiles("client/templates/dashboard/orders/list/items/items.js", "client");
 
-	// api.addFiles("client/templates/dashboard/orders/list/summary/summary.html", "client");
-	// api.addFiles("client/templates/dashboard/orders/list/summary/summary.js", "client");
+	api.addFiles("client/templates/dashboard/orders/list/summary/summary.html", "client");
+	api.addFiles("client/templates/dashboard/orders/list/summary/summary.js", "client");
 
 	// api.addFiles("client/templates/dashboard/orders/list/pdf/pdf.html", "client");
 	// api.addFiles("client/templates/dashboard/orders/list/pdf/pdf.js", "client");
@@ -720,14 +723,14 @@ api.addFiles("client/templates/layout/layout.js", "client");
 	api.addFiles("client/templates/products/productDetail/variants/variantForm/inventoryVariant/inventoryVariant.html", "client");
 	api.addFiles("client/templates/products/productDetail/variants/variantForm/inventoryVariant/inventoryVariant.js", "client");
 
-		api.addFiles("client/templates/products/productDetail/variants/variantForm/childVariant/childVariant.html", "client");
+	api.addFiles("client/templates/products/productDetail/variants/variantForm/childVariant/childVariant.html", "client");
 	api.addFiles("client/templates/products/productDetail/variants/variantForm/childVariant/childVariant.js", "client");
 
 	api.addFiles("client/templates/products/productDetail/attributes/attributes.html", "client");
 	api.addFiles("client/templates/products/productDetail/attributes/attributes.js", "client");
 
-	// api.addFiles("client/templates/products/productSettings/productSettings.html", "client");
-	// api.addFiles("client/templates/products/productSettings/productSettings.js", "client");
+	api.addFiles("client/templates/products/productSettings/productSettings.html", "client");
+	api.addFiles("client/templates/products/productSettings/productSettings.js", "client");
 
 	// // Exports
 	api.export("EFrameworkCore");

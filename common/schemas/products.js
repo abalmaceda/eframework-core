@@ -38,29 +38,42 @@ EFrameworkCore.Schemas.VariantMedia = new SimpleSchema({
  * ProductPosition Schema
  */
  /* TODO */
+
+ /**
+  * @global EFrameworkCore.Schemas.ProductPosition
+  * @summary Schema para la Posición de un producto
+  * @description
+  * 	- Schema para guarda la información de la posición de un producto para un determinado tag ( utilizado como filtro.)
+  * 	- Esto se utiliza para determina la posición del producto dentro de la grid.
+  */
 EFrameworkCore.Schemas.ProductPosition = new SimpleSchema({
-  tag: {
-    type: String,
-    optional: true
-  },
-  position: {
-    type: Number,
-    optional: true
-  },
-  pinned: {
-    type: Boolean,
-    optional: true
-  },
-  weight: {
-    type: Number,
-    optional: true,
-    defaultValue: 0,
-    min: 0,
-    max: 3
-  },
-  updatedAt: {
-    type: Date
-  }
+	// Nombre del tag
+	tag: {
+		type: String,
+		optional: true
+	},
+	//Posición del producto para asignar orden.
+	position: {
+		type: Number,
+		optional: true
+	},
+	//TODO
+	pinned: {
+		type: Boolean,
+		optional: true
+	},
+	//Tamaño de la componente que muestra el producto
+	weight: {
+		type: Number,
+		optional: true,
+		defaultValue: 0,
+		min: 0,
+		max: 3
+	},
+	//Fecha de creación
+	updatedAt: {
+		type: Date
+	}
 });
 
 /**
@@ -246,148 +259,154 @@ EFrameworkCore.Schemas.ProductVariant = new SimpleSchema({
 /**
  * Product Schema
  */
-/* TODO */
+
+
+/**
+ * @global EFrameworkCore.Schemas.Product
+ * @summary Schema de un producto
+ * @todo Documentar
+ */
 EFrameworkCore.Schemas.Product = new SimpleSchema({
-  _id: {
-    type: String,
-    optional: true
-  },
-  cloneId: {
-    type: String,
-    optional: true
-  },
-  /*TODO: Entender que es esto */
-  shopId: {
-    type: String,
-    autoValue: EFrameworkCore.shopIdAutoValue,
-    index: 1,
-    label: "Product ShopId"
-  },
-  title: {
-    type: String
-  },
-  pageTitle: {
-    type: String,
-    optional: true
-  },
-  description: {
-    type: String,
-    optional: true
-  },
-  type: {
-    label: "Type",
-    type: String,
-    defaultValue: "simple"
-  },
-  /*TODO: Entender que es esto */
-  vendor: {
-    type: String,
-    optional: true
-  },
-  /*Corresponden a una cualidad que permite identificar a un producto de sus semejantes.*/
-  metafields: {
-    type: [EFrameworkCore.Schemas.Metafield],
-    optional: true
-  },
-  positions: {
-    type: [EFrameworkCore.Schemas.ProductPosition],
-    optional: true
-  },
-  variants: {
-    type: [EFrameworkCore.Schemas.ProductVariant]
-  },
-  requiresShipping: {
-    label: "Require a shipping address",
-    type: Boolean,
-    defaultValue: true,
-    optional: true
-  },
-  parcel: {
-    type: EFrameworkCore.Schemas.ShippingParcel,
-    optional: true
-  },
-  hashtags: {
-    type: [String],
-    optional: true,
-    index: 1
-  },
-  twitterMsg: {
-    type: String,
-    optional: true,
-    max: 140
-  },
-  facebookMsg: {
-    type: String,
-    optional: true,
-    max: 255
-  },
-  googleplusMsg: {
-    type: String,
-    optional: true,
-    max: 255
-  },
-  pinterestMsg: {
-    type: String,
-    optional: true,
-    max: 255
-  },
-  metaDescription: {
-    type: String,
-    optional: true
-  },
-  /*TODO: Entender que es esto */
-  handle: {
-    type: String,
-    optional: true,
-    index: 1
-  },
-  /*TODO: Entender que es esto */
-  isVisible: {
-    type: Boolean,
-    index: 1
-  },
-  /*TODO: Entender que es esto */
-  publishedAt: {
-    type: Date,
-    optional: true
-  },
-  /*TODO: Entender que es esto */
-  publishedScope: {
-    type: String,
-    optional: true
-  },
-  /*TODO: Entender que es esto */
-  templateSuffix: {
-    type: String,
-    optional: true
-  },
-  /*TODO: Entender que es esto */
-  createdAt: {
-    type: Date,
-    autoValue: function () {
-      if (this.isInsert) {
-        return new Date;
-      } else if (this.isUpsert) {
-        return {
-          $setOnInsert: new Date
-        };
-      }
-    }
-  },
-  /*TODO: Entender que es esto */
-  updatedAt: {
-    type: Date,
-    autoValue: function () {
-      if (this.isUpdate) {
-        return {
-          $set: new Date
-        };
-      } else if (this.isUpsert) {
-        return {
-          $setOnInsert: new Date
-        };
-      }
-    },
-    optional: true
-  }
+	_id: {
+		type: String,
+		optional: true
+	},
+	cloneId: {
+		type: String,
+		optional: true
+	},
+	/*TODO: Entender que es esto */
+	shopId: {
+		type: String,
+		autoValue: EFrameworkCore.shopIdAutoValue,
+		index: 1,
+		label: "Product ShopId"
+	},
+	title: {
+		type: String
+	},
+	pageTitle: {
+		type: String,
+		optional: true
+	},
+	description: {
+		type: String,
+		optional: true
+	},
+	type: {
+		label: "Type",
+		type: String,
+		defaultValue: "simple"
+	},
+	/*TODO: Entender que es esto */
+	vendor: {
+		type: String,
+		optional: true
+	},
+	/*Corresponden a una cualidad que permite identificar a un producto de sus semejantes.*/
+	metafields: {
+		type: [EFrameworkCore.Schemas.Metafield],
+		optional: true
+	},
+	/*
+	*	- Ver deficion de EFrameworkCore.Schemas.ProductPosition
+	*	- Es un arreglo para permitir diferentes positions para diferentes tag. ( Permite diferentes posiciones para diferentes filtros tag)
+	*/
+	positions: {
+		type: [EFrameworkCore.Schemas.ProductPosition],
+		optional: true
+	},
+	variants: {
+		type: [EFrameworkCore.Schemas.ProductVariant]
+	},
+	requiresShipping: {
+		label: "Require a shipping address",
+		type: Boolean,
+		defaultValue: true,
+		optional: true
+	},
+	parcel: {
+		type: EFrameworkCore.Schemas.ShippingParcel,
+		optional: true
+	},
+	hashtags: {
+		type: [String],
+		optional: true,
+		index: 1
+	},
+	twitterMsg: {
+		type: String,
+		optional: true,
+		max: 140
+	},
+	facebookMsg: {
+		type: String,
+		optional: true,
+		max: 255
+	},
+	googleplusMsg: {
+		type: String,
+		optional: true,
+		max: 255
+	},
+	pinterestMsg: {
+		type: String,
+		optional: true,
+		max: 255
+	},
+	metaDescription: {
+		type: String,
+		optional: true
+	},
+	/*TODO: Entender que es esto */
+	handle: {
+		type: String,
+		optional: true,
+		index: 1
+	},
+	/*TODO: Entender que es esto */
+	isVisible: {
+		type: Boolean,
+		index: 1
+	},
+	/*TODO: Entender que es esto */
+	publishedAt: {
+		type: Date,
+		optional: true
+	},
+	/*TODO: Entender que es esto */
+	publishedScope: {
+		type: String,
+		optional: true
+	},
+	/*TODO: Entender que es esto */
+	templateSuffix: {
+		type: String,
+		optional: true
+	},
+	/*TODO: Entender que es esto */
+	createdAt: {
+		type: Date,
+		autoValue: function () {
+			if (this.isInsert) {
+				return new Date;
+			}
+			else if (this.isUpsert) {
+				return { $setOnInsert: new Date };
+			}
+		}
+	},
+	/*TODO: Entender que es esto */
+	updatedAt: {
+		type: Date,
+		autoValue: function () {
+			if (this.isUpdate) {
+				return { $set: new Date };
+			}
+			else if (this.isUpsert) {
+				return { $setOnInsert: new Date };
+			}
+		},
+		optional: true
+	}
 });

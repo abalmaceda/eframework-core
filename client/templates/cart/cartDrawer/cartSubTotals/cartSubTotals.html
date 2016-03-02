@@ -3,15 +3,15 @@
 	<div class="cart-items">
 		<div class="cart-totals">
 			<table class="table table-condensed">
-				<thead data-i18n='cartSubTotals.head'>Your cart</thead>
+				<thead data-i18n='cartSubTotals.head'>Cart Details</thead>
 				<!-- Cantidad de elementos -->
-				<tr><td data-i18n='cartSubTotals.items'>Items in cart</td><td>{{cart.cartCount}}</td></tr>
+				<!-- <tr><td data-i18n='cartSubTotals.items'>Items in cart</td><td>{{cart.cartCount}}</td></tr> -->
 				<!-- valor articulos ( sin shipping ni tax) -->
-				<tr><td data-i18n='cartSubTotals.subtotal'>Sub total</td><td>{{formatPrice cart.cartSubTotal}}</td></tr>
+				<tr><td data-i18n='cartSubTotals.subtotal'>Subtotal</td><td>{{formatPrice cart.cartSubTotal}}</td></tr>
 				<!-- precio shipping -->
-				<tr><td data-i18n='cartSubTotals.shipping'>Shipping</td><td>{{formatPrice cart.cartShipping}}</td></tr>
+				<tr><td data-i18n='cartSubTotals.shipping'>Add shipping</td><td>{{formatPrice cart.cartShipping}}</td></tr>
 				<!-- valor de los taxes -->
-				<tr><td data-i18n='cartSubTotals.tax'>Tax</td><td>{{formatPrice cart.cartTaxes}}</td></tr>
+				<tr><td data-i18n='cartSubTotals.tax'>Taxes</td><td>{{formatPrice cart.cartTaxes}}</td></tr>
 				<!-- Total ( articulos + shipping + taxes ) -->
 				<tr><td data-i18n='cartSubTotals.total'>Total</td><td>{{formatPrice cart.cartTotal}}</td></tr>
 			</table>

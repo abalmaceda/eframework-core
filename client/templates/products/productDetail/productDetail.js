@@ -182,9 +182,9 @@ Template.productDetail.events({
 
 				if (options.length > 0) {
 					Alerts.add("Please choose options before adding to cart", "danger", {
-						placement: "productDetail",
-						i18nKey: "productDetail.chooseOptions",
-						autoHide: 10000
+						placement 	: "productDetail",
+						i18nKey 	: "productDetail.chooseOptions",
+						autoHide 	: 10000
 					});
 					return [];
 				}

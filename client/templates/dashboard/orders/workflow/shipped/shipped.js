@@ -1,10 +1,16 @@
-/**
- * coreShipmentShipped events
- *
+ /**
+ * Template.coreShipmentShipped.events
+ * @summary Events para Template.coreShipmentShipped
  */
 Template.coreShipmentShipped.events({
-  "click .btn": function () {
-    Meteor.call("order/orderShipped", this._id);
-    Meteor.call("workflow/pushOrderWorkflow", "coreOrderWorkflow", "orderShipped", this._id);
-  }
+	/**
+	* @event click .btn
+	* @summary
+	* @param {String} event -
+	* @param {Blaze.Template} template -
+	*/
+	"click .btn": function (event, template) {
+		Meteor.call("order/orderShipped", this._id);
+		Meteor.call("workflow/pushOrderWorkflow", "coreOrderWorkflow", "orderShipped", this._id);
+	}
 });

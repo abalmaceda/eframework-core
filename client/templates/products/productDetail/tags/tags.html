@@ -1,5 +1,3 @@
-
-<!-- TODO: Comentarios -->
 <!-- se pasa como parametro la variable "tags" al llamar el template -->
 <template name="productTagInputForm">
 	<div class="tags">
@@ -33,13 +31,12 @@
 	</div>
 </template>
 
- <!-- TODO : Comentarios -->
- <!-- se pasa como parametro la variable "tags" al llamar el template -->
+<!--  -->
 <template name="productDetailTags">
+	<!-- se pasa como parametro la variable "tags" al llamar el template -->
 	<div class="tags">
 		<ul class="list-inline">
 			<!-- ./tags corresponde al parametro "tags" que se paso al template antes de llamarlo -->
-			<!-- TODO : entender el por que de "./tags" -->
 			{{#each ./tags}}
 				<!-- TODO: No entiendo la logica de esto. La idea es que si no tienes Tags el producto actual, entonces ahi muestro los tags... Pero eso no significaria que no tengo tags para mostrar ??-->
 				{{#unless currentHashTag}}

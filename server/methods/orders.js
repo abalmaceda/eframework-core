@@ -1,9 +1,11 @@
-// /**
-//  * Reaction Order Methods
-//  */
-// Meteor.methods({
+/*
+ * @global EFrameworkCore Orders Methods
+ * @summary
+ * @todo documentar y descomentar
+ */
+Meteor.methods({
 //   /**
-//    * orders/shipmentTracking
+//    * @function orders/shipmentTracking
 //    * @summary wraps addTracking and triggers workflow update
 //    * @param {Object} order - order Object
 //    * @param {String} tracking - tracking number to add to order
@@ -33,7 +35,7 @@
 //     }
 //   },
 //   /**
-//    * orders/shipmentPacking
+//    * @function orders/shipmentPacking
 //    *
 //    * @summary trigger packing status
 //    * @param {Object} order - order object
@@ -49,11 +51,12 @@
 //     }
 //   },
 //   /**
-//    * orders/processPayment
+//    * @function orders/processPayment
 //    *
 //    * @summary trigger processPayment and workflow update
 //    * @param {Object} order - order object
 //    * @return {Object} return this.processPayment result
+//    * @deprecada
 //    */
 //   "orders/processPayment": function (order) {
 //     check(order, Object);
@@ -70,7 +73,7 @@
 //     });
 //   },
 //   /**
-//    * orders/shipmentShipped
+//    * @function orders/shipmentShipped
 //    *
 //    * @summary trigger shipmentShipped status and workflow update
 //    * @param {Object} order - order object
@@ -86,7 +89,7 @@
 //     }
 //   },
 //   /**
-//    * orders/orderCompleted
+//    * @function orders/orderCompleted
 //    *
 //    * @summary trigger orderCompleted status and workflow update
 //    * @param {Object} order - order object
@@ -103,7 +106,7 @@
 //     }
 //   },
 //   /**
-//    * orders/addTracking
+//    * @function orders/addTracking
 //    * @summary Adds tracking information to order without workflow update.
 //    * Call after any tracking code is generated
 //    * @param {String} orderId - add tracking to orderId
@@ -121,7 +124,7 @@
 //   },
 
 //   /**
-//    * orders/addShipment
+//    * @function orders/addShipment
 //    * @summary Adds tracking information to order without workflow update.
 //    * Call after any tracking code is generated
 //    * @param {String} orderId - add tracking to orderId
@@ -150,7 +153,7 @@
 //   },
 
 //   /**
-//    * orders/updateShipmentTracking
+//    * @function orders/updateShipmentTracking
 //    * @summary Adds tracking information to order without workflow update.
 //    * Call after any tracking code is generated
 //    * @param {String} orderId - add tracking to orderId
@@ -174,7 +177,7 @@
 //   },
 
 //   /**
-//    * orders/addItemToShipment
+//    * @function orders/addItemToShipment
 //    * @summary Adds tracking information to order without workflow update.
 //    * Call after any tracking code is generated
 //    * @param {String} orderId - add tracking to orderId
@@ -213,7 +216,7 @@
 //   },
 
 //   /**
-//    * orders/addShipment
+//    * @function orders/addShipment
 //    * @summary Adds tracking information to order without workflow update.
 //    * Call after any tracking code is generated
 //    * @param {String} orderId - add tracking to orderId
@@ -236,7 +239,7 @@
 //   },
 
 //   /**
-//    * orders/addOrderEmail
+//    * @function orders/addOrderEmail
 //    * @summary Adds email to order, used for guest users
 //    * @param {String} orderId - add tracking to orderId
 //    * @param {String} email - valid email address
@@ -252,7 +255,7 @@
 //     });
 //   },
 //   /**
-//    * orders/addOrderEmail
+//    * @function orders/addOrderEmail
 //    * @summary Adds file, documents to order. use for packing slips, labels, customs docs, etc
 //    * @param {String} orderId - add tracking to orderId
 //    * @param {String} docId - CFS collection docId
@@ -273,52 +276,53 @@
 //     });
 //   },
 
-//   /**
-//    * orders/updateHistory
-//    * @summary adds order history item for tracking and logging order updates
-//    * @param {String} orderId - add tracking to orderId
-//    * @param {String} event - workflow event
-//    * @param {String} value - event value
-//    * @return {String} returns order update result
-//    */
-//   "orders/updateHistory": function (orderId, event, value) {
-//     check(orderId, String);
-//     check(event, String);
-//     check(value, Match.Optional(String));
-//     return EFrameworkCore.Collections.Orders.update(orderId, {
-//       $addToSet: {
-//         history: {
-//           event: event,
-//           value: value,
-//           userId: Meteor.userId(),
-//           updatedAt: new Date()
-//         }
-//       }
-//     });
-//   },
+	/**
+	* @function orders/updateHistory
+	* @summary adds order history item for tracking and logging order updates
+	* @param {String} orderId - add tracking to orderId
+	* @param {String} event - workflow event
+	* @param {String} value - event value
+	* @return {String} returns order update result
+	*/
+	"orders/updateHistory": function (orderId, event, value) {
+		check(orderId, String);
+		check(event, String);
+		check(value, Match.Optional(String));
+		return EFrameworkCore.Collections.Orders.update(orderId, {
+			$addToSet: {
+				history: {
+					event: event,
+					value: value,
+					userId: Meteor.userId(),
+					updatedAt: new Date()
+				}
+			}
+		});
+	},
 
-//   /**
-//    * orders/inventoryAdjust
-//    * adjust inventory when an order is placed
-//    * @param {String} orderId - add tracking to orderId
-//    * @return {null} no return value
-//    */
-//   "orders/inventoryAdjust": function (orderId) {
-//     check(orderId, String);
-//     let order = EFrameworkCore.Collections.Orders.findOne(orderId);
+	/**
+	* @function orders/inventoryAdjust
+	* @summary ajusta el inventario cuando la orden fue realizada
+	* @param {String} orderId - add tracking to orderId
+	* @return {null} no return value
+	* @todo
+	*/
+	"orders/inventoryAdjust": function (orderId) {
+		check(orderId, String);
+		let order = EFrameworkCore.Collections.Orders.findOne(orderId);
 
-//     _.each(order.items, function (product) {
-//       EFrameworkCore.Collections.Products.update({
-//         "_id": product.productId,
-//         "variants._id": product.variants._id
-//       }, {
-//         $inc: {
-//           "variants.$.inventoryQuantity": -product.quantity
-//         }
-//       });
-//     });
-//     return;
-//   },
+		_.each(order.items, function (product) {
+			EFrameworkCore.Collections.Products.update(
+			{
+				"_id": product.productId,
+				"variants._id": product.variants._id
+			},
+			{
+				$inc: {"variants.$.inventoryQuantity": -product.quantity }
+			});
+		});
+		return;
+	},
 
 //   /**
 //    * orders/capturePayments
@@ -367,4 +371,4 @@
 //       }
 //     });
 //   }
-// });
+});

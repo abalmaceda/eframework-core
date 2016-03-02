@@ -52,6 +52,12 @@ Template.productTagInputForm.helpers({
  * @summary Events para Template.productTagInputForm
  */
 Template.productTagInputForm.events({
+	/**
+	 * @event click .tag-input-hashtag
+	 * @summary Constructor_for_a_Collection
+	 * @returns {Number} Sum of a and b
+	 * @this What_does_the_THIS_keyword_refer_to_here
+	 */
 	"click .tag-input-hashtag": function () {
 		return Meteor.call("products/setHandleTag", selectedProductId(), this ._id, function (error, result) {
 			if (result) {
@@ -59,6 +65,7 @@ Template.productTagInputForm.events({
 			}
 		});
 	},
+
 	/**
 	 * @summary Se elimina un tag del producto seleccionado
 	 * @event click .tag-input-group-remove
@@ -74,8 +81,13 @@ Template.productTagInputForm.events({
 				- template, a template instance for the template where the handler is defined.
 			The handler also receives some additional context data in this, depending on the context of the current element handling the event
 		*/
-		return Meteor.call("products/removeProductTag", selectedProductId(), this._id);
+		return Meteor.call("products/removeProductTag", selectedProductId(), this._id, function (error, result) {
+			if (error) {
+				console.log("products/removeProductTag :", error)
+			}
+		});
 	},
+
 	/**
 	 * @summary Entrega sugerencias de acuerdo a los Tag que ya existen. REcordar que los Tags se comparten entre los productos, no así los atributos.
 	 * @event click .tag-input-group-remove
@@ -102,6 +114,7 @@ Template.productTagInputForm.events({
 			}
 		});
 	},
+
 	/**
 	 * @summary Update del tag si este cambia de valor
 	 * @event change .tags-input-select
@@ -126,9 +139,17 @@ Template.productTagInputForm.events({
 			});
 		}
 	},
-  // "mousedown .tag-input-group-handle": function (event, template) {
-  //   return template.$(".tag-edit-list").sortable("refresh");
-  // }
+
+	/**
+	 * @event mousedown .tag-input-group-handle
+	 * @summary Permite hacer sort entre los elementos .tag-edit-list
+	 * @param {jQuery.Event} event
+	 * @param {Template} template
+	 * @returns {void}
+	 */
+	"mousedown .tag-input-group-handle": function (event, template) {
+		return template.$(".tag-edit-list").sortable("refresh");
+	}
 });
 
 /**
@@ -141,7 +162,6 @@ Template.productTagInputForm.events({
  */
 Template.productTagInputForm.onRendered(function () {
 	return $(".tag-edit-list").sortable({
-		/* TODO : Entender que significa  esto "> li" */
 		items: "> li",
 		handle: ".tag-input-group-handle",
 		opacity: 0.7,
@@ -158,7 +178,11 @@ Template.productTagInputForm.onRendered(function () {
 				}
 			}
 			/*Se actualiza la lista de tags en el servidor*/
-			return Meteor.call("products/updateProductField", selectedProductId(), "hashtags", hashtagsList);
+			return Meteor.call("products/updateProductField", selectedProductId(), "hashtags", hashtagsList, function (error, result) {
+			if (error) {
+				console.log("products/updateProductField :", error)
+			}
+		});
 		},
 		start: function(event, ui) {
 			ui.placeholder.height(ui.helper.height());

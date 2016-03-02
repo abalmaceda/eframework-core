@@ -289,29 +289,32 @@ Router.map(function () {
 		}
 	});
 
-//   this.route("cartCompleted", {
-//     controller: ShopController,
-//     path: "completed/:_id",
-//     template: "cartCompleted",
-//     subscriptions: function () {
-//       this.subscribe("Orders");
-//       return this.subscribe("CompletedCartOrder", Meteor.userId(),
-//         this.params._id);
-//     },
-//     data: function () {
-//       if (this.ready()) {
-//         if (EFrameworkCore.Collections.Orders.findOne({
-//           cartId: this.params._id
-//         })) {
-//           return EFrameworkCore.Collections.Orders.findOne({
-//             cartId: this.params._id
-//           });
-//         }
-//         return this.render("unauthorized");
-//       }
-//       return this.render("loading");
-//     }
-//   });
+	/**
+	 * @summary Ruta para acceder al resumen despues de realizada la compra.
+	 * @param {String} _id - tagId
+	 * @returns {void}
+	 * @todo Descripcion
+	 */
+	this.route("cartCompleted", {
+	controller: ShopController,
+		path: "completed/:_id",
+		template: "cartCompleted",
+		subscriptions: function () {
+			this.subscribe("Orders");
+			return this.subscribe("CompletedCartOrder", Meteor.userId(), this.params._id);
+		},
+		data: function () {
+			if (this.ready()) {
+				if (EFrameworkCore.Collections.Orders.findOne({ cartId: this.params._id})) {
+					return EFrameworkCore.Collections.Orders.findOne({
+						cartId: this.params._id
+					});
+				}
+				return this.render("unauthorized");
+			}
+			return this.render("loading");
+		}
+	});
 
 //   return this.route("dashboard/pdf/orders", {
 //     controller: PrintController,

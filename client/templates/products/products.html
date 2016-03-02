@@ -1,15 +1,13 @@
-<!-- 
-	TODO
-	Muestra los productos disponibles
--->
+<!--Muestra los productos disponibles-->
 <template name="products">
 	{{>productGrid}}
 </template>
 
-<!-- TODO -->
+<!-- Grilla con los productos de la Shop. -->
 <template name="productListGrid">
 	<div class="row">
 		{{>productGrid}}
+		<!-- Si es administrador, muestra la lista de productos -->
 		{{#if hasPermission "createProduct"}}
 			{{>productList}}
 		{{/if}}

@@ -1,5 +1,6 @@
-<!-- TODO-->
+<!-- Te muestra el resúmen de todas las ordenes realizadas con orden descendente en fechas. -->
 <template name="dashboardOrdersList">
+	<!-- Se agrega informacion por cada orden realizada ( la primera es la recien realizada )-->
 	{{#each orders data=data}}
 	  	<div class="panel panel-default order-list-detail">
 			<div class="panel-heading">
@@ -31,6 +32,7 @@
 						</strong>
 					</div>
 					<div class="col-xs-10">
+						<!-- Se agrega información de cada dirección de shipping-->
 						{{#each shipping}}
 							{{#with address}}
 								<span>

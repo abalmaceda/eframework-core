@@ -1,7 +1,8 @@
 /**
- * PaymentMethod Schema
+ * @summary EFrameworkCore.Schemas.PaymentMethod
+ * @description
+ * @todo DOCUMENTACION y DESCRIPCION
  */
-
 EFrameworkCore.Schemas.PaymentMethod = new SimpleSchema({
   processor: {
     type: String
@@ -41,6 +42,9 @@ EFrameworkCore.Schemas.PaymentMethod = new SimpleSchema({
     type: Date,
     optional: true
   },
+  "metadata.authorizationId":{
+  	type: String
+  },
   authorization: {
     type: String,
     optional: true
@@ -58,9 +62,10 @@ EFrameworkCore.Schemas.PaymentMethod = new SimpleSchema({
 });
 
 /**
- * Invoice Schema
+ * @summary EFrameworkCore.Schemas.Invoice
+ * @description
+ * @todo DOCUMENTACION y DESCRIPCION
  */
-
 EFrameworkCore.Schemas.Invoice = new SimpleSchema({
   transaction: {
     type: String,
@@ -91,10 +96,12 @@ EFrameworkCore.Schemas.Invoice = new SimpleSchema({
   }
 });
 
-/**
- * Payment Schema
- */
 
+/**
+ * @summary EFrameworkCore.Schemas.Payment
+ * @description
+ * @todo DOCUMENTACION y DESCRIPCION
+ */
 EFrameworkCore.Schemas.Payment = new SimpleSchema({
   _id: {
     type: String,

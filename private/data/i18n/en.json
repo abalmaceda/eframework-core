@@ -100,11 +100,11 @@
                     "checkout": "Checkout now"
                 },
                 "cartSubTotals": {
-                    "head": "Your cart",
+                    "head": "Cart Details",
                     "items": "Items in cart",
-                    "subtotal": "Sub total",
-                    "shipping": "Shipping",
-                    "tax": "Tax",
+                    "subtotal": "Subtotal",
+                    "shipping": "Add shipping",
+                    "tax": "Taxes",
                     "total": "Total"
                 },
                 "cartDrawerItems": {

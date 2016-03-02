@@ -1,7 +1,12 @@
 /**
  * productList helpers
  */
-/*TODO:*/
+
+
+ /**
+  * @global Meida
+  * @summary EFrameworkCore.Collections.Media
+  */
 let Media;
 Media = EFrameworkCore.Collections.Media;
 
@@ -23,7 +28,7 @@ Template.productList.helpers({
 	/**
 	 * @function media
 	 * @summary
-	 * @returns {String}
+	 * @returns {}
 	 * @todo Documentar
 	 */
 	media: function () {

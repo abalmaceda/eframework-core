@@ -7,11 +7,11 @@ FS.HTTP.setHeadersForGet([
 ]);
 
 /**
- * Define CollectionFS collection
- * See: https://github.com/CollectionFS/Meteor-CollectionFS
- * chunkSize: 1024*1024*2; <- CFS default // 256k is default GridFS chunk size, but performs terribly
+ * @summary Define CollectionFS collection
+ * @description chunkSize: 1024*1024*2; <- CFS default // 256k is default GridFS chunk size, but performs terribly
+ * @see {@link https://github.com/CollectionFS/Meteor-CollectionFS|GitHub}
+ * @todo Documentar
  */
-/*TODO*/
 EFrameworkCore.Collections.Media = new FS.Collection("Media",{
 	stores: [
 		new FS.Store.GridFS("image", {

@@ -1,40 +1,46 @@
-<!-- TODO: comentarios -->
+<!-- Template para la sección de imagenes en los detalles del producto. -->
 <template name="productImageGallery">
 	<div id="galleryDropPane" class="galleryDropPane">
 		<ul class="gallery">
+			<!-- Recorro todas las imagenes que tiene la galeria para el estado actual ( puede ser producto o variant seleccionada )-->
 			{{#each media}}
-				{> imageDetail}}
+				<!-- Muestro los detalles de la imagen-->
+				{{> imageDetail}}
 			{{else}}
 				<li>
 					<img src= "/resources/placeholder.gif" class="img-responsive" id="img-upload">
 				</li>
 			{{/each}}
 		</ul>
+		<!-- Menu para cargar imagenes  -->
 		{{>imageUploader}}
 	</div>
 </template>
 
-<!-- TODO -->
+<!-- Muestra las imagenes -->
 <template name="imageDetail">
-  <li class="gallery-sortable" data-index="{{_id}}">
-    <img src="{{url uploading='/resources/placeholder.gif' storing='/resources/placeholder.gif' store='large'}}" class="img-responsive" alt="{{title}}">
-    {{#unless this.isUploaded}}
-      {{> FS.UploadProgressBar bootstrap=true}}
-    {{/unless}}
-    {{#if hasPermission "createProduct"}}
-      <div class="gallery-tools">
-        <a class="image-remove-link" data-index="{{_id}}"><i class="remove-image fa fa-times-circle fa-2x"></i></a>
-      </div>
-    {{/if}}
-  </li>
+	<li class="gallery-sortable" data-index="{{_id}}">
+		<img src="{{url uploading='/resources/placeholder.gif' storing='/resources/placeholder.gif' store='large'}}" class="img-responsive" alt="{{title}}">
+		<!-- Muestra imagen de carga si la imagen se esta subiendo -->
+		{{#unless this.isUploaded}}
+			{{> FS.UploadProgressBar bootstrap=true}}
+		{{/unless}}
+
+		<!-- Permite borrar las imagenes si se tiene el permiso "productCreate"-->
+		{{#if hasPermission "createProduct"}}
+			<div class="gallery-tools">
+				<a class="image-remove-link" data-index="{{_id}}"><i class="remove-image fa fa-times-circle fa-2x"></i></a>
+			</div>
+		{{/if}}
+	</li>
 </template>
 
-<!-- TODO -->
+<!-- Componente para cargar imágenes utilizando drag and drop. Solo se puede acceder si se tiene permisos de "createProduct"-->
 <template name="imageUploader">
-{{#if hasPermission "createProduct"}}
-  <div id="dropzone" class="dropzone">
-   <input name="files" id="files" class="hidden" type="file" multiple/>
-    <div class="btn btn-default btn-block" id="btn-upload" data-i18n="productDetail.dropFile">Drop file to upload</div>
-  </div>
-{{/if}}
+	{{#if hasPermission "createProduct"}}
+		<div id="dropzone" class="dropzone">
+			<input name="files" id="files" class="hidden" type="file" multiple/>
+			<div class="btn btn-default btn-block" id="btn-upload" data-i18n="productDetail.dropFile">Drop file to upload</div>
+		</div>
+	{{/if}}
 </template>

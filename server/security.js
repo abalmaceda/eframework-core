@@ -21,7 +21,7 @@ let Cart = EFrameworkCore.Collections.Cart;
 
 //let Discounts = EFrameworkCore.Collections.Discounts;
 
-//let Media = EFrameworkCore.Collections.Media;
+let Media = EFrameworkCore.Collections.Media;
 
 let Orders = EFrameworkCore.Collections.Orders;
 
@@ -69,12 +69,18 @@ Security.defineMethod("ifShopIdMatchesThisId",
 	}
 });
 
-// Security.defineMethod("ifFileBelongsToShop", {
-//   fetch: [],
-//   deny: function (type, arg, userId, doc) {
-//     return doc.metadata.shopId !== EFrameworkCore.getShopId();
-//   }
-// });
+
+/**
+ * @function Security.defineMethod."ifFileBelongsToShop"
+ * @summary Verifica que el Media perteneza a la Shop actual
+ * @returns {Boolean} Si pertenece o no
+ */
+Security.defineMethod("ifFileBelongsToShop", {
+	fetch: [],
+	deny: function (type, arg, userId, doc) {
+		return doc.metadata.shopId !== EFrameworkCore.getShopId();
+	}
+});
 
 // Security.defineMethod("ifUserIdMatches", {
 //   fetch: [],
@@ -112,14 +118,19 @@ Security.permit(["insert", "update", "remove"]).collections([Products, Tags, Tra
 	group: EFrameworkCore.getShopId()
 }).ifShopIdMatches().exceptProps(["shopId"]).apply();
 
-// /*
-//  * Permissive security for users with the "admin" role for FS.Collections
-//  */
+/*
+ * Permissive security for users with the "admin" role for FS.Collections
+ */
 
-// Security.permit(["insert", "update", "remove"]).collections([Media]).ifHasRole({
-//   role: ["admin", "owner", "createProduct"],
-//   group: EFrameworkCore.getShopId()
-// }).ifFileBelongsToShop().apply();
+ /**
+ * @description Seguridad para Administrador "admin" para  FS.Collections
+ * @summary Los usuarios con rol "admin" pueden "insert", "update", "remove" en Media solo si pertenece a Shop ( EFrameworkCore.getShopId() )
+ * @todo agregar discounts, taxes
+ */
+Security.permit(["insert", "update", "remove"]).collections([Media]).ifHasRole({
+	role: ["admin", "owner", "createProduct"],
+	group: EFrameworkCore.getShopId()
+}).ifFileBelongsToShop().apply();
 
 // /*
 //  * Users with the "admin" or "owner" role may update and
@@ -166,13 +177,12 @@ Shops.permit(["update", "remove"]).ifHasRole({
 //   group: EFrameworkCore.getShopId()
 // }).ifShopIdMatchesThisId().ifUserIdMatches().ifSessionIdMatches().apply();
 
-// /*
-//  * apply download permissions to file collections
-//  */
-// _.each([Media], function (fsCollection) {
-//   return fsCollection.allow({
-//     download: function () {
-//       return true;
-//     }
-//   });
-// });
+/**
+ * @summary Agregar permisos de descarga a cada file collections
+ * @returns {void}
+ */
+_.each([Media], function (fsCollection) {
+	return fsCollection.allow({
+		download: function () {return true;}
+	});
+});

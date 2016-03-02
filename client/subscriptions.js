@@ -50,7 +50,10 @@ cart.observeChanges(
  /* TODO: entender esta subscription */
 EFrameworkCore.Subscriptions.Packages = Meteor.subscribe("Packages");
 
-/* TODO: Por que es necesario tener una subscripcion de tags */
+/**
+ * @summary Suscripcion al collection "Tags"
+ * @todo Mas descripcion sobre "Tags"
+ */
 EFrameworkCore.Subscriptions.Tags = Meteor.subscribe("Tags");
 
 /**

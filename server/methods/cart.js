@@ -1,99 +1,79 @@
-/**
- * Reaction Cart Methods
+/*
+ * @global EFrameworkCore Cart Methods
+ * @summary
+ * @todo documentar y descomentar
  */
-
 Meteor.methods({
-//   /**
-//    * cart/mergeCart
-//    * @summary merge matching sessionId cart into specified userId cart
-//    *
-//    * There should be one cart for each independent, non logged in user session
-//    * When a user logs in that cart now belongs to that user and we use the a single user cart.
-//    * If they are logged in on more than one devices, regardless of session, the user cart will be used
-//    * If they had more than one cart, on more than one device,logged in at seperate times then merge the carts
-//    *
-//    * @param {String} cartId - cartId of the cart to merge matching session carts into.
-//    * @return {Object} cartId - cartId on success
-//    */
-//   "cart/mergeCart": function (cartId) {
-//     check(cartId, String);
+	/**
+	* @function cart/mergeCart
+	* @summary merge matching sessionId cart into specified userId cart
+	*
+	* There should be one cart for each independent, non logged in user session
+	* When a user logs in that cart now belongs to that user and we use the a single user cart.
+	* If they are logged in on more than one devices, regardless of session, the user cart will be used
+	* If they had more than one cart, on more than one device,logged in at seperate times then merge the carts
+	*
+	* @param {String} cartId - cartId del Cart para hacer merge con  of the cart to merge matching session carts into.
+	* @return {Object} cartId - cartId solo si success
+	* @todo
+	*/
+	"cart/mergeCart": function (cartId) {
+		check(cartId, String);
 
-//     let Cart = EFrameworkCore.Collections.Cart; // convienance shorthand
-//     let currentCart = Cart.findOne(cartId); // we don't process current cart, but merge into it.
-//     let userId = currentCart.userId; // just used to filter out the current cart
-//     let sessionId = EFrameworkCore.sessionId; // persisten sessions, see: publications/sessions.js
-//     let shopId = EFrameworkCore.getShopId();
+		let Cart = EFrameworkCore.Collections.Cart; // convienance shorthand
+		let currentCart = Cart.findOne(cartId); // we don't process current cart, but merge into it.
+		let userId = currentCart.userId; // just used to filter out the current cart
+		let sessionId = EFrameworkCore.sessionId; // persisten sessions, see: publications/sessions.js
+		let shopId = EFrameworkCore.getShopId();
 
-//     // no need to merge anonymous carts
-//     if (Roles.userIsInRole(userId, "anonymous", shopId)) {
-//       return false;
-//     }
-//     EFrameworkCore.Log.debug("merge cart: matching sessionId");
-//     EFrameworkCore.Log.debug("current userId", userId);
-//     EFrameworkCore.Log.debug("sessionId", sessionId);
-//     // get session carts without current user cart
-//     let sessionCarts = Cart.find({
-//       $and: [{
-//         userId: {
-//           $ne: userId
-//         }
-//       }, {
-//         sessionId: {
-//           $eq: sessionId
-//         }
-//       }]
-//     });
-//     EFrameworkCore.Log.debug("sessionCarts", sessionCarts.fetch())
-//     EFrameworkCore.Log.debug(
-//       `merge cart: begin merge processing of session ${sessionId} into: ${currentCart._id}`
-//     );
-//     // loop through session carts and merge into user cart
-//     sessionCarts.forEach((sessionCart) => {
-//       EFrameworkCore.Log.debug(
-//         `merge cart: merge user userId: ${userId}, sessionCart.userId: ${sessionCart.userId}, sessionCart id: ${sessionCart._id}`
-//       );
-//       // really if we have no items, there's nothing to merge    "workflow" : {
-//       if (sessionCart.items) {
-//         // merge session cart into current cart
-//         Cart.update(currentCart._id, {
-//           $set: {
-//             "userId": Meteor.userId(),
-//             "workflow.status": "checkoutLogin",
-//             "workflow.workflow": ["checkoutLogin"]
-//           },
-//           $addToSet: {
-//             items: {
-//               $each: sessionCart.items
-//             }
-//           }
-//         });
-//       }
-//       // cleanup session Carts after merge.
-//       if (sessionCart.userId !== this.userId) {
-//         // clear the cart that was used for a session
-//         // and we're also going to do some garbage Collection
-//         Cart.remove(sessionCart._id);
-//         Meteor.users.remove(sessionCart.userId);
-//         EFrameworkCore.Collections.Accounts.remove({
-//           userId: sessionCart.userId
-//         });
-//         EFrameworkCore.Log.debug(
-//           `merge cart: delete cart ${sessionCart._id} and user: ${sessionCart.userId}`
-//         );
-//       }
+		// no need to merge anonymous carts
+		if (Roles.userIsInRole(userId, "anonymous", shopId)) {
+			return false;
+		}
+		EFrameworkCore.Log.debug("merge cart: matching sessionId");
+		EFrameworkCore.Log.debug("current userId", userId);
+		EFrameworkCore.Log.debug("sessionId", sessionId);
+		// get session carts without current user cart
+		let sessionCarts = Cart.find({ $and: [{userId: { $ne: userId } }, { sessionId: { $eq: sessionId } }] });
+		EFrameworkCore.Log.debug("sessionCarts", sessionCarts.fetch())
+		EFrameworkCore.Log.debug( `merge cart: begin merge processing of session ${sessionId} into: ${currentCart._id}`);
+		// loop through session carts and merge into user cart
+		sessionCarts.forEach((sessionCart) => {
+			EFrameworkCore.Log.debug( `merge cart: merge user userId: ${userId}, sessionCart.userId: ${sessionCart.userId}, sessionCart id: ${sessionCart._id}` );
+			// really if we have no items, there's nothing to merge    "workflow" : {
+			if (sessionCart.items) {
+				// merge session cart into current cart
+				Cart.update(currentCart._id,
+				{
+					$set: {
+						"userId": Meteor.userId(), "workflow.status": "checkoutLogin", "workflow.workflow": ["checkoutLogin"]
+					},
+					$addToSet: { items: { $each: sessionCart.items }}
+				});
+			}
+			// cleanup session Carts after merge.
+			if (sessionCart.userId !== this.userId) {
+				// clear the cart that was used for a session
+				// and we're also going to do some garbage Collection
+				Cart.remove(sessionCart._id);
+				Meteor.users.remove(sessionCart.userId);
+				EFrameworkCore.Collections.Accounts.remove({ userId: sessionCart.userId });
+				EFrameworkCore.Log.debug( `merge cart: delete cart ${sessionCart._id} and user: ${sessionCart.userId}` );
+			}
 
-//       EFrameworkCore.Log.debug(
-//         `merge cart: processed merge for cartId ${sessionCart._id}`
-//       );
-//       return currentCart._id;
-//     });
+			EFrameworkCore.Log.debug(`merge cart: processed merge for cartId ${sessionCart._id}` );
+			return currentCart._id;
+		});
 
-//     return currentCart._id;
-//   },
+		return currentCart._id;
+	},
 
 	/**
 	* cart/createCart
 	* @summary crea y retorna un nuevo "cart" para el "user"
+	* @description
+		- Crea un carro para un usuario
+		- Este método tambien hace merge de carros. Esto ocurre cuando un usuario pasa de 'anonymous'-> 'logged'
 	* @param {String} createForUserId - userId al que se le crearà el "cart"
 	* @returns {String} cartId - users cartId
 	* @todo Documentar y entender
@@ -110,10 +90,13 @@ Meteor.methods({
 		// this is the only true cart
 		let currentUserCart = Cart.findOne({ userId: userId });
 
+		//Caso de uusario que existe
 		if (currentUserCart) {
 			EFrameworkCore.Log.debug("currentUserCart", currentUserCart.sessionId);
 			sessionId = currentUserCart.session;
-		} else {
+		}
+		//El usuario no se a autenticado
+		else {
 			sessionId = EFrameworkCore.sessionId;
 		}
 		EFrameworkCore.Log.debug("current cart serverSession", sessionId);
@@ -134,13 +117,10 @@ Meteor.methods({
 		EFrameworkCore.Log.debug("create cart: userId", userId);
 		EFrameworkCore.Log.debug("create cart: sessionId", sessionId);
 		EFrameworkCore.Log.debug("create cart: currentUserCart", currentCartId);
-		EFrameworkCore.Log.debug("create cart: sessionCarts.count",
-		sessionCartCount);
+		EFrameworkCore.Log.debug("create cart: sessionCarts.count", sessionCartCount);
 		EFrameworkCore.Log.debug("create cart: anonymousUser", anonymousUser);
 
-		// if we have a session cart, but just create or
-		// authenticated into a new user we need to create a user
-		// cart for the new authenticated user.
+		//En el caso de existir un carro, pero recien se ha creado o autenticado un nuevo usuario, es necesario crear un usuario del Cart para el nuevo usuario autenticado.
 		if (!currentCartId && anonymousUser === false) {
 			currentCartId = Cart.insert({
 				sessionId: sessionId,
@@ -149,16 +129,14 @@ Meteor.methods({
 			EFrameworkCore.Log.debug("create cart: into new user cart. created: " + currentCartId + " for user " + userId);
 		}
 
-		// merge session carts into the current cart
+		// merge session carts en el cart actual
 		if (currentCartId && sessionCartCount > 0 && anonymousUser === false) {
 			EFrameworkCore.Log.debug( "create cart: found existing cart. merge into " + currentCartId + " for user " + userId);
 			Meteor.call("cart/mergeCart", currentCartId);
-		} else if (!currentCartId) { // Create empty cart if there is none.
-			currentCartId = Cart.insert({
-				sessionId: sessionId,
-				shopId: shopId,
-				userId: userId
-			});
+		}
+		//creo un carro vacio, si no existe ninguno
+		else if (!currentCartId) {
+			currentCartId = Cart.insert({ sessionId: sessionId, shopId: shopId, userId: userId });
 			EFrameworkCore.Log.debug( `create cart: no existing cart. created: ${currentCartId} currentCartId for sessionId ${sessionId} and userId ${userId}`);
 		}
 		return currentCartId;
@@ -253,91 +231,87 @@ Meteor.methods({
 		});
 	},
 
-//   *
-//    * cart/copyCartToOrder
-//    * @summary transform cart to order
-//    * when a payment is processed we want to copy the cart
-//    * over to an order object, and give the user a new empty
-//    * cart. reusing the cart schema makes sense, but integrity of
-//    * the order, we don't want to just make another cart item
-//    * @todo:  Partial order processing, shopId processing
-//    * @todo:  Review Security on this method
-//    * @param {String} cartId - cartId to transform to order
-//    * @return {String} returns orderId
+	/*
+	* cart/copyCartToOrder
+	* @summary transform cart to order
+	* when a payment is processed we want to copy the cart
+	* over to an order object, and give the user a new empty
+	* cart. reusing the cart schema makes sense, but integrity of
+	* the order, we don't want to just make another cart item
+	* @todo:  Partial order processing, shopId processing
+	* @todo:  Review Security on this method
+	* @param {String} cartId - cartId to transform to order
+	* @return {String} returns orderId
+	* @todo
+	*	- TODO
+	*	- verificar éxito de orders/inventoryAdjust
+	*/
+	"cart/copyCartToOrder": (cartId) => {
+		check(cartId, String);
+		let cart = EFrameworkCore.Collections.Cart.findOne(cartId);
+		let order = _.clone(cart);
+		let user;
+		let emails;
 
-//   "cart/copyCartToOrder": (cartId) => {
-//     check(cartId, String);
-//     let cart = EFrameworkCore.Collections.Cart.findOne(cartId);
-//     let order = _.clone(cart);
-//     let user;
-//     let emails;
+		// reassign the id, we'll get a new orderId
+		order.cartId = cart._id;
 
-//     // reassign the id, we'll get a new orderId
-//     order.cartId = cart._id;
+		// a helper for guest login, we let guest add email afterwords
+		// for ease, we'll also add automatically for logged in users
+		if (order.userId && !order.email) {
+			user = Meteor.user(order.userId);
+			emails = _.pluck(user.emails, "address");
+			order.email = emails[0];
+		}
 
-//     // a helper for guest login, we let guest add email afterwords
-//     // for ease, we'll also add automatically for logged in users
-//     if (order.userId && !order.email) {
-//       user = Meteor.user(order.userId);
-//       emails = _.pluck(user.emails, "address");
-//       order.email = emails[0];
-//     }
+		// schema should provide order defaults
+		// so we'll delete the cart autovalues
+		delete order.createdAt; // autovalues
+		delete order.updatedAt;
+		delete order.cartCount;
+		delete order.cartShipping;
+		delete order.cartSubTotal;
+		delete order.cartTaxes;
+		delete order.cartDiscounts;
+		delete order.cartTotal;
+		delete order._id;
 
-//     // schema should provide order defaults
-//     // so we'll delete the cart autovalues
-//     delete order.createdAt; // autovalues
-//     delete order.updatedAt;
-//     delete order.cartCount;
-//     delete order.cartShipping;
-//     delete order.cartSubTotal;
-//     delete order.cartTaxes;
-//     delete order.cartDiscounts;
-//     delete order.cartTotal;
-//     delete order._id;
+		// init item level workflow
+		_.each(order.items, function (item, index) {
+			order.items[index].workflow = { status: "orderCreated", workflow: ["inventoryAdjusted"] };
+		});
 
-//     // init item level workflow
-//     _.each(order.items, function (item, index) {
-//       order.items[index].workflow = {
-//         status: "orderCreated",
-//         workflow: ["inventoryAdjusted"]
-//       };
-//     });
+		if (!order.items) {
+			throw new Meteor.Error( "An error occurred saving the order. Missing cart items.");
+		}
 
-//     if (!order.items) {
-//       throw new Meteor.Error(
-//         "An error occurred saving the order. Missing cart items.");
-//     }
+		// set el nuevo status del  workflow
+		order.workflow.status = "new";
+		order.workflow.workflow = ["orderCreated"];
 
-//     // set new workflow status
-//     order.workflow.status = "new";
-//     order.workflow.workflow = ["orderCreated"];
+		//Se inserta una nueva Order
+		let orderId = EFrameworkCore.Collections.Orders.insert(order);
+		EFrameworkCore.Log.debug("Created orderId", orderId);
 
-//     // insert new reaction order
-//     let orderId = EFrameworkCore.Collections.Orders.insert(order);
-//     EFrameworkCore.Log.debug("Created orderId", orderId);
+		if (orderId) {
+			// TODO: check éxito de orders/inventoryAdjust
+			Meteor.call("orders/inventoryAdjust", orderId);
 
-//     if (orderId) {
-//       // TODO: check for succesful orders/inventoryAdjust
-//       Meteor.call("orders/inventoryAdjust", orderId);
-//       // trash the old cart
-//       EFrameworkCore.Collections.Cart.remove({
-//         _id: order.cartId
-//       });
-//       // create a new cart for the user
-//       // even though this should be caught by
-//       // subscription handler, it's not always working
-//       let newCartExists = EFrameworkCore.Collections.Cart.find(order.userId);
-//       if (newCartExists.count() === 0) {
-//         Meteor.call("cart/createCart", order.userId);
-//       }
-//       // return
-//       EFrameworkCore.Log.debug("Transitioned cart " + cartId + " to order " +
-//         orderId);
-//       return orderId;
-//     }
-//     // we should not have made it here, throw error
-//     throw new Meteor.Error("cart/copyCartToOrder: Invalid request");
-//   },
+			// Eliminar el Cart antiguo
+			EFrameworkCore.Collections.Cart.remove({ _id: order.cartId });
+
+			//Se crea un nuevo Cart para el usuario. Aunque esto deberia ser manejado por subscription, no funciona siempre.
+			let newCartExists = EFrameworkCore.Collections.Cart.find(order.userId);
+			if (newCartExists.count() === 0) {
+				Meteor.call("cart/createCart", order.userId);
+			}
+			// return
+			EFrameworkCore.Log.debug("Transitioned cart " + cartId + " to order " + orderId);
+			return orderId;
+		}
+		//No deberia estar aca. Se arroja un error
+		throw new Meteor.Error("cart/copyCartToOrder: Invalid request");
+	},
 
 	/**
 	* cart/setShipmentMethod
@@ -495,70 +469,70 @@ Meteor.methods({
 		}
 	},
 
-//   /**
-//    * cart/submitPayment
-//    * @summary saves a submitted payment to cart, triggers workflow
-//    * and adds "paymentSubmitted" to cart workflow
-//    * Note: this method also has a client stub, that forwards to cartCompleted
-//    * @param {Object} paymentMethod - paymentMethod object
-//    * @return {String} returns update result
-//    */
-//   "cart/submitPayment": function (paymentMethod) {
-//     check(paymentMethod, EFrameworkCore.Schemas.PaymentMethod);
+  /**
+   * cart/submitPayment
+   * @summary saves a submitted payment to cart, triggers workflow
+   * and adds "paymentSubmitted" to cart workflow
+   * Note: this method also has a client stub, that forwards to cartCompleted
+   * @param {Object} paymentMethod - paymentMethod object
+   * @return {String} returns update result
+   */
+  "cart/submitPayment": function (paymentMethod) {
+    check(paymentMethod, EFrameworkCore.Schemas.PaymentMethod);
 
-//     let checkoutCart = EFrameworkCore.Collections.Cart.findOne({
-//       userId: Meteor.userId()
-//     });
+    let checkoutCart = EFrameworkCore.Collections.Cart.findOne({
+      userId: Meteor.userId()
+    });
 
-//     let cart = _.clone(checkoutCart);
-//     let cartId = cart._id;
-//     let invoice = {
-//       shipping: cart.cartShipping(),
-//       subtotal: cart.cartSubTotal(),
-//       taxes: cart.cartTaxes(),
-//       discounts: cart.cartDiscounts(),
-//       total: cart.cartTotal()
-//     };
+    let cart = _.clone(checkoutCart);
+    let cartId = cart._id;
+    let invoice = {
+      shipping: cart.cartShipping(),
+      subtotal: cart.cartSubTotal(),
+      taxes: cart.cartTaxes(),
+      discounts: cart.cartDiscounts(),
+      total: cart.cartTotal()
+    };
 
-//     // we won't actually close the order at this stage.
-//     // we'll just update the workflow and billing data where
-//     // method-hooks can process the workflow update.
+    // we won't actually close the order at this stage.
+    // we'll just update the workflow and billing data where
+    // method-hooks can process the workflow update.
 
-//     let selector;
-//     let update;
-//     // temp hack until we build out multiple billing handlers
-//     // if we have an existing item update it, otherwise add to set.
-//     if (cart.billing) {
-//       selector = {
-//         "_id": cartId,
-//         "billing._id": cart.billing[0]._id
-//       };
-//       update = {
-//         $set: {
-//           "billing.$.paymentMethod": paymentMethod,
-//           "billing.$.invoice": invoice
-//         }
-//       };
-//     } else {
-//       selector = {
-//         _id: cartId
-//       };
-//       update = {
-//         $addToSet: {
-//           "billing.paymentMethod": paymentMethod,
-//           "billing.invoice": invoice
-//         }
-//       };
-//     }
+    let selector;
+    let update;
+    // temp hack until we build out multiple billing handlers
+    // if we have an existing item update it, otherwise add to set.
+    if (cart.billing) {
+      selector = {
+        "_id": cartId,
+        "billing._id": cart.billing[0]._id
+      };
+      update = {
+        $set: {
+          "billing.$.paymentMethod": paymentMethod,
+          "billing.$.invoice": invoice
+        }
+      };
+    } else {
+      selector = {
+        _id: cartId
+      };
+      update = {
+        $addToSet: {
+          "billing.paymentMethod": paymentMethod,
+          "billing.invoice": invoice
+        }
+      };
+    }
 
-//     return EFrameworkCore.Collections.Cart.update(selector, update,
-//       function (error) {
-//         if (error) {
-//           EFrameworkCore.Log.warn(error);
-//           throw new Meteor.Error("An error occurred saving the order",
-//             error);
-//         }
-//         return;
-//       });
-//   }
+    return EFrameworkCore.Collections.Cart.update(selector, update,
+      function (error) {
+        if (error) {
+          EFrameworkCore.Log.warn(error);
+          throw new Meteor.Error("An error occurred saving the order",
+            error);
+        }
+        return;
+      });
+  }
 });

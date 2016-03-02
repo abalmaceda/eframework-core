@@ -221,37 +221,49 @@ _.extend(EFrameworkCore, {
 		Session.set("admin/actionView", undefined);
 	},
 
-//   getCurrentTag: function () {
-//     if (Router.current().route.getName() === "/product/tag") {
-//       return Router.current().params._id;
-//     }
-//   },
+	/**
+	 * @function getCurrentTag
+	 * @summary Obtiene el tag que actualmente se tiene seleccionado para hacer filtro
+	 * @returns {String} id del tag actual
+	 */
+	getCurrentTag: function () {
+		//Solo existe un filtro de tag si la url tiene "/product/tag"
+		//if (Router.current().route.getName() === "/product/tag") {
+		if (Router.current().route.getName() === "product/tag") {
+			return Router.current().params._id;
+		}
+	},
 
-/* TODO: entender esta funcion. */
-  getRegistryForCurrentRoute: function (provides) {
-    let routeName = Router.current().route.getName();
-    // find registry entries for routeName
-    let reactionApp = EFrameworkCore.Collections.Packages.findOne({
-      // "registry.provides": provides,
-      "registry.route": routeName
-    }, {
-      enabled: 1,
-      registry: 1,
-      name: 1,
-      route: 1
-    });
+	/**
+	* @function getRegistryForCurrentRoute
+	* @summary Constructor_for_a_Collection
+	* @param {Number} provides
+	* @returns {}
+	* @todo Documentar
+	*/
+	getRegistryForCurrentRoute: function (provides) {
+		let routeName = Router.current().route.getName();
+		// find registry entries for routeName
+		let reactionApp = EFrameworkCore.Collections.Packages.findOne(
+		{
+			// "registry.provides": provides,
+			"registry.route": routeName
+		},
+		{
+			enabled: 1,
+			registry: 1,
+			name: 1,
+			route: 1
+		});
 
-    if (reactionApp) {
-      let settingsData = _.find(reactionApp.registry, function (item) {
-        return item.provides === provides && item.route === routeName;
-      });
-
-      return settingsData;
-    }
-
-    return null;
-  }
-
+		if (reactionApp) {
+			let settingsData = _.find(reactionApp.registry, function (item) {
+				return item.provides === provides && item.route === routeName;
+			});
+			return settingsData;
+		}
+		return null;
+	}
 });
 
 /*TODO : todo para abajo */

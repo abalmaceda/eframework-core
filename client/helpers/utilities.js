@@ -30,52 +30,52 @@ if (Package.blaze) {
   });
 }
 
-// /**
-//  * registerHelper monthOptions
-//  * @summary formats moment.js months into an array for autoform selector
-//  * @return {Array} returns array of months [value:, label:]
-//  */
-// Template.registerHelper("monthOptions", function () {
-//   let label = i18n.t("app.monthOptions") || "Choose month";
-//   let monthOptions = [{
-//     value: "",
-//     label: label
-//   }];
-//   let months = moment.months();
-//   for (let index in months) {
-//     if ({}.hasOwnProperty.call(months, index)) {
-//       let month = months[index];
-//       monthOptions.push({
-//         value: parseInt(index, 10) + 1,
-//         label: month
-//       });
-//     }
-//   }
-//   return monthOptions;
-// });
+/**
+ * registerHelper monthOptions
+ * @summary formats moment.js months into an array for autoform selector
+ * @return {Array} returns array of months [value:, label:]
+ */
+Template.registerHelper("monthOptions", function (firstValue) {
+	let label = firstValue || i18n.t("app.monthOptions") || "Choose month";
+	let monthOptions = [{
+		value: "",
+		label: label
+	}];
+	let months = moment.months();
+	for (let index in months) {
+		if ({}.hasOwnProperty.call(months, index)) {
+			let month = months[index];
+			monthOptions.push({
+				value: parseInt(index, 10) + 1,
+				label: month
+			});
+		}
+	}
+	return monthOptions;
+});
 
-// /**
-//  * yearOptions
-//  * @summary formats moment.js next 9 years into array for autoform selector
-//  * @return {Array} returns array of years [value:, label:]
-//  */
-// Template.registerHelper("yearOptions", function () {
-//   let _i;
-//   let label = i18n.t("app.yearOptions") || "Choose year";
-//   let yearOptions = [{
-//     value: "",
-//     label: label
-//   }];
-//   let year = new Date().getFullYear();
-//   for (x = _i = 1; _i < 9; x = _i += 1) {
-//     yearOptions.push({
-//       value: year,
-//       label: year
-//     });
-//     year++;
-//   }
-//   return yearOptions;
-// });
+/**
+ * yearOptions
+ * @summary formats moment.js next 9 years into array for autoform selector
+ * @return {Array} returns array of years [value:, label:]
+ */
+Template.registerHelper("yearOptions", function (firstValue) {
+	let _i;
+	let label = firstValue || i18n.t("app.yearOptions") || "Choose year";
+	let yearOptions = [{
+		value: "",
+		label: label
+	}];
+	let year = new Date().getFullYear();
+	for (x = _i = 1; _i < 21; x = _i += 1) {
+		yearOptions.push({
+			value: year,
+			label: year
+		});
+		year++;
+	}
+	return yearOptions;
+});
 
 // /**
 //  * timezoneOptions
@@ -288,25 +288,26 @@ Template.registerHelper("orElse", function (v1, v2) {
 //   return new Spacebars.SafeString(nl2br);
 // });
 
-// /**
-//  * dateFormat
-//  * @description
-//  * format an ISO date using Moment.js
-//  * http://momentjs.com/
-//  * moment syntax example: moment(Date("2011-07-18T15:50:52")).format("MMMM YYYY")
-//  * @example {{dateFormat creation_date format="MMMM YYYY"}}
-//  * @param {String} context - moment context
-//  * @param {String} block - hash of moment options, ie: format=""
-//  * @return {Date} return formatted date
-//  */
-// Template.registerHelper("dateFormat", function (context, block) {
-//   let f;
-//   if (window.moment) {
-//     f = block.hash.format || "MMM DD, YYYY hh:mm:ss A";
-//     return moment(context).format(f);
-//   }
-//   return context;
-// });
+
+/**
+ * @function dateFormat
+ * @summary formato y fecha ISO utilizando Moment.js
+ * @param {String} context - moment context
+ * @param {String} block - hash of moment options, ie: format=""
+ * @return {Date} fecha con formato ISO
+ * @description
+ * moment syntax example: moment(Date("2011-07-18T15:50:52")).format("MMMM YYYY")
+ * @see {@link http://momentjs.com/|Moment.js}
+ * @example {{dateFormat creation_date format="MMMM YYYY"}}
+ */
+Template.registerHelper("dateFormat", function (context, block) {
+	let f;
+	if (window.moment) {
+	f = block.hash.format || "MMM DD, YYYY hh:mm:ss A";
+	return moment(context).format(f);
+	}
+	return context;
+});
 
 // /**
 //  * pluralize

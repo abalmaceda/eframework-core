@@ -1,32 +1,27 @@
- <!--
- 	Muestra un conjunto de productos disponibles.
- -->
- <!-- TODO: More Info -->
+<!-- Muestra un conjunto de productos disponibles.-->
 <template name="productGrid">
 	<div class="container-main">
 		<div class="product-grid" data-event-category="grid" data-event-action="generic-click" data-event-label="product grid click">
 			<ul class="product-grid-list list-unstyled" id="product-grid-list">
-				<!-- Por cada producto disponible, se genera una vista previa  -->
+				<!--  Por cada producto disponible, se genera una vista previa  -->
 				{{#each products}}
+					<!--  Vista previa del producto -->
 					{{> productGridItems}}
 				{{/each}}
 			</ul>
 		</div>
 	</div>
 
-	{{!-- TODO: Finish infinite paganation implementation
+	<!-- TODO: Finish infinite paganation implementation
 	{{#if productScrollLimit}}
 		<div class="row" id="productScrollLimitLoader">
 			<span class="pager" data-i18n="app.more">More</span>
 		</div>
 	{{/if}}
-	--}}
+	-->
 </template>
 
-<!--
-	Muestra información simple de un producto.
--->
- <!-- TODO: More Info -->
+<!--Muestra información simple de un producto.-->
 <template name="productGridItems">
 	<li class="product-grid-item {{#if position.pinned}}pinned{{/if}} {{weightClass}}" data-id="{{_id}}" id="{{_id}}">
 		<!-- Agrega noticia relacionada al producto -->
@@ -37,16 +32,13 @@
 
 		<a class="product-grid-item-images" href="{{pathForSEO 'product' 'handle'}}" data-event-category="grid" data-event-action="product-click" data-event-label="grid product click" data-event-value="{{_id}}">
 			<div class="product-primary-images">
-
-				<!-- Muestra foto de produecto si tiene, en caso contrario muestrra una foto Default -->
+				<!-- Muestra foto de producto si tiene, en caso contrario muestra una foto Default -->
 				{{#with media}}
 					<span class="product-image" style="background-image: url('{{url store='large'}}')"></span>
 				{{else}}
 					<span class="product-image" style="background-image: url(/resources/placeholder.gif)"></span>
 				{{/with}}
-
 			</div>
-
 			{{#if additionalMedia}}
 				{{#if isMediumWeight}}
 					<div class="product-additional-images">

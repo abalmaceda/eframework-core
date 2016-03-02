@@ -46,10 +46,10 @@
                     "checkout": "Comprar ahora"
                 },
                 "cartSubTotals": {
-                    "head": "Su carrito",
+                    "head": "Descripción del carro",
                     "items": "Articulos de compra",
                     "subtotal": "Subtotal",
-                    "shipping": "Envío",
+                    "shipping": "Agregar Envío",
                     "tax": "Impuestos",
                     "total": "Total"
                 },
