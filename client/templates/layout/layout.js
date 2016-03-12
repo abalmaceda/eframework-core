@@ -38,5 +38,17 @@ Template.coreAdminLayout.helpers({
 			return "show-settings";
 		}
 		return "";
+	},
+
+	/**
+	* @method adminControlsClassname
+	* @summary Entrega un css class para Esconder el main page si la resolución es col-xs
+	* @returns {String}
+	*/
+	adminPageHidePhoneClassname: function () {
+		if (EFrameworkCore.isActionViewOpen()) {
+			return "hidden-xs";
+		}
+		return "";
 	}
 });

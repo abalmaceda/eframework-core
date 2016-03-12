@@ -30,7 +30,7 @@
 <!--TODO-->
 <template name="coreAdminLayout">
 	<span class="layout-alerts-global">{{>bootstrapAlerts}}</span>
-	<div class="page {{adminControlsClassname}}">
+	<div class="page {{adminControlsClassname}} {{adminPageHidePhoneClassname}} col-md-8 col-lg-8">
 		<nav class="eframework-navigation-header">{{> yield region="layoutHeader"}}</nav>
 		<!-- Layout para mostrar la información del cart -->
 		<nav class="eframework-cart-drawer">{{>cartDrawer}}</nav>
@@ -41,7 +41,8 @@
 		</main>
 		<footer class="eframework-navigation-footer footer-default">{{>yield region="layoutFooter"}}</footer>
 	</div>
-	<div class="admin-controls action-view {{adminControlsClassname}}">
+	<!-- Sección de settings -->
+	<div class="admin-controls action-view {{adminControlsClassname}} col-xs-4 col-md-4 col-lg-4">
 		<div class="admin-controls-heading">
 			{{> settingsHeader}}
 		</div>

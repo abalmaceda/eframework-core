@@ -137,7 +137,9 @@ EFrameworkCore.Schemas.ProductVariant = new SimpleSchema({
 	},
 	inventoryManagement: {
 		type: Boolean,
-		label: "Inventory Tracking",
+		//TODO
+		//label: "Inventory Tracking",
+		label: "Track this product's inventory",
 		optional: true,
 		custom: function () {
 			if (Meteor.isClient) {
