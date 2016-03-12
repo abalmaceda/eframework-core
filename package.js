@@ -578,32 +578,32 @@ api.addFiles("client/templates/layout/layout.js", "client");
 	api.addFiles("client/templates/cart/cartPanel/cartPanel.html", "client");
 	api.addFiles("client/templates/cart/cartPanel/cartPanel.js", "client");
 
-	api.addFiles("client/templates/cart/checkout/checkout.html", "client");
-	api.addFiles("client/templates/cart/checkout/checkout.js", "client");
+	api.addFiles("client/templates/checkout/checkout.html", "client");
+	api.addFiles("client/templates/checkout/checkout.js", "client");
 
-	api.addFiles("client/templates/cart/checkout/checkoutHeader/checkoutHeader.html", "client");
+	api.addFiles("client/templates/checkout/checkoutHeader/checkoutHeader.html", "client");
 
-	// api.addFiles("client/templates/cart/checkout/login/login.html", "client");
-	// api.addFiles("client/templates/cart/checkout/login/login.js", "client");
+	// api.addFiles("client/templates/checkout/login/login.html", "client");
+	// api.addFiles("client/templates/checkout/login/login.js", "client");
 
-	api.addFiles("client/templates/cart/checkout/checkoutProgressBar/checkoutProgressBar.html", "client");
-	api.addFiles("client/templates/cart/checkout/checkoutProgressBar/checkoutProgressBar.js", "client");
+	api.addFiles("client/templates/checkout/checkoutProgressBar/checkoutProgressBar.html", "client");
+	api.addFiles("client/templates/checkout/checkoutProgressBar/checkoutProgressBar.js", "client");
 
-	api.addFiles("client/templates/cart/checkout/review/review.html", "client");
-	api.addFiles("client/templates/cart/checkout/review/review.js", "client");
+	api.addFiles("client/templates/checkout/review/review.html", "client");
+	api.addFiles("client/templates/checkout/review/review.js", "client");
 
-	api.addFiles("client/templates/cart/checkout/payment/payment.html", "client");
-	api.addFiles("client/templates/cart/checkout/payment/methods/cards.html", "client");
-	api.addFiles("client/templates/cart/checkout/payment/methods/cards.js", "client");
+	api.addFiles("client/templates/checkout/payment/payment.html", "client");
+	api.addFiles("client/templates/checkout/payment/methods/cards.html", "client");
+	api.addFiles("client/templates/checkout/payment/methods/cards.js", "client");
 
-	api.addFiles("client/templates/cart/checkout/completed/completed.html", "client");
-	api.addFiles("client/templates/cart/checkout/completed/completed.js", "client");
+	api.addFiles("client/templates/checkout/completed/completed.html", "client");
+	api.addFiles("client/templates/checkout/completed/completed.js", "client");
 
-	api.addFiles("client/templates/cart/checkout/shipping/shipping.html", "client");
-	api.addFiles("client/templates/cart/checkout/shipping/shipping.js", "client");
+	api.addFiles("client/templates/checkout/shipping/shipping.html", "client");
+	api.addFiles("client/templates/checkout/shipping/shipping.js", "client");
 
-	api.addFiles("client/templates/cart/checkout/addressBook/addressBook.html", "client");
-	api.addFiles("client/templates/cart/checkout/addressBook/addressBook.js", "client");
+	api.addFiles("client/templates/checkout/addressBook/addressBook.html", "client");
+	api.addFiles("client/templates/checkout/addressBook/addressBook.js", "client");
 
 	// api.addFiles("client/templates/dashboard/console/console.html", "client");
 	// api.addFiles("client/templates/dashboard/console/console.js", "client");
