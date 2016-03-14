@@ -1,27 +1,35 @@
 <!--
-TODO
+	TODO
 	Muestra los Items que aparecen en el cart
  -->
 <template name="cartDrawerItems">
-	<div class="cart-items" id="{{productId}}{{variants._id}}">
-		<div class="remove-cart-item fa fa-times fa-lg" data-target="{{productId}}{{variants._id}}"></div>
-		<a href="{{pathForSEO 'product' 'productId'}}/{{variants._id}}" data-event-category="cart" data-event-action="product-click" data-event-label="Cart product click" data-event-value="{{productId}}">
-			{{#with media}}
-				<div class="center-cropped" style="background-image: url('{{url store='small'}}');">
-					<img src="{{url store='small'}}" class="product-grid-item-images img-responsive">
-				</div>
-			{{else}}
-				<div class="center-cropped" style="background-image: url('/resources/placeholder.gif');">
-					<img src= "/resources/placeholder.gif" class="product-grid-item-images img-responsive">
-				</div>
-			{{/with}}
-		</a>
-		<div class="cart-labels">
-			{{#if cart.showItemLowInventoryWarning variants}}
-				<div class="badge badge-low-inv-warning" title="{{variants.inventoryQuantity}} {{i18n 'cartDrawerItems.left'}}">!</div>
-			{{/if}}
-			<span class="badge">{{quantity}}</span>
-			<span class="cart-item-title">{{variants.title}}</span>
+	<div class="cart-items panel  panel-{{#if cart.showItemLowInventoryWarning variants}}warning{{else}}default{{/if}}" id="{{productId}}{{variants._id}}">
+		<div class="panel-body">
+			<div class="remove-cart-item fa fa-times fa-lg" data-target="{{productId}}{{variants._id}}"></div>
+			<a href="{{pathForSEO 'product' 'productId'}}/{{variants._id}}" data-event-category="cart" data-event-action="product-click" data-event-label="Cart product click" data-event-value="{{productId}}">
+				{{#with media}}
+					<!-- Hay imagenes para el producto. Se muestra -->
+					<div class="center-cropped" style="background-image: url('{{url store='small'}}');">
+						<img src="{{url store='small'}}" class="product-grid-item-images img-responsive">
+					</div>
+				{{else}}
+					<!-- Imagen default s no hay ninguna para mostrar. -->
+					<div class="center-cropped" style="background-image: url('/resources/placeholder.gif');">
+						<img src= "/resources/placeholder.gif" class="product-grid-item-images img-responsive">
+					</div>
+				{{/with}}
+			</a>
+		</div>
+		<div class ="panel-heading">
+			<div class="cart-labels">
+			<!--
+				{{#if cart.showItemLowInventoryWarning variants}}
+					<div class="badge badge-low-inv-warning" title="{{variants.inventoryQuantity}} {{i18n 'cartDrawerItems.left'}}">!</div>
+				{{/if}}
+			-->
+				<span class="badge">{{quantity}}</span>
+				<span class="cart-item-title">{{variants.title}}</span>
+			</div>
 		</div>
 	</div>
 </template>
