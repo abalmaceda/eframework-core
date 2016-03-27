@@ -161,24 +161,22 @@ Meteor.startup(function () {
  * @return {String} returns i18n translated message
  */
 Template.registerHelper("i18n", function (i18nKey, i18nMessage) {
-  if (!i18nKey || typeof i18nMessage !== String) {
-    EFrameworkCore.Log.info("i18n key string required to translate", i18nKey, i18nMessage);
-    return "";
-  }
-  check(i18nKey, String);
-  check(i18nMessage, String);
+	if (!i18nKey || typeof i18nMessage !== "string") {
+		EFrameworkCore.Log.info("i18n key string required to translate", i18nKey, i18nMessage);
+		return "";
+	}
+	check(i18nKey, String);
+	check(i18nMessage, String);
 
-  i18nextDep.depend();
+	i18nextDep.depend();
 
-  let message = new Handlebars.SafeString(i18nMessage);
+	let message = new Handlebars.SafeString(i18nMessage);
 
-  if (i18n.t(i18nKey) === i18nKey) {
-    EFrameworkCore.Log.debug(
-      `i18n: no translation found. returning raw message for: ${i18nKey}`
-    );
-    return message.string;
-  }
-  return i18n.t(i18nKey);
+	if (i18n.t(i18nKey) === i18nKey) {
+		EFrameworkCore.Log.debug(`i18n: no translation found. returning raw message for: ${i18nKey}`);
+		return message.string;
+	}
+	return i18n.t(i18nKey);
 });
 
 // /**

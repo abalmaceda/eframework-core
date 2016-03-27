@@ -265,7 +265,7 @@ Template.productDetail.events({
 	 * @returns {void}
 	 * @todo Documentar
 	 */
-	"click .toggle-product-isVisible-link": function (event, template) {
+	"click [data-event-action=toggle-product-isVisible]": function (event, template) {
 		let errorMsg = "";
 		if (!this.title) {
 			errorMsg += "Product title is required. ";

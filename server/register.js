@@ -38,7 +38,7 @@ EFrameworkCore.registerPackage(
 			provides: 		"dashboard",
 			label: 			"Core",
 			description: 	"E-Commerce Framework Core",
-			icon: 			"fa fa-th",
+			icon: 			"fa fa-diamond",
 			cycle: 			1,
 			container: 		"dashboard",
 			permissions: [
