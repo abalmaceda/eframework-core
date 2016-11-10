@@ -72,11 +72,11 @@ EFrameworkCore.Schemas.Address = new SimpleSchema({
     type: Boolean
   },
   isBillingDefault: {
-    label: "Make this your default billing address?",
+    label: "Set as billing address?",
     type: Boolean
   },
   isShippingDefault: {
-    label: "Make this your default shipping address?",
+    label: "Set as shipping address?",
     type: Boolean
   },
   metafields: {

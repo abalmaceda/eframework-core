@@ -110,47 +110,47 @@ Meteor.methods({
 		return clone._id;
 	},
 
-//   /**
-//    * products/createVariant
-//    * @summary initializes empty variant template (all others are clones)
-//    * should only be seen when all variants have been deleted from a product.
-//    * @param {String} productId - the productId where we create variant
-//    * @param {String} newVariant - variant object
-//    * @return {String} new variantId
-//    */
-//   "products/createVariant": function (productId, newVariant) {
-//     check(productId, String);
-//     check(newVariant, Match.OneOf(Object, void 0));
-//     let createVariant = newVariant || {};
-//     // must have createProduct permissions
-//     if (!EFrameworkCore.hasPermission("createProduct")) {
-//       throw new Meteor.Error(403, "Access Denied");
-//     }
-//     this.unblock();
-//     // random id for new variant
-//     let newVariantId = Random.id();
-//     // if we have a newVariant object we'll use it.
-//     if (newVariant) {
-//       createVariant._id = newVariantId;
-//       check(createVariant, EFrameworkCore.Schemas.ProductVariant);
-//     } else {
-//       createVariant = {
-//         _id: newVariantId,
-//         title: "",
-//         price: 0.00
-//       };
-//     }
-//     Products.update({
-//       _id: productId
-//     }, {
-//       $addToSet: {
-//         variants: createVariant
-//       }
-//     }, {
-//       validate: false
-//     });
-//     return newVariantId;
-//   },
+  /**
+   * products/createVariant
+   * @summary initializes empty variant template (all others are clones)
+   * should only be seen when all variants have been deleted from a product.
+   * @param {String} productId - the productId where we create variant
+   * @param {String} newVariant - variant object
+   * @return {String} new variantId
+   */
+  "products/createVariant": function (productId, newVariant) {
+    check(productId, String);
+    check(newVariant, Match.OneOf(Object, void 0));
+    let createVariant = newVariant || {};
+    // must have createProduct permissions
+    if (!EFrameworkCore.hasPermission("createProduct")) {
+      throw new Meteor.Error(403, "Access Denied");
+    }
+    this.unblock();
+    // random id for new variant
+    let newVariantId = Random.id();
+    // if we have a newVariant object we'll use it.
+    if (newVariant) {
+      createVariant._id = newVariantId;
+      check(createVariant, EFrameworkCore.Schemas.ProductVariant);
+    } else {
+      createVariant = {
+        _id: newVariantId,
+        title: "",
+        price: 0.00
+      };
+    }
+    Products.update({
+      _id: productId
+    }, {
+      $addToSet: {
+        variants: createVariant
+      }
+    }, {
+      validate: false
+    });
+    return newVariantId;
+  },
 
 	/**
 	* products/createInventoryVariant
@@ -300,30 +300,30 @@ Meteor.methods({
 		}
 	},
 
-//   /**
-//    * products/updateVariants
-//    * @summary update whole variants array
-//    * @param {Array} variants - array of variants to update
-//    * @return {String} returns update result
-//    */
-//   "products/updateVariants": function (variants) {
-//     check(variants, [Object]);
-//     // must have createProduct permissions
-//     if (!EFrameworkCore.hasPermission("createProduct")) {
-//       throw new Meteor.Error(403, "Access Denied");
-//     }
-//     this.unblock();
-//     let product = Products.findOne({
-//       "variants._id": variants[0]._id
-//     });
-//     return Products.update(product._id, {
-//       $set: {
-//         variants: variants
-//       }
-//     }, {
-//       validate: false
-//     });
-//   },
+  /**
+   * products/updateVariants
+   * @summary update whole variants array
+   * @param {Array} variants - array of variants to update
+   * @return {String} returns update result
+   */
+  "products/updateVariants": function (variants) {
+    check(variants, [Object]);
+    // must have createProduct permissions
+    if (!EFrameworkCore.hasPermission("createProduct")) {
+      throw new Meteor.Error(403, "Access Denied");
+    }
+    this.unblock();
+    let product = Products.findOne({
+      "variants._id": variants[0]._id
+    });
+    return Products.update(product._id, {
+      $set: {
+        variants: variants
+      }
+    }, {
+      validate: false
+    });
+  },
 
 	/**
 	* products/deleteVariant
@@ -373,67 +373,67 @@ Meteor.methods({
 		return true;
 	},
 
-//   /**
-//    * products/cloneProduct
-//    * @summary clone a whole product, defaulting visibility, etc
-//    * in the future we are going to do an inheritance product
-//    * that maintains relationships with the cloned product tree
-//    * @param {Object} product - product object to clone
-//    * @returns {String} returns insert result
-//    */
-//   "products/cloneProduct": function (product) {
-//     check(product, Object);
-//     // must have createProduct permissions
-//     if (!EFrameworkCore.hasPermission("createProduct")) {
-//       throw new Meteor.Error(403, "Access Denied");
-//     }
-//     this.unblock();
+  /**
+   * products/cloneProduct
+   * @summary clone a whole product, defaulting visibility, etc
+   * in the future we are going to do an inheritance product
+   * that maintains relationships with the cloned product tree
+   * @param {Object} product - product object to clone
+   * @returns {String} returns insert result
+   */
+  "products/cloneProduct": function (product) {
+    check(product, Object);
+    // must have createProduct permissions
+    if (!EFrameworkCore.hasPermission("createProduct")) {
+      throw new Meteor.Error(403, "Access Denied");
+    }
+    this.unblock();
 
-//     let i = 0;
+    let i = 0;
 
-//     let handleCount = Products.find({
-//       cloneId: product._id
-//     }).count() + 1;
+    let handleCount = Products.find({
+      cloneId: product._id
+    }).count() + 1;
 
-//     product.cloneId = product._id;
-//     product._id = Random.id();
-//     delete product.updatedAt;
-//     delete product.createdAt;
-//     delete product.publishedAt;
-//     delete product.handle;
-//     product.isVisible = false;
-//     if (product.title) {
-//       product.title = product.title + handleCount;
-//     }
-//     while (i < product.variants.length) {
-//       let newVariantId = Random.id();
-//       let oldVariantId = product.variants[i]._id;
-//       product.variants[i]._id = newVariantId;
-//       EFrameworkCore.Collections.Media.find({
-//         "metadata.variantId": oldVariantId
-//       }).forEach(function (fileObj) {
-//         let newFile = fileObj.copy();
-//         return newFile.update({
-//           $set: {
-//             "metadata.productId": product._id,
-//             "metadata.variantId": newVariantId
-//           }
-//         });
-//       });
-//       if (!product.variants[i].parentId) {
-//         while (i < product.variants.length) {
-//           if (product.variants[i].parentId === oldVariantId) {
-//             product.variants[i].parentId = newVariantId;
-//           }
-//           i++;
-//         }
-//       }
-//       i++;
-//     }
-//     return Products.insert(product, {
-//       validate: false
-//     });
-//   },
+    product.cloneId = product._id;
+    product._id = Random.id();
+    delete product.updatedAt;
+    delete product.createdAt;
+    delete product.publishedAt;
+    delete product.handle;
+    product.isVisible = false;
+    if (product.title) {
+      product.title = product.title + handleCount;
+    }
+    while (i < product.variants.length) {
+      let newVariantId = Random.id();
+      let oldVariantId = product.variants[i]._id;
+      product.variants[i]._id = newVariantId;
+      EFrameworkCore.Collections.Media.find({
+        "metadata.variantId": oldVariantId
+      }).forEach(function (fileObj) {
+        let newFile = fileObj.copy();
+        return newFile.update({
+          $set: {
+            "metadata.productId": product._id,
+            "metadata.variantId": newVariantId
+          }
+        });
+      });
+      if (!product.variants[i].parentId) {
+        while (i < product.variants.length) {
+          if (product.variants[i].parentId === oldVariantId) {
+            product.variants[i].parentId = newVariantId;
+          }
+          i++;
+        }
+      }
+      i++;
+    }
+    return Products.insert(product, {
+      validate: false
+    });
+  },
 
 	/**
 	* products/createProduct
@@ -545,7 +545,8 @@ Meteor.methods({
 		check(productId, String);
 		check(tagName, String);
 		check(tagId, Match.OneOf(String, null));
-		check(currentTagId, Match.Optional(String));
+		// check(currentTagId, Match.Optional(String));
+		check(currentTagId, Match.OneOf(String,null));
 		/* Se verifica que se tenga permisos "createProduct" */
 		if (!EFrameworkCore.hasPermission("createProduct")) {
 			throw new Meteor.Error(403, "Access Denied");

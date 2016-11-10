@@ -3,12 +3,12 @@
  * @summary Helpers para Template.variantForm
  */
 Template.variantForm.helpers({
-  // variantDetails: function () {
-  //   if (this.parentId === null) {
-  //     return Template.parentVariantForm;
-  //   }
-  //   return Template.childVariantForm;
-  // },
+	variantDetails: function () {
+	if (this.parentId === null) {
+	return Template.parentVariantForm;
+	}
+	return Template.childVariantForm;
+	},
   	/**
   	 * childVariants
   	 * @summary

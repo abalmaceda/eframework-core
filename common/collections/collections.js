@@ -46,23 +46,24 @@ EFrameworkCore.Helpers.cartTransform = {
 	 * @todo Documentar y entender
 	 */
 	cartShipping: function () {
-	let shipping = 0;
-	if (this.shipping) {
-	if (this.shipping[0].shipmentMethod) {
-	shipping += this.shipping[0].shipmentMethod.rate;
-	}
-	}
-	return shipping;
+		let shipping = 0;
+		if (this.shipping) {
+			if (this.shipping[0].shipmentMethod) {
+				shipping += this.shipping[0].shipmentMethod.rate;
+			}
+		}
+		return shipping;
 	},
+
 	cartSubTotal: function () {
-	let subtotal = 0;
-	if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
-	for (let items of this.items) {
-	subtotal += items.quantity * items.variants.price;
-	}
-	}
-	subtotal = subtotal.toFixed(2);
-	return subtotal;
+		let subtotal = 0;
+		if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
+			for (let items of this.items) {
+				subtotal += items.quantity * items.variants.price;
+			}
+		}
+		subtotal = subtotal.toFixed(2);
+		return subtotal;
 	},
 
 	/**
@@ -73,15 +74,15 @@ EFrameworkCore.Helpers.cartTransform = {
 	 * @todo Documentar y entender
 	 */
 	cartTaxes: function () {
-	let subtotal = 0;
-	if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
-	for (let items of this.items) {
-	let tax = this.tax || 0;
-	subtotal += items.variants.price * tax;
-	}
-	}
-	subtotal = subtotal.toFixed(2);
-	return subtotal;
+		let subtotal = 0;
+		if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
+			for (let items of this.items) {
+				let tax = this.tax || 0;
+				subtotal += items.variants.price * tax;
+			}
+		}
+		subtotal = subtotal.toFixed(2);
+		return subtotal;
 	},
 
 	/**
@@ -92,7 +93,7 @@ EFrameworkCore.Helpers.cartTransform = {
 	 * @todo Documentar y entender
 	 */
 	cartDiscounts: function () {
-	return "0.00";
+		return "0.00";
 	},
 
 	/**
@@ -103,28 +104,34 @@ EFrameworkCore.Helpers.cartTransform = {
 	 * @todo Documentar y entender
 	 */
 	cartTotal: function () {
-	let total;
-	let subtotal = 0;
-	if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
-	for (let items of this.items) {
-	subtotal += items.quantity * items.variants.price;
-	}
-	}
-	let shipping = 0;
-	if (this.shipping) {
-	if (this.shipping.shippingMethod) {
-	for (let shippingMethod of this.shipping.shippingMethod) {
-	shipping += shippingMethod.rate;
-	}
-	}
-	}
+		let total;
+		let subtotal = 0;
+		if (typeof this !== "undefined" && this !== null ? this.items : void 0) {
+			for (let items of this.items) {
+				subtotal += items.quantity * items.variants.price;
+			}
+		}
+		// let shipping = 0;
+		// if (this.shipping) {
+		// 	if (this.shipping[0].shippingMethod) {
+		// 		for (let shippingMethod of this.shipping[0].shippingMethod) {
+		// 			shipping += shippingMethod.rate;
+		// 		}
+		// 	}
+		// }
+		let shipping = 0;
+		if (this.shipping) {
+			if (this.shipping[0].shipmentMethod) {
+				shipping += this.shipping[0].shipmentMethod.rate;
+			}
+		}
 
-	shipping = parseFloat(shipping);
-	if (!isNaN(shipping)) {
-	subtotal = subtotal + shipping;
-	}
-	total = subtotal.toFixed(2);
-	return total;
+		shipping = parseFloat(shipping);
+		if (!isNaN(shipping)) {
+			subtotal = subtotal + shipping;
+		}
+		total = subtotal.toFixed(2);
+		return total;
 	}
 };
 

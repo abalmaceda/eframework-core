@@ -15,10 +15,10 @@ Template.products.events({
 	 * @todo Documentar
 	 * @deprecated
 	 */
-	// "click #productListView": function () {
-	// 	$(".product-grid").hide();
-	// 	return $(".product-list").show();
-	// },
+	"click #productListView": function () {
+		$(".product-grid").hide();
+		return $(".product-list").show();
+	},
 
 	/**
 	 * @function click #productGridView
@@ -29,10 +29,10 @@ Template.products.events({
 	 * @this What_does_the_THIS_keyword_refer_to_here
 	 * @todo Documentar
 	 */
-	// "click #productGridView": function () {
-	// 	$(".product-list").hide();
-	// 	return $(".product-grid").show();
-	// },
+	"click #productGridView": function () {
+		$(".product-list").hide();
+		return $(".product-grid").show();
+	},
 
 	/**
 	 * @function click .product-list-item
@@ -40,8 +40,8 @@ Template.products.events({
 	 * @returns {void}
 	 * @this What_does_the_THIS_keyword_refer_to_here
 	 */
-	// "click .product-list-item": function () {
-	// 	return Router.go("product", {_id: this._id});
-	// }
+	"click .product-list-item": function () {
+		return Router.go("product", {_id: this._id});
+	}
 });
 

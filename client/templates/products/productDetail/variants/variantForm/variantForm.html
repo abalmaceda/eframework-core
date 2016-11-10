@@ -1,7 +1,7 @@
 <!-- Formulario para editar Variant de un Product -->
 <!-- TODO: Verificar si tambien sirve para crear -->
 <template name="variantForm">
-	<div id="variant-edit-form-{{_id}}" class="variant-edit-form {{variantFormVisible}}">
+	<div id="variant-edit-form-{{_id}}" class="variant-edit-form {{variantFormVisible}} ">
 		<div class="row well well-sm variant-form" >
 			<!-- Se esta utilizando el package meteor-autoform para la cración de UI Form básicos -->
 			<!-- Se utiliza el schema "ProductVariant" para crear el formulario -->
@@ -76,14 +76,18 @@
 								{{/if}}
 							</div>
 							<!-- <div> que contiene datos relacionados con el "compareAtPrice" del ProductVariant -->
-							<div class="col-xs-3 col-sm-3 form-group{{#if afFieldIsInvalid name='compareAtPrice'}} has-error{{/if}}">
+<!--
+								<div class="col-xs-3 col-sm-3 form-group{{#if afFieldIsInvalid name='compareAtPrice'}} has-error{{/if}}">
+-->
 								<!-- Agrego el label para compareAtPrice -->
+<!--
 								<label class="control-label">{{afFieldLabelText name='compareAtPrice'}}</label>
 								{{>afFieldInput name='compareAtPrice'}}
 								{{#if afFieldIsInvalid name='compareAtPrice'}}
 									<span class="help-block">{{afFieldMessage name='compareAtPrice'}}</span>
 								{{/if}}
 							</div>
+-->
 							<!-- <div> que contiene datos relacionados con el "price" del ProductVariant -->
 							<div class="col-xs-3 col-sm-3 form-group {{#if afFieldIsInvalid name='price'}} has-error{{/if}}">
 								<!-- Agrego el label para price -->
@@ -109,24 +113,33 @@
 						<div class="variant-options col-xs-12 col-sm-3 col-md-3">
 							<!-- <div> que contiene datos relacionados con el "taxable" del ProductVariant -->
 							<div class="form-group {{#if afFieldIsInvalid name='taxable'}} has-error{{/if}}">
+								<!--<i class="fa fa-check-square-o text-info fa-3x fa-fw"></i> Taxable-->
+
 								{{>afFieldInput name='taxable' value=true}}
 								{{#if afFieldIsInvalid name='taxable'}}
 									<span class="help-block">{{afFieldMessage name='taxable'}}</span>
 								{{/if}}
+
 							</div>
 							<!-- <div> que contiene datos relacionados con el "inventotyManagement" del ProductVariant -->
 							<div class="form-group{{#if afFieldIsInvalid name='inventoryManagement'}} has-error{{/if}}">
+								<!--<i class="fa fa-check-square-o text-info fa-3x fa-fw"></i> Track this product's inventory-->
+
 								{{>afFieldInput name='inventoryManagement'}}
 								{{#if afFieldIsInvalid name='inventoryManagement'}}
 									<span class="help-block">{{afFieldMessage name='inventoryManagement'}}</span>
 								{{/if}}
+
 							</div>
 							<!-- <div> que contiene datos relacionados con el "inventoryPolicy" del ProductVariant -->
 							<div class="form-group{{#if afFieldIsInvalid name='inventoryPolicy'}} has-error{{/if}} inventoryPolicy" style="{{displayInventoryManagement}}">
+								<!-- <i class="fa fa-check-square-o text-info fa-3x fa-fw"></i> Deny when out of stock-->
+
 								{{>afFieldInput name='inventoryPolicy'}}
 								{{#if afFieldIsInvalid name='inventoryPolicy'}}
 									<span class="help-block">{{afFieldMessage name='inventoryPolicy'}}</span>
 								{{/if}}
+
 							</div>
 							<!-- <div> que contiene datos relacionados con el "title" del ProductVariant -->
 							<div class="lowInventoryWarningThreshold form-group{{#if afFieldIsInvalid name='lowInventoryWarningThreshold'}} has-error{{/if}}" style="{{displayLowInventoryWarning doc}}">
@@ -141,6 +154,7 @@
 						</div>
 					</div>
 				</fieldset>
+
 				<div class="variant-form-buttons col-sm-12">
 					{{>afFieldInput name="_id" type="hidden"}}
 					<button class="btn btn-default btn-child-variant-form" data-toggle="tooltip" title="{{i18n 'productDetailEdit.addVariantOption' 'Add Option'}}">
@@ -155,6 +169,7 @@
 						<i class="fa fa-trash-o"></i> {{i18n 'productDetailEdit.removeVariant' 'Remove'}}
 					</button>
 				</div>
+
 			{{/autoForm}}
 		</div>
 

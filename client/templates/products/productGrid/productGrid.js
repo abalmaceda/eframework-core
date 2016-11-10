@@ -1,35 +1,35 @@
 
-// /**
-//  * loadMoreProducts
-//  * @summary whenever #productScrollLimitLoader becomes visible, retrieve more results
-//  * this basically runs this:
-//  * Session.set('productScrollLimit', Session.get('productScrollLimit') + ITEMS_INCREMENT);
-//  * @return {undefined}
-//  */
-// function loadMoreProducts() {
-//   let threshold;
-//   let target = $("#productScrollLimitLoader");
-//   if (target.length) {
-//     threshold = $(window).scrollTop() + $(window).height() - target.height();
-//     if (target.offset().top < threshold) {
-//       if (!target.data("visible")) {
-//         target.data("productScrollLimit", true);
-//         Session.set("productScrollLimit",
-//           Session.get("productScrollLimit") + ITEMS_INCREMENT || 10);
-//       }
-//     } else {
-//       if (target.data("visible")) {
-//         target.data("visible", false);
-//       }
-//     }
-//   }
-// }
+/**
+ * loadMoreProducts
+ * @summary whenever #productScrollLimitLoader becomes visible, retrieve more results
+ * this basically runs this:
+ * Session.set('productScrollLimit', Session.get('productScrollLimit') + ITEMS_INCREMENT);
+ * @return {undefined}
+ */
+function loadMoreProducts() {
+  let threshold;
+  let target = $("#productScrollLimitLoader");
+  if (target.length) {
+    threshold = $(window).scrollTop() + $(window).height() - target.height();
+    if (target.offset().top < threshold) {
+      if (!target.data("visible")) {
+        target.data("productScrollLimit", true);
+        Session.set("productScrollLimit",
+          Session.get("productScrollLimit") + ITEMS_INCREMENT || 10);
+      }
+    } else {
+      if (target.data("visible")) {
+        target.data("visible", false);
+      }
+    }
+  }
+}
 
 
 /**
  * @summary Ejecuta la función "loadMoreProducts" cada vez que el usuario hace scroll
  */
-//$(window).scroll(loadMoreProducts());
+$(window).scroll(loadMoreProducts());
 
 
 /**
@@ -44,11 +44,11 @@ Template.productGrid.helpers({
 	 * @description add_two_numbers
 	 * @todo Documentar
 	 */
-//   productScrollLimit: function () {
-//     // if count less rows than we asked for, we've got all the rows in the collection.
-//     return !(EFrameworkCore.Collections.Products.find().count() < Session.get(
-//       "productScrollLimit"));
-//   },
+  productScrollLimit: function () {
+    // if count less rows than we asked for, we've got all the rows in the collection.
+    return !(EFrameworkCore.Collections.Products.find().count() < Session.get(
+      "productScrollLimit"));
+  },
 
 	/**
 	 * @function products
@@ -418,25 +418,25 @@ Template.productGridItems.events({
 	 * @description add_two_numbers
 	 * @todo Documentar
 	 */
-	// "click .clone-product": function () {
-	// 	let title;
-	// 	title = this.title;
-	// 	return Meteor.call("products/cloneProduct", this, function (error, productId) {
-	// 		if (error) {
-	// 			throw new Meteor.Error("error cloning product", error);
-	// 		}
-	// 		Router.go("product", {
-	// 			_id: productId
-	// 		});
-	// 		return Alerts.add("Cloned " + title, "success", {
-	// 			placement: "productManagement",
-	// 			id: productId,
-	// 			i18nKey: "productDetail.cloneMsg",
-	// 			autoHide: true,
-	// 			dismissable: false
-	// 		});
-	// 	});
-	// },
+	"click .clone-product": function () {
+		let title;
+		title = this.title;
+		return Meteor.call("products/cloneProduct", this, function (error, productId) {
+			if (error) {
+				throw new Meteor.Error("error cloning product", error);
+			}
+			Router.go("product", {
+				_id: productId
+			});
+			return Alerts.add("Cloned " + title, "success", {
+				placement: "productManagement",
+				id: productId,
+				i18nKey: "productDetail.cloneMsg",
+				autoHide: true,
+				dismissable: false
+			});
+		});
+	},
 
 	/**
 	 * @event click .delete-product
@@ -494,24 +494,24 @@ Template.productGridItems.events({
 	 * @see {@link http://docs.meteor.com/#/full/tracker|METEOR}
 	 * @todo Documentar
 	 */
-//   "click .update-product-weight": function (event) {
-//     let position;
-//     let weight;
-//     event.preventDefault();
-//     weight = this.position.weight || 0;
-//     if (weight < 2) {
-//       weight++;
-//     } else {
-//       weight = 0;
-//     }
-//     position = {
-//       tag: share.tag,
-//       weight: weight,
-//       updatedAt: new Date()
-//     };
-//     Meteor.call("products/updateProductPosition", this._id, position);
-//     return Tracker.flush();
-//   },
+  "click .update-product-weight": function (event) {
+    let position;
+    let weight;
+    event.preventDefault();
+    weight = this.position.weight || 0;
+    if (weight < 2) {
+      weight++;
+    } else {
+      weight = 0;
+    }
+    position = {
+      tag: share.tag,
+      weight: weight,
+      updatedAt: new Date()
+    };
+    Meteor.call("products/updateProductPosition", this._id, position);
+    return Tracker.flush();
+  },
 
 	/**
 	 * @event click .publish-product

@@ -19,3 +19,17 @@
 		</div>
 	{{/if}}
 </template>
+
+<template name="variantListChoices">
+	<div class="product-variants-choice">
+		<select class=" form-control variants-choice-selector" id="select">
+			{{#if childVariants}}
+				{{#each childVariants}}
+					<option>{{optionTitle}}</option>
+				{{/each}}
+			{{else}}
+				<option>{{title}}</option>
+			{{/if}}
+		</select>
+	</div>
+</template>
